@@ -4,6 +4,7 @@ from pysocialsim.base.decorator.require import require
 from pysocialsim.simulator.simulation.simulation import Simulation
 from pysocialsim.simulator.simulation.event.event import Event
 from pysocialsim.base.decorator.public import public
+from pysocialsim.simulator.dispatcher.dispatcher import Dispatcher
 
 class AbstractSimulator(Object):
     
@@ -15,18 +16,24 @@ class AbstractSimulator(Object):
     def initialize(self, simulation):
         self.__simulation = simulation
         self.__simulation.setSimulator(self)
+        self.__dispatcher = None
     
     @public    
-    @return_type(None.__class__)
+    @return_type(Event)
     @require("event", Event)
     def handleEvent(self, event):
-        raise NotImplementedError()
+        return self.__dispatcher.handleEvent(event)
     
-    
+    @public
+    @return_type(Dispatcher)
+    @require("dispatcher", Dispatcher)
     def setDispatcher(self, dispatcher):
-        raise NotImplementedError()
+        self.__dispatcher = dispatcher
+        return self.__dispatcher
     
+    @public
+    @return_type(Simulation)
     def getSimulation(self):
-        raise NotImplementedError()
+        return self.__simulation
         
     

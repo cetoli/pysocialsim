@@ -6,3 +6,6 @@ class Dispatcher(object):
     
     def __init__(self):
         raise NotImplementedError()
+    
+    def handleEvent(self, event):
+        raise NotImplementedError()

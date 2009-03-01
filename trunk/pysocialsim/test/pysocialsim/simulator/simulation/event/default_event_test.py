@@ -1,5 +1,7 @@
 from pysocialsim.network.peer.peer import Peer
 from pysocialsim.simulator.simulation.event.default_event import DefaultEvent
+from pysocialsim.base.interface import implements
+from pysocialsim.simulator.simulation.event.event import Event
 import pymockobject
 import unittest
 
@@ -19,3 +21,5 @@ class DefaultEventTest(unittest.TestCase):
         self.assertRaises(TypeError, DefaultEvent, False)
         self.assertRaises(TypeError, DefaultEvent, 1)
         self.assertRaises(TypeError, DefaultEvent, 0.56)
+        
+        self.assertTrue(implements(DefaultEvent(peer), Event))

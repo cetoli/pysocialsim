@@ -9,3 +9,6 @@ class Simulation(object):
     
     def setSimulator(self, simulator):
         raise NotImplementedError()
+    
+    def getNetwork(self):
+        raise NotImplementedError()

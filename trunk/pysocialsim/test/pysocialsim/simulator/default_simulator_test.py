@@ -22,6 +22,8 @@ class DefaultSimulatorTest(unittest.TestCase):
         self.assertRaises(TypeError, DefaultSimulator, False)
         self.assertRaises(TypeError, DefaultSimulator, 1.9)
         self.assertRaises(TypeError, DefaultSimulator, 1)
+        
+        self.assertTrue(implements(DefaultSimulator(simulation), Simulator))
     
     def test_set_dispatcher(self):
         simulation = pymockobject.create(Simulation)

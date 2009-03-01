@@ -9,3 +9,6 @@ class Event(object):
     
     def getHandle(self):
         raise NotImplementedError()
+    
+    def getPeer(self, peer):
+        raise NotImplementedError()

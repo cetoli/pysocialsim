@@ -83,3 +83,4 @@ class DefaultSimulationTest(unittest.TestCase):
         self.assertRaises(TypeError, simulation.registerEvent, 1.5)
         
         
+        

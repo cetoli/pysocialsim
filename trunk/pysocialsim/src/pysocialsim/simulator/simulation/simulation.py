@@ -21,3 +21,6 @@ class Simulation(object):
     
     def unregisterEvent(self):
         raise NotImplementedError()
+    
+    def generateEvents(self):
+        raise NotImplementedError()

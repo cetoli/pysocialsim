@@ -47,3 +47,9 @@ class AbstractSimulation(Object):
     @return_type(Event)
     def unregisterEvent(self):
         return self.__events.dequeue()
+    
+    @public
+    @return_type(None.__class__)
+    def generateEvents(self):
+        self.__network.generateEvents(self)
+        

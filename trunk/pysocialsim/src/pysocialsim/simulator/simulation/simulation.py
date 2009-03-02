@@ -12,3 +12,12 @@ class Simulation(object):
     
     def getNetwork(self):
         raise NotImplementedError()
+    
+    def registerEvent(self, event):
+        raise NotImplementedError()
+    
+    def countEvents(self):
+        raise NotImplementedError()
+    
+    def unregisterEvent(self):
+        raise NotImplementedError()

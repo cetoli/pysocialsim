@@ -12,3 +12,6 @@ class Event(object):
     
     def getPeer(self, peer):
         raise NotImplementedError()
+    
+    def getPriority(self):
+        raise NotImplementedError()

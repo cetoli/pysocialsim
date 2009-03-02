@@ -1,11 +1,8 @@
 from pysocialsim.base.interface import Interface
 
-class Peer(object):
-
+class Topology(object):
+    
     __metaclass__ = Interface
     
     def __init__(self):
-        raise NotImplementedError()
-    
-    def getId(self):
         raise NotImplementedError()

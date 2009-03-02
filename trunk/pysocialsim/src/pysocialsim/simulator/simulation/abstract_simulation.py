@@ -16,6 +16,7 @@ class AbstractSimulation(Object):
     @require("network", Network)
     def initialize(self, network):
         self.__network = network
+        self.__network.setSimulation(self)
         self.__simulator = None
         self.__events = PriorityQueue()
         
@@ -49,7 +50,7 @@ class AbstractSimulation(Object):
         return self.__events.dequeue()
     
     @public
-    @return_type(None.__class__)
+    @return_type(int)
     def generateEvents(self):
-        self.__network.generateEvents(self)
+        return self.__network.generateEvents(self)
         

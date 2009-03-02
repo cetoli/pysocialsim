@@ -81,6 +81,14 @@ class DefaultSimulationTest(unittest.TestCase):
         self.assertRaises(TypeError, simulation.registerEvent, "test")
         self.assertRaises(TypeError, simulation.registerEvent, 1)
         self.assertRaises(TypeError, simulation.registerEvent, 1.5)
+    
+    def test_generate_events(self):
+        network = pymockobject.create(Network)
+        simulation = DefaultSimulation(network)
         
-        
-        
+        network.generateEvents.expects(simulation).will(ReturnValue(1000))
+        self.assertEquals(1000, simulation.generateEvents())
+        network.generateEvents.expects(simulation).will(ReturnValue(10000))
+        self.assertEquals(10000, simulation.generateEvents())
+        network.generateEvents.expects(simulation).will(ReturnValue(100000))
+        self.assertEquals(100000, simulation.generateEvents())

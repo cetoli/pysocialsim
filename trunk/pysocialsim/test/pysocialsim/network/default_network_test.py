@@ -112,3 +112,32 @@ class DefaultNetworkTest(unittest.TestCase):
         self.assertRaises(TypeError, network.removePeer, "1")
         self.assertRaises(TypeError, network.removePeer, peer1)
         self.assertRaises(TypeError, network.removePeer, 0.2356)
+        
+    def test_add_peers_and_generate_events(self):
+        topology = pymockobject.create(Topology)
+        network = DefaultNetwork(topology)
+        simulation = pymockobject.create(Simulation)
+                
+        self.assertEquals(simulation, network.setSimulation(simulation))
+        
+        peer1 = pymockobject.create(Peer)
+        peer1.getId.will(ReturnValue(1))
+        peer1.generateEvents.expects(simulation)
+        self.assertEquals(peer1, network.addPeer(peer1))
+        self.assertEquals(1, network.countPeers())        
+        
+        peer2 = pymockobject.create(Peer)
+        peer2.getId.will(ReturnValue(2))
+        peer2.generateEvents.expects(simulation)
+        self.assertEquals(peer2, network.addPeer(peer2))
+        self.assertEquals(2, network.countPeers())
+        
+        peer3 = pymockobject.create(Peer)
+        peer3.getId.will(ReturnValue(3))
+        peer3.generateEvents.expects(simulation)
+        self.assertEquals(peer3, network.addPeer(peer3))
+        self.assertEquals(3, network.countPeers())
+        
+        simulation.countEvents.will(ReturnValue(30000))
+        
+        self.assertEquals(30000, network.generateEvents(simulation))

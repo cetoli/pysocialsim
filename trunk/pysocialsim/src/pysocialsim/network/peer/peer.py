@@ -1,6 +1,7 @@
 from pysocialsim.base.interface import Interface
+from pysocialsim.simulator.simulation.event.event_generator import EventGenerator
 
-class Peer(object):
+class Peer(EventGenerator):
 
     __metaclass__ = Interface
     

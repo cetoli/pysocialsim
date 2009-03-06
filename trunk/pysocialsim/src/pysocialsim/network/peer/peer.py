@@ -10,3 +10,24 @@ class Peer(EventGenerator):
     
     def getId(self):
         raise NotImplementedError()
+    
+    def addEventGenerator(self, generator):
+        raise NotImplementedError()
+    
+    def removeEventGenerator(self, generator):
+        raise NotImplementedError()
+    
+    def countEventGenerators(self):
+        raise NotImplementedError()
+    
+    def getNetwork(self):
+        raise NotImplementedError()
+    
+    def isConnected(self):
+        raise NotImplementedError()
+    
+    def connect(self):
+        raise NotImplementedError()
+    
+    def disconnect(self):
+        raise NotImplementedError()

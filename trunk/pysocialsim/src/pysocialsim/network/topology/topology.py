@@ -6,3 +6,9 @@ class Topology(object):
     
     def __init__(self):
         raise NotImplementedError()
+    
+    def connect(self, peer):
+        raise NotImplementedError()
+    
+    def disconnect(self, peer):
+        raise NotImplementedError()

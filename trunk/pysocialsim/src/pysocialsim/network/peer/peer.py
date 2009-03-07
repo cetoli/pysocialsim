@@ -31,3 +31,6 @@ class Peer(EventGenerator):
     
     def disconnect(self):
         raise NotImplementedError()
+    
+    def getType(self):
+        raise NotImplementedError()

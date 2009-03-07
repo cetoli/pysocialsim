@@ -15,11 +15,13 @@ class AbstractPeer(Object):
     @return_type(None.__class__)
     @require("id", int)
     @require("network", Network)
-    def initialize(self, id, network):
+    @require("type", int)
+    def initialize(self, id, network, type):
         self.__id = id
         self.__network = network
         self.__eventGenerators = []
         self.__isConnected = False
+        self.__type = type
     
     @public
     @return_type(int)
@@ -80,3 +82,8 @@ class AbstractPeer(Object):
         topology = network.getTopology()
         topology.disconnect(self)
         self.__isConnected = False
+    
+    @public
+    @return_type(int)
+    def getType(self):
+        return self.__type

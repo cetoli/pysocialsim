@@ -4,6 +4,7 @@ from pysocialsim.base.decorator.require import require
 from pysocialsim.network.topology.topology import Topology
 from pysocialsim.network.pure_network import PureNetwork
 from pysocialsim.network.peer.default_peer import DefaultPeer
+from random import randint
 
 class PureNetworkBuilder(AbstractNetworkBuilder):
     
@@ -16,7 +17,7 @@ class PureNetworkBuilder(AbstractNetworkBuilder):
             return 0
         peers = 0
         for id in range(params["peers"]):
-            self.getNetwork().addPeer(DefaultPeer(id, self.getNetwork()))
+            self.getNetwork().addPeer(DefaultPeer(id, self.getNetwork(), randint(params["min_permanence"], params["max_permanence"]), randint(params["min_absence"], params["max_absence"])))
             peers += 1
             
         return peers

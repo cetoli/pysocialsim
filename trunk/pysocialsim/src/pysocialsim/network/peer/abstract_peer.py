@@ -16,12 +16,17 @@ class AbstractPeer(Object):
     @require("id", int)
     @require("network", Network)
     @require("type", int)
-    def initialize(self, id, network, type):
+    @require("permanence", int)
+    @require("absence", int)
+    def initialize(self, id, network, type, permanence, absence):
         self.__id = id
         self.__network = network
         self.__eventGenerators = []
         self.__isConnected = False
         self.__type = type
+        self.__permanence = permanence
+        self.__absence = absence
+        #print self.__permanence/10000000.0, self.__absence/100000000.0
     
     @public
     @return_type(int)
@@ -87,3 +92,13 @@ class AbstractPeer(Object):
     @return_type(int)
     def getType(self):
         return self.__type
+    
+    @public
+    @return_type(int)
+    def getPermanenceTime(self):
+        return self.__permanence
+    
+    @public
+    @return_type(int)
+    def getAbsenceTime(self):
+        return self.__absence

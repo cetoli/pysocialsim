@@ -3,5 +3,5 @@ from pysocialsim.network.peer.peer_constants import PeerConstants
 
 class DefaultPeer(AbstractPeer):
     
-    def __init__(self, id, network):
-        self.initialize(id, network, PeerConstants.DEFAULT_PEER)
+    def __init__(self, id, network, permancence, absence):
+        self.initialize(id, network, PeerConstants.DEFAULT_PEER, permancence, absence)

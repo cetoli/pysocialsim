@@ -28,7 +28,7 @@ class PureNetworkBuilderTest(unittest.TestCase):
         builder = PureNetworkBuilder()
         
         self.assertTrue(builder.createNetwork(topology))
-        self.assertEquals(1000, builder.buildNetwork(peers=1000))
+        self.assertEquals(1000, builder.buildNetwork(peers=1000, min_permanence=21600, max_permanence=31104000, min_absence=3600, max_absence=2592000))
         self.assertTrue(builder.getNetwork())
         
         network = builder.getNetwork()

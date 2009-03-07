@@ -13,24 +13,24 @@ class DefaultPeerTest(unittest.TestCase):
     
     def test_create_instance(self):
         network = pymockobject.create(Network)
-        self.assertTrue(DefaultPeer(1, network))
-        self.assertTrue(implements(DefaultPeer(1, network), Peer))
+        self.assertTrue(DefaultPeer(1, network, 10, 1))
+        self.assertTrue(implements(DefaultPeer(1, network, 10, 1), Peer))
         
-        peer = DefaultPeer(1, network)
+        peer = DefaultPeer(1, network, 10, 1)
         self.assertEquals(1, peer.getId())
         self.assertEquals(network, peer.getNetwork())
         self.assertEquals(0, peer.countEventGenerators())
         self.assertFalse(peer.isConnected())
         
-        self.assertRaises(TypeError, DefaultPeer, 12, None)
-        self.assertRaises(TypeError, DefaultPeer, None, network)
-        self.assertRaises(TypeError, DefaultPeer, None, None)
-        self.assertRaises(TypeError, DefaultPeer, "12", "123")
+        self.assertRaises(TypeError, DefaultPeer, 12, None, 10, 1)
+        self.assertRaises(TypeError, DefaultPeer, None, network, 10, 1)
+        self.assertRaises(TypeError, DefaultPeer, None, None, 10, 1)
+        self.assertRaises(TypeError, DefaultPeer, "12", "123", 10, 1)
     
     def test_add_event_generator(self):
         network = pymockobject.create(Network)
         simulation = pymockobject.create(Simulation)
-        peer = DefaultPeer(12, network)
+        peer = DefaultPeer(12, network, 10, 1)
         
         generator1 = pymockobject.create(EventGenerator)
         generator1.generateEvents.expects(simulation).will(ReturnValue(5000))
@@ -41,7 +41,7 @@ class DefaultPeerTest(unittest.TestCase):
         network = pymockobject.create(Network)
         topology = pymockobject.create(Topology)
         
-        peer = DefaultPeer(15, network);
+        peer = DefaultPeer(15, network, 10, 1);
         
         network.getTopology.will(ReturnValue(topology))
         topology.connect.expects(peer)

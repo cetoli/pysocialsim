@@ -34,3 +34,9 @@ class Peer(EventGenerator):
     
     def getType(self):
         raise NotImplementedError()
+    
+    def getPermanenceTime(self):
+        raise NotImplementedError()
+    
+    def getAbsenceTime(self):
+        raise NotImplementedError()

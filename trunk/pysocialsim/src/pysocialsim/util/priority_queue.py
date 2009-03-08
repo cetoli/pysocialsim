@@ -51,3 +51,4 @@ class PriorityQueue(Object):
         last = self.__queue[len(self.__queue) - 1]
         sem.release()
         return last
+    

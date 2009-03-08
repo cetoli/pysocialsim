@@ -38,20 +38,3 @@ class DefaultSimulatorTest(unittest.TestCase):
         self.assertRaises(TypeError, simulator.setDispatcher, False)
         self.assertRaises(TypeError, simulator.setDispatcher, "Test")
     
-    def test_handle_event(self):
-        simulation = pymockobject.create(Simulation)
-        simulator = DefaultSimulator(simulation)
-        dispatcher = pymockobject.create(Dispatcher)
-        event = pymockobject.create(Event)
-        
-        dispatcher.handleEvent.expects(event).will(ReturnValue(event))
-        
-        self.assertEquals(dispatcher, simulator.setDispatcher(dispatcher))        
-        self.assertEquals(event, simulator.handleEvent(event))
-        
-        self.assertRaises(TypeError, simulator.handleEvent, None)
-        self.assertRaises(TypeError, simulator.handleEvent, 123)
-        self.assertRaises(TypeError, simulator.handleEvent, True)
-        self.assertRaises(TypeError, simulator.handleEvent, False)
-        self.assertRaises(TypeError, simulator.handleEvent, "test")
-        self.assertRaises(TypeError, simulator.handleEvent, 0.88)   

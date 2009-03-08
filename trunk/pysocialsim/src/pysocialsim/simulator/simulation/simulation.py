@@ -24,3 +24,9 @@ class Simulation(object):
     
     def generateEvents(self):
         raise NotImplementedError()
+    
+    def simulate(self):
+        raise NotImplementedError()
+    
+    def stop(self):
+        raise NotImplementedError()

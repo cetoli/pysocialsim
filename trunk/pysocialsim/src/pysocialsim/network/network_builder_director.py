@@ -10,6 +10,6 @@ class NetworkBuilderDirector(Object):
         self.__builder = builder
     
     @public
-    @require("params", dict)    
-    def build(self, **params):
+    def build(self, topology, **params):
+        self.__builder.createNetwork(topology)
         self.__builder.buildNetwork(**params)

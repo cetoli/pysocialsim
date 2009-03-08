@@ -5,6 +5,7 @@ from pysocialsim.network.topology.topology import Topology
 from pysocialsim.base.decorator.return_type import return_type
 from pysocialsim.simulator.simulation.simulation import Simulation
 from pysocialsim.network.peer.peer import Peer
+from types import NoneType
 
 class AbstractNetwork(Object):
     
@@ -74,3 +75,9 @@ class AbstractNetwork(Object):
         if not self.__peers.has_key(id):
             return None
         return self.__peers[id]
+    
+    @public
+    @return_type(NoneType)
+    def stop(self):
+        for peer in self.__peers.values():
+            peer.stop()

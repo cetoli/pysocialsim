@@ -9,9 +9,9 @@ class DefaultEventTest(unittest.TestCase):
     
     def test_create_instance(self):
         peer = pymockobject.create(Peer)
-        self.assertTrue(DefaultEvent(peer, 1))
+        self.assertTrue(DefaultEvent(peer, 1.0))
         
-        event = DefaultEvent(peer, 5)
+        event = DefaultEvent(peer, 5.0)
         self.assertEquals("DEFAULT", event.getHandle())
         self.assertEquals(peer, event.getPeer())
         self.assertEquals(5, event.getPriority())
@@ -23,4 +23,4 @@ class DefaultEventTest(unittest.TestCase):
         self.assertRaises(TypeError, DefaultEvent, 1)
         self.assertRaises(TypeError, DefaultEvent, 0.56)
         
-        self.assertTrue(implements(DefaultEvent(peer, 5), Event))
+        self.assertTrue(implements(DefaultEvent(peer, 5.0), Event))

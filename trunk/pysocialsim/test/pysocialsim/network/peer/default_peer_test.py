@@ -19,7 +19,7 @@ class DefaultPeerTest(unittest.TestCase):
         peer = DefaultPeer(1, network, 10, 1)
         self.assertEquals(1, peer.getId())
         self.assertEquals(network, peer.getNetwork())
-        self.assertEquals(0, peer.countEventGenerators())
+        self.assertEquals(2, peer.countEventGenerators())
         self.assertFalse(peer.isConnected())
         
         self.assertRaises(TypeError, DefaultPeer, 12, None, 10, 1)

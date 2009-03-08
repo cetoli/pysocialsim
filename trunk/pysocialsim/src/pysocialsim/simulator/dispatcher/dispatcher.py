@@ -9,3 +9,12 @@ class Dispatcher(object):
     
     def handleEvent(self, event):
         raise NotImplementedError()
+    
+    def registerEventHandler(self, eventHandler):
+        raise NotImplementedError()
+    
+    def unregisterEventHandler(self, handle):
+        raise NotImplementedError()
+    
+    def countEventHandlers(self):
+        raise NotImplementedError()

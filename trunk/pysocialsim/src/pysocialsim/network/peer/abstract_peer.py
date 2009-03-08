@@ -26,7 +26,6 @@ class AbstractPeer(Object):
         self.__type = type
         self.__permanence = permanence
         self.__absence = absence
-        #print self.__permanence/10000000.0, self.__absence/100000000.0
     
     @public
     @return_type(int)
@@ -61,11 +60,9 @@ class AbstractPeer(Object):
     @return_type(int)
     @require("simulation", Simulation)
     def generateEvents(self, simulation):
-        aux = 0
         for generator in self.__eventGenerators:
-            aux += generator.generateEvents(simulation)
+            generator.generateEvents(simulation)
             
-        return aux
     
     @public
     @return_type(bool)
@@ -102,3 +99,9 @@ class AbstractPeer(Object):
     @return_type(int)
     def getAbsenceTime(self):
         return self.__absence
+    
+    @public
+    @return_type(NoneType)
+    def stop(self):
+        for generator in self.__eventGenerators:
+            generator.stop()

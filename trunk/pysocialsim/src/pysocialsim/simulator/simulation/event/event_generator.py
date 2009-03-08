@@ -9,3 +9,6 @@ class EventGenerator(object):
     
     def generateEvents(self, simulation):
         raise NotImplementedError()
+    
+    def stop(self):
+        raise NotImplementedError()

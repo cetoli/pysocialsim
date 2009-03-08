@@ -15,3 +15,12 @@ class Simulator(object):
     
     def getSimulation(self):
         raise NotImplementedError()
+    
+    def configure(self):
+        raise NotImplementedError()
+    
+    def execute(self):
+        raise NotImplementedError()
+    
+    def stop(self):
+        raise NotImplementedError()

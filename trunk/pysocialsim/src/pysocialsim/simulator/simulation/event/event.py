@@ -15,3 +15,9 @@ class Event(object):
     
     def getPriority(self):
         raise NotImplementedError()
+    
+    def handled(self):
+        raise NotImplementedError()
+    
+    def isHandled(self):
+        raise NotImplementedError()

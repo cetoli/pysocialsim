@@ -5,6 +5,7 @@ from pysocialsim.base.decorator.public import public
 from pysocialsim.simulator.simulation.event.event import Event
 from pysocialsim.base.decorator.return_type import return_type
 from pysocialsim.simulator.dispatcher.event_handler import EventHandler
+from threading import Thread
 
 class AbstractDispatcher(Object):
     
@@ -22,8 +23,11 @@ class AbstractDispatcher(Object):
     def handleEvent(self, event):
         if not self.__eventHandlers.has_key(event.getHandle()):
             return False
+        if event.isHandled():
+            return False
         clone = self.__eventHandlers[event.getHandle()].clone()
-        return clone.handleEvent(event)
+        AbstractDispatcher.EventHandlingThread(clone, event).start()
+        return event
     
     @public
     @return_type(bool)
@@ -47,3 +51,14 @@ class AbstractDispatcher(Object):
     @return_type(int)
     def countEventHandlers(self):
         return len(self.__eventHandlers)
+    
+    class EventHandlingThread(Thread):
+        
+        def __init__(self, handler, event):
+            Thread.__init__(self)
+            self.__handler = handler
+            self.__event = event
+            
+        def run(self):
+            self.__handler.handleEvent(self.__event)
+            self.__event.handled()

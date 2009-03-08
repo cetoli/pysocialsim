@@ -23,8 +23,7 @@ class AbstractSimulator(Object):
     @return_type(Event)
     @require("event", Event)
     def handleEvent(self, event):
-        print event.getHandle(), event.getPriority(), event.getPeer().getId()
-        return event
+        return self.__dispatcher.handleEvent(event)
     
     @public
     @return_type(Dispatcher)

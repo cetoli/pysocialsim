@@ -27,7 +27,7 @@ class AbstractEventHandler(Object):
     @public
     @return_type(EventHandler)
     def clone(self):
-        return copy(self)
+        raise NotImplementedError()
     
     @public
     @require("event", Event)

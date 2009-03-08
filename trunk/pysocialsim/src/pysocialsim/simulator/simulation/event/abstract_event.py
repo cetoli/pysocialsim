@@ -17,6 +17,7 @@ class AbstractEvent(Object):
         self.__handle = handle
         self.__peer = peer
         self.__priority = priority
+        self.__isHandled = False
         
     @public
     @return_type(str)
@@ -32,3 +33,14 @@ class AbstractEvent(Object):
     @return_type(float)
     def getPriority(self):
         return self.__priority
+    
+    @public
+    @return_type(bool)
+    def handled(self):
+        self.__isHandled = True
+        return self.__isHandled
+    
+    @public
+    @return_type(bool)
+    def isHandled(self):
+        return self.__isHandled

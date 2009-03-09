@@ -6,21 +6,26 @@ from pysocialsim.network.pure_network_builder import PureNetworkBuilder
 from pysocialsim.simulator.dispatcher.default_dispatcher import DefaultDispatcher
 from pysocialsim.network.peer.event.connection_event_handler import ConnectionEventHandler
 from pysocialsim.network.peer.event.disconnection_event_handler import DisconnectionEventHandler
+import time
 
 if __name__ == '__main__':
     topology = UnstructuredTopology()
     builder = PureNetworkBuilder()
     director = NetworkBuilderDirector(builder)
-    director.build(topology, peers=100, min_permanence=21600, max_permanence=31104000, min_absence=3600, max_absence=2592000)
+    director.build(topology, peers=1000, min_permanence=21600, max_permanence=31104000, min_absence=3600, max_absence=2592000)
     network = builder.getNetwork()
+    network.setEvolutionRate(100)
     simulation = DefaultSimulation(network)
     simulator = DefaultSimulator(simulation)
     dispatcher = DefaultDispatcher(simulator)
     
     dispatcher.registerEventHandler(ConnectionEventHandler(simulation))
     dispatcher.registerEventHandler(DisconnectionEventHandler(simulation))
-    
+    print time.time() / 100000000000000000000.0
     simulator.configure()
     simulator.execute()
     
+    #time.sleep(5)
+    
+    #topology.show()
     #simulator.stop()

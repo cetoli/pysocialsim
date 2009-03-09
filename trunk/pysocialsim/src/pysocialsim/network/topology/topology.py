@@ -24,3 +24,9 @@ class Topology(object):
     
     def getGraph(self):
         raise NotImplementedError()
+    
+    def show(self):
+        raise NotImplementedError()
+    
+    def dispatchMessage(self, message):
+        raise NotImplementedError()

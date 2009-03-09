@@ -73,7 +73,8 @@ class AbstractSimulation(Object):
             self.__simulation = simulation
             
         def run(self):
-            self.__simulation.getNetwork().generateEvents(self.__simulation)
+            while True:
+                self.__simulation.getNetwork().generateEvents(self.__simulation)
             
     class SimulationThread(Thread):
         

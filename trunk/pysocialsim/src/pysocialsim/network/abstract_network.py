@@ -6,6 +6,7 @@ from pysocialsim.base.decorator.return_type import return_type
 from pysocialsim.simulator.simulation.simulation import Simulation
 from pysocialsim.network.peer.peer import Peer
 from types import NoneType
+import time
 
 class AbstractNetwork(Object):
     
@@ -18,6 +19,7 @@ class AbstractNetwork(Object):
         self.__topology = topology
         self.__peers = {}
         self.__simulation = None
+        self.__evolutionRate = 0
     
     @public
     @return_type(Topology)
@@ -28,8 +30,15 @@ class AbstractNetwork(Object):
     @return_type(int)
     @require("simulation", Simulation)
     def generateEvents(self, simulation):
-        for peer in self.__peers.values():
-            peer.generateEvents(simulation)
+        peers = 0
+        day = 1
+        while peers < len(self.__peers):
+            for id in range(peers, (self.__evolutionRate * day) - 1):
+                self.__peers[id].generateEvents(simulation)
+                peers += 1
+            day += 1
+            peers += 1
+            time.sleep(0.02592)
         return simulation.countEvents()
     
     @public
@@ -81,3 +90,18 @@ class AbstractNetwork(Object):
     def stop(self):
         for peer in self.__peers.values():
             peer.stop()
+            
+    @public
+    @return_type(int)
+    def setEvolutionRate(self, evolutionRate):
+        self.__evolutionRate = evolutionRate
+        return self.__evolutionRate
+    
+    @public
+    @return_type(int)
+    def getEvolutionRate(self):
+        return self.__evolutionRate
+    
+    @public
+    def dispatchMessage(self, message):
+        pass

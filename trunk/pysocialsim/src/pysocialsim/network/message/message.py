@@ -1,39 +1,41 @@
 from pysocialsim.base.interface import Interface
-from pysocialsim.simulator.simulation.event.event_generator import EventGenerator
 
-class Network(EventGenerator):
+class Message(object):
     
     __metaclass__ = Interface
     
     def __init__(self):
         raise NotImplementedError()
     
-    def getTopology(self):
+    def getSourceId(self):
         raise NotImplementedError()
     
-    def getSimulation(self):
+    def getTargetId(self):
         raise NotImplementedError()
     
-    def setSimulation(self, simulation):
+    def getTTL(self):
         raise NotImplementedError()
     
-    def countPeers(self):
+    def registerTrace(self, id):
         raise NotImplementedError()
     
-    def addPeer(self, peer):
+    def unregisterTrace(self):
         raise NotImplementedError()
     
-    def removePeer(self, id):
+    def countTraces(self):
         raise NotImplementedError()
     
-    def getPeer(self, id):
+    def getTrace(self, index):
         raise NotImplementedError()
     
-    def setEvolutionRate(self, evolutionRate):
+    def getTraces(self):
         raise NotImplementedError()
     
-    def getEvolutionRate(self):
+    def getFirstTrace(self):
         raise NotImplementedError()
     
-    def dispatchMessage(self, message):
+    def getLastTrace(self):
+        raise NotImplementedError()
+    
+    def getName(self):
         raise NotImplementedError()

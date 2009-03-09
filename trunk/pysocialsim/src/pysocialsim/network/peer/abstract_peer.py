@@ -6,6 +6,8 @@ from pysocialsim.base.decorator.public import public
 from pysocialsim.simulator.simulation.event.event_generator import EventGenerator
 from pysocialsim.simulator.simulation.simulation import Simulation
 from types import NoneType
+from pysocialsim.network.peer.event.send_event import SendEvent
+import time
 
 class AbstractPeer(Object):
     
@@ -26,6 +28,7 @@ class AbstractPeer(Object):
         self.__type = type
         self.__permanence = permanence
         self.__absence = absence
+        self.__currentTime = 0.0
     
     @public
     @return_type(int)
@@ -105,3 +108,24 @@ class AbstractPeer(Object):
     def stop(self):
         for generator in self.__eventGenerators:
             generator.stop()
+    
+    @public        
+    def send(self, message):
+        network = self.getNetwork()
+        simulation = network.getSimulation()
+        event = SendEvent(self, self.__currentTime + (time.time() / 100000000000000000000.0), message)
+        simulation.registerEvent(event)
+        return message
+    
+    @public
+    def receive(self, message):
+        pass
+    
+    @public
+    def setCurrentTime(self, currentTime):
+        self.__currentTime = currentTime
+        return self.__currentTime
+    
+    @public
+    def getCurrentTime(self):
+        return self.__currentTime

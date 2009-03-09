@@ -12,7 +12,6 @@ class DisconnectionEventHandler(AbstractEventHandler):
         
     @require("event", Event)
     def executeHandler(self, event):
-        print event.getHandle(), event.getPriority(), event.getPeer().getId()
         peer = event.getPeer()
         peer.disconnect()
         

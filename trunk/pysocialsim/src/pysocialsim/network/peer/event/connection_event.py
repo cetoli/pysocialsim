@@ -1,6 +1,6 @@
-from pysocialsim.simulator.simulation.event.default_event import DefaultEvent
+from pysocialsim.simulator.simulation.event.abstract_event import AbstractEvent
 
-class ConnectionEvent(DefaultEvent):
+class ConnectionEvent(AbstractEvent):
     
     def __init__(self, peer, priority):
         self.initialize("CONNECT_PEER", peer, priority)

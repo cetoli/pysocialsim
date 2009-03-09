@@ -40,3 +40,15 @@ class Peer(EventGenerator):
     
     def getAbsenceTime(self):
         raise NotImplementedError()
+    
+    def send(self, message):
+        raise NotImplementedError()
+    
+    def receive(self, message):
+        raise NotImplementedError()
+    
+    def setCurrentTime(self, currentTime):
+        raise NotImplementedError()
+    
+    def getCurrentTime(self):
+        raise NotImplementedError()

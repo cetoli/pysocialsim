@@ -4,8 +4,8 @@ from pysocialsim.base.decorator.return_type import return_type
 from types import NoneType
 from random import randint
 from threading import Semaphore
-from pysocialsim.network.message.ping_message import PingMessage
-from pysocialsim.network.message.connect_message import ConnectMessage
+from pysocialsim.network.peer.message.connect_message import ConnectMessage
+from pysocialsim.network.peer.message.disconnect_message import DisconnectMessage
 
 class UnstructuredTopology(DefaultTopology):
     
@@ -41,10 +41,21 @@ class UnstructuredTopology(DefaultTopology):
         sem.acquire()
         if not peer.isConnected():
             return
-        graph = self.getGraph()
-        graph.delete_node(peer.getId())
+        neighbors = self.getNeighbors(peer.getId())
+        for n in neighbors:
+            message = DisconnectMessage(peer.getId(), n, 3)
+            peer.send(message)
         sem.release()
     
     @public
     def dispatchMessage(self, message):
-        pass
+        peer = self.getNetwork().getPeer(message.getTargetId())
+        peer.receive(message)
+    
+    @public    
+    def createConnection(self, sourceId, targetId):
+        self.getGraph().add_edge(sourceId, targetId)
+    
+    @public
+    def removeConnection(self, sourceId, targetId):
+        raise NotImplementedError()

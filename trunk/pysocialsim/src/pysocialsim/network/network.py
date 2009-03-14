@@ -37,3 +37,9 @@ class Network(EventGenerator):
     
     def dispatchMessage(self, message):
         raise NotImplementedError()
+    
+    def createConnection(self, sourceId, targetId):
+        raise NotImplementedError()
+    
+    def removeConnection(self, sourceId, targetId):
+        raise NotImplementedError()

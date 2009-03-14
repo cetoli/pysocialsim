@@ -32,7 +32,8 @@ class AbstractTopology(Object):
     @public
     @return_type(ImmutableSet)
     def getNeighbors(self, id):
-        return ImmutableSet(self.__graph.neighbors_iter())
+        print id
+        return ImmutableSet(self.__graph.neighbors(id))
     
     @public
     @return_type(Network)
@@ -62,4 +63,12 @@ class AbstractTopology(Object):
     
     @public
     def dispatchMessage(self, message):
+        raise NotImplementedError()
+    
+    @public
+    def createConnection(self, sourceId, targetId):
+        raise NotImplementedError()
+    
+    @public
+    def removeConnection(self, sourceId, targetId):
         raise NotImplementedError()

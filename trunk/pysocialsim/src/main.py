@@ -26,7 +26,7 @@ if __name__ == '__main__':
     
     dispatcher = DefaultDispatcher(simulator)
     dispatcher.registerEventHandler(ConnectionEventHandler(simulation))
-    #dispatcher.registerEventHandler(DisconnectionEventHandler(simulation))
+    dispatcher.registerEventHandler(DisconnectionEventHandler(simulation))
     dispatcher.registerEventHandler(SendEventHandler(simulation))
     dispatcher.registerEventHandler(ReceiveEventHandler(simulation))
     

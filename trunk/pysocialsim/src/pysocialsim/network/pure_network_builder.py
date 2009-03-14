@@ -5,6 +5,9 @@ from pysocialsim.network.topology.topology import Topology
 from pysocialsim.network.pure_network import PureNetwork
 from pysocialsim.network.peer.default_peer import DefaultPeer
 from random import randint
+from pysocialsim.network.peer.message.default_message_dispatcher import DefaultMessageDispatcher
+from pysocialsim.network.peer.message.connect_message_handler import ConnectMessageHandler
+from pysocialsim.network.peer.message.ok_connect_message_handler import OKConnectMessageHandler
 
 class PureNetworkBuilder(AbstractNetworkBuilder):
     
@@ -17,7 +20,11 @@ class PureNetworkBuilder(AbstractNetworkBuilder):
             return 0
         peers = 0
         for id in range(params["peers"]):
-            self.getNetwork().addPeer(DefaultPeer(id, self.getNetwork(), randint(params["min_permanence"], params["max_permanence"]), randint(params["min_absence"], params["max_absence"])))
+            peer = DefaultPeer(id, self.getNetwork(), randint(params["min_permanence"], params["max_permanence"]), randint(params["min_absence"], params["max_absence"]))
+            dispatcher = DefaultMessageDispatcher(peer)
+            dispatcher.registerMessageHandler(ConnectMessageHandler(peer))
+            dispatcher.registerMessageHandler(OKConnectMessageHandler(peer))
+            self.getNetwork().addPeer(peer)
             peers += 1
             
         return peers

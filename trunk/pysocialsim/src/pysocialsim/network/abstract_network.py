@@ -20,6 +20,7 @@ class AbstractNetwork(Object):
         self.__peers = {}
         self.__simulation = None
         self.__evolutionRate = 0
+        self.__topology.setNetwork(self)
     
     @public
     @return_type(Topology)
@@ -105,3 +106,11 @@ class AbstractNetwork(Object):
     @public
     def dispatchMessage(self, message):
         pass
+    
+    @public
+    def createConnection(self, sourceId, targetId):
+        self.__topology.createConnection(sourceId, targetId)
+    
+    @public
+    def removeConnection(self, sourceId, targetId):
+        raise NotImplementedError()

@@ -136,14 +136,22 @@ class AbstractPeer(Object):
     
     @public
     def sendMessage(self, message):
-        peer = self.__network.getPeer(message.getTargetId())
-        peer.receive(message)
+        topology = self.__network.getTopology()
+        topology.dispatchMessage(message)
     
     @public
     def receiveMessage(self, message):
-        print 1
+        return self.__messageDispatcher.handleMessage(message)
         
     @public
     def setMessageDispatcher(self, dispatcher):
         self.__messageDispatcher = dispatcher
         return self.__messageDispatcher
+    
+    @public
+    def createConnection(self, peerId):
+        self.__network.createConnection(self.__id, peerId)
+    
+    @public
+    def removeConnection(self, peerId):
+        raise NotImplementedError()

@@ -21,9 +21,9 @@ class AbstractMessageDispatcher(Object):
     
     @public
     def registerMessageHandler(self, handler):
-        if self.__handlers.has_key(handler.getHandle()):
+        if self.__handlers.has_key(handler.getMessageName()):
             return False
-        self.__eventHandlers[handler.getMessageName()] = handler
+        self.__handlers[handler.getMessageName()] = handler
         return True
     
     @public

@@ -61,3 +61,9 @@ class Peer(EventGenerator):
     
     def setMessageDispatcher(self, dispatcher):
         raise NotImplementedError()
+    
+    def createConnection(self, peerId):
+        raise NotImplementedError()
+    
+    def removeConnection(self, peerId):
+        raise NotImplementedError()

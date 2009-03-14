@@ -39,3 +39,9 @@ class Message(object):
     
     def getName(self):
         raise NotImplementedError()
+    
+    def handled(self):
+        raise NotImplementedError()
+    
+    def isHandled(self):
+        raise NotImplementedError()

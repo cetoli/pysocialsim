@@ -4,6 +4,8 @@ from pysocialsim.base.decorator.return_type import return_type
 from types import NoneType
 from random import randint
 from threading import Semaphore
+from pysocialsim.network.message.ping_message import PingMessage
+from pysocialsim.network.message.connect_message import ConnectMessage
 
 class UnstructuredTopology(DefaultTopology):
     
@@ -23,10 +25,13 @@ class UnstructuredTopology(DefaultTopology):
         if len(graph.nodes()) > 0:
             nodes = graph.nodes()
             node = randint(0, len(nodes) - 1)
-                
-        graph.add_node(peer.getId())
-        if node <> None:
-            graph.add_edge(peer.getId(), node)
+        
+        if not node:
+            graph.add_node(peer.getId())
+        else:
+            connect = ConnectMessage(peer.getId(), node, 3)
+            peer.send(connect)
+
         sem.release()
     
     @public

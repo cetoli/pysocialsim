@@ -52,3 +52,12 @@ class Peer(EventGenerator):
     
     def getCurrentTime(self):
         raise NotImplementedError()
+    
+    def sendMessage(self, message):
+        raise NotImplementedError()
+    
+    def receiveMessage(self, message):
+        raise NotImplementedError()
+    
+    def setMessageDispatcher(self, dispatcher):
+        raise NotImplementedError()

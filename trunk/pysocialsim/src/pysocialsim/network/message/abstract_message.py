@@ -17,6 +17,7 @@ class AbstractMessage(Object):
         self.__targetId = targetId
         self.__ttl = ttl
         self.__traces = []
+        self.__isHandled = False
     
     @public    
     def getSourceId(self):
@@ -61,3 +62,12 @@ class AbstractMessage(Object):
     @public
     def getName(self):
         return self.__name
+    
+    @public
+    def handled(self):
+        self.__isHandled = True
+        return self.__isHandled
+    
+    @public
+    def isHandled(self):
+        return self.__isHandled

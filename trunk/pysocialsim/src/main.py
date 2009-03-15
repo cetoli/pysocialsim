@@ -8,7 +8,6 @@ from pysocialsim.network.peer.event.connection_event_handler import ConnectionEv
 from pysocialsim.network.peer.event.disconnection_event_handler import DisconnectionEventHandler
 from pysocialsim.network.peer.event.send_event_handler import SendEventHandler
 from pysocialsim.network.peer.event.receive_event_handler import ReceiveEventHandler
-import time
 
 if __name__ == '__main__':
     topology = UnstructuredTopology()
@@ -16,13 +15,14 @@ if __name__ == '__main__':
     builder = PureNetworkBuilder()
     
     director = NetworkBuilderDirector(builder)
-    director.build(topology, peers=100, min_permanence=21600, max_permanence=31104000, min_absence=3600, max_absence=2592000)
+    director.build(topology, peers=1000, min_permanence=21600, max_permanence=31104000, min_absence=3600, max_absence=2592000)
     
     network = builder.getNetwork()
-    network.setEvolutionRate(10)
+    network.setEvolutionRate(100)
 
     simulation = DefaultSimulation(network)
     simulator = DefaultSimulator(simulation)
+    simulator.setNumberOfFiles(5000)
     
     dispatcher = DefaultDispatcher(simulator)
     dispatcher.registerEventHandler(ConnectionEventHandler(simulation))

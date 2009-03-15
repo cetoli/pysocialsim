@@ -67,3 +67,18 @@ class Peer(EventGenerator):
     
     def removeConnection(self, peerId):
         raise NotImplementedError()
+    
+    def connected(self):
+        raise NotImplementedError()
+    
+    def disconnected(self):
+        raise NotImplementedError()
+    
+    def addFile(self, file):
+        raise NotImplementedError()
+    
+    def removeFile(self, id):
+        raise NotImplementedError()
+    
+    def countFiles(self):
+        raise NotImplementedError()

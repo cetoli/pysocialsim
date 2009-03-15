@@ -113,4 +113,4 @@ class AbstractNetwork(Object):
     
     @public
     def removeConnection(self, sourceId, targetId):
-        raise NotImplementedError()
+        self.__topology.removeConnection(sourceId, targetId)

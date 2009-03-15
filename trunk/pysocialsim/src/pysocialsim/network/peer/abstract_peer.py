@@ -8,6 +8,7 @@ from pysocialsim.simulator.simulation.simulation import Simulation
 from types import NoneType
 from pysocialsim.network.peer.event.send_event import SendEvent
 from pysocialsim.network.peer.event.receive_event import ReceiveEvent
+from sets import ImmutableSet
 import time
 
 class AbstractPeer(Object):
@@ -31,6 +32,7 @@ class AbstractPeer(Object):
         self.__absence = absence
         self.__currentTime = 0.0
         self.__messageDispatcher = None
+        self.__files = {}
     
     @public
     @return_type(int)
@@ -80,7 +82,6 @@ class AbstractPeer(Object):
         network = self.getNetwork()
         topology = network.getTopology()
         topology.connect(self)
-        self.__isConnected = True
     
     @public
     @return_type(NoneType)
@@ -114,14 +115,14 @@ class AbstractPeer(Object):
     @public        
     def send(self, message):
         simulation = self.__network.getSimulation()
-        event = SendEvent(self, self.__currentTime + (time.time() / 100000000000000000000.0), message)
+        event = SendEvent(self, 1 / 10000000000000000000000000000000000000000000.0, message)
         simulation.registerEvent(event)
         return message
     
     @public
     def receive(self, message):
         simulation = self.__network.getSimulation()
-        event = ReceiveEvent(self, self.__currentTime + (time.time() / 100000000000000000000.0), message)
+        event = ReceiveEvent(self, 1 / 10000000000000000000000000000000000000000000.0, message)
         simulation.registerEvent(event)
         return message
     
@@ -154,4 +155,28 @@ class AbstractPeer(Object):
     
     @public
     def removeConnection(self, peerId):
-        raise NotImplementedError()
+        self.__network.removeConnection(self.__id, peerId)
+    
+    @public    
+    def connected(self):
+        self.__isConnected = True
+        return self.__isConnected
+    
+    @public
+    def disconnected(self):
+        self.__isConnected = False
+        return self.__isConnected
+    
+    @public
+    def addFile(self, file):
+        self.__files[file.getId()] = file
+        file.addOwner(self.__id)
+    
+    @public
+    def removeFile(self, id):
+        del self.__files[id]
+        file.removeOwner(self.__id)
+    
+    @public
+    def countFiles(self):
+        return ImmutableSet(self.__files.values())

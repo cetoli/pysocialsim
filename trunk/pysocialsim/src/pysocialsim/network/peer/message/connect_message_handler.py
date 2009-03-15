@@ -12,6 +12,7 @@ class ConnectMessageHandler(AbstractMessageHandler):
         network = self.getPeer().getNetwork()
         peer = network.getPeer(message.getSourceId())
         message = OKConnectMessage(message.getTargetId(), message.getSourceId(), message.getTTL())
+        self.getPeer().getNetwork().getTopology().addNode(self.getPeer().getId())
         peer.send(message)
         
     @public

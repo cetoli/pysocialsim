@@ -24,3 +24,9 @@ class Simulator(object):
     
     def stop(self):
         raise NotImplementedError()
+    
+    def setNumberOfFiles(self, files):
+        raise NotImplementedError()
+    
+    def getNumberOfFiles(self):
+        raise NotImplementedError()

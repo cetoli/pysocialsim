@@ -36,3 +36,9 @@ class Topology(object):
     
     def removeConnection(self, sourceId, targetId):
         raise NotImplementedError()
+    
+    def addNode(self, id):
+        raise NotImplementedError()
+    
+    def removeNode(self, id):
+        raise NotImplementedError()

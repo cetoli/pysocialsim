@@ -1,41 +1,38 @@
 from pysocialsim.base.interface import Interface
 
-class Simulation(object):
-
+class File(object):
+    
     __metaclass__ = Interface
     
     def __init__(self):
         raise NotImplementedError()
     
-    def setSimulator(self, simulator):
+    def getId(self):
         raise NotImplementedError()
     
-    def getNetwork(self):
+    def addFolksonomy(self, folksonomy):
         raise NotImplementedError()
     
-    def registerEvent(self, event):
+    def removeFolksonomy(self, folksonomy):
         raise NotImplementedError()
     
-    def countEvents(self):
+    def countFolksonomies(self):
         raise NotImplementedError()
     
-    def unregisterEvent(self):
+    def getFolksonomies(self):
         raise NotImplementedError()
     
-    def generateEvents(self):
+    def addOwner(self, peerId):
         raise NotImplementedError()
     
-    def simulate(self):
+    def removeOwner(self, peerId):
         raise NotImplementedError()
     
-    def stop(self):
+    def countOwners(self):
         raise NotImplementedError()
     
-    def setNumberOfFiles(self, files):
+    def getOwners(self):
         raise NotImplementedError()
     
-    def getNumberOfFiles(self):
-        raise NotImplementedError()
-    
-    def generateFiles(self):
+    def getConcept(self):
         raise NotImplementedError()

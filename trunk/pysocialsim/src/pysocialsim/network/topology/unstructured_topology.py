@@ -47,15 +47,4 @@ class UnstructuredTopology(DefaultTopology):
             peer.send(message)
         sem.release()
     
-    @public
-    def dispatchMessage(self, message):
-        peer = self.getNetwork().getPeer(message.getTargetId())
-        peer.receive(message)
     
-    @public    
-    def createConnection(self, sourceId, targetId):
-        self.getGraph().add_edge(sourceId, targetId)
-    
-    @public
-    def removeConnection(self, sourceId, targetId):
-        raise NotImplementedError()

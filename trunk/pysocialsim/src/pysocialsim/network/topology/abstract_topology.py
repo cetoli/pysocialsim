@@ -32,7 +32,6 @@ class AbstractTopology(Object):
     @public
     @return_type(ImmutableSet)
     def getNeighbors(self, id):
-        print id
         return ImmutableSet(self.__graph.neighbors(id))
     
     @public
@@ -61,14 +60,23 @@ class AbstractTopology(Object):
         yticks([])
         pylab.show()
     
-    @public
-    def dispatchMessage(self, message):
-        raise NotImplementedError()
-    
-    @public
+    @public    
     def createConnection(self, sourceId, targetId):
-        raise NotImplementedError()
+        self.getGraph().add_edge(sourceId, targetId)
     
     @public
     def removeConnection(self, sourceId, targetId):
-        raise NotImplementedError()
+        self.getGraph().remove_edge(sourceId, targetId)
+    
+    @public
+    def addNode(self, id):
+        self.__graph.add_node(id)
+    
+    @public
+    def removeNode(self, id):
+        self.__graph.remove_node(id)
+        
+    @public
+    def dispatchMessage(self, message):
+        peer = self.getNetwork().getPeer(message.getTargetId())
+        peer.receive(message)

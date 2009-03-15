@@ -21,6 +21,7 @@ class AbstractSimulation(Object):
         self.__network.setSimulation(self)
         self.__simulator = None
         self.__events = PriorityQueue()
+        self.__numberOfFiles = 0
         
     @public
     @return_type(Network)
@@ -65,6 +66,19 @@ class AbstractSimulation(Object):
     @return_type(NoneType)        
     def stop(self):
         self.__network.stop()
+        
+    @public
+    def setNumberOfFiles(self, files):
+        self.__numberOfFiles = files
+        return self.__numberOfFiles
+    
+    @public
+    def getNumberOfFiles(self):
+        return self.__numberOfFiles
+    
+    @public
+    def generateFiles(self):
+        raise NotImplementedError()
     
     class EventGenerationThread(Thread):
         

@@ -40,6 +40,7 @@ class AbstractSimulator(Object):
     @public
     @return_type(NoneType)    
     def configure(self):
+        self.__simulation.generateFiles()
         self.__simulation.generateEvents()
     
     @public
@@ -51,3 +52,11 @@ class AbstractSimulator(Object):
     @return_type(NoneType)
     def stop(self):
         self.__simulation.stop()
+    
+    @public    
+    def setNumberOfFiles(self, files):
+        return self.__simulation.setNumberOfFiles(files)
+    
+    @public
+    def getNumberOfFiles(self):
+        return self.__simulation.getNumberOfFiles()

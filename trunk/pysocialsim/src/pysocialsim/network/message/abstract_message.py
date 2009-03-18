@@ -18,6 +18,7 @@ class AbstractMessage(Object):
         self.__ttl = ttl
         self.__traces = []
         self.__isHandled = False
+        self.__hop = 0
     
     @public    
     def getSourceId(self):
@@ -71,3 +72,24 @@ class AbstractMessage(Object):
     @public
     def isHandled(self):
         return self.__isHandled
+    
+    @public
+    def setHop(self, hop):
+        self.__hop = hop
+        return self.__hop
+        
+    @public
+    def getHop(self):
+        return self.__hop
+    
+    @public
+    def setSourceId(self, sourceId):
+        self.__sourceId = sourceId
+    
+    @public
+    def setTargetId(self, targetId):
+        self.__targetId = targetId
+        
+    @public    
+    def clone(self):
+        raise NotImplementedError()

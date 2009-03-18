@@ -14,7 +14,11 @@ from pysocialsim.network.peer.message.ok_disconnect_message_handler import OKDis
 class PureNetworkBuilder(AbstractNetworkBuilder):
     
     def __init__(self):
+        self.initialize()
+    
+    def initialize(self):
         self.setNetwork(None)
+        self.setProtocol(None)
     
     @public    
     def buildNetwork(self, **params):
@@ -24,10 +28,9 @@ class PureNetworkBuilder(AbstractNetworkBuilder):
         for id in range(params["peers"]):
             peer = DefaultPeer(id, self.getNetwork(), randint(params["min_permanence"], params["max_permanence"]), randint(params["min_absence"], params["max_absence"]))
             dispatcher = DefaultMessageDispatcher(peer)
-            dispatcher.registerMessageHandler(ConnectMessageHandler(peer))
-            dispatcher.registerMessageHandler(OKConnectMessageHandler(peer))
-            dispatcher.registerMessageHandler(DisconnectMessageHandler(peer))
-            dispatcher.registerMessageHandler(OKDisconnectMessageHandler(peer))
+
+            peer.setProtocol(self.getProtocol())
+            
             self.getNetwork().addPeer(peer)
             peers += 1
             
@@ -35,7 +38,9 @@ class PureNetworkBuilder(AbstractNetworkBuilder):
     
     @public
     @require("topology", Topology)
-    def createNetwork(self, topology):
+    def createNetwork(self, topology, protocol):
         self.setNetwork(PureNetwork(topology))
+        self.setProtocol(protocol)
+        self.getProtocol().setTopology(topology)
         return self.getNetwork()
     

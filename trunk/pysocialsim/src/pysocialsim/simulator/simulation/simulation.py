@@ -39,3 +39,9 @@ class Simulation(object):
     
     def generateFiles(self):
         raise NotImplementedError()
+    
+    def setTTL(self, ttl):
+        raise NotImplementedError()
+    
+    def getTTL(self):
+        raise NotImplementedError()

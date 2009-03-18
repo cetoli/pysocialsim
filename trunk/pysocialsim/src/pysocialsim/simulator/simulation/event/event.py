@@ -10,7 +10,7 @@ class Event(object):
     def getHandle(self):
         raise NotImplementedError()
     
-    def getPeer(self, peer):
+    def getPeer(self):
         raise NotImplementedError()
     
     def getPriority(self):

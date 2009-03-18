@@ -13,7 +13,7 @@ class DisconnectMessageHandler(AbstractMessageHandler):
         peer = network.getPeer(message.getSourceId())
         message = OKDisconnectMessage(message.getTargetId(), message.getSourceId(), message.getTTL())
         peer.send(message)
-        self.getPeer().getNetwork().getTopology().removeNode(self.getPeer().getId())
+        self.getPeer().getNetwork().getTopology().removeConnection(message.getTargetId(), message.getSourceId())
         
     @public
     def clone(self):

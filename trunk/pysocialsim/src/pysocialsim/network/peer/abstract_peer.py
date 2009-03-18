@@ -8,8 +8,6 @@ from pysocialsim.simulator.simulation.simulation import Simulation
 from types import NoneType
 from pysocialsim.network.peer.event.send_event import SendEvent
 from pysocialsim.network.peer.event.receive_event import ReceiveEvent
-from sets import ImmutableSet
-import time
 
 class AbstractPeer(Object):
     
@@ -33,6 +31,7 @@ class AbstractPeer(Object):
         self.__currentTime = 0.0
         self.__messageDispatcher = None
         self.__files = {}
+        self.__protocol = None
     
     @public
     @return_type(int)
@@ -79,16 +78,12 @@ class AbstractPeer(Object):
     @public
     @return_type(NoneType)
     def connect(self):
-        network = self.getNetwork()
-        topology = network.getTopology()
-        topology.connect(self)
+        self.__protocol.connect()
     
     @public
     @return_type(NoneType)
     def disconnect(self):
-        network = self.getNetwork()
-        topology = network.getTopology()
-        topology.disconnect(self)
+        self.__protocol.disconnect()
         self.__isConnected = False
     
     @public
@@ -137,16 +132,20 @@ class AbstractPeer(Object):
     
     @public
     def sendMessage(self, message):
-        topology = self.__network.getTopology()
-        topology.dispatchMessage(message)
+        self.__protocol.sendMessage(message)
     
     @public
     def receiveMessage(self, message):
-        return self.__messageDispatcher.handleMessage(message)
+        self.__protocol.receiveMessage(message)
+        return message
         
     @public
     def setMessageDispatcher(self, dispatcher):
         self.__messageDispatcher = dispatcher
+        return self.__messageDispatcher
+    
+    @public
+    def getMessageDispatcher(self):
         return self.__messageDispatcher
     
     @public
@@ -179,4 +178,22 @@ class AbstractPeer(Object):
     
     @public
     def countFiles(self):
-        return ImmutableSet(self.__files.values())
+        return len(self.__files)
+    
+    @public
+    def getProtocol(self):
+        return self.__protocol
+    
+    @public
+    def setProtocol(self, protocol):
+        self.__protocol = protocol.clone()
+        self.__protocol.setPeer(self)
+        for handlerClass in self.__protocol.getMessageHandlerClasses():
+            handler = handlerClass(self)
+            self.__messageDispatcher.registerMessageHandler(handler)
+            handler.getMessageName()
+        return self.__protocol
+    
+    @public
+    def advertise(self, advertisementType):
+        raise NotImplementedError()

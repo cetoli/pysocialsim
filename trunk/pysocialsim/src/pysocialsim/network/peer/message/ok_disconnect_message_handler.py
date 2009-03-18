@@ -9,6 +9,7 @@ class OKDisconnectMessageHandler(AbstractMessageHandler):
     @public
     def executeHandler(self, message):
         self.getPeer().disconnected()
+        self.getPeer().getNetwork().getTopology().removeNode(self.getPeer().getId())
         
         
     @public

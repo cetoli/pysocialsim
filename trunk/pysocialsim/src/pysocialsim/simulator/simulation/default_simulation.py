@@ -19,7 +19,9 @@ class DefaultSimulation(AbstractSimulation):
             tags = conceptMap.mapping[concept]
             initial = randint(0, int(len(tags)/2))
             final = randint(int(len(tags)/2), len(tags) - 1)
+            
             folks = []
+            
             for j in range(initial, final):
                 folks.append(tags[j])
             

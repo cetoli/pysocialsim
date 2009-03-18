@@ -22,14 +22,15 @@ class UnstructuredTopology(DefaultTopology):
         graph = self.getGraph()
         
         node = None
-        if len(graph.nodes()) > 0:
+        if len(graph) > 0:
             nodes = graph.nodes()
             node = randint(0, len(nodes) - 1)
         
-        if not node:
-            graph.add_node(peer.getId())
-        else:
-            connect = ConnectMessage(peer.getId(), node, 3)
+        self.addNode(peer.getId())
+        if node:
+            network = self.getNetwork()
+            simulation = network.getSimulation()
+            connect = ConnectMessage(peer.getId(), node, simulation.getTTL())
             peer.send(connect)
 
         sem.release()
@@ -42,8 +43,10 @@ class UnstructuredTopology(DefaultTopology):
         if not peer.isConnected():
             return
         neighbors = self.getNeighbors(peer.getId())
+        network = self.getNetwork()
+        simulation = network.getSimulation()
         for n in neighbors:
-            message = DisconnectMessage(peer.getId(), n, 3)
+            message = DisconnectMessage(peer.getId(), n, simulation.getTTL())
             peer.send(message)
         sem.release()
     

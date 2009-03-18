@@ -10,8 +10,11 @@ class NetworkBuilder(object):
     def buildNetwork(self, **params):
         raise NotImplementedError()
     
-    def createNetwork(self, topology):
+    def createNetwork(self, topology, protocol):
         raise NotImplementedError()
     
     def getNetwork(self):
+        raise NotImplementedError()
+    
+    def getProtocol(self):
         raise NotImplementedError()

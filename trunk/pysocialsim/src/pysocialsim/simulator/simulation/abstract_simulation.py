@@ -22,6 +22,7 @@ class AbstractSimulation(Object):
         self.__simulator = None
         self.__events = PriorityQueue()
         self.__numberOfFiles = 0
+        self.__ttl = 0
         
     @public
     @return_type(Network)
@@ -79,6 +80,14 @@ class AbstractSimulation(Object):
     @public
     def generateFiles(self):
         raise NotImplementedError()
+    
+    @public
+    def setTTL(self, ttl):
+        self.__ttl = 0
+        
+    @public
+    def getTTL(self):
+        return self.__ttl
     
     class EventGenerationThread(Thread):
         

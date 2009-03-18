@@ -8,6 +8,7 @@ from pysocialsim.network.peer.event.connection_event_handler import ConnectionEv
 from pysocialsim.network.peer.event.disconnection_event_handler import DisconnectionEventHandler
 from pysocialsim.network.peer.event.send_event_handler import SendEventHandler
 from pysocialsim.network.peer.event.receive_event_handler import ReceiveEventHandler
+from pysocialsim.network.protocol.gnutella_protocol import GnutellaProtocol
 
 if __name__ == '__main__':
     topology = UnstructuredTopology()
@@ -15,14 +16,15 @@ if __name__ == '__main__':
     builder = PureNetworkBuilder()
     
     director = NetworkBuilderDirector(builder)
-    director.build(topology, peers=1000, min_permanence=21600, max_permanence=31104000, min_absence=3600, max_absence=2592000)
+    director.build(topology, GnutellaProtocol(), peers=100, min_permanence=21600, max_permanence=31104000, min_absence=3600, max_absence=2592000)
     
     network = builder.getNetwork()
-    network.setEvolutionRate(100)
+    network.setEvolutionRate(10)
 
     simulation = DefaultSimulation(network)
+    simulation.setTTL(3)
     simulator = DefaultSimulator(simulation)
-    simulator.setNumberOfFiles(5000)
+    simulator.setNumberOfFiles(500)
     
     dispatcher = DefaultDispatcher(simulator)
     dispatcher.registerEventHandler(ConnectionEventHandler(simulation))

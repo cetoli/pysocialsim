@@ -8,7 +8,7 @@ class OKConnectMessageHandler(AbstractMessageHandler):
         
     @public
     def executeHandler(self, message):
-        self.getPeer().createConnection(message.getTargetId())
+        self.getPeer().createConnection(message.getSourceId())
         self.getPeer().connected()
         
         

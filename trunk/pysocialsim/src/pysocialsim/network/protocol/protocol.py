@@ -1,62 +1,50 @@
 from pysocialsim.base.interface import Interface
 
-class Message(object):
+class Protocol(object):
     
     __metaclass__ = Interface
     
     def __init__(self):
         raise NotImplementedError()
     
-    def getSourceId(self):
+    def sendMessage(self, message):
         raise NotImplementedError()
     
-    def getTargetId(self):
+    def receiveMessage(self, message):
         raise NotImplementedError()
     
-    def getTTL(self):
+    def advertise(self, advertisementType):
         raise NotImplementedError()
     
-    def registerTrace(self, id):
+    def setPeer(self, peer):
         raise NotImplementedError()
     
-    def unregisterTrace(self):
+    def getPeer(self):
         raise NotImplementedError()
     
-    def countTraces(self):
+    def registerMessageHandlerClass(self, messageName, handlerClass):
         raise NotImplementedError()
     
-    def getTrace(self, index):
+    def unregisterMessageHandlerClass(self, messageName):
         raise NotImplementedError()
     
-    def getTraces(self):
+    def countMessageHandlerClasses(self):
         raise NotImplementedError()
     
-    def getFirstTrace(self):
+    def connect(self):
         raise NotImplementedError()
     
-    def getLastTrace(self):
-        raise NotImplementedError()
-    
-    def getName(self):
-        raise NotImplementedError()
-    
-    def handled(self):
-        raise NotImplementedError()
-    
-    def isHandled(self):
-        raise NotImplementedError()
-    
-    def setHop(self, hop):
-        raise NotImplementedError()
-    
-    def getHop(self):
-        raise NotImplementedError()
-    
-    def setSourceId(self, sourceId):
-        raise NotImplementedError()
-    
-    def setTargetId(self, targetId):
+    def disconnect(self):
         raise NotImplementedError()
     
     def clone(self):
+        raise NotImplementedError()
+    
+    def setTopology(self, topology):
+        raise NotImplementedError()
+    
+    def getTopology(self):
+        raise NotImplementedError()
+    
+    def getMessageHandlerClasses(self):
         raise NotImplementedError()

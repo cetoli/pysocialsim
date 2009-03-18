@@ -10,6 +10,7 @@ from networkx.drawing.nx_pylab import draw_networkx_nodes
 from networkx.drawing.nx_pylab import draw_networkx_edges
 from matplotlib.pyplot import xticks
 from matplotlib.pyplot import yticks
+from threading import Semaphore
 import pylab
 
 class AbstractTopology(Object):
@@ -20,6 +21,7 @@ class AbstractTopology(Object):
     def initialize(self):
         self.__network = None
         self.__graph = Graph().to_undirected()
+        
     
     @public
     def connect(self, peer):
@@ -32,6 +34,8 @@ class AbstractTopology(Object):
     @public
     @return_type(ImmutableSet)
     def getNeighbors(self, id):
+        if not self.__graph.has_node(id):
+            return ImmutableSet([])
         return ImmutableSet(self.__graph.neighbors(id))
     
     @public
@@ -62,11 +66,17 @@ class AbstractTopology(Object):
     
     @public    
     def createConnection(self, sourceId, targetId):
-        self.getGraph().add_edge(sourceId, targetId)
+        sem = Semaphore()
+        sem.acquire()
+        self.__graph.add_edge(sourceId, targetId)
+        sem.release()
     
     @public
     def removeConnection(self, sourceId, targetId):
-        self.getGraph().remove_edge(sourceId, targetId)
+        sem = Semaphore()
+        sem.acquire()
+        self.__graph.delete_edge(sourceId, targetId)
+        sem.release()
     
     @public
     def addNode(self, id):
@@ -74,7 +84,9 @@ class AbstractTopology(Object):
     
     @public
     def removeNode(self, id):
-        self.__graph.remove_node(id)
+        if self.__graph.has_node(id):
+            return
+        self.__graph.delete_node(id)
         
     @public
     def dispatchMessage(self, message):

@@ -2,7 +2,7 @@ from pysocialsim.base.interface import Interface
 from pysocialsim.simulator.simulation.event.event_generator import EventGenerator
 
 class Peer(EventGenerator):
-
+    
     __metaclass__ = Interface
     
     def __init__(self):
@@ -62,6 +62,9 @@ class Peer(EventGenerator):
     def setMessageDispatcher(self, dispatcher):
         raise NotImplementedError()
     
+    def getMessageDispatcher(self):
+        raise NotImplementedError()
+    
     def createConnection(self, peerId):
         raise NotImplementedError()
     
@@ -81,4 +84,13 @@ class Peer(EventGenerator):
         raise NotImplementedError()
     
     def countFiles(self):
+        raise NotImplementedError()
+    
+    def advertise(self, advertisementType):
+        raise NotImplementedError()
+    
+    def getProtocol(self):
+        raise NotImplementedError()
+    
+    def setProtocol(self, protocol):
         raise NotImplementedError()

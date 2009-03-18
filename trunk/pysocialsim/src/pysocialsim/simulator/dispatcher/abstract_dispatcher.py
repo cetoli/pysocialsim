@@ -32,6 +32,7 @@ class AbstractDispatcher(Object):
         self.__dispatcherLogFile = open("dispatcher.log", "a")
         self.__dispatcherLogFile.write(event.getHandle() + ";" + str(event.getPriority()) + ";" + str(event.getPeer().getId()) + ";" + str(time.time())+"\n")
         self.__dispatcherLogFile.close()
+        
         return event
     
     @public

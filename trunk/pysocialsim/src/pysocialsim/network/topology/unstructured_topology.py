@@ -6,6 +6,7 @@ from random import randint
 from threading import Semaphore
 from pysocialsim.network.peer.message.connect_message import ConnectMessage
 from pysocialsim.network.peer.message.disconnect_message import DisconnectMessage
+from pysocialsim.network.message.message_manager import MessageManager
 
 class UnstructuredTopology(DefaultTopology):
     
@@ -30,7 +31,7 @@ class UnstructuredTopology(DefaultTopology):
         if node:
             network = self.getNetwork()
             simulation = network.getSimulation()
-            connect = ConnectMessage(peer.getId(), node, simulation.getTTL())
+            connect = ConnectMessage(MessageManager().getMessageId(), peer.getId(), node, simulation.getTTL())
             peer.send(connect)
 
         sem.release()
@@ -46,7 +47,7 @@ class UnstructuredTopology(DefaultTopology):
         network = self.getNetwork()
         simulation = network.getSimulation()
         for n in neighbors:
-            message = DisconnectMessage(peer.getId(), n, simulation.getTTL())
+            message = DisconnectMessage(MessageManager().getMessageId(), peer.getId(), n, simulation.getTTL())
             peer.send(message)
         sem.release()
     

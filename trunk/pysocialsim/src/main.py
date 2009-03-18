@@ -9,6 +9,7 @@ from pysocialsim.network.peer.event.disconnection_event_handler import Disconnec
 from pysocialsim.network.peer.event.send_event_handler import SendEventHandler
 from pysocialsim.network.peer.event.receive_event_handler import ReceiveEventHandler
 from pysocialsim.network.protocol.gnutella_protocol import GnutellaProtocol
+from pysocialsim.network.peer.event.file_advertisement_event_handler import FileAdvertisementEventHandler
 
 if __name__ == '__main__':
     topology = UnstructuredTopology()
@@ -31,6 +32,7 @@ if __name__ == '__main__':
     dispatcher.registerEventHandler(DisconnectionEventHandler(simulation))
     dispatcher.registerEventHandler(SendEventHandler(simulation))
     dispatcher.registerEventHandler(ReceiveEventHandler(simulation))
+    dispatcher.registerEventHandler(FileAdvertisementEventHandler(simulation))
     
     simulator.configure()
     simulator.execute()

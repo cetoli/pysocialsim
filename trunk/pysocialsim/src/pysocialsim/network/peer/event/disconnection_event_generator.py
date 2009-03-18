@@ -1,4 +1,3 @@
-from threading import Thread
 from pysocialsim.network.peer.event.disconnection_event import DisconnectionEvent
 
 class DisconnectionEventGenerator:

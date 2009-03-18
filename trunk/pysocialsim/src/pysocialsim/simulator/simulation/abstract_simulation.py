@@ -83,7 +83,7 @@ class AbstractSimulation(Object):
     
     @public
     def setTTL(self, ttl):
-        self.__ttl = 0
+        self.__ttl = ttl
         
     @public
     def getTTL(self):

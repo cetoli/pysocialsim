@@ -60,3 +60,15 @@ class Message(object):
     
     def clone(self):
         raise NotImplementedError()
+    
+    def setParameter(self, name, value):
+        raise NotImplementedError()
+    
+    def getParameter(self, name):
+        raise NotImplementedError()
+    
+    def removeParameter(self, name):
+        raise NotImplementedError()
+    
+    def getId(self):
+        raise NotImplementedError()

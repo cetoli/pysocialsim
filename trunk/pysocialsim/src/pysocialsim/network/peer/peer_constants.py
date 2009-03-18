@@ -6,6 +6,8 @@ class PeerConstants(object):
     SIMPLE_PEER = 1
     SUPER_PEER = 2
     
+    FILE_ADVERTISEMENT = 0
+    
     __metaclass__ = Interface
     
     def __init__(self):

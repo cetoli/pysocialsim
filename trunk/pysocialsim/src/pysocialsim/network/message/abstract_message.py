@@ -11,7 +11,8 @@ class AbstractMessage(Object):
     @require("sourceId", int)
     @require("targetId", int)
     @require("ttl", int)
-    def initialize(self, name, sourceId, targetId, ttl):
+    def initialize(self, name, id,  sourceId, targetId, ttl):
+        self.__id = id
         self.__name = name
         self.__sourceId = sourceId
         self.__targetId = targetId
@@ -19,6 +20,7 @@ class AbstractMessage(Object):
         self.__traces = []
         self.__isHandled = False
         self.__hop = 0
+        self.__parameters = {}
     
     @public    
     def getSourceId(self):
@@ -50,7 +52,7 @@ class AbstractMessage(Object):
     
     @public
     def getTraces(self):
-        raise NotImplementedError()
+        return self.__traces
     
     @public
     def getFirstTrace(self):
@@ -93,3 +95,19 @@ class AbstractMessage(Object):
     @public    
     def clone(self):
         raise NotImplementedError()
+    
+    @public
+    def setParameter(self, name, value):
+        self.__parameters[name] = value
+        
+    @public
+    def getParameter(self, name):
+        return self.__parameters[name]
+    
+    @public
+    def removeParameter(self, name):
+        del self.__parameters[name]
+        
+    @public
+    def getId(self):
+        return self.__id

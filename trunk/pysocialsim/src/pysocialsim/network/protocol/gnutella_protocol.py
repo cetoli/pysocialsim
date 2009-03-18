@@ -4,6 +4,7 @@ from pysocialsim.network.peer.message.disconnect_message_handler import Disconne
 from pysocialsim.network.peer.message.ok_connect_message_handler import OKConnectMessageHandler
 from pysocialsim.network.peer.message.ok_disconnect_message_handler import OKDisconnectMessageHandler
 from pysocialsim.base.decorator.public import public
+from pysocialsim.network.peer.message.file_advertisement_message_handler import FileAdvertisementMessageHandler
 
 class GnutellaProtocol(AbstractProtocol):
     
@@ -16,6 +17,7 @@ class GnutellaProtocol(AbstractProtocol):
         self.registerMessageHandlerClass("DISCONNECT", DisconnectMessageHandler)
         self.registerMessageHandlerClass("OK_CONNECT", OKConnectMessageHandler)
         self.registerMessageHandlerClass("OK_DISCONNECT", OKDisconnectMessageHandler)
+        self.registerMessageHandlerClass("FILE_ADVERTISEMENT", FileAdvertisementMessageHandler)
     
     @public    
     def sendMessage(self, message):
@@ -27,19 +29,19 @@ class GnutellaProtocol(AbstractProtocol):
         if peer.getId() == message.getTargetId():
             dispatcher = peer.getMessageDispatcher()
             dispatcher.handleMessage(message)
-        else:
-            print message.getName()
-            network = peer.getNetwork()
-            topology = self.getTopology()
-            neighbors = topology.getNeighbors(peer.getId())
-            message.registerTrace(peer.getId())
-            for id in neighbors:
-                if id <> peer.getId():
-                    msg = message.clone()
-                    msg.setSourceId(peer.getId())
-                    msg.setTargetId(id)
-                    neighbor = network.getPeer(id)
-                    neighbor.send(msg)
+#        else:
+#            print message.getName()
+#            network = peer.getNetwork()
+#            topology = self.getTopology()
+#            neighbors = topology.getNeighbors(peer.getId())
+#            message.registerTrace(peer.getId())
+#            for id in neighbors:
+#                if id <> peer.getId():
+#                    msg = message.clone()
+#                    msg.setSourceId(peer.getId())
+#                    msg.setTargetId(id)
+#                    neighbor = network.getPeer(id)
+#                    neighbor.send(msg)
             
     
     @public

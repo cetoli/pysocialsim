@@ -86,6 +86,12 @@ class Peer(EventGenerator):
     def countFiles(self):
         raise NotImplementedError()
     
+    def getFile(self, index):
+        raise NotImplementedError()
+    
+    def getFiles(self):
+        raise NotImplementedError()
+    
     def advertise(self, advertisementType):
         raise NotImplementedError()
     

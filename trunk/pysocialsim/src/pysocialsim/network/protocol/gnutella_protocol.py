@@ -5,6 +5,11 @@ from pysocialsim.network.peer.message.ok_connect_message_handler import OKConnec
 from pysocialsim.network.peer.message.ok_disconnect_message_handler import OKDisconnectMessageHandler
 from pysocialsim.base.decorator.public import public
 from pysocialsim.network.peer.message.file_advertisement_message_handler import FileAdvertisementMessageHandler
+from random import randint
+from pysocialsim.network.peer.message.file_advertisement_message import FileAdvertisementMessage
+from pysocialsim.network.message.message_manager import MessageManager
+from pysocialsim.network.peer.peer import Peer
+from pysocialsim.network.peer.peer_constants import PeerConstants
 
 class GnutellaProtocol(AbstractProtocol):
     
@@ -46,7 +51,8 @@ class GnutellaProtocol(AbstractProtocol):
     
     @public
     def advertise(self, advertisementType):
-        raise NotImplementedError()
+        if advertisementType == PeerConstants.FILE_ADVERTISEMENT:
+            self.advertiseFile()
     
     @public
     def clone(self):
@@ -62,3 +68,19 @@ class GnutellaProtocol(AbstractProtocol):
     @public
     def disconnect(self):
         self.getTopology().disconnect(self.getPeer())
+        
+    def advertiseFile(self):
+        if self.getPeer().countFiles() == 0:
+            return
+        fileId = randint(0, self.getPeer().countFiles() - 1)
+        files = self.getPeer().getFiles()
+        network = self.getPeer().getNetwork()
+        topology = network.getTopology()
+        neighbors = topology.getNeighbors(self.getPeer().getId())
+        for id in neighbors:
+            message = FileAdvertisementMessage(MessageManager().getMessageId(), self.getPeer().getId(), id, network.getSimulation().getTTL())
+            message.setHop(1)
+            message.registerTrace(self.getPeer().getId())
+            message.setParameter("fileId", fileId)
+            message.setParameter("folksonomies", files[fileId].getFolksonomies())
+            self.getPeer().send(message)

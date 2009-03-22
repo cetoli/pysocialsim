@@ -8,11 +8,6 @@ class FileAdvertisementMessageHandler(AbstractMessageHandler):
         
     @public
     def executeHandler(self, message):
-#        message.setHop(message.getHop() + 1)
-#        if message.getHop() > message.getTTL():
-#            print message.getId(), "was destroyed."
-#            return
-#        else:
         message.registerTrace(self.getPeer().getId())
         print message.getHop(), message.getTTL()
         print message.getTraces()
@@ -28,7 +23,6 @@ class FileAdvertisementMessageHandler(AbstractMessageHandler):
                 msg.setTargetId(id)
                 msg.setHop(msg.getHop() + 1)
                 network.getPeer(id).send(msg)
-        
         
     @public
     def clone(self):

@@ -8,7 +8,6 @@ from pysocialsim.simulator.simulation.simulation import Simulation
 from types import NoneType
 from pysocialsim.network.peer.event.send_event import SendEvent
 from pysocialsim.network.peer.event.receive_event import ReceiveEvent
-from sets import ImmutableSet
 
 class AbstractPeer(Object):
     
@@ -33,6 +32,7 @@ class AbstractPeer(Object):
         self.__messageDispatcher = None
         self.__files = {}
         self.__protocol = None
+        self.__messageObservers = {}
     
     @public
     @return_type(int)
@@ -197,7 +197,7 @@ class AbstractPeer(Object):
     
     @public
     def advertise(self, advertisementType):
-        raise NotImplementedError()
+        self.getProtocol().advertise(advertisementType)
     
     @public
     def getFile(self, id):
@@ -206,3 +206,19 @@ class AbstractPeer(Object):
     @public
     def getFiles(self):
         return self.__files.values()
+    
+    @public
+    def notifyMessageObservers(self, message):
+        raise NotImplementedError()
+    
+    @public
+    def addMessageObserver(self, observer):
+        raise NotImplementedError()
+    
+    @public
+    def removeMessageObserver(self, messageName):
+        raise NotImplementedError()
+    
+    @public
+    def countMessageObservers(self, messageName):
+        raise NotImplementedError()

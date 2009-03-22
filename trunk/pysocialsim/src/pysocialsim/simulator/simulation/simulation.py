@@ -45,3 +45,5 @@ class Simulation(object):
     
     def getTTL(self):
         raise NotImplementedError()
+    
+    

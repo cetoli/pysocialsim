@@ -6,6 +6,8 @@ from pysocialsim.network.network import Network
 from pysocialsim.network.peer.event.connection_event_generator import ConnectionEventGenerator
 from pysocialsim.network.peer.event.disconnection_event_generator import DisconnectionEventGenerator
 from pysocialsim.network.peer.event.file_advertisement_event_generator import FileAdvertisementEventGenerator
+from pysocialsim.base.decorator.public import public
+from pysocialsim.network.peer.interest.default_interest import DefaultInterest
 
 class DefaultPeer(AbstractPeer):
     
@@ -24,4 +26,21 @@ class DefaultPeer(AbstractPeer):
         self.addEventGenerator(DisconnectionEventGenerator(self))
         self.addEventGenerator(FileAdvertisementEventGenerator(self))
     
-    
+    @public
+    def addFile(self, file):
+        AbstractPeer.addFile(self, file)
+        
+        interests = self.getInterests()
+        if not interests.has_key(file.getConcept()):
+            interests[file.getConcept()] = {}
+            concept = interests[file.getConcept()]
+            for f in file.getFolksonomies():
+                interest = DefaultInterest(f)
+                concept[interest.getFolksonomy()] = interest
+        else:
+            concept = interests[file.getConcept()]
+            for f in file.getFolksonomies():
+                if not concept.has_key(f):
+                    interest = DefaultInterest(f)
+                    concept[interest.getFolksonomy()] = interest
+        

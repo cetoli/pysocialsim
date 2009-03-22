@@ -33,6 +33,7 @@ class AbstractPeer(Object):
         self.__files = {}
         self.__protocol = None
         self.__messageObservers = {}
+        self.__interests = {}
     
     @public
     @return_type(int)
@@ -171,6 +172,7 @@ class AbstractPeer(Object):
     def addFile(self, file):
         self.__files[file.getId()] = file
         file.addOwner(self.__id)
+            
     
     @public
     def removeFile(self, id):
@@ -222,3 +224,6 @@ class AbstractPeer(Object):
     @public
     def countMessageObservers(self, messageName):
         raise NotImplementedError()
+    
+    def getInterests(self):
+        return self.__interests

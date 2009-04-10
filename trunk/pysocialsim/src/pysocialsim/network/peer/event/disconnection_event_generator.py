@@ -5,13 +5,15 @@ class DisconnectionEventGenerator:
     def __init__(self, peer):
         self.__peer = peer
         self.__active = False
-        self.__priority = (self.__peer.getPermanenceTime() + self.__peer.getAbsenceTime()) / 100000000.0
+        self.__priority = self.__peer.getPermanenceTime()
     
     def generateEvents(self, simulation):
-        self.__simulation = simulation
-        event = DisconnectionEvent(self.__peer, self.__priority)
-        self.__simulation.registerEvent(event)
-        self.__priority += (self.__peer.getPermanenceTime() + self.__peer.getAbsenceTime()) / 100000000.0
+        if self.__peer.isConnected():
+            if simulation.getCurrentSimulationTime() == self.__priority:
+                event = DisconnectionEvent(self.__peer, self.__priority)
+                simulation.registerEvent(event)
+                print "disconnect"
+                self.__priority = self.__peer.getPermanenceTime() + self.__peer.getAbsenceTime()
     
     def stop(self):
         self.__active = False

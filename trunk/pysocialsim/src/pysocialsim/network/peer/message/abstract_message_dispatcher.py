@@ -1,5 +1,6 @@
 from pysocialsim.base.object import Object
 from pysocialsim.base.decorator.public import public
+from threading import Thread
 
 class AbstractMessageDispatcher(Object):
     
@@ -16,7 +17,7 @@ class AbstractMessageDispatcher(Object):
         if not self.__handlers.has_key(message.getName()):
             return False
         clone = self.__handlers[message.getName()].clone()
-        clone.handleMessage(message)
+        AbstractMessageDispatcher.MessageHandlingThread(clone, message).start()
         return message
     
     @public
@@ -36,3 +37,13 @@ class AbstractMessageDispatcher(Object):
     @public
     def countMessageHandlers(self):
         return len(self.__handlers)
+    
+    class MessageHandlingThread(Thread):
+        
+        def __init__(self, handler, message):
+            Thread.__init__(self)
+            self.__handler = handler
+            self.__message = message
+            
+        def run(self):
+            self.__handler.handleMessage(self.__message)

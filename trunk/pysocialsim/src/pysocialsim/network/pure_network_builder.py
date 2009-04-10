@@ -6,10 +6,6 @@ from pysocialsim.network.pure_network import PureNetwork
 from pysocialsim.network.peer.default_peer import DefaultPeer
 from random import randint
 from pysocialsim.network.peer.message.default_message_dispatcher import DefaultMessageDispatcher
-from pysocialsim.network.peer.message.connect_message_handler import ConnectMessageHandler
-from pysocialsim.network.peer.message.ok_connect_message_handler import OKConnectMessageHandler
-from pysocialsim.network.peer.message.disconnect_message_handler import DisconnectMessageHandler
-from pysocialsim.network.peer.message.ok_disconnect_message_handler import OKDisconnectMessageHandler
 
 class PureNetworkBuilder(AbstractNetworkBuilder):
     

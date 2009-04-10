@@ -14,7 +14,7 @@ class AbstractPeerEvent(AbstractEvent):
     @return_type(NoneType)
     @require("handle", str)
     @require("peer", Peer)
-    @require("priority", float)
+    @require("priority", int)
     @require("message", Message)
     def initialize(self, handle, peer, priority, message):
         AbstractEvent.initialize(self, handle, peer, priority)

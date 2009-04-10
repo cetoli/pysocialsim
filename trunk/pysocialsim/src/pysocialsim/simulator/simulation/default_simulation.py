@@ -30,4 +30,5 @@ class DefaultSimulation(AbstractSimulation):
             peer = self.getNetwork().getPeer(peerId)
             peer.addFile(file)
             
-            
+            for f in file.getFolksonomies():
+                peer.reputeContent(file.getConcept(), f, randint(0, 100))

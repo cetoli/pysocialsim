@@ -100,3 +100,11 @@ class Peer(EventGenerator):
     
     def setProtocol(self, protocol):
         raise NotImplementedError()
+    
+    def reputeContent(self, concept, folksonomy, reputationValue):
+        raise NotImplementedError()
+    
+    def createNecessity(self, type):
+        raise NotImplementedError()
+    
+    

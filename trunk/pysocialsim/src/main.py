@@ -10,6 +10,7 @@ from pysocialsim.network.peer.event.send_event_handler import SendEventHandler
 from pysocialsim.network.peer.event.receive_event_handler import ReceiveEventHandler
 from pysocialsim.network.protocol.gnutella_protocol import GnutellaProtocol
 from pysocialsim.network.peer.event.file_advertisement_event_handler import FileAdvertisementEventHandler
+from pysocialsim.network.peer.event.content_necessity_event_handler import ContentNecessityEventHandler
 
 if __name__ == '__main__':
     topology = UnstructuredTopology()
@@ -17,15 +18,18 @@ if __name__ == '__main__':
     builder = PureNetworkBuilder()
     
     director = NetworkBuilderDirector(builder)
-    director.build(topology, GnutellaProtocol(), peers=100, min_permanence=21600, max_permanence=31104000, min_absence=3600, max_absence=2592000)
+    director.build(topology, GnutellaProtocol(), peers=100, min_permanence=60, max_permanence=1200, min_absence=10, max_absence=120)
     
     network = builder.getNetwork()
     network.setEvolutionRate(10)
 
     simulation = DefaultSimulation(network)
     simulation.setTTL(3)
+    simulation.setSimulationTime(3600)
+    
+    simulation.setPeerConnectionRate(10)
     simulator = DefaultSimulator(simulation)
-    simulator.setNumberOfFiles(500)
+    simulator.setNumberOfFiles(5)
     
     dispatcher = DefaultDispatcher(simulator)
     dispatcher.registerEventHandler(ConnectionEventHandler(simulation))
@@ -33,6 +37,7 @@ if __name__ == '__main__':
     dispatcher.registerEventHandler(SendEventHandler(simulation))
     dispatcher.registerEventHandler(ReceiveEventHandler(simulation))
     dispatcher.registerEventHandler(FileAdvertisementEventHandler(simulation))
+    dispatcher.registerEventHandler(ContentNecessityEventHandler(simulation))
     
     simulator.configure()
     simulator.execute()

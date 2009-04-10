@@ -12,7 +12,7 @@ class AbstractEvent(Object):
     @return_type(None.__class__)
     @require("handle", str)
     @require("peer", Peer)
-    @require("priority", float)
+    @require("priority", int)
     def initialize(self, handle, peer, priority):
         self.__handle = handle
         self.__peer = peer
@@ -30,7 +30,7 @@ class AbstractEvent(Object):
         return self.__peer
     
     @public
-    @return_type(float)
+    @return_type(int)
     def getPriority(self):
         return self.__priority
     

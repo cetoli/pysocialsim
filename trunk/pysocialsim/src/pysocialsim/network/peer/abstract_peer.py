@@ -8,6 +8,7 @@ from pysocialsim.simulator.simulation.simulation import Simulation
 from types import NoneType
 from pysocialsim.network.peer.event.send_event import SendEvent
 from pysocialsim.network.peer.event.receive_event import ReceiveEvent
+from pysocialsim.network.peer.necessity.necessity_constants import NecessityConstants
 
 class AbstractPeer(Object):
     
@@ -34,6 +35,9 @@ class AbstractPeer(Object):
         self.__protocol = None
         self.__messageObservers = {}
         self.__interests = {}
+        self.__necessities = {}
+        
+        self.__necessities[NecessityConstants.CONTENT] = []
     
     @public
     @return_type(int)
@@ -112,14 +116,14 @@ class AbstractPeer(Object):
     @public        
     def send(self, message):
         simulation = self.__network.getSimulation()
-        event = SendEvent(self, 1 / 10000000000000000000000000000000000000000000.0, message)
+        event = SendEvent(self, simulation.getCurrentSimulationTime(), message)
         simulation.registerEvent(event)
         return message
     
     @public
     def receive(self, message):
         simulation = self.__network.getSimulation()
-        event = ReceiveEvent(self, 1 / 10000000000000000000000000000000000000000000.0, message)
+        event = ReceiveEvent(self, simulation.getCurrentSimulationTime(), message)
         simulation.registerEvent(event)
         return message
     
@@ -227,3 +231,16 @@ class AbstractPeer(Object):
     
     def getInterests(self):
         return self.__interests
+    
+    @public
+    def reputeContent(self, concept, folksonomy, reputationValue):
+        concept = self.__interests[concept]
+        interest = concept[folksonomy]
+        interest.addReputation(reputationValue)
+    
+    @public
+    def createNecessity(self, type):
+        raise NotImplementedError()
+    
+    def registerNecessity(self, necessity):
+        self.__necessities[necessity.getType()].append(necessity)

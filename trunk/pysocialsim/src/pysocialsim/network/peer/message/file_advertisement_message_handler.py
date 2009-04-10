@@ -9,8 +9,6 @@ class FileAdvertisementMessageHandler(AbstractMessageHandler):
     @public
     def executeHandler(self, message):
         message.registerTrace(self.getPeer().getId())
-        print message.getHop(), message.getTTL()
-        print message.getTraces()
         message.setSourceId(self.getPeer().getId())
         network = self.getPeer().getNetwork()
         topology = network.getTopology()

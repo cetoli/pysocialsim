@@ -6,6 +6,7 @@ from pysocialsim.simulator.simulation.event.event import Event
 from pysocialsim.base.decorator.return_type import return_type
 from pysocialsim.simulator.dispatcher.event_handler import EventHandler
 from threading import Thread
+from threading import Semaphore
 import time
 
 class AbstractDispatcher(Object):
@@ -29,10 +30,6 @@ class AbstractDispatcher(Object):
             return False
         clone = self.__eventHandlers[event.getHandle()].clone()
         AbstractDispatcher.EventHandlingThread(clone, event).start()
-        self.__dispatcherLogFile = open("dispatcher.log", "a")
-        self.__dispatcherLogFile.write(event.getHandle() + ";" + str(event.getPriority()) + ";" + str(event.getPeer().getId()) + ";" + str(time.time())+"\n")
-        self.__dispatcherLogFile.close()
-        
         return event
     
     @public
@@ -68,3 +65,7 @@ class AbstractDispatcher(Object):
         def run(self):
             self.__handler.handleEvent(self.__event)
             self.__event.handled()
+            
+            self.__dispatcherLogFile = open("dispatcher.log", "a")
+            self.__dispatcherLogFile.write(self.__event.getHandle() + ";" + str(self.__event.getPriority()) + ";" + str(self.__event.getPeer().getId()) + ";" + str(time.time())+"\n")
+            self.__dispatcherLogFile.close()

@@ -4,13 +4,13 @@ from sets import ImmutableSet
 from pysocialsim.base.decorator.return_type import return_type
 from pysocialsim.network.network import Network
 from pysocialsim.base.decorator.require import require
-from networkx.graph import Graph
 from networkx.drawing.layout import spring_layout
 from networkx.drawing.nx_pylab import draw_networkx_nodes
 from networkx.drawing.nx_pylab import draw_networkx_edges
+from threading import Semaphore
 from matplotlib.pyplot import xticks
 from matplotlib.pyplot import yticks
-from threading import Semaphore
+from networkx.classes.graph import Graph
 import pylab
 
 class AbstractTopology(Object):

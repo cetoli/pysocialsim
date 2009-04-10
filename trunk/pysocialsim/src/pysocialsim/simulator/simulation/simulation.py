@@ -46,4 +46,23 @@ class Simulation(object):
     def getTTL(self):
         raise NotImplementedError()
     
+    def setSimulationTime(self, simulationTime):
+        raise NotImplementedError()
     
+    def getSimulationTime(self):
+        raise NotImplementedError()
+    
+    def getCurrentSimulationTime(self):
+        raise NotImplementedError()
+    
+    def setCurrentSimulationTime(self, currentSimulationTime):
+        raise NotImplementedError()
+    
+    def setPeerConnectionRate(self, peerNumber):
+        raise NotImplementedError()
+    
+    def getPeerConnectionRate(self):
+        raise NotImplementedError()
+    
+    def getPeerConnectionFrequency(self):
+        raise NotImplementedError()

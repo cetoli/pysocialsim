@@ -1,8 +1,6 @@
 from pysocialsim.base.object import Object
 from threading import Semaphore
 from pysocialsim.base.decorator.public import public
-from pysocialsim.base.decorator.return_type import return_type
-from pysocialsim.base.decorator.require import require
 import bisect
 
 class PriorityQueue(Object):
@@ -24,6 +22,8 @@ class PriorityQueue(Object):
     def dequeue(self):
         sem = Semaphore()
         sem.acquire()
+        if len(self.__queue) == 0:
+            return
         item = self.__queue.pop(0)[1]
         sem.release()
         return item

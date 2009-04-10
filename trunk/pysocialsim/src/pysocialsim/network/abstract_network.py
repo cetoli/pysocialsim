@@ -31,15 +31,8 @@ class AbstractNetwork(Object):
     @return_type(int)
     @require("simulation", Simulation)
     def generateEvents(self, simulation):
-        peers = 0
-        day = 1
-        while peers < len(self.__peers):
-            for id in range(peers, (self.__evolutionRate * day) - 1):
-                self.__peers[id].generateEvents(simulation)
-                peers += 1
-            day += 1
-            peers += 1
-            time.sleep(0.02592)
+        for peer in self.__peers.values():
+            peer.generateEvents(simulation)
         return simulation.countEvents()
     
     @public

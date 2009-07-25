@@ -1,0 +1,136 @@
+from pysocialsim.base.object import Object
+from networkx.classes.graph import Graph
+from pysocialsim.base.decorator.public import public
+from pysocialsim.p2p.network.i_p2p_network import IP2PNetwork
+from pysocialsim.base.decorator.require import require
+from pysocialsim.base.decorator.return_type import return_type
+from sets import ImmutableSet
+from pysocialsim.p2p.message.i_p2p_message import IP2PMessage
+from threading import Semaphore
+from pysocialsim.p2p.routing.default_neighbor import DefaultNeighbor
+import time
+
+class AbstractP2PTopology(Object):
+    
+    def __init__(self):
+        raise NotImplementedError()
+    
+    def initialize(self):
+        self.__network = None
+        self.__graph = {}
+    
+    @public
+    def setP2PNetwork(self, network):
+        self.__network = network
+        return self.__network
+    
+    @public
+    def connect(self, peer):
+        raise NotImplementedError()
+    
+    @public
+    def disconnect(self, peer):
+        raise NotImplementedError()
+    
+    @public
+    def getNeighbors(self, id):
+        if not self.__graph.has_key(id):
+            return ImmutableSet([])
+        return ImmutableSet(self.__graph[id])
+    
+    @public
+    def getP2PNetwork(self):
+        return self.__network
+    
+    @public
+    def getGraph(self):
+        return self.__graph
+    
+    @public
+    def show(self):
+        raise NotImplementedError()
+    
+    @public
+    def dispatchMessage(self, message):
+        sem = Semaphore()
+        sem.acquire()
+        peer = self.getP2PNetwork().getPeer(message.getTargetId())
+        peer.receive(message)
+        sem.release()
+        return message
+    
+    @public
+    def createConnection(self, sourceId, targetId):
+        if isinstance(sourceId, bool) or isinstance(targetId, bool):
+            raise TypeError()
+        if targetId in self.__graph[sourceId]:
+            raise StandardError()
+        sem = Semaphore()
+        sem.acquire()
+        self.__graph[sourceId].append(targetId)
+        self.__network.getPeer(sourceId).addNeighbor(DefaultNeighbor(self.__network.getPeer(sourceId), targetId))
+        self.__graph[targetId].append(sourceId)
+        self.__network.getPeer(targetId).addNeighbor(DefaultNeighbor(self.__network.getPeer(targetId), sourceId))
+        sem.release()
+        return self.isNeighbor(sourceId, targetId)
+    
+    @public
+    def removeConnection(self, sourceId, targetId):
+        if isinstance(sourceId, bool) or isinstance(targetId, bool):
+            raise TypeError()
+        if not self.isNeighbor(sourceId, targetId):
+            return True
+        sem = Semaphore()
+        sem.acquire()
+        self.__graph[sourceId].remove(targetId)
+        if self.__graph.has_key(targetId):
+            self.__graph[targetId].remove(sourceId)
+        sem.release()
+        return not self.isNeighbor(sourceId, targetId)
+    
+    @public
+    def addNode(self, id):
+        if isinstance(id, bool):
+            raise TypeError()
+        if self.__graph.has_key(id):
+            return True
+        sem = Semaphore()
+        sem.acquire()
+        self.__graph[id] = []
+        sem.release()
+        return self.__graph.has_key(id)
+    
+    @public
+    def removeNode(self, id):
+        if isinstance(id, bool):
+            raise TypeError()
+        if not self.__graph.has_key(id):
+            return False
+        sem = Semaphore()
+        sem.acquire()
+        del self.__graph[id]
+        sem.release()
+        return not self.__graph.has_key(id)
+    
+    @public
+    def isNeighbor(self, sourceId, targetId):
+        sem = Semaphore()
+        sem.acquire()
+        if self.__graph.has_key(sourceId):
+            aux = targetId in self.__graph[sourceId]
+        else:
+            aux = False
+        sem.release()
+        return aux
+    
+    @public
+    def countNodes(self):
+        return len(self.__graph.keys())
+    
+    @public
+    def countConnections(self):
+        connections = 0
+        for edges in self.__graph.values():
+            connections += len(edges)
+        return connections
+    

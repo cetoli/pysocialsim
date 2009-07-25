@@ -3,7 +3,6 @@ from pysocialsim.base.decorator.public import public
 from pysocialsim.p2p.dispatcher.message_dispatcher import MessageDispatcher
 from sets import ImmutableSet
 from pysocialsim.p2p.peer.i_peer import IPeer
-from pysocialsim.p2p.routing.default_neighbor import DefaultNeighbor
 
 class AbstractPeer(Object):
     
@@ -29,6 +28,7 @@ class AbstractPeer(Object):
         self.__neighbors = {}
         self.__disconnectionTime = 0
         self.__scheduledDisconnection = False
+        self.__diskSpace = 83886080
         
     @public
     def getId(self):
@@ -85,9 +85,6 @@ class AbstractPeer(Object):
     
     @public
     def send(self, message):
-        simulation = self.__network.getSimulation()
-        #event = SendEvent(self, message.getPriority(), message)
-        #simulation.registerEvent(event)
         self.sendMessage(message)
         return message
     
@@ -114,7 +111,6 @@ class AbstractPeer(Object):
     def createConnection(self, targetId):
         self.__network.createConnection(self.__id, targetId)
         self.connected()
-        print "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
         return self.isConnected()
     
     @public
@@ -220,3 +216,11 @@ class AbstractPeer(Object):
     @public
     def getScheduledForDisconnection(self):
         return self.__scheduledDisconnection
+    
+    @public
+    def setDiskSpace(self, diskSpace):
+        self.__diskSpace = diskSpace
+    
+    @public
+    def getDiskSpace(self):
+        return self.__diskSpace

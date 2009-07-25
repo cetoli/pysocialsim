@@ -1,17 +1,19 @@
 from pysocialsim.base.interface import Interface
 
-class IMatchingStrategy(object):
+class ISocialMatching(object):
     
     __metaclass__ = Interface
     
     def __init__(self):
         raise NotImplementedError()
     
-    def execute(self, interest, advertisement):
+    def getPeerId(self):
         raise NotImplementedError()
     
-    def setProfile(self, profile):
+    def getElementId(self):
         raise NotImplementedError()
     
-    def getProfile(self):
+    def getPercentage(self):
         raise NotImplementedError()
+    
+    

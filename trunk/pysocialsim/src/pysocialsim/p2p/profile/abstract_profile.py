@@ -57,8 +57,6 @@ class AbstractProfile(Object):
     
     @public
     def matchInterests(self, advertisement, interestMatchingStrategy):
+        interestMatchingStrategy.setProfile(self)
         for interest in self.__interests[advertisement.getType()]:
-            threshold = interestMatchingStrategy.execute(interest, advertisement)
-            #if (threshold >= interest.getInitialThreshold()) and (threshold <= interest.getLimitThreshold()):
-                #print "EU", self.__peer.getId(), " ME INTERESSEI ", threshold, "% por ", advertisement.getElementId(), "de ", advertisement.getPeerId()
-            
+            interestMatchingStrategy.execute(interest, advertisement)            

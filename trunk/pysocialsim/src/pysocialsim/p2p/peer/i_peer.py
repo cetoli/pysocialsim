@@ -104,3 +104,9 @@ class IPeer(object):
     
     def getScheduledForDisconnection(self):
         raise NotImplementedError()
+    
+    def setDiskSpace(self, diskSpace):
+        raise NotImplementedError()
+    
+    def getDiskSpace(self):
+        raise NotImplementedError()

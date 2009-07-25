@@ -31,4 +31,7 @@ class IProfile(object):
     def addInterest(self, interest):
         raise NotImplementedError()
     
+    def addSocialMatching(self, socialMatching):
+        raise NotImplementedError()
+    
     

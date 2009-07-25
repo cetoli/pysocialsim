@@ -1,14 +1,8 @@
 from pysocialsim.base.object import Object
-from networkx.classes.graph import Graph
 from pysocialsim.base.decorator.public import public
-from pysocialsim.p2p.network.i_p2p_network import IP2PNetwork
-from pysocialsim.base.decorator.require import require
-from pysocialsim.base.decorator.return_type import return_type
 from sets import ImmutableSet
-from pysocialsim.p2p.message.i_p2p_message import IP2PMessage
 from threading import Semaphore
 from pysocialsim.p2p.routing.default_neighbor import DefaultNeighbor
-import time
 
 class AbstractP2PTopology(Object):
     

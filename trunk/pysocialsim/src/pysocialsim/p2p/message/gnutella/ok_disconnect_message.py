@@ -1,7 +1,5 @@
 from pysocialsim.p2p.message.abstract_p2p_message import AbstractP2PMessage
 from pysocialsim.base.decorator.public import public
-from pysocialsim.base.decorator.return_type import return_type
-from pysocialsim.p2p.message.i_p2p_message import IP2PMessage
 
 class OKDisconnectMessage(AbstractP2PMessage):
     
@@ -14,4 +12,6 @@ class OKDisconnectMessage(AbstractP2PMessage):
         message.setHop(self.getHop())
         for id in self.getTraces():
             message.registerTrace(id)
+        for name in self.getParameterNames():
+            message.setParameter(name, self.getParameter(name))
         return message

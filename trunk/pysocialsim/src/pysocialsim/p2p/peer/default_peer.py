@@ -7,6 +7,7 @@ from random import randint
 from pysocialsim.p2p.peer.i_peer import IPeer
 from pysocialsim.p2p.profile.default_interest import DefaultInterest
 from pysocialsim.simulator.event.peer_disconnection_event import PeerDisconnectionEvent
+from pysocialsim.p2p.dispatcher.relationship.create_relationship_message_handler import CreateRelationshipMessageHandler
 
 class DefaultPeer(AbstractPeer):
     
@@ -27,6 +28,9 @@ class DefaultPeer(AbstractPeer):
             
         for ix in range(initial, end):
             profile.addFolksonomy(map.mapping[concept][ix])
+            
+        dispatcher = self.getMessageDispatcher()
+        dispatcher.registerMessageHandler(CreateRelationshipMessageHandler(self))
     
     @public
     def specifyInterest(self):

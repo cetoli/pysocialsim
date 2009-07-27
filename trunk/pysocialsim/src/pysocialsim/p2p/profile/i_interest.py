@@ -18,3 +18,15 @@ class IInterest:
     
     def getFolksonomies(self):
         raise NotImplementedError()
+    
+    def addSocialMatching(self, socialMatching):
+        raise NotImplementedError()
+    
+    def removeSocialMatching(self, socialMatching):
+        raise NotImplementedError()
+    
+    def getMatchedPeers(self):
+        raise NotImplementedError()
+    
+    def getSocialMatchings(self, peer):
+        raise NotImplementedError()

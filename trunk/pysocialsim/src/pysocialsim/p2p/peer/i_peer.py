@@ -110,3 +110,6 @@ class IPeer(object):
     
     def getDiskSpace(self):
         raise NotImplementedError()
+    
+    def createRelationship(self):
+        raise NotImplementedError()

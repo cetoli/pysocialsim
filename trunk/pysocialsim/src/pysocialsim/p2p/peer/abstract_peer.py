@@ -3,6 +3,9 @@ from pysocialsim.base.decorator.public import public
 from pysocialsim.p2p.dispatcher.message_dispatcher import MessageDispatcher
 from sets import ImmutableSet
 from pysocialsim.p2p.peer.i_peer import IPeer
+from random import randint
+from pysocialsim.p2p.message.relationship.create_relationship_message import CreateRelationshipMessage
+from pysocialsim.p2p.message.message_manager import MessageManager
 
 class AbstractPeer(Object):
     
@@ -224,3 +227,23 @@ class AbstractPeer(Object):
     @public
     def getDiskSpace(self):
         return self.__diskSpace
+    
+    @public
+    def createRelationship(self):
+        interests = self.__profile.getInterests()
+        if len(interests) == 0:
+            return
+        interest = interests[randint(0, len(interests) - 1)]
+        if len(interest.getMatchedPeers()) == 0:
+            return
+        matchedPeers = interest.getMatchedPeers()
+        peer = matchedPeers[randint(0, len(matchedPeers) - 1)]
+        if len(interest.getSocialMatchings(peer)) == 0:
+            return
+        matchings = interest.getSocialMatchings(peer)
+        elementId = matchings.keys()[randint(0, len(matchings.keys()) - 1)]
+        print "ADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADAD"
+        message = CreateRelationshipMessage(MessageManager().getMessageId(), self.__id, peer, 3, self.__network.getSimulation())
+        message.setParameter("elementId", elementId)
+        message.setParameter("type", interest.getType())
+        self.sendMessage(message)

@@ -2,6 +2,7 @@ from pysocialsim.base.object import Object
 from pysocialsim.p2p.peer.i_peer import IPeer
 from pysocialsim.base.decorator.public import public
 from pysocialsim.base.decorator.return_type import return_type
+from sets import ImmutableSet
 
 class AbstractProfile(Object):
     
@@ -60,3 +61,7 @@ class AbstractProfile(Object):
         interestMatchingStrategy.setProfile(self)
         for interest in self.__interests[advertisement.getType()]:
             interestMatchingStrategy.execute(interest, advertisement)            
+    
+    @public
+    def getInterests(self):
+        return self.__interests[0]

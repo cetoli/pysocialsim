@@ -5,7 +5,6 @@ from random import randint
 from pysocialsim.p2p.message.message_manager import MessageManager
 from pysocialsim.p2p.dispatcher.gnutella.connect_message_handler import ConnectMessageHandler
 from pysocialsim.p2p.dispatcher.gnutella.ok_connect_message_handler import OKConnectMessageHandler
-from pysocialsim.p2p.message.gnutella.disconnect_message import DisconnectMessage
 from pysocialsim.p2p.dispatcher.gnutella.disconnect_message_handler import DisconnectMessageHandler
 from pysocialsim.p2p.dispatcher.gnutella.ok_disconnect_message_handler import OKDisconnectMessageHandler
 from pysocialsim.p2p.message.gnutella.advertise_content_message import AdvertiseContentMessage
@@ -35,6 +34,8 @@ class GnutellaProtocol(AbstractP2PProtocol):
         if self.getPeer().getId() == message.getTargetId():
             dispatcher = self.getPeer().getMessageDispatcher()
             dispatcher.handleP2PMessage(message)
+        else:
+            pass
             
     @public
     def advertise(self, element, advertisementType):

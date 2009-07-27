@@ -37,5 +37,20 @@ class AbstractInterest(Object):
         matchings = self.__socialMatchings[socialMatching.getPeerId()]
         if not matchings.has_key(socialMatching.getElementId()):
             matchings[socialMatching.getElementId()] = socialMatching
-            
+    
+    @public        
+    def removeSocialMatching(self, socialMatching):
+        if self.__socialMatchings.has_key(socialMatching.getPeerId()):
+            matchings = self.__socialMatchings[socialMatching.getPeerId()]
+            if matchings.has_key(socialMatching.getElementId()):
+                del matchings[socialMatching.getElementId()]
+                if len(matchings) == 0:
+                    del self.__socialMatchings[socialMatching.getPeerId()]
+    @public
+    def getMatchedPeers(self):
+        return self.__socialMatchings.keys()
+    
+    @public
+    def getSocialMatchings(self, peer):
+        return self.__socialMatchings[peer]
         

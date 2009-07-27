@@ -1,38 +1,35 @@
-from pysocialsim.base.interface import Interface
 
-class IInterest:
-    
-    __metaclass__ = Interface
+class ISocialCloudView(object):
     
     def __init__(self):
         raise NotImplementedError()
     
-    def getInitialThreshold(self):
+    def getId(self):
         raise NotImplementedError()
     
-    def getLimitThreshold(self):
+    def addSocialRelationship(self, relationship):
         raise NotImplementedError()
     
-    def getType(self):
+    def removeSocialRelationship(self, relationship):
         raise NotImplementedError()
     
-    def getFolksonomies(self):
+    def getRelationships(self):
         raise NotImplementedError()
     
-    def addSocialMatching(self, socialMatching):
+    def countRelationships(self):
         raise NotImplementedError()
     
-    def removeSocialMatching(self, socialMatching):
+    def addSharedContent(self, sharedContent):
         raise NotImplementedError()
     
-    def getMatchedPeers(self):
+    def removeSharedContent(self, sharedContent):
         raise NotImplementedError()
     
-    def getSocialMatchings(self, peer):
+    def getSharedContents(self):
         raise NotImplementedError()
     
-    def countSocialMatchings(self, peer):
+    def countSharedContents(self):
         raise NotImplementedError()
     
-    def countMatchedPeers(self):
+    def getSize(self):
         raise NotImplementedError()

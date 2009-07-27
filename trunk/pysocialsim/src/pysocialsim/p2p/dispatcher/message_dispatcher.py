@@ -1,11 +1,5 @@
 from pysocialsim.base.object import Object
-from pysocialsim.base.decorator.return_type import return_type
-from types import NoneType
-from pysocialsim.base.decorator.require import require
-from pysocialsim.p2p.peer.i_peer import IPeer
 from pysocialsim.base.decorator.public import public
-from pysocialsim.p2p.dispatcher.i_message_handler import IMessageHandler
-from pysocialsim.p2p.message.i_p2p_message import IP2PMessage
 from threading import Thread
 
 class MessageDispatcher(Object):
@@ -41,7 +35,11 @@ class MessageDispatcher(Object):
         if not self.__messageHandlers.has_key(message.getName()):
             raise StandardError()
         handler = self.__messageHandlers[message.getName()]
-        MessageDispatcher.MessageHandlingThread(handler, message).start()
+        handler.handleP2PMessage(message)
+#        try:
+#            MessageDispatcher.MessageHandlingThread(handler, message).start()
+#        except:
+#            pass
         return message
     
     class MessageHandlingThread(Thread):

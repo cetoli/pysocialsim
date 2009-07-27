@@ -22,7 +22,7 @@ class PriorityQueue(Object):
         sem = Semaphore()
         sem.acquire()
         for event in self.__queue:
-            if event == item:
+            if event[1] == item:
                 return event
         bisect.insort(self.__queue, (priority, item))
         sem.release()

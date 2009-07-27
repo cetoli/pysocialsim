@@ -6,11 +6,8 @@ from pysocialsim.simulator.dispatcher.peer_connection_event_handler import PeerC
 from pysocialsim.simulator.dispatcher.peer_disconnection_event_handler import PeerDisconnectionEventHandler
 from pysocialsim.simulator.dispatcher.content_sharing_event_handler import ContentSharingEventHandler
 from pysocialsim.simulator.simulation.stochastic.peer_connection_process_model import PeerConnectionProcessModel
-from pysocialsim.simulator.simulation.stochastic.content_sharing_process_model import ContentSharingProcessModel
-from pysocialsim.simulator.simulation.stochastic.peer_interest_process_model import PeerInterestProcessModel
 from pysocialsim.simulator.dispatcher.interest_specification_event_handler import InterestSpecificationEventHandler
-from pysocialsim.simulator.simulation.stochastic.relationship_creation_process_model import RelationshipCreationProcessModel
-from pysocialsim.simulator.dispatcher.relationship_creation_event_handler import RelationshipCreationEventHandler
+from pysocialsim.p2p.dispatcher.relationship.social_cloud_creation_event_handler import SocialCloudCreationEventHandler
 
 if __name__ == '__main__':
     builder = DefaultP2PNetworkBuilder()
@@ -24,20 +21,11 @@ if __name__ == '__main__':
     simulator.registerEventHandler(PeerDisconnectionEventHandler(simulation))
     simulator.registerEventHandler(ContentSharingEventHandler(simulation))
     simulator.registerEventHandler(InterestSpecificationEventHandler(simulation))
-    simulator.registerEventHandler(RelationshipCreationEventHandler(simulation))
+    simulator.registerEventHandler(SocialCloudCreationEventHandler(simulation))
     
     simulation.setSimulationTime(2592000)
     
     model = PeerConnectionProcessModel(1, 846)
-    simulation.addStochasticModel(model)
-    
-    model = ContentSharingProcessModel(1, 30000, 3600)
-    simulation.addStochasticModel(model)
-    
-    model = PeerInterestProcessModel(1, 60000, 1900)
-    simulation.addStochasticModel(model)
-    
-    model = RelationshipCreationProcessModel(1, 10000, 2000)
     simulation.addStochasticModel(model)
     
     simulation.execute()

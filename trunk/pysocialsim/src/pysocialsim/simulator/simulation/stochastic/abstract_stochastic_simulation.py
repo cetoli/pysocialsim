@@ -58,3 +58,4 @@ class AbstractStochasticSimulation(AbstractSimulation):
                         self.__simulation.setSimulationCurrentTime(i)
                         for model in self.__simulation.getStochasticModels():
                             self.__simulation.setGeneratedEvents(model.generateEvents(self.__simulation) + self.__simulation.getGeneratedEvents())
+                            time.sleep(0.02)

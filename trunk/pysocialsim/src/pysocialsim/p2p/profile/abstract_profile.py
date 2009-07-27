@@ -65,3 +65,7 @@ class AbstractProfile(Object):
     @public
     def getInterests(self):
         return self.__interests[0]
+    
+    @public
+    def countInterests(self):
+        return len(self.__interests)

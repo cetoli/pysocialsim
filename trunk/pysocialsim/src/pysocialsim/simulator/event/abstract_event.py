@@ -41,4 +41,4 @@ class AbstractEvent(Object):
         return self.__isHandled
     
     def __eq__(self, other):
-        return (self.__handle and other.getHandle()) and (self.__peer == other.getPeer()) and (self.__priority == other.getPriority()) and (self.__isHandled == other.isHandled()) 
+        return (self.__handle == other.getHandle()) and (self.__peer == other.getPeer()) and (self.__priority == other.getPriority()) and (self.__isHandled == other.isHandled()) 

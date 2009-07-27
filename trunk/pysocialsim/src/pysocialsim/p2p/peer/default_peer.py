@@ -7,7 +7,10 @@ from random import randint
 from pysocialsim.p2p.peer.i_peer import IPeer
 from pysocialsim.p2p.profile.default_interest import DefaultInterest
 from pysocialsim.simulator.event.peer_disconnection_event import PeerDisconnectionEvent
-from pysocialsim.p2p.dispatcher.relationship.create_relationship_message_handler import CreateRelationshipMessageHandler
+from pysocialsim.simulator.event.interest_specification_event import InterestSpecificationEvent
+from pysocialsim.simulator.event.content_sharing_event import ContentSharingEvent
+from pysocialsim.simulator.event.social_cloud_creation_event import SocialCloudCreationEvent
+import time
 
 class DefaultPeer(AbstractPeer):
     
@@ -21,7 +24,6 @@ class DefaultPeer(AbstractPeer):
         
         map = FolksonomyMap()
         
-        #for concept in map.mapping.keys():            
         concept = map.mapping.keys()[randint(0, len(map.mapping.keys()) - 1)]
         initial = randint(0, (len(map.mapping[concept])/2) - 1)
         end = randint((len(map.mapping[concept])/2), len(map.mapping[concept]) - 1)
@@ -29,8 +31,6 @@ class DefaultPeer(AbstractPeer):
         for ix in range(initial, end):
             profile.addFolksonomy(map.mapping[concept][ix])
             
-        dispatcher = self.getMessageDispatcher()
-        dispatcher.registerMessageHandler(CreateRelationshipMessageHandler(self))
     
     @public
     def specifyInterest(self):
@@ -65,6 +65,10 @@ class DefaultPeer(AbstractPeer):
             self.__peer = peer
             
         def run(self):
+            interestTime = 0
+            contentSharingTime = 0
+            cloudCreationTime = 0
+            relationships = 0
             while True:
                 network = self.__peer.getP2PNetwork()
                 simulation = network.getSimulation()
@@ -78,6 +82,30 @@ class DefaultPeer(AbstractPeer):
                         self.__peer.setScheduledForDisconnection(True)
                         simulation.registerEvent(event)
                         return
+                
+                profile = self.__peer.getProfile()
+                if (interestTime == 190) and (profile.countInterests() <= 60):
+                    if network.countConnectedPeers() > 2:
+                        interestTime = 0
+                        event = InterestSpecificationEvent(self.__peer, simulation.getSimulationCurrentTime())
+                        simulation.registerEvent(event)
+                
+                if (contentSharingTime == 360) and (self.__peer.countContents() <= 20):
+                    if network.countConnectedPeers() > 2:
+                        contentSharingTime = 0
+                        event = ContentSharingEvent(self.__peer, simulation.getSimulationCurrentTime())
+                        simulation.registerEvent(event)
+                        
+                if (cloudCreationTime == 200):
+                    if network.countConnectedPeers() > 2:
+                        cloudCreationTime = 0
+                        event = SocialCloudCreationEvent(self.__peer, simulation.getSimulationCurrentTime())
+                        simulation.registerEvent(event)
+                
+                interestTime += 1
+                contentSharingTime += 1
+                cloudCreationTime += 1
+                time.sleep(0.02)
                 
                     
                     

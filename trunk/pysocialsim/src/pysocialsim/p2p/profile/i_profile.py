@@ -34,4 +34,7 @@ class IProfile(object):
     def getInterests(self):
         raise NotImplementedError()
     
+    def countInterests(self):
+        raise NotImplementedError()
+    
     

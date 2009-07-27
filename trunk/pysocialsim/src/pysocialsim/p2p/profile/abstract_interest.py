@@ -53,4 +53,12 @@ class AbstractInterest(Object):
     @public
     def getSocialMatchings(self, peer):
         return self.__socialMatchings[peer]
+    
+    @public
+    def countMatchedPeers(self):
+        return len(self.__socialMatchings)
+    
+    @public
+    def countSocialMatchings(self, peer):
+        return len(self.__socialMatchings[peer])
         

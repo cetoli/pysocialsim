@@ -1,6 +1,5 @@
 from pysocialsim.base.object import Object
 from pysocialsim.base.decorator.public import public
-from pysocialsim.simulator.event.relationship_creation_event import RelationshipCreationEvent
 
 class RelationshipCreationProcessModel(Object):
     

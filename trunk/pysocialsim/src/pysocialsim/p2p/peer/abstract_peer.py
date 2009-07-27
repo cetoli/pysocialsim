@@ -4,7 +4,7 @@ from pysocialsim.p2p.dispatcher.message_dispatcher import MessageDispatcher
 from sets import ImmutableSet
 from pysocialsim.p2p.peer.i_peer import IPeer
 from random import randint
-from pysocialsim.p2p.message.relationship.create_relationship_message import CreateRelationshipMessage
+from pysocialsim.p2p.message.relationship.invite_create_social_cloud_message import InviteCreateSocialCloudMessage
 from pysocialsim.p2p.message.message_manager import MessageManager
 
 class AbstractPeer(Object):
@@ -229,21 +229,31 @@ class AbstractPeer(Object):
         return self.__diskSpace
     
     @public
-    def createRelationship(self):
+    def createSocialCloud(self):
+        if self.__profile.countInterests() == 0:
+            return
+        
         interests = self.__profile.getInterests()
-        if len(interests) == 0:
-            return
         interest = interests[randint(0, len(interests) - 1)]
-        if len(interest.getMatchedPeers()) == 0:
+        
+        if interest.countMatchedPeers() == 0:
             return
-        matchedPeers = interest.getMatchedPeers()
-        peer = matchedPeers[randint(0, len(matchedPeers) - 1)]
-        if len(interest.getSocialMatchings(peer)) == 0:
+        
+        peers = interest.getMatchedPeers()
+        peer = peers[randint(0, len(peers) - 1)]
+        
+        if interest.countSocialMatchings(peer) == 0:
             return
-        matchings = interest.getSocialMatchings(peer)
-        elementId = matchings.keys()[randint(0, len(matchings.keys()) - 1)]
-        print "ADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADADAD"
-        message = CreateRelationshipMessage(MessageManager().getMessageId(), self.__id, peer, 3, self.__network.getSimulation())
-        message.setParameter("elementId", elementId)
+        
+        socialMatchings = interest.getSocialMatchings(peer)
+        socialMatching = socialMatchings.values()[randint(0, len(socialMatchings.values()) - 1)]
+        
+        simulation = self.__network.getSimulation()
+        
+        message = InviteCreateSocialCloudMessage(MessageManager().getMessageId(), self.__id, socialMatching.getPeerId(), 3, simulation.getSimulationCurrentTime())
         message.setParameter("type", interest.getType())
+        message.setParameter("elementId", socialMatching.getElementId())
+        
         self.sendMessage(message)
+        
+        print "QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ"

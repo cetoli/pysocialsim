@@ -111,5 +111,5 @@ class IPeer(object):
     def getDiskSpace(self):
         raise NotImplementedError()
     
-    def createRelationship(self):
+    def createSocialCloud(self):
         raise NotImplementedError()

@@ -72,7 +72,6 @@ class DefaultPeer(AbstractPeer):
             interestTime = 0
             contentSharingTime = 0
             cloudCreationTime = 0
-            relationships = 0
             while True:
                 network = self.__peer.getP2PNetwork()
                 simulation = network.getSimulation()

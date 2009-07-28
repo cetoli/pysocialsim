@@ -7,7 +7,7 @@ from pysocialsim.simulator.dispatcher.peer_disconnection_event_handler import Pe
 from pysocialsim.simulator.dispatcher.content_sharing_event_handler import ContentSharingEventHandler
 from pysocialsim.simulator.simulation.stochastic.peer_connection_process_model import PeerConnectionProcessModel
 from pysocialsim.simulator.dispatcher.interest_specification_event_handler import InterestSpecificationEventHandler
-from pysocialsim.p2p.dispatcher.relationship.social_cloud_creation_event_handler import SocialCloudCreationEventHandler
+from pysocialsim.simulator.dispatcher.social_cloud_creation_event_handler import SocialCloudCreationEventHandler
 
 if __name__ == '__main__':
     builder = DefaultP2PNetworkBuilder()

@@ -18,7 +18,7 @@ class AdvertiseContentMessageHandler(AbstractMessageHandler):
         if message.getHop() < message.getTTL():
             peer = self.getPeer()
             
-            advertisement = ContentAdvertisement(message.getSourceId(), message.getParameter("contentId"), message.getParameter("folksonomies"), message.getParameter("type"))
+            advertisement = ContentAdvertisement(message.getTraces()[0], message.getParameter("contentId"), message.getParameter("folksonomies"), message.getParameter("type"))
             
             profile = peer.getProfile()
             profile.matchInterests(advertisement, DefaultInterestMatchingStrategy())

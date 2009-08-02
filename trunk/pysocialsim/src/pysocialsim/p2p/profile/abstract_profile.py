@@ -13,6 +13,7 @@ class AbstractProfile(Object):
         self.__peer = peer
         self.__folksonomies = {}
         self.__interests = {0: []}
+        self.__socialClouds = {}
     
     @public
     def addFolksonomy(self, folksonomy):
@@ -69,3 +70,15 @@ class AbstractProfile(Object):
     @public
     def countInterests(self):
         return len(self.__interests)
+    
+    @public
+    def addSocialCloud(self, cloud):
+        self.__socialClouds[cloud.getId()] = cloud
+    
+    @public
+    def removeSocialCloud(self, cloud):
+        del self.__socialClouds[cloud.getId()]
+    
+    @public
+    def countSocialClouds(self):
+        return len(self.__socialClouds)

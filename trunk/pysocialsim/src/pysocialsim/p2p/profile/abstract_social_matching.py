@@ -22,3 +22,5 @@ class AbstractSocialMatching(Object):
     @public
     def getPercentage(self):
         return self.__percentage
+    
+    

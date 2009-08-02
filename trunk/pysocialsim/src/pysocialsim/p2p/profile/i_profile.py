@@ -37,4 +37,13 @@ class IProfile(object):
     def countInterests(self):
         raise NotImplementedError()
     
+    def addSocialCloud(self, cloud):
+        raise NotImplementedError()
+    
+    def removeSocialCloud(self, cloud):
+        raise NotImplementedError()
+    
+    def countSocialClouds(self):
+        raise NotImplementedError()
+    
     

@@ -11,6 +11,7 @@ from pysocialsim.simulator.event.interest_specification_event import InterestSpe
 from pysocialsim.simulator.event.content_sharing_event import ContentSharingEvent
 from pysocialsim.simulator.event.social_cloud_creation_event import SocialCloudCreationEvent
 from pysocialsim.p2p.dispatcher.relationship.invite_create_social_cloud_message_handler import InviteCreateSocialCloudMessageHandler
+from pysocialsim.p2p.dispatcher.relationship.accept_create_social_cloud_message_handler import AcceptCreateSocialCloudMessageHandler
 import time
 
 class DefaultPeer(AbstractPeer):
@@ -34,6 +35,7 @@ class DefaultPeer(AbstractPeer):
             
         dispatcher = self.getMessageDispatcher()
         dispatcher.registerMessageHandler(InviteCreateSocialCloudMessageHandler(self))
+        dispatcher.registerMessageHandler(AcceptCreateSocialCloudMessageHandler(self))
         
         
     @public
@@ -46,8 +48,6 @@ class DefaultPeer(AbstractPeer):
         first = randint(0, (len(profile.getFolksonomies()) - 1)/2)
         last =  randint((len(profile.getFolksonomies()))/2, len(profile.getFolksonomies()))
         
-        
-        print "HAH", first, last
         folksonomies = []
         
         for i in range(first, last):

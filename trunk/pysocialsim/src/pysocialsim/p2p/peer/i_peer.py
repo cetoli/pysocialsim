@@ -113,3 +113,6 @@ class IPeer(object):
     
     def createSocialCloud(self):
         raise NotImplementedError()
+    
+    def getContent(self, id):
+        raise NotImplementedError()

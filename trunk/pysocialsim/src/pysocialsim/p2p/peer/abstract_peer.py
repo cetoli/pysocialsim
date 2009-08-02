@@ -174,6 +174,7 @@ class AbstractPeer(Object):
     def advertise(self, type):
         if type == IPeer.CONTENT_ADVERTISEMENT:
             for c in self.__contents.values():
+                print self.__id, c.getId()
                 self.__protocol.advertise(c, type)
     
     @public
@@ -250,10 +251,12 @@ class AbstractPeer(Object):
         
         simulation = self.__network.getSimulation()
         
-        message = InviteCreateSocialCloudMessage(MessageManager().getMessageId(), self.__id, socialMatching.getPeerId(), 3, simulation.getSimulationCurrentTime())
-        message.setParameter("type", interest.getType())
+        message = InviteCreateSocialCloudMessage(MessageManager().getMessageId(), self.__id, peer, 3, simulation.getSimulationCurrentTime())
         message.setParameter("elementId", socialMatching.getElementId())
+        message.setParameter("type", interest.getType())
         
-        self.sendMessage(message)
-        
-        print "QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ"
+        self.send(message) 
+    
+    @public    
+    def getContent(self, id):
+        return self.__contents[id]

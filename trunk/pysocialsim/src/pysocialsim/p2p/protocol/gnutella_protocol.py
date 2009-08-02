@@ -35,7 +35,7 @@ class GnutellaProtocol(AbstractP2PProtocol):
             dispatcher = self.getPeer().getMessageDispatcher()
             dispatcher.handleP2PMessage(message)
         else:
-            pass
+            print "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
             
     @public
     def advertise(self, element, advertisementType):
@@ -69,7 +69,6 @@ class GnutellaProtocol(AbstractP2PProtocol):
             
         self.getPeer().connected()
         disconnectionTime = randint(3600, 28800)
-        print "qqqqqqqq", disconnectionTime
         self.getPeer().setDisconnectionTime(disconnectionTime)
         
         sem.release()

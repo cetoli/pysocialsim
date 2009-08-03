@@ -10,15 +10,5 @@ class ISocialRelationship(object):
     def getTargetId(self):
         raise NotImplementedError()
     
-    def getSharedDiskSpace(self):
+    def getTargetCloudId(self):
         raise NotImplementedError()
-    
-    def setSharedDiskSpace(self, sharedDiskSpace):
-        raise NotImplementedError()
-    
-    def addSharedContentId(self, sharedContentId):
-        raise NotImplementedError()
-    
-    def removeSharedContentId(self, sharedContentId):
-        raise NotImplementedError()
-    

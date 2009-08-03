@@ -33,3 +33,12 @@ class ISocialCloudView(object):
     
     def getSize(self):
         raise NotImplementedError()
+    
+    def getRelationship(self, peerId):
+        raise NotImplementedError()
+    
+    def getSharedDiskSpace(self):
+        raise NotImplementedError()
+    
+    def setSharedDiskSpace(self, sharedDiskSpace):
+        raise NotImplementedError()

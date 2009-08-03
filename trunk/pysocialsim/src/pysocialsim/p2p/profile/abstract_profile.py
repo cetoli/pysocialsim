@@ -82,3 +82,7 @@ class AbstractProfile(Object):
     @public
     def countSocialClouds(self):
         return len(self.__socialClouds)
+
+    @public
+    def getSocialCloud(self, cloudId):
+        return self.__socialClouds[cloudId]

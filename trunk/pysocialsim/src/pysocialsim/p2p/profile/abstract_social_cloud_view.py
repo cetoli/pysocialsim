@@ -6,10 +6,11 @@ class AbstractSocialCloudView(Object):
     def __init__(self):
         raise NotImplementedError()
     
-    def initialize(self, id):
+    def initialize(self, id, sharedDiskSpace):
         self.__id = id
         self.__socialRelationships = {}
         self.__sharedContents = {}
+        self.__sharedDiskSpace = sharedDiskSpace
     
     @public
     def getId(self):
@@ -37,16 +38,28 @@ class AbstractSocialCloudView(Object):
     
     @public
     def removeSharedContent(self, sharedContent):
-        raise NotImplementedError()
+        del self.__sharedContents[sharedContent.getId()]
     
     @public
     def getSharedContents(self):
-        raise NotImplementedError()
+        return self.__sharedContents.values()
     
     @public
     def countSharedContents(self):
-        raise NotImplementedError()
+        return len(self.__sharedContents)
     
     @public
     def getSize(self):
         raise NotImplementedError()
+    
+    @public
+    def getRelationship(self, peerId):
+        return self.__socialRelationships[peerId]
+    
+    @public
+    def getSharedDiskSpace(self):
+        return self.__sharedDiskSpace
+    
+    @public
+    def setSharedDiskSpace(self, sharedDiskSpace):
+        self.__sharedDiskSpace = sharedDiskSpace

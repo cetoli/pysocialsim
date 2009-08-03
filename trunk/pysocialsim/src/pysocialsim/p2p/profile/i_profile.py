@@ -46,4 +46,7 @@ class IProfile(object):
     def countSocialClouds(self):
         raise NotImplementedError()
     
+    def getSocialCloud(self, cloudId):
+        raise NotImplementedError()
+    
     

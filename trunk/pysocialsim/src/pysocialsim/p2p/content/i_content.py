@@ -39,3 +39,6 @@ class IContent(object):
     
     def getSize(self):
         raise NotImplementedError()
+    
+    def clone(self):
+        raise NotImplementedError()

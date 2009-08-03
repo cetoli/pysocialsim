@@ -4,7 +4,6 @@ from pysocialsim.p2p.dispatcher.message_dispatcher import MessageDispatcher
 from sets import ImmutableSet
 from pysocialsim.p2p.peer.i_peer import IPeer
 from random import randint
-from pysocialsim.p2p.message.relationship.invite_create_social_cloud_message import InviteCreateSocialCloudMessage
 from pysocialsim.p2p.message.message_manager import MessageManager
 
 class AbstractPeer(Object):
@@ -251,11 +250,11 @@ class AbstractPeer(Object):
         
         simulation = self.__network.getSimulation()
         
-        message = InviteCreateSocialCloudMessage(MessageManager().getMessageId(), self.__id, peer, 3, simulation.getSimulationCurrentTime())
-        message.setParameter("elementId", socialMatching.getElementId())
-        message.setParameter("type", interest.getType())
+#        message = InviteCreateSocialCloudMessage(MessageManager().getMessageId(), self.__id, peer, 3, simulation.getSimulationCurrentTime())
+#        message.setParameter("elementId", socialMatching.getElementId())
+#        message.setParameter("type", interest.getType())
         
-        self.send(message) 
+#        self.send(message) 
     
     @public    
     def getContent(self, id):

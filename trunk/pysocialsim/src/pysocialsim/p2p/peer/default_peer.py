@@ -10,8 +10,6 @@ from pysocialsim.simulator.event.peer_disconnection_event import PeerDisconnecti
 from pysocialsim.simulator.event.interest_specification_event import InterestSpecificationEvent
 from pysocialsim.simulator.event.content_sharing_event import ContentSharingEvent
 from pysocialsim.simulator.event.social_cloud_creation_event import SocialCloudCreationEvent
-from pysocialsim.p2p.dispatcher.relationship.invite_create_social_cloud_message_handler import InviteCreateSocialCloudMessageHandler
-from pysocialsim.p2p.dispatcher.relationship.accept_create_social_cloud_message_handler import AcceptCreateSocialCloudMessageHandler
 import time
 
 class DefaultPeer(AbstractPeer):
@@ -34,8 +32,6 @@ class DefaultPeer(AbstractPeer):
             profile.addFolksonomy(map.mapping[concept][ix])
             
         dispatcher = self.getMessageDispatcher()
-        dispatcher.registerMessageHandler(InviteCreateSocialCloudMessageHandler(self))
-        dispatcher.registerMessageHandler(AcceptCreateSocialCloudMessageHandler(self))
         
         
     @public

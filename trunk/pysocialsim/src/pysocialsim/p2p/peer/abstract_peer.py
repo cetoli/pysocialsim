@@ -250,12 +250,6 @@ class AbstractPeer(Object):
         
         simulation = self.__network.getSimulation()
         
-#        message = InviteCreateSocialCloudMessage(MessageManager().getMessageId(), self.__id, peer, 3, simulation.getSimulationCurrentTime())
-#        message.setParameter("elementId", socialMatching.getElementId())
-#        message.setParameter("type", interest.getType())
-        
-#        self.send(message) 
-    
     @public    
     def getContent(self, id):
         return self.__contents[id]

@@ -6,7 +6,7 @@ class AbstractSocialRelationship(Object):
     def __init__(self):
         raise NotImplementedError()
     
-    def initialize(self, targetId, sharedDiskSpace, targetCloudId):
+    def initialize(self, targetId, targetCloudId):
         self.__targetId = targetId
         self.__targetCloudId = targetCloudId
     

@@ -2,5 +2,5 @@ from pysocialsim.p2p.profile.abstract_social_relationship import AbstractSocialR
 
 class DefaultSocialRelationship(AbstractSocialRelationship):
     
-    def __init__(self, targetId, sharedDiskSpace):
-        self.initialize(targetId, sharedDiskSpace)
+    def __init__(self, targetId, targetCloudId):
+        self.initialize(targetId, targetCloudId)

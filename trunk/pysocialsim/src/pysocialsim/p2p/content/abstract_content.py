@@ -1,7 +1,5 @@
 from pysocialsim.base.object import Object
-from pysocialsim.base.decorator.require import require
 from pysocialsim.base.decorator.public import public
-from pysocialsim.base.decorator.return_type import return_type
 from sets import ImmutableSet
 
 class AbstractContent(Object):
@@ -14,6 +12,7 @@ class AbstractContent(Object):
         self.__folksonomies = folksonomies
         self.__owners = []
         self.__size = size
+        self.__socialClouds = []
     
     @public
     def getId(self):
@@ -64,3 +63,23 @@ class AbstractContent(Object):
     @public
     def getSize(self):
         return self.__size
+    
+    @public
+    def clone(self):
+        raise NotImplementedError()
+    
+    @public
+    def addSocialCloud(self, cloudId):
+        self.__socialClouds.append(cloudId)
+    
+    @public
+    def removeSocialCloud(self, cloudId):
+        self.__socialClouds.remove(cloudId)
+    
+    @public
+    def countSocialClouds(self):
+        return len(self.__socialClouds)
+    
+    @public
+    def hasSocialCloud(self, cloudId):
+        return cloudId in self.__socialClouds

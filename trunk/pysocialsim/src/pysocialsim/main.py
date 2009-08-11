@@ -24,6 +24,7 @@ if __name__ == '__main__':
     simulator.registerEventHandler(SocialCloudCreationEventHandler(simulation))
     
     simulation.setSimulationTime(2592000)
+    simulation.setNumberOfHops(5)
     
     model = PeerConnectionProcessModel(1, 846)
     simulation.addStochasticModel(model)

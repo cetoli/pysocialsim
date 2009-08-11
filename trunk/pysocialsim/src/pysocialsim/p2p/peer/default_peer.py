@@ -10,6 +10,13 @@ from pysocialsim.simulator.event.peer_disconnection_event import PeerDisconnecti
 from pysocialsim.simulator.event.interest_specification_event import InterestSpecificationEvent
 from pysocialsim.simulator.event.content_sharing_event import ContentSharingEvent
 from pysocialsim.simulator.event.social_cloud_creation_event import SocialCloudCreationEvent
+from pysocialsim.p2p.message.relationship.request_new_social_cloud_message import RequestNewSocialCloudMessage
+from pysocialsim.p2p.message.message_manager import MessageManager
+from pysocialsim.p2p.dispatcher.relationship.request_new_social_cloud_message_handler import RequestNewSocialCloudMessageHandler
+from pysocialsim.p2p.dispatcher.relationship.accept_new_social_cloud_message_handler import AcceptNewSocialCloudMessageHandler
+from pysocialsim.p2p.message.relationship.share_content_social_cloud_message import ShareContentSocialCloudMessage
+from pysocialsim.p2p.dispatcher.relationship.share_content_social_cloud_message_handler import ShareContentSocialCloudMessageHandler
+from pysocialsim.p2p.dispatcher.relationship.accept_share_content_social_cloud_message_handler import AcceptShareContentSocialCloudMessageHandler
 import time
 
 class DefaultPeer(AbstractPeer):
@@ -32,6 +39,39 @@ class DefaultPeer(AbstractPeer):
             profile.addFolksonomy(map.mapping[concept][ix])
             
         dispatcher = self.getMessageDispatcher()
+        dispatcher.registerMessageHandler(RequestNewSocialCloudMessageHandler(self))
+        dispatcher.registerMessageHandler(AcceptNewSocialCloudMessageHandler(self))
+        dispatcher.registerMessageHandler(ShareContentSocialCloudMessageHandler(self))
+        dispatcher.registerMessageHandler(AcceptShareContentSocialCloudMessageHandler(self))
+    
+    @public    
+    def createSocialCloud(self):
+        profile = self.getProfile()
+        if profile.countInterests() == 0:
+            return
+        
+        interests = profile.getInterests()
+        interest = interests[randint(0, len(interests) - 1)]
+        
+        if interest.countMatchedPeers() == 0:
+            return
+        
+        peers = interest.getMatchedPeers()
+        peer = peers[randint(0, len(peers) - 1)]
+        
+        if interest.countSocialMatchings(peer) == 0:
+            return
+        
+        socialMatchings = interest.getSocialMatchings(peer)
+        socialMatching = socialMatchings.values()[randint(0, len(socialMatchings.values()) - 1)]
+        
+        network = self.getP2PNetwork()
+        simulation = network.getSimulation()
+        
+        message = RequestNewSocialCloudMessage(MessageManager().getMessageId(), self.getId(), peer, simulation.getNumberOfHops(), simulation.getSimulationCurrentTime())
+        message.setParameter("elementId", socialMatching.getElementId())
+        message.setParameter("type", interest.getType())
+        self.send(message)
         
         
     @public

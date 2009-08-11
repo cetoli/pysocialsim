@@ -17,6 +17,7 @@ class AbstractSimulation(Object):
         self.__generatedEvents = 0
         self.__simulationCurrentTime = 0
         self.__totalContents = 0
+        self.__numberOfHops = 0
     
     @public
     def getP2PNetwork(self):
@@ -104,3 +105,11 @@ class AbstractSimulation(Object):
     @public
     def getNumberOfContents(self):
         return self.__totalContents
+    
+    @public
+    def setNumberOfHops(self, hops):
+        self.__numberOfHops= hops
+    
+    @public
+    def getNumberOfHops(self):
+        return self.__numberOfHops

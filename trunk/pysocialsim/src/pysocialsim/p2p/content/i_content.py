@@ -42,3 +42,16 @@ class IContent(object):
     
     def clone(self):
         raise NotImplementedError()
+    
+    def addSocialCloud(self, cloudId):
+        raise NotImplementedError()
+    
+    def removeSocialCloud(self, cloudId):
+        raise NotImplementedError()
+    
+    def countSocialClouds(self):
+        raise NotImplementedError()
+    
+    def hasSocialCloud(self, cloudId):
+        raise NotImplementedError()
+    

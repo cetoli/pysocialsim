@@ -124,13 +124,12 @@ class AbstractPeer(Object):
     
     @public
     def addContent(self, content):
-        if self.__contents.has_key(content.getId()):
-            raise StandardError()
         self.__contents[content.getId()] = content
-        self.__sharedContent.append(content.getId())
-        content.addOwner(self.__id)
-        for f in content.getFolksonomies():
-            self.__profile.addFolksonomy(f)
+        if not content.getId() in self.__sharedContent:
+            self.__sharedContent.append(content.getId())
+            content.addOwner(self.__id)
+            for f in content.getFolksonomies():
+                self.__profile.addFolksonomy(f)
         return self.__contents[content.getId()]
     
     @public
@@ -173,7 +172,6 @@ class AbstractPeer(Object):
     def advertise(self, type):
         if type == IPeer.CONTENT_ADVERTISEMENT:
             for c in self.__contents.values():
-                print self.__id, c.getId()
                 self.__protocol.advertise(c, type)
     
     @public
@@ -230,25 +228,7 @@ class AbstractPeer(Object):
     
     @public
     def createSocialCloud(self):
-        if self.__profile.countInterests() == 0:
-            return
-        
-        interests = self.__profile.getInterests()
-        interest = interests[randint(0, len(interests) - 1)]
-        
-        if interest.countMatchedPeers() == 0:
-            return
-        
-        peers = interest.getMatchedPeers()
-        peer = peers[randint(0, len(peers) - 1)]
-        
-        if interest.countSocialMatchings(peer) == 0:
-            return
-        
-        socialMatchings = interest.getSocialMatchings(peer)
-        socialMatching = socialMatchings.values()[randint(0, len(socialMatchings.values()) - 1)]
-        
-        simulation = self.__network.getSimulation()
+        raise NotImplementedError()
         
     @public    
     def getContent(self, id):

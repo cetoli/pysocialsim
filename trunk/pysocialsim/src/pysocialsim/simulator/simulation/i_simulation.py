@@ -48,3 +48,9 @@ class ISimulation(object):
     
     def getNumberOfContents(self):
         raise NotImplementedError()
+    
+    def setNumberOfHops(self, hops):
+        raise NotImplementedError()
+    
+    def getNumberOfHops(self):
+        raise NotImplementedError()

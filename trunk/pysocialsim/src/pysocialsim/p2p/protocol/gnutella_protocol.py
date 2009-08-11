@@ -3,10 +3,6 @@ from pysocialsim.base.decorator.public import public
 from threading import Semaphore
 from random import randint
 from pysocialsim.p2p.message.message_manager import MessageManager
-from pysocialsim.p2p.dispatcher.gnutella.connect_message_handler import ConnectMessageHandler
-from pysocialsim.p2p.dispatcher.gnutella.ok_connect_message_handler import OKConnectMessageHandler
-from pysocialsim.p2p.dispatcher.gnutella.disconnect_message_handler import DisconnectMessageHandler
-from pysocialsim.p2p.dispatcher.gnutella.ok_disconnect_message_handler import OKDisconnectMessageHandler
 from pysocialsim.p2p.message.gnutella.advertise_content_message import AdvertiseContentMessage
 from pysocialsim.p2p.dispatcher.gnutella.advertise_content_message_handler import AdvertiseContentMessageHandler
 
@@ -17,10 +13,6 @@ class GnutellaProtocol(AbstractP2PProtocol):
     
     @public
     def setPeer(self, peer):
-        self.registerMessageHandler(ConnectMessageHandler(peer))
-        self.registerMessageHandler(OKConnectMessageHandler(peer))
-        self.registerMessageHandler(DisconnectMessageHandler(peer))
-        self.registerMessageHandler(OKDisconnectMessageHandler(peer))
         self.registerMessageHandler(AdvertiseContentMessageHandler(peer))
         return AbstractP2PProtocol.setPeer(self, peer)
     
@@ -40,9 +32,11 @@ class GnutellaProtocol(AbstractP2PProtocol):
     @public
     def advertise(self, element, advertisementType):
         peer = self.getPeer()
+        network = peer.getP2PNetwork()
+        simulation = network.getSimulation()
         neighbors = self.getP2PTopology().getNeighbors(peer.getId())
         for n in neighbors:
-            message = AdvertiseContentMessage(MessageManager().getMessageId(), peer.getId(), n, 3, 0)
+            message = AdvertiseContentMessage(MessageManager().getMessageId(), peer.getId(), n, simulation.getNumberOfHops(), simulation.getSimulationCurrentTime())
             message.registerTrace(self.getPeer().getId())
             message.setParameter("contentId", element.getId())
             message.setParameter("folksonomies", element.getFolksonomies())

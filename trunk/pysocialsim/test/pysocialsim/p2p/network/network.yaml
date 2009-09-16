@@ -1,7 +1,0 @@
-{
-   "peers": 1000,
-   "protocol": {
-      "module": "pysocialsim.p2p.protocol.gnutella_protocol",
-      "className": "GnutellaProtocol"
-   } 
-}

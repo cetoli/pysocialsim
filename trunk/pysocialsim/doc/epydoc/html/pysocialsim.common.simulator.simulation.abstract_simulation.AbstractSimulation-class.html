@@ -1,0 +1,1485 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>pysocialsim.common.simulator.simulation.abstract_simulation.AbstractSimulation</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://code.google.com/p/pysocialsim/">PySocialSim</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Package&nbsp;pysocialsim ::
+        Package&nbsp;common ::
+        Package&nbsp;simulator ::
+        Package&nbsp;simulation ::
+        <a href="pysocialsim.common.simulator.simulation.abstract_simulation-module.html">Module&nbsp;abstract_simulation</a> ::
+        Class&nbsp;AbstractSimulation
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="pysocialsim.common.simulator.simulation.abstract_simulation.AbstractSimulation-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class AbstractSimulation</h1><p class="nomargin-top"><span class="codelink"><a href="pysocialsim.common.simulator.simulation.abstract_simulation-pysrc.html#AbstractSimulation">source&nbsp;code</a></span></p>
+<pre class="base-tree">
+              object --+    
+                       |    
+      <a href="pysocialsim.common.base.object.Object-class.html">base.object.Object</a> --+
+                           |
+              object --+   |
+                       |   |
+<a href="pysocialsim.common.simulator.simulation.i_simulation.ISimulation-class.html">i_simulation.ISimulation</a> --+
+                           |
+                          <strong class="uidshort">AbstractSimulation</strong>
+</pre>
+
+<hr />
+<p>Define the basic implementation of ISimulation</p>
+
+<hr />
+<div class="fields">      <p><strong>Author:</strong>
+        Fabricio
+      </p>
+      <p><strong>Organization:</strong>
+        Federal University of Rio de Janeiro
+      </p>
+      <p><strong>Contact:</strong>
+        fbarros@gmail.com
+      </p>
+      <p><strong>Since:</strong>
+        27/08/2009
+      </p>
+</div><!-- ==================== NESTED CLASSES ==================== -->
+<a name="section-NestedClasses"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Nested Classes</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-NestedClasses"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="pysocialsim.common.simulator.simulation.abstract_simulation.AbstractSimulation.SimulationEngine-class.html" class="summary-name">SimulationEngine</a>
+    </td>
+  </tr>
+</table>
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pysocialsim.common.simulator.simulation.abstract_simulation.AbstractSimulation-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      x.__init__(...) initializes x; see x.__class__.__doc__ for signature</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pysocialsim.common.simulator.simulation.abstract_simulation-pysrc.html#AbstractSimulation.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">NoneType</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pysocialsim.common.simulator.simulation.abstract_simulation.AbstractSimulation-class.html#initialize" class="summary-sig-name">initialize</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Initializes the object.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pysocialsim.common.simulator.simulation.abstract_simulation-pysrc.html#AbstractSimulation.initialize">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">ISimulationEventGenerator</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pysocialsim.common.simulator.simulation.abstract_simulation.AbstractSimulation-class.html#addSimulationEventGenerator" class="summary-sig-name">addSimulationEventGenerator</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">simulationEventGenerator</span>)</span><br />
+      Adds a simulation event generator.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pysocialsim.common.simulator.simulation.abstract_simulation-pysrc.html#AbstractSimulation.addSimulationEventGenerator">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">ISimulationEventGenerator</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pysocialsim.common.simulator.simulation.abstract_simulation.AbstractSimulation-class.html#removeSimulationEventGenerator" class="summary-sig-name">removeSimulationEventGenerator</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">simulationEventGenerator</span>)</span><br />
+      Removes a simulation event generator.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pysocialsim.common.simulator.simulation.abstract_simulation-pysrc.html#AbstractSimulation.removeSimulationEventGenerator">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">list</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pysocialsim.common.simulator.simulation.abstract_simulation.AbstractSimulation-class.html#getSimulationEventGenerators" class="summary-sig-name">getSimulationEventGenerators</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Gets a list of simulation event generators.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pysocialsim.common.simulator.simulation.abstract_simulation-pysrc.html#AbstractSimulation.getSimulationEventGenerators">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">int</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pysocialsim.common.simulator.simulation.abstract_simulation.AbstractSimulation-class.html#countSimulationEventGenerators" class="summary-sig-name">countSimulationEventGenerators</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Counts simulation event generators.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pysocialsim.common.simulator.simulation.abstract_simulation-pysrc.html#AbstractSimulation.countSimulationEventGenerators">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">NoneType</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pysocialsim.common.simulator.simulation.abstract_simulation.AbstractSimulation-class.html#configure" class="summary-sig-name">configure</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Configures the simulation.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pysocialsim.common.simulator.simulation.abstract_simulation-pysrc.html#AbstractSimulation.configure">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">IPeerToPeerNetwork</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pysocialsim.common.simulator.simulation.abstract_simulation.AbstractSimulation-class.html#getPeerToPeerNetwork" class="summary-sig-name">getPeerToPeerNetwork</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Gets a peer-to-peer network object.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pysocialsim.common.simulator.simulation.abstract_simulation-pysrc.html#AbstractSimulation.getPeerToPeerNetwork">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">ISimulationEvent</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pysocialsim.common.simulator.simulation.abstract_simulation.AbstractSimulation-class.html#getSimulationEvent" class="summary-sig-name">getSimulationEvent</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">handle</span>)</span><br />
+      Gets the first simulation event in priority queue.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pysocialsim.common.simulator.simulation.abstract_simulation-pysrc.html#AbstractSimulation.getSimulationEvent">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">IPeerToPeerNetwork</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pysocialsim.common.simulator.simulation.abstract_simulation.AbstractSimulation-class.html#setPeerToPeerNetwork" class="summary-sig-name">setPeerToPeerNetwork</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">peerToPeerNetwork</span>)</span><br />
+      Sets a peer-to-peer network object.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pysocialsim.common.simulator.simulation.abstract_simulation-pysrc.html#AbstractSimulation.setPeerToPeerNetwork">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">int</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pysocialsim.common.simulator.simulation.abstract_simulation.AbstractSimulation-class.html#getSimulationTime" class="summary-sig-name">getSimulationTime</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Gets the during time of simulation.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pysocialsim.common.simulator.simulation.abstract_simulation-pysrc.html#AbstractSimulation.getSimulationTime">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">int</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pysocialsim.common.simulator.simulation.abstract_simulation.AbstractSimulation-class.html#setSimulationTime" class="summary-sig-name">setSimulationTime</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">simulationTime</span>)</span><br />
+      Sets a time of simulation.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pysocialsim.common.simulator.simulation.abstract_simulation-pysrc.html#AbstractSimulation.setSimulationTime">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">int</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pysocialsim.common.simulator.simulation.abstract_simulation.AbstractSimulation-class.html#getCurrentSimulationTime" class="summary-sig-name">getCurrentSimulationTime</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Gets the current time of simulation.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pysocialsim.common.simulator.simulation.abstract_simulation-pysrc.html#AbstractSimulation.getCurrentSimulationTime">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">int</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pysocialsim.common.simulator.simulation.abstract_simulation.AbstractSimulation-class.html#setCurrentSimulationTime" class="summary-sig-name">setCurrentSimulationTime</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">currentSimulationTime</span>)</span><br />
+      Sets the current time of simulation.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pysocialsim.common.simulator.simulation.abstract_simulation-pysrc.html#AbstractSimulation.setCurrentSimulationTime">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">ISimulator</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pysocialsim.common.simulator.simulation.abstract_simulation.AbstractSimulation-class.html#getSimulator" class="summary-sig-name">getSimulator</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Sets a simulator.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pysocialsim.common.simulator.simulation.abstract_simulation-pysrc.html#AbstractSimulation.getSimulator">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">ISimulator</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pysocialsim.common.simulator.simulation.abstract_simulation.AbstractSimulation-class.html#setSimulator" class="summary-sig-name">setSimulator</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">simulator</span>)</span><br />
+      Sets a simulator.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pysocialsim.common.simulator.simulation.abstract_simulation-pysrc.html#AbstractSimulation.setSimulator">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">NoneType</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pysocialsim.common.simulator.simulation.abstract_simulation.AbstractSimulation-class.html#execute" class="summary-sig-name">execute</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Executes the simulation.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pysocialsim.common.simulator.simulation.abstract_simulation-pysrc.html#AbstractSimulation.execute">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">NoneType</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pysocialsim.common.simulator.simulation.abstract_simulation.AbstractSimulation-class.html#stop" class="summary-sig-name">stop</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Stops the simulation.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pysocialsim.common.simulator.simulation.abstract_simulation-pysrc.html#AbstractSimulation.stop">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">int</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pysocialsim.common.simulator.simulation.abstract_simulation.AbstractSimulation-class.html#countSimulationEventQueues" class="summary-sig-name">countSimulationEventQueues</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Counts queues of simulation events.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pysocialsim.common.simulator.simulation.abstract_simulation-pysrc.html#AbstractSimulation.countSimulationEventQueues">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">int</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pysocialsim.common.simulator.simulation.abstract_simulation.AbstractSimulation-class.html#countSimulationEvents" class="summary-sig-name">countSimulationEvents</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">handle</span>)</span><br />
+      Counts simulation events registered by simulation object.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pysocialsim.common.simulator.simulation.abstract_simulation-pysrc.html#AbstractSimulation.countSimulationEvents">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">ISimulationEvent</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pysocialsim.common.simulator.simulation.abstract_simulation.AbstractSimulation-class.html#registerSimulationEvent" class="summary-sig-name">registerSimulationEvent</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">simulationEvent</span>)</span><br />
+      Registries a simulation event in simulation.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pysocialsim.common.simulator.simulation.abstract_simulation-pysrc.html#AbstractSimulation.registerSimulationEvent">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">ISimulationEvent</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pysocialsim.common.simulator.simulation.abstract_simulation.AbstractSimulation-class.html#unregisterSimulationEvent" class="summary-sig-name">unregisterSimulationEvent</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">handle</span>)</span><br />
+      Unregistries a simulation event in queue of events.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pysocialsim.common.simulator.simulation.abstract_simulation-pysrc.html#AbstractSimulation.unregisterSimulationEvent">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__repr__</code>,
+      <code>__setattr__</code>,
+      <code>__str__</code>
+      </p>
+    </td>
+  </tr>
+<tr bgcolor="#e8f0f8" >
+  <th colspan="2" class="group-header"
+    >&nbsp;&nbsp;&nbsp;&nbsp;Inherited from <a href="pysocialsim.common.base.object.Object-class.html">base.object.Object</a></th></tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">Object</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pysocialsim.common.base.object.Object-class.html#clone" class="summary-sig-name">clone</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Creates a new object from prototype instance.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pysocialsim.common.base.object-pysrc.html#Object.clone">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== STATIC METHODS ==================== -->
+<a name="section-StaticMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Static Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-StaticMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr bgcolor="#e8f0f8" >
+  <th colspan="2" class="group-header"
+    >&nbsp;&nbsp;&nbsp;&nbsp;Inherited from <a href="pysocialsim.common.base.object.Object-class.html">base.object.Object</a></th></tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">object</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pysocialsim.common.base.object.Object-class.html#__new__" class="summary-sig-name">__new__</a>(<span class="summary-sig-arg">cls</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span><br />
+      Overrides static method for creating objects.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pysocialsim.common.base.object-pysrc.html#Object.__new__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">ISimulator</span>
+    </td><td class="summary">
+        <a href="pysocialsim.common.simulator.simulation.abstract_simulation.AbstractSimulation-class.html#simulator" class="summary-name">simulator</a>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">int</span>
+    </td><td class="summary">
+        <a href="pysocialsim.common.simulator.simulation.abstract_simulation.AbstractSimulation-class.html#simulationTime" class="summary-name">simulationTime</a>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">int</span>
+    </td><td class="summary">
+        <a href="pysocialsim.common.simulator.simulation.abstract_simulation.AbstractSimulation-class.html#currentSimulationTime" class="summary-name">currentSimulationTime</a>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">IPeerToPeerNetwork</span>
+    </td><td class="summary">
+        <a href="pysocialsim.common.simulator.simulation.abstract_simulation.AbstractSimulation-class.html#peerToPeerNetwork" class="summary-name">peerToPeerNetwork</a>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pysocialsim.common.simulator.simulation.abstract_simulation-pysrc.html#AbstractSimulation.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>x.__init__(...) initializes x; see x.__class__.__doc__ for 
+  signature</p>
+  <dl class="fields">
+    <dt>Overrides:
+        object.__init__
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="initialize"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">initialize</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pysocialsim.common.simulator.simulation.abstract_simulation-pysrc.html#AbstractSimulation.initialize">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Initializes the object.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>args</code></strong> - function's list of arguments</li>
+        <li><strong class="pname"><code>kwargs</code></strong> - parameter names</li>
+    </ul></dd>
+    <dt>Returns: NoneType</dt>
+        <dd>Returns an object created by function.</dd>
+    <dt>Overrides:
+        <a href="pysocialsim.common.base.object.Object-class.html#initialize">base.object.Object.initialize</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="addSimulationEventGenerator"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">addSimulationEventGenerator</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">simulationEventGenerator</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pysocialsim.common.simulator.simulation.abstract_simulation-pysrc.html#AbstractSimulation.addSimulationEventGenerator">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Adds a simulation event generator.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>simulationEventGenerator</code></strong> - an ISimulationEventGenerator</li>
+    </ul></dd>
+    <dt>Returns: ISimulationEventGenerator</dt>
+        <dd>a ISimulationEventGenerator</dd>
+    <dt>Decorators:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code>@public</code></li>
+    </ul></dd>
+    <dt>Overrides:
+        <a href="pysocialsim.common.simulator.simulation.i_simulation.ISimulation-class.html#addSimulationEventGenerator">i_simulation.ISimulation.addSimulationEventGenerator</a>
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="removeSimulationEventGenerator"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">removeSimulationEventGenerator</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">simulationEventGenerator</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pysocialsim.common.simulator.simulation.abstract_simulation-pysrc.html#AbstractSimulation.removeSimulationEventGenerator">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Removes a simulation event generator.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>simulationEventGenerator</code></strong> - an ISimulationEventGenerator</li>
+    </ul></dd>
+    <dt>Returns: ISimulationEventGenerator</dt>
+        <dd>a ISimulationEventGenerator</dd>
+    <dt>Decorators:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code>@public</code></li>
+    </ul></dd>
+    <dt>Overrides:
+        <a href="pysocialsim.common.simulator.simulation.i_simulation.ISimulation-class.html#removeSimulationEventGenerator">i_simulation.ISimulation.removeSimulationEventGenerator</a>
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="getSimulationEventGenerators"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getSimulationEventGenerators</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pysocialsim.common.simulator.simulation.abstract_simulation-pysrc.html#AbstractSimulation.getSimulationEventGenerators">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Gets a list of simulation event generators.</p>
+  <dl class="fields">
+    <dt>Returns: list</dt>
+        <dd>a list</dd>
+    <dt>Decorators:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code>@public</code></li>
+    </ul></dd>
+    <dt>Overrides:
+        <a href="pysocialsim.common.simulator.simulation.i_simulation.ISimulation-class.html#getSimulationEventGenerators">i_simulation.ISimulation.getSimulationEventGenerators</a>
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="countSimulationEventGenerators"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">countSimulationEventGenerators</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pysocialsim.common.simulator.simulation.abstract_simulation-pysrc.html#AbstractSimulation.countSimulationEventGenerators">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Counts simulation event generators.</p>
+  <dl class="fields">
+    <dt>Returns: int</dt>
+        <dd>a int</dd>
+    <dt>Decorators:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code>@public</code></li>
+    </ul></dd>
+    <dt>Overrides:
+        <a href="pysocialsim.common.simulator.simulation.i_simulation.ISimulation-class.html#countSimulationEventGenerators">i_simulation.ISimulation.countSimulationEventGenerators</a>
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="configure"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">configure</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pysocialsim.common.simulator.simulation.abstract_simulation-pysrc.html#AbstractSimulation.configure">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Configures the simulation.</p>
+  <dl class="fields">
+    <dt>Returns: NoneType</dt>
+    <dt>Decorators:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code>@public</code></li>
+    </ul></dd>
+    <dt>Overrides:
+        <a href="pysocialsim.common.simulator.simulation.i_simulation.ISimulation-class.html#configure">i_simulation.ISimulation.configure</a>
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="getPeerToPeerNetwork"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getPeerToPeerNetwork</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pysocialsim.common.simulator.simulation.abstract_simulation-pysrc.html#AbstractSimulation.getPeerToPeerNetwork">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Gets a peer-to-peer network object.</p>
+  <dl class="fields">
+    <dt>Returns: IPeerToPeerNetwork</dt>
+        <dd>an IPeerToPeerNetwork</dd>
+    <dt>Decorators:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code>@public</code></li>
+    </ul></dd>
+    <dt>Overrides:
+        <a href="pysocialsim.common.simulator.simulation.i_simulation.ISimulation-class.html#getPeerToPeerNetwork">i_simulation.ISimulation.getPeerToPeerNetwork</a>
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="getSimulationEvent"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getSimulationEvent</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">handle</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pysocialsim.common.simulator.simulation.abstract_simulation-pysrc.html#AbstractSimulation.getSimulationEvent">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Gets the first simulation event in priority queue.</p>
+  <dl class="fields">
+    <dt>Returns: ISimulationEvent</dt>
+        <dd>a ISimulationEvent</dd>
+    <dt>Decorators:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code>@public</code></li>
+    </ul></dd>
+    <dt>Overrides:
+        <a href="pysocialsim.common.simulator.simulation.i_simulation.ISimulation-class.html#getSimulationEvent">i_simulation.ISimulation.getSimulationEvent</a>
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="setPeerToPeerNetwork"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">setPeerToPeerNetwork</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">peerToPeerNetwork</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pysocialsim.common.simulator.simulation.abstract_simulation-pysrc.html#AbstractSimulation.setPeerToPeerNetwork">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Sets a peer-to-peer network object.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>peerToPeerNetwork</code></strong> - an IPeerToPeerNetwork</li>
+    </ul></dd>
+    <dt>Returns: IPeerToPeerNetwork</dt>
+        <dd>an IPeerToPeerNetwork</dd>
+    <dt>Decorators:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code>@public</code></li>
+    </ul></dd>
+    <dt>Overrides:
+        <a href="pysocialsim.common.simulator.simulation.i_simulation.ISimulation-class.html#setPeerToPeerNetwork">i_simulation.ISimulation.setPeerToPeerNetwork</a>
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="getSimulationTime"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getSimulationTime</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pysocialsim.common.simulator.simulation.abstract_simulation-pysrc.html#AbstractSimulation.getSimulationTime">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Gets the during time of simulation.</p>
+  <dl class="fields">
+    <dt>Returns: int</dt>
+        <dd>an int</dd>
+    <dt>Decorators:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code>@public</code></li>
+    </ul></dd>
+    <dt>Overrides:
+        <a href="pysocialsim.common.simulator.simulation.i_simulation.ISimulation-class.html#getSimulationTime">i_simulation.ISimulation.getSimulationTime</a>
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="setSimulationTime"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">setSimulationTime</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">simulationTime</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pysocialsim.common.simulator.simulation.abstract_simulation-pysrc.html#AbstractSimulation.setSimulationTime">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Sets a time of simulation.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>simulationTime</code></strong> - an int</li>
+    </ul></dd>
+    <dt>Returns: int</dt>
+        <dd>an int</dd>
+    <dt>Decorators:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code>@public</code></li>
+    </ul></dd>
+    <dt>Overrides:
+        <a href="pysocialsim.common.simulator.simulation.i_simulation.ISimulation-class.html#setSimulationTime">i_simulation.ISimulation.setSimulationTime</a>
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="getCurrentSimulationTime"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getCurrentSimulationTime</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pysocialsim.common.simulator.simulation.abstract_simulation-pysrc.html#AbstractSimulation.getCurrentSimulationTime">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Gets the current time of simulation.</p>
+  <dl class="fields">
+    <dt>Returns: int</dt>
+        <dd>an int</dd>
+    <dt>Decorators:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code>@public</code></li>
+    </ul></dd>
+    <dt>Overrides:
+        <a href="pysocialsim.common.simulator.simulation.i_simulation.ISimulation-class.html#getCurrentSimulationTime">i_simulation.ISimulation.getCurrentSimulationTime</a>
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="setCurrentSimulationTime"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">setCurrentSimulationTime</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">currentSimulationTime</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pysocialsim.common.simulator.simulation.abstract_simulation-pysrc.html#AbstractSimulation.setCurrentSimulationTime">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Sets the current time of simulation.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>currentSimulationTime</code></strong> - an int</li>
+    </ul></dd>
+    <dt>Returns: int</dt>
+        <dd>an int</dd>
+    <dt>Decorators:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code>@public</code></li>
+    </ul></dd>
+    <dt>Overrides:
+        <a href="pysocialsim.common.simulator.simulation.i_simulation.ISimulation-class.html#setCurrentSimulationTime">i_simulation.ISimulation.setCurrentSimulationTime</a>
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="getSimulator"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getSimulator</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pysocialsim.common.simulator.simulation.abstract_simulation-pysrc.html#AbstractSimulation.getSimulator">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Sets a simulator.</p>
+  <dl class="fields">
+    <dt>Returns: ISimulator</dt>
+        <dd>an ISimulator</dd>
+    <dt>Decorators:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code>@public</code></li>
+    </ul></dd>
+    <dt>Overrides:
+        <a href="pysocialsim.common.simulator.simulation.i_simulation.ISimulation-class.html#getSimulator">i_simulation.ISimulation.getSimulator</a>
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="setSimulator"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">setSimulator</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">simulator</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pysocialsim.common.simulator.simulation.abstract_simulation-pysrc.html#AbstractSimulation.setSimulator">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Sets a simulator.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>simulator</code></strong> - an ISimulator</li>
+    </ul></dd>
+    <dt>Returns: ISimulator</dt>
+        <dd>an ISimulator</dd>
+    <dt>Decorators:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code>@public</code></li>
+    </ul></dd>
+    <dt>Overrides:
+        <a href="pysocialsim.common.simulator.simulation.i_simulation.ISimulation-class.html#setSimulator">i_simulation.ISimulation.setSimulator</a>
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="execute"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">execute</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pysocialsim.common.simulator.simulation.abstract_simulation-pysrc.html#AbstractSimulation.execute">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Executes the simulation.</p>
+  <dl class="fields">
+    <dt>Returns: NoneType</dt>
+    <dt>Decorators:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code>@public</code></li>
+    </ul></dd>
+    <dt>Overrides:
+        <a href="pysocialsim.common.simulator.simulation.i_simulation.ISimulation-class.html#execute">i_simulation.ISimulation.execute</a>
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="stop"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">stop</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pysocialsim.common.simulator.simulation.abstract_simulation-pysrc.html#AbstractSimulation.stop">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Stops the simulation.</p>
+  <dl class="fields">
+    <dt>Returns: NoneType</dt>
+    <dt>Decorators:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code>@public</code></li>
+    </ul></dd>
+    <dt>Overrides:
+        <a href="pysocialsim.common.simulator.simulation.i_simulation.ISimulation-class.html#stop">i_simulation.ISimulation.stop</a>
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="countSimulationEventQueues"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">countSimulationEventQueues</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pysocialsim.common.simulator.simulation.abstract_simulation-pysrc.html#AbstractSimulation.countSimulationEventQueues">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Counts queues of simulation events.</p>
+  <dl class="fields">
+    <dt>Returns: int</dt>
+        <dd>a int</dd>
+    <dt>Decorators:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code>@public</code></li>
+    </ul></dd>
+    <dt>Overrides:
+        <a href="pysocialsim.common.simulator.simulation.i_simulation.ISimulation-class.html#countSimulationEventQueues">i_simulation.ISimulation.countSimulationEventQueues</a>
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="countSimulationEvents"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">countSimulationEvents</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">handle</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pysocialsim.common.simulator.simulation.abstract_simulation-pysrc.html#AbstractSimulation.countSimulationEvents">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Counts simulation events registered by simulation object.</p>
+  <dl class="fields">
+    <dt>Returns: int</dt>
+        <dd>an int</dd>
+    <dt>Decorators:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code>@public</code></li>
+    </ul></dd>
+    <dt>Overrides:
+        <a href="pysocialsim.common.simulator.simulation.i_simulation.ISimulation-class.html#countSimulationEvents">i_simulation.ISimulation.countSimulationEvents</a>
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="registerSimulationEvent"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">registerSimulationEvent</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">simulationEvent</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pysocialsim.common.simulator.simulation.abstract_simulation-pysrc.html#AbstractSimulation.registerSimulationEvent">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Registries a simulation event in simulation.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>simulationEvent</code></strong> - an ISimulationEvent</li>
+    </ul></dd>
+    <dt>Returns: ISimulationEvent</dt>
+        <dd>an ISimulationEvent</dd>
+    <dt>Decorators:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code>@public</code></li>
+    </ul></dd>
+    <dt>Overrides:
+        <a href="pysocialsim.common.simulator.simulation.i_simulation.ISimulation-class.html#registerSimulationEvent">i_simulation.ISimulation.registerSimulationEvent</a>
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="unregisterSimulationEvent"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">unregisterSimulationEvent</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">handle</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pysocialsim.common.simulator.simulation.abstract_simulation-pysrc.html#AbstractSimulation.unregisterSimulationEvent">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Unregistries a simulation event in queue of events.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>handle</code></strong> - a str</li>
+    </ul></dd>
+    <dt>Returns: ISimulationEvent</dt>
+        <dd>an ISimulationEvent</dd>
+    <dt>Decorators:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code>@public</code></li>
+    </ul></dd>
+    <dt>Overrides:
+        <a href="pysocialsim.common.simulator.simulation.i_simulation.ISimulation-class.html#unregisterSimulationEvent">i_simulation.ISimulation.unregisterSimulationEvent</a>
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== PROPERTY DETAILS ==================== -->
+<a name="section-PropertyDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Property Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-PropertyDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="simulator"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">simulator</h3>
+  
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="pysocialsim.common.simulator.simulation.abstract_simulation.AbstractSimulation-class.html#getSimulator" class="summary-sig-name">getSimulator</a>(<span class="summary-sig-arg">self</span>)</span>
+        - Sets a simulator.
+    </dd>
+    <dt>Set Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="pysocialsim.common.simulator.simulation.abstract_simulation.AbstractSimulation-class.html#setSimulator" class="summary-sig-name">setSimulator</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">simulator</span>)</span>
+        - Sets a simulator.
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="simulationTime"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">simulationTime</h3>
+  
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="pysocialsim.common.simulator.simulation.abstract_simulation.AbstractSimulation-class.html#getSimulationTime" class="summary-sig-name">getSimulationTime</a>(<span class="summary-sig-arg">self</span>)</span>
+        - Gets the during time of simulation.
+    </dd>
+    <dt>Set Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="pysocialsim.common.simulator.simulation.abstract_simulation.AbstractSimulation-class.html#setSimulationTime" class="summary-sig-name">setSimulationTime</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">simulationTime</span>)</span>
+        - Sets a time of simulation.
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="currentSimulationTime"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">currentSimulationTime</h3>
+  
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="pysocialsim.common.simulator.simulation.abstract_simulation.AbstractSimulation-class.html#getCurrentSimulationTime" class="summary-sig-name">getCurrentSimulationTime</a>(<span class="summary-sig-arg">self</span>)</span>
+        - Gets the current time of simulation.
+    </dd>
+    <dt>Set Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="pysocialsim.common.simulator.simulation.abstract_simulation.AbstractSimulation-class.html#setCurrentSimulationTime" class="summary-sig-name">setCurrentSimulationTime</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">currentSimulationTime</span>)</span>
+        - Sets the current time of simulation.
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="peerToPeerNetwork"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">peerToPeerNetwork</h3>
+  
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="pysocialsim.common.simulator.simulation.abstract_simulation.AbstractSimulation-class.html#getPeerToPeerNetwork" class="summary-sig-name">getPeerToPeerNetwork</a>(<span class="summary-sig-arg">self</span>)</span>
+        - Gets a peer-to-peer network object.
+    </dd>
+    <dt>Set Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="pysocialsim.common.simulator.simulation.abstract_simulation.AbstractSimulation-class.html#setPeerToPeerNetwork" class="summary-sig-name">setPeerToPeerNetwork</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">peerToPeerNetwork</span>)</span>
+        - Sets a peer-to-peer network object.
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://code.google.com/p/pysocialsim/">PySocialSim</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Wed Sep 16 01:27:03 2009
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

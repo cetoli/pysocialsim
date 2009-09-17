@@ -95,8 +95,17 @@ class Scheduler(Object):
         pre_condition(peerId, lambda x: x <> None)
         pre_condition(peerId, lambda x: x > 0)
         
+        pre_condition(peerType, lambda x: x <> None)
+        pre_condition(peerType, lambda x: self.__peerTimes.has_key(x))
+        pre_condition(peerId, lambda x: x <> None)
+        pre_condition(peerId, lambda x: x > 0)
+
+        peers = self.__peerTimes[peerType]
+        if not peers.has_key(peerId):
+            raise InvalidValueError()
+        times = peers[peerId]
+        return returns(times.pop(len(times) - 1), int)
         
-    
     @public
     def getTimeForPeer(self, peerType, peerId):
         """

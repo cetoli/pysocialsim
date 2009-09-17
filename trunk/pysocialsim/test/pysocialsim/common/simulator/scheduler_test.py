@@ -158,6 +158,3 @@ class SchedulerTest(unittest.TestCase):
         self.assertEquals(2700, scheduler.getTimeForPeer(IPeerToPeerNetwork.SIMPLE_PEER, 1))
         self.assertTrue(scheduler.getTimesForPeer(IPeerToPeerNetwork.SIMPLE_PEER, 1))
         
-        self.assertEquals(2700, scheduler.unregisterTimeForPeer(IPeerToPeerNetwork.SIMPLE_PEER, 1))
-        self.assertEquals(2, scheduler.countTimesForPeer(IPeerToPeerNetwork.SIMPLE_PEER, 1))
-

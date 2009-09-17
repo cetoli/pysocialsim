@@ -44,7 +44,10 @@ class ISimulatorTest(unittest.TestCase):
         self.assertRaises(NotImplementedError, self.SimulatorForTest().setSimulation, pymockobject.create(ISimulation))
         
     def testTryGetSimulation(self):
-        self.assertRaises(NotImplementedError, self.SimulatorForTest().getSimulation)    
+        self.assertRaises(NotImplementedError, self.SimulatorForTest().getSimulation)
+    
+    def testTryInvokeGetScheduler(self):
+        self.assertRaises(NotImplementedError, self.SimulatorForTest().getScheduler)    
         
     class SimulatorForTest(ISimulator):
         

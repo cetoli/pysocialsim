@@ -10,8 +10,8 @@ from pysocialsim.common.base.object import Object
 from pysocialsim.common.util.rotines import requires, returns, pre_condition
 from pysocialsim.common.p2p.topology.i_peer_to_peer_topology import IPeerToPeerTopology
 from pysocialsim.common.base.decorators import public
-from pysocialsim.common.p2p.topology.node.i_node_device import INodeDevice
 from pysocialsim.common.error import io_error
+from pysocialsim.common.p2p.topology.graph.i_node_device import INodeDevice
 
 class Node(Object):
     """

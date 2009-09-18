@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>pysocialsim.common.p2p.topology.graph.node</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://code.google.com/p/pysocialsim/">PySocialSim</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Package&nbsp;pysocialsim ::
+        Package&nbsp;common ::
+        Package&nbsp;p2p ::
+        Package&nbsp;topology ::
+        Package&nbsp;graph ::
+        Module&nbsp;node
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="pysocialsim.common.p2p.topology.graph.node-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="pysocialsim.common.p2p.topology.graph.node-module.html">Module pysocialsim.common.p2p.topology.graph.node</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-docstring">Defines the module with the implementation of Node class.</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-docstring">@author: Fabricio</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-docstring">@organization: Federal University of Rio de Janeiro</tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-docstring">@contact: fbarros@gmail.com </tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-docstring">@since: 18/09/2009</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">pysocialsim</tt><tt class="py-op">.</tt><tt class="py-name">common</tt><tt class="py-op">.</tt><tt class="py-name">base</tt><tt class="py-op">.</tt><tt id="link-0" class="py-name" targets="Module pysocialsim.common.base.object=pysocialsim.common.base.object-module.html"><a title="pysocialsim.common.base.object" class="py-name" href="#" onclick="return doclink('link-0', 'object', 'link-0');">object</a></tt> <tt class="py-keyword">import</tt> <tt id="link-1" class="py-name" targets="Class pysocialsim.common.base.object.Object=pysocialsim.common.base.object.Object-class.html"><a title="pysocialsim.common.base.object.Object" class="py-name" href="#" onclick="return doclink('link-1', 'Object', 'link-1');">Object</a></tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">pysocialsim</tt><tt class="py-op">.</tt><tt class="py-name">common</tt><tt class="py-op">.</tt><tt class="py-name">util</tt><tt class="py-op">.</tt><tt class="py-name">rotines</tt> <tt class="py-keyword">import</tt> <tt class="py-name">requires</tt><tt class="py-op">,</tt> <tt class="py-name">returns</tt><tt class="py-op">,</tt> <tt class="py-name">pre_condition</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">pysocialsim</tt><tt class="py-op">.</tt><tt class="py-name">common</tt><tt class="py-op">.</tt><tt class="py-name">p2p</tt><tt class="py-op">.</tt><tt class="py-name">topology</tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Module pysocialsim.common.p2p.topology.i_peer_to_peer_topology=pysocialsim.common.p2p.topology.i_peer_to_peer_topology-module.html"><a title="pysocialsim.common.p2p.topology.i_peer_to_peer_topology" class="py-name" href="#" onclick="return doclink('link-2', 'i_peer_to_peer_topology', 'link-2');">i_peer_to_peer_topology</a></tt> <tt class="py-keyword">import</tt> <tt id="link-3" class="py-name" targets="Class pysocialsim.common.p2p.topology.i_peer_to_peer_topology.IPeerToPeerTopology=pysocialsim.common.p2p.topology.i_peer_to_peer_topology.IPeerToPeerTopology-class.html"><a title="pysocialsim.common.p2p.topology.i_peer_to_peer_topology.IPeerToPeerTopology" class="py-name" href="#" onclick="return doclink('link-3', 'IPeerToPeerTopology', 'link-3');">IPeerToPeerTopology</a></tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">pysocialsim</tt><tt class="py-op">.</tt><tt class="py-name">common</tt><tt class="py-op">.</tt><tt class="py-name">base</tt><tt class="py-op">.</tt><tt id="link-4" class="py-name" targets="Module pysocialsim.common.base.decorators=pysocialsim.common.base.decorators-module.html"><a title="pysocialsim.common.base.decorators" class="py-name" href="#" onclick="return doclink('link-4', 'decorators', 'link-4');">decorators</a></tt> <tt class="py-keyword">import</tt> <tt id="link-5" class="py-name" targets="Function pysocialsim.common.base.decorators.public()=pysocialsim.common.base.decorators-module.html#public"><a title="pysocialsim.common.base.decorators.public" class="py-name" href="#" onclick="return doclink('link-5', 'public', 'link-5');">public</a></tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">pysocialsim</tt><tt class="py-op">.</tt><tt class="py-name">common</tt><tt class="py-op">.</tt><tt class="py-name">error</tt> <tt class="py-keyword">import</tt> <tt id="link-6" class="py-name" targets="Module pysocialsim.common.error.io_error=pysocialsim.common.error.io_error-module.html"><a title="pysocialsim.common.error.io_error" class="py-name" href="#" onclick="return doclink('link-6', 'io_error', 'link-6');">io_error</a></tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">pysocialsim</tt><tt class="py-op">.</tt><tt class="py-name">common</tt><tt class="py-op">.</tt><tt class="py-name">p2p</tt><tt class="py-op">.</tt><tt class="py-name">topology</tt><tt class="py-op">.</tt><tt class="py-name">graph</tt><tt class="py-op">.</tt><tt id="link-7" class="py-name" targets="Module pysocialsim.common.p2p.topology.graph.i_node_device=pysocialsim.common.p2p.topology.graph.i_node_device-module.html"><a title="pysocialsim.common.p2p.topology.graph.i_node_device" class="py-name" href="#" onclick="return doclink('link-7', 'i_node_device', 'link-7');">i_node_device</a></tt> <tt class="py-keyword">import</tt> <tt id="link-8" class="py-name" targets="Class pysocialsim.common.p2p.topology.graph.i_node_device.INodeDevice=pysocialsim.common.p2p.topology.graph.i_node_device.INodeDevice-class.html"><a title="pysocialsim.common.p2p.topology.graph.i_node_device.INodeDevice" class="py-name" href="#" onclick="return doclink('link-8', 'INodeDevice', 'link-8');">INodeDevice</a></tt> </tt>
+<a name="Node"></a><div id="Node-def"><a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt> <a class="py-toggle" href="#" id="Node-toggle" onclick="return toggle('Node');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="pysocialsim.common.p2p.topology.graph.node.Node-class.html">Node</a><tt class="py-op">(</tt><tt class="py-base-class">Object</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Node-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Node-expanded"><a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"><tt class="py-docstring">    Defines the implementation of network node.</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"><tt class="py-docstring">    @author: Fabricio</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"><tt class="py-docstring">    @organization: Federal University of Rio de Janeiro</tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"><tt class="py-docstring">    @contact: fbarros@gmail.com </tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"><tt class="py-docstring">    @since: 18/09/2009</tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line">     </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line">    <tt id="link-9" class="py-name" targets="Variable pysocialsim.common.p2p.topology.graph.node.Node.PROCESSOR=pysocialsim.common.p2p.topology.graph.node.Node-class.html#PROCESSOR"><a title="pysocialsim.common.p2p.topology.graph.node.Node.PROCESSOR" class="py-name" href="#" onclick="return doclink('link-9', 'PROCESSOR', 'link-9');">PROCESSOR</a></tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line">    <tt id="link-10" class="py-name" targets="Variable pysocialsim.common.p2p.topology.graph.node.Node.DISK=pysocialsim.common.p2p.topology.graph.node.Node-class.html#DISK"><a title="pysocialsim.common.p2p.topology.graph.node.Node.DISK" class="py-name" href="#" onclick="return doclink('link-10', 'DISK', 'link-10');">DISK</a></tt> <tt class="py-op">=</tt> <tt class="py-number">1</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line">    <tt id="link-11" class="py-name" targets="Variable pysocialsim.common.p2p.topology.graph.node.Node.NETWORK_ADAPTER=pysocialsim.common.p2p.topology.graph.node.Node-class.html#NETWORK_ADAPTER"><a title="pysocialsim.common.p2p.topology.graph.node.Node.NETWORK_ADAPTER" class="py-name" href="#" onclick="return doclink('link-11', 'NETWORK_ADAPTER', 'link-11');">NETWORK_ADAPTER</a></tt> <tt class="py-op">=</tt> <tt class="py-number">2</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line">     </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line">    <tt id="link-12" class="py-name" targets="Variable pysocialsim.common.p2p.topology.graph.node.Node.__public__=pysocialsim.common.p2p.topology.graph.node.Node-class.html#__public__"><a title="pysocialsim.common.p2p.topology.graph.node.Node.__public__" class="py-name" href="#" onclick="return doclink('link-12', '__public__', 'link-12');">__public__</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-string">"PROCESSOR"</tt><tt class="py-op">,</tt> <tt class="py-string">"DISK"</tt><tt class="py-op">,</tt> <tt class="py-string">"NETWORK_ADAPTER"</tt><tt class="py-op">]</tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line">     </tt>
+<a name="Node.__init__"></a><div id="Node.__init__-def"><a name="L31"></a><tt class="py-lineno"> 31</tt> <a class="py-toggle" href="#" id="Node.__init__-toggle" onclick="return toggle('Node.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="pysocialsim.common.p2p.topology.graph.node.Node-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">topology</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Node.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Node.__init__-expanded"><a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line"><tt class="py-docstring">        Constructor of Node class</tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line"><tt class="py-docstring">        @param topology: an IPeerToPeerTopology</tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line"><tt class="py-docstring">        @type topology: IPeerToPeerTopology</tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line"><tt class="py-docstring">        @rtype: NoneType</tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-13" class="py-name" targets="Method pysocialsim.common.base.object.Object.initialize()=pysocialsim.common.base.object.Object-class.html#initialize,Method pysocialsim.common.p2p.peer.abstract_peer.AbstractPeer.initialize()=pysocialsim.common.p2p.peer.abstract_peer.AbstractPeer-class.html#initialize,Method pysocialsim.common.p2p.topology.abstract_peer_to_peer_topology.AbstractPeerToPeerTopology.initialize()=pysocialsim.common.p2p.topology.abstract_peer_to_peer_topology.AbstractPeerToPeerTopology-class.html#initialize,Method pysocialsim.common.p2p.topology.graph.node.Node.initialize()=pysocialsim.common.p2p.topology.graph.node.Node-class.html#initialize,Method pysocialsim.common.simulator.default_simulator.DefaultSimulator.initialize()=pysocialsim.common.simulator.default_simulator.DefaultSimulator-class.html#initialize,Method pysocialsim.common.simulator.event.abstract_simulation_event.AbstractSimulationEvent.initialize()=pysocialsim.common.simulator.event.abstract_simulation_event.AbstractSimulationEvent-class.html#initialize,Method pysocialsim.common.simulator.event.abstract_simulation_event_generator.AbstractSimulationEventGenerator.initialize()=pysocialsim.common.simulator.event.abstract_simulation_event_generator.AbstractSimulationEventGenerator-class.html#initialize,Method pysocialsim.common.simulator.event.abstract_simulation_event_handler.AbstractSimulationEventHandler.initialize()=pysocialsim.common.simulator.event.abstract_simulation_event_handler.AbstractSimulationEventHandler-class.html#initialize,Method pysocialsim.common.simulator.event.event_dispatcher.EventDispatcher.initialize()=pysocialsim.common.simulator.event.event_dispatcher.EventDispatcher-class.html#initialize,Method pysocialsim.common.simulator.event.priority_queue.PriorityQueue.initialize()=pysocialsim.common.simulator.event.priority_queue.PriorityQueue-class.html#initialize,Method pysocialsim.common.simulator.scheduler.Scheduler.initialize()=pysocialsim.common.simulator.scheduler.Scheduler-class.html#initialize,Method pysocialsim.common.simulator.simulation.abstract_simulation.AbstractSimulation.initialize()=pysocialsim.common.simulator.simulation.abstract_simulation.AbstractSimulation-class.html#initialize"><a title="pysocialsim.common.base.object.Object.initialize
+pysocialsim.common.p2p.peer.abstract_peer.AbstractPeer.initialize
+pysocialsim.common.p2p.topology.abstract_peer_to_peer_topology.AbstractPeerToPeerTopology.initialize
+pysocialsim.common.p2p.topology.graph.node.Node.initialize
+pysocialsim.common.simulator.default_simulator.DefaultSimulator.initialize
+pysocialsim.common.simulator.event.abstract_simulation_event.AbstractSimulationEvent.initialize
+pysocialsim.common.simulator.event.abstract_simulation_event_generator.AbstractSimulationEventGenerator.initialize
+pysocialsim.common.simulator.event.abstract_simulation_event_handler.AbstractSimulationEventHandler.initialize
+pysocialsim.common.simulator.event.event_dispatcher.EventDispatcher.initialize
+pysocialsim.common.simulator.event.priority_queue.PriorityQueue.initialize
+pysocialsim.common.simulator.scheduler.Scheduler.initialize
+pysocialsim.common.simulator.simulation.abstract_simulation.AbstractSimulation.initialize" class="py-name" href="#" onclick="return doclink('link-13', 'initialize', 'link-13');">initialize</a></tt><tt class="py-op">(</tt><tt class="py-name">topology</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line">     </tt>
+<a name="Node.initialize"></a><div id="Node.initialize-def"><a name="L40"></a><tt class="py-lineno"> 40</tt> <a class="py-toggle" href="#" id="Node.initialize-toggle" onclick="return toggle('Node.initialize');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="pysocialsim.common.p2p.topology.graph.node.Node-class.html#initialize">initialize</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">topology</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Node.initialize-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Node.initialize-expanded"><a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line"><tt class="py-docstring">        Initializes the object</tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line"><tt class="py-docstring">        @param topology: an IPeerToPeerTopology</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line"><tt class="py-docstring">        @type topology: IPeerToPeerTopology</tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line"><tt class="py-docstring">        @rtype: NoneType</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line">        <tt class="py-name">requires</tt><tt class="py-op">(</tt><tt class="py-name">topology</tt><tt class="py-op">,</tt> <tt id="link-14" class="py-name"><a title="pysocialsim.common.p2p.topology.i_peer_to_peer_topology.IPeerToPeerTopology" class="py-name" href="#" onclick="return doclink('link-14', 'IPeerToPeerTopology', 'link-3');">IPeerToPeerTopology</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__topology</tt> <tt class="py-op">=</tt> <tt class="py-name">topology</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__edges</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__devices</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+</div><a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line">     </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">public</tt>     </tt>
+<a name="Node.addNodeDevice"></a><div id="Node.addNodeDevice-def"><a name="L53"></a><tt class="py-lineno"> 53</tt> <a class="py-toggle" href="#" id="Node.addNodeDevice-toggle" onclick="return toggle('Node.addNodeDevice');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="pysocialsim.common.p2p.topology.graph.node.Node-class.html#addNodeDevice">addNodeDevice</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">nodeDevice</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Node.addNodeDevice-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Node.addNodeDevice-expanded"><a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line"><tt class="py-docstring">        Adds a node device.</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line"><tt class="py-docstring">        @param nodeDevice: INodeDevice</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line"><tt class="py-docstring">        @rtype: INodeDevice</tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line">        <tt class="py-name">requires</tt><tt class="py-op">(</tt><tt class="py-name">nodeDevice</tt><tt class="py-op">,</tt> <tt id="link-15" class="py-name"><a title="pysocialsim.common.p2p.topology.graph.i_node_device.INodeDevice" class="py-name" href="#" onclick="return doclink('link-15', 'INodeDevice', 'link-8');">INodeDevice</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line">         </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line">        <tt class="py-name">pre_condition</tt><tt class="py-op">(</tt><tt class="py-name">nodeDevice</tt><tt class="py-op">,</tt> <tt class="py-keyword">lambda</tt> <tt class="py-name">x</tt><tt class="py-op">:</tt> <tt class="py-name">x</tt> <tt class="py-op">&lt;&gt;</tt> <tt class="py-name">None</tt><tt class="py-op">)</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line">         </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__devices</tt><tt class="py-op">[</tt><tt class="py-name">nodeDevice</tt><tt class="py-op">.</tt><tt id="link-16" class="py-name" targets="Method pysocialsim.common.p2p.peer.abstract_peer.AbstractPeer.getType()=pysocialsim.common.p2p.peer.abstract_peer.AbstractPeer-class.html#getType,Method pysocialsim.common.p2p.peer.i_peer.IPeer.getType()=pysocialsim.common.p2p.peer.i_peer.IPeer-class.html#getType,Method pysocialsim.common.p2p.topology.graph.i_node_device.INodeDevice.getType()=pysocialsim.common.p2p.topology.graph.i_node_device.INodeDevice-class.html#getType"><a title="pysocialsim.common.p2p.peer.abstract_peer.AbstractPeer.getType
+pysocialsim.common.p2p.peer.i_peer.IPeer.getType
+pysocialsim.common.p2p.topology.graph.i_node_device.INodeDevice.getType" class="py-name" href="#" onclick="return doclink('link-16', 'getType', 'link-16');">getType</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">nodeDevice</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">returns</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__devices</tt><tt class="py-op">.</tt><tt class="py-name">has_key</tt><tt class="py-op">(</tt><tt class="py-name">nodeDevice</tt><tt class="py-op">.</tt><tt id="link-17" class="py-name"><a title="pysocialsim.common.p2p.peer.abstract_peer.AbstractPeer.getType
+pysocialsim.common.p2p.peer.i_peer.IPeer.getType
+pysocialsim.common.p2p.topology.graph.i_node_device.INodeDevice.getType" class="py-name" href="#" onclick="return doclink('link-17', 'getType', 'link-16');">getType</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">bool</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line">     </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">public</tt> </tt>
+<a name="Node.removeNodeDevice"></a><div id="Node.removeNodeDevice-def"><a name="L67"></a><tt class="py-lineno"> 67</tt> <a class="py-toggle" href="#" id="Node.removeNodeDevice-toggle" onclick="return toggle('Node.removeNodeDevice');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="pysocialsim.common.p2p.topology.graph.node.Node-class.html#removeNodeDevice">removeNodeDevice</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">nodeDevice</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Node.removeNodeDevice-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Node.removeNodeDevice-expanded"><a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line"><tt class="py-docstring">        Removes a node device.</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line"><tt class="py-docstring">        @param nodeDevice: INodeDevice</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line"><tt class="py-docstring">        @rtype: INodeDevice</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">        <tt class="py-name">requires</tt><tt class="py-op">(</tt><tt class="py-name">nodeDevice</tt><tt class="py-op">,</tt> <tt id="link-18" class="py-name"><a title="pysocialsim.common.p2p.topology.graph.i_node_device.INodeDevice" class="py-name" href="#" onclick="return doclink('link-18', 'INodeDevice', 'link-8');">INodeDevice</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">        <tt class="py-name">pre_condition</tt><tt class="py-op">(</tt><tt class="py-name">nodeDevice</tt><tt class="py-op">,</tt> <tt class="py-keyword">lambda</tt> <tt class="py-name">x</tt><tt class="py-op">:</tt> <tt class="py-name">x</tt> <tt class="py-op">&lt;&gt;</tt> <tt class="py-name">None</tt><tt class="py-op">)</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">        <tt class="py-keyword">del</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__devices</tt><tt class="py-op">[</tt><tt class="py-name">nodeDevice</tt><tt class="py-op">.</tt><tt id="link-19" class="py-name"><a title="pysocialsim.common.p2p.peer.abstract_peer.AbstractPeer.getType
+pysocialsim.common.p2p.peer.i_peer.IPeer.getType
+pysocialsim.common.p2p.topology.graph.i_node_device.INodeDevice.getType" class="py-name" href="#" onclick="return doclink('link-19', 'getType', 'link-16');">getType</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">]</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">returns</tt><tt class="py-op">(</tt><tt class="py-keyword">not</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__devices</tt><tt class="py-op">.</tt><tt class="py-name">has_key</tt><tt class="py-op">(</tt><tt class="py-name">nodeDevice</tt><tt class="py-op">.</tt><tt id="link-20" class="py-name"><a title="pysocialsim.common.p2p.peer.abstract_peer.AbstractPeer.getType
+pysocialsim.common.p2p.peer.i_peer.IPeer.getType
+pysocialsim.common.p2p.topology.graph.i_node_device.INodeDevice.getType" class="py-name" href="#" onclick="return doclink('link-20', 'getType', 'link-16');">getType</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">bool</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line">     </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">public</tt> </tt>
+<a name="Node.getNodeDevice"></a><div id="Node.getNodeDevice-def"><a name="L79"></a><tt class="py-lineno"> 79</tt> <a class="py-toggle" href="#" id="Node.getNodeDevice-toggle" onclick="return toggle('Node.getNodeDevice');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="pysocialsim.common.p2p.topology.graph.node.Node-class.html#getNodeDevice">getNodeDevice</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">nodeDeviceType</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Node.getNodeDevice-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Node.getNodeDevice-expanded"><a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line"><tt class="py-docstring">        Gets a node device.</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line"><tt class="py-docstring">        @param nodeDeviceType: the type of node device</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line"><tt class="py-docstring">        @type nodeDeviceType: int</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">        <tt class="py-name">requires</tt><tt class="py-op">(</tt><tt class="py-name">nodeDeviceType</tt><tt class="py-op">,</tt> <tt class="py-name">int</tt><tt class="py-op">)</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">         </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">        <tt class="py-name">pre_condition</tt><tt class="py-op">(</tt><tt class="py-name">nodeDeviceType</tt><tt class="py-op">,</tt> <tt class="py-keyword">lambda</tt> <tt class="py-name">x</tt><tt class="py-op">:</tt> <tt class="py-name">x</tt> <tt class="py-op">&lt;&gt;</tt> <tt class="py-name">None</tt><tt class="py-op">)</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">        <tt class="py-name">pre_condition</tt><tt class="py-op">(</tt><tt class="py-name">nodeDeviceType</tt><tt class="py-op">,</tt> <tt class="py-keyword">lambda</tt> <tt class="py-name">x</tt><tt class="py-op">:</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__devices</tt><tt class="py-op">.</tt><tt class="py-name">has_key</tt><tt class="py-op">(</tt><tt class="py-name">x</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">         </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">returns</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__devices</tt><tt class="py-op">[</tt><tt class="py-name">nodeDeviceType</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt id="link-21" class="py-name"><a title="pysocialsim.common.p2p.topology.graph.i_node_device.INodeDevice" class="py-name" href="#" onclick="return doclink('link-21', 'INodeDevice', 'link-8');">INodeDevice</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">     </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">public</tt> </tt>
+<a name="Node.getNodeDevices"></a><div id="Node.getNodeDevices-def"><a name="L93"></a><tt class="py-lineno"> 93</tt> <a class="py-toggle" href="#" id="Node.getNodeDevices-toggle" onclick="return toggle('Node.getNodeDevices');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="pysocialsim.common.p2p.topology.graph.node.Node-class.html#getNodeDevices">getNodeDevices</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Node.getNodeDevices-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Node.getNodeDevices-expanded"><a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line"><tt class="py-docstring">        Gets the list of node devices</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line"><tt class="py-docstring">        @return: an list</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line"><tt class="py-docstring">        @rtype: list</tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__devices</tt><tt class="py-op">.</tt><tt class="py-name">itervalues</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line">     </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">public</tt> </tt>
+<a name="Node.countNodeDevices"></a><div id="Node.countNodeDevices-def"><a name="L102"></a><tt class="py-lineno">102</tt> <a class="py-toggle" href="#" id="Node.countNodeDevices-toggle" onclick="return toggle('Node.countNodeDevices');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="pysocialsim.common.p2p.topology.graph.node.Node-class.html#countNodeDevices">countNodeDevices</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Node.countNodeDevices-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Node.countNodeDevices-expanded"><a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line"><tt class="py-docstring">        Counts the number of node devices.</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line"><tt class="py-docstring">        @return: a int</tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line"><tt class="py-docstring">        @rtype: int</tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__devices</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line">     </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">public</tt> </tt>
+<a name="Node.getPeerToPeerTopology"></a><div id="Node.getPeerToPeerTopology-def"><a name="L111"></a><tt class="py-lineno">111</tt> <a class="py-toggle" href="#" id="Node.getPeerToPeerTopology-toggle" onclick="return toggle('Node.getPeerToPeerTopology');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="pysocialsim.common.p2p.topology.graph.node.Node-class.html#getPeerToPeerTopology">getPeerToPeerTopology</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Node.getPeerToPeerTopology-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Node.getPeerToPeerTopology-expanded"><a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line"><tt class="py-docstring">        Gets the peer-to-peer topology</tt> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line"><tt class="py-docstring">        @return: a IPeerToPeerTopology</tt> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line"><tt class="py-docstring">        @rtype: IPeerToPeerTopology</tt> </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">returns</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__topology</tt><tt class="py-op">,</tt> <tt id="link-22" class="py-name"><a title="pysocialsim.common.p2p.topology.i_peer_to_peer_topology.IPeerToPeerTopology" class="py-name" href="#" onclick="return doclink('link-22', 'IPeerToPeerTopology', 'link-3');">IPeerToPeerTopology</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line">     </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">public</tt> </tt>
+<a name="Node.input"></a><div id="Node.input-def"><a name="L120"></a><tt class="py-lineno">120</tt> <a class="py-toggle" href="#" id="Node.input-toggle" onclick="return toggle('Node.input');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="pysocialsim.common.p2p.topology.graph.node.Node-class.html#input">input</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">nodeDeviceType</tt><tt class="py-op">,</tt> <tt class="py-param">data</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Node.input-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Node.input-expanded"><a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line">        <tt class="py-name">requires</tt><tt class="py-op">(</tt><tt class="py-name">nodeDeviceType</tt><tt class="py-op">,</tt> <tt class="py-name">int</tt><tt class="py-op">)</tt> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line">         </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line">        <tt class="py-name">pre_condition</tt><tt class="py-op">(</tt><tt class="py-name">nodeDeviceType</tt><tt class="py-op">,</tt> <tt class="py-keyword">lambda</tt> <tt class="py-name">x</tt><tt class="py-op">:</tt> <tt class="py-name">x</tt> <tt class="py-op">&lt;&gt;</tt> <tt class="py-name">None</tt><tt class="py-op">)</tt> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line">        <tt class="py-name">pre_condition</tt><tt class="py-op">(</tt><tt class="py-name">data</tt><tt class="py-op">,</tt> <tt class="py-keyword">lambda</tt> <tt class="py-name">x</tt><tt class="py-op">:</tt> <tt class="py-name">x</tt> <tt class="py-op">&lt;&gt;</tt> <tt class="py-name">None</tt><tt class="py-op">)</tt> </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line">         </tt>
+<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__devices</tt><tt class="py-op">.</tt><tt class="py-name">has_key</tt><tt class="py-op">(</tt><tt class="py-name">nodeDeviceType</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt id="link-23" class="py-name"><a title="pysocialsim.common.error.io_error" class="py-name" href="#" onclick="return doclink('link-23', 'io_error', 'link-6');">io_error</a></tt><tt class="py-op">.</tt><tt id="link-24" class="py-name" targets="Class pysocialsim.common.error.io_error.IOError=pysocialsim.common.error.io_error.IOError-class.html"><a title="pysocialsim.common.error.io_error.IOError" class="py-name" href="#" onclick="return doclink('link-24', 'IOError', 'link-24');">IOError</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line">         </tt>
+<a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__devices</tt><tt class="py-op">[</tt><tt class="py-name">nodeDeviceType</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt id="link-25" class="py-name" targets="Method pysocialsim.common.p2p.topology.graph.i_node_device.INodeDevice.input()=pysocialsim.common.p2p.topology.graph.i_node_device.INodeDevice-class.html#input,Method pysocialsim.common.p2p.topology.graph.node.Node.input()=pysocialsim.common.p2p.topology.graph.node.Node-class.html#input"><a title="pysocialsim.common.p2p.topology.graph.i_node_device.INodeDevice.input
+pysocialsim.common.p2p.topology.graph.node.Node.input" class="py-name" href="#" onclick="return doclink('link-25', 'input', 'link-25');">input</a></tt><tt class="py-op">(</tt><tt class="py-name">data</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line">     </tt>
+<a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">public</tt> </tt>
+<a name="Node.output"></a><div id="Node.output-def"><a name="L132"></a><tt class="py-lineno">132</tt> <a class="py-toggle" href="#" id="Node.output-toggle" onclick="return toggle('Node.output');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="pysocialsim.common.p2p.topology.graph.node.Node-class.html#output">output</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">nodeDeviceType</tt><tt class="py-op">,</tt> <tt class="py-param">data</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Node.output-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Node.output-expanded"><a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line">        <tt class="py-name">requires</tt><tt class="py-op">(</tt><tt class="py-name">nodeDeviceType</tt><tt class="py-op">,</tt> <tt class="py-name">int</tt><tt class="py-op">)</tt> </tt>
+<a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line">         </tt>
+<a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line">        <tt class="py-name">pre_condition</tt><tt class="py-op">(</tt><tt class="py-name">nodeDeviceType</tt><tt class="py-op">,</tt> <tt class="py-keyword">lambda</tt> <tt class="py-name">x</tt><tt class="py-op">:</tt> <tt class="py-name">x</tt> <tt class="py-op">&lt;&gt;</tt> <tt class="py-name">None</tt><tt class="py-op">)</tt> </tt>
+<a name="L136"></a><tt class="py-lineno">136</tt>  <tt class="py-line">        <tt class="py-name">pre_condition</tt><tt class="py-op">(</tt><tt class="py-name">data</tt><tt class="py-op">,</tt> <tt class="py-keyword">lambda</tt> <tt class="py-name">x</tt><tt class="py-op">:</tt> <tt class="py-name">x</tt> <tt class="py-op">&lt;&gt;</tt> <tt class="py-name">None</tt><tt class="py-op">)</tt> </tt>
+<a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line">         </tt>
+<a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__devices</tt><tt class="py-op">.</tt><tt class="py-name">has_key</tt><tt class="py-op">(</tt><tt class="py-name">nodeDeviceType</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt id="link-26" class="py-name"><a title="pysocialsim.common.error.io_error" class="py-name" href="#" onclick="return doclink('link-26', 'io_error', 'link-6');">io_error</a></tt><tt class="py-op">.</tt><tt id="link-27" class="py-name"><a title="pysocialsim.common.error.io_error.IOError" class="py-name" href="#" onclick="return doclink('link-27', 'IOError', 'link-24');">IOError</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line">         </tt>
+<a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__devices</tt><tt class="py-op">[</tt><tt class="py-name">nodeDeviceType</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt id="link-28" class="py-name" targets="Method pysocialsim.common.p2p.topology.graph.i_node_device.INodeDevice.output()=pysocialsim.common.p2p.topology.graph.i_node_device.INodeDevice-class.html#output,Method pysocialsim.common.p2p.topology.graph.node.Node.output()=pysocialsim.common.p2p.topology.graph.node.Node-class.html#output"><a title="pysocialsim.common.p2p.topology.graph.i_node_device.INodeDevice.output
+pysocialsim.common.p2p.topology.graph.node.Node.output" class="py-name" href="#" onclick="return doclink('link-28', 'output', 'link-28');">output</a></tt><tt class="py-op">(</tt><tt class="py-name">data</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://code.google.com/p/pysocialsim/">PySocialSim</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Fri Sep 18 16:45:13 2009
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

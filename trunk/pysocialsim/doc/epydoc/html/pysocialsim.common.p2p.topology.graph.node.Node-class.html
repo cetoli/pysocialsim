@@ -3,7 +3,7 @@
           "DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>pysocialsim.common.simulator.event.priority_queue.PriorityQueue</title>
+  <title>pysocialsim.common.p2p.topology.graph.node.Node</title>
   <link rel="stylesheet" href="epydoc.css" type="text/css" />
   <script type="text/javascript" src="epydoc.js"></script>
 </head>
@@ -41,10 +41,11 @@
       <span class="breadcrumbs">
         Package&nbsp;pysocialsim ::
         Package&nbsp;common ::
-        Package&nbsp;simulator ::
-        Package&nbsp;event ::
-        <a href="pysocialsim.common.simulator.event.priority_queue-module.html">Module&nbsp;priority_queue</a> ::
-        Class&nbsp;PriorityQueue
+        Package&nbsp;p2p ::
+        Package&nbsp;topology ::
+        Package&nbsp;graph ::
+        <a href="pysocialsim.common.p2p.topology.graph.node-module.html">Module&nbsp;node</a> ::
+        Class&nbsp;Node
       </span>
     </td>
     <td>
@@ -54,24 +55,24 @@
     onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
         <tr><td align="right"><span class="options"
             >[<a href="frames.html" target="_top">frames</a
-            >]&nbsp;|&nbsp;<a href="pysocialsim.common.simulator.event.priority_queue.PriorityQueue-class.html"
+            >]&nbsp;|&nbsp;<a href="pysocialsim.common.p2p.topology.graph.node.Node-class.html"
             target="_top">no&nbsp;frames</a>]</span></td></tr>
       </table>
     </td>
   </tr>
 </table>
 <!-- ==================== CLASS DESCRIPTION ==================== -->
-<h1 class="epydoc">Class PriorityQueue</h1><p class="nomargin-top"><span class="codelink"><a href="pysocialsim.common.simulator.event.priority_queue-pysrc.html#PriorityQueue">source&nbsp;code</a></span></p>
+<h1 class="epydoc">Class Node</h1><p class="nomargin-top"><span class="codelink"><a href="pysocialsim.common.p2p.topology.graph.node-pysrc.html#Node">source&nbsp;code</a></span></p>
 <pre class="base-tree">
         object --+    
                  |    
 <a href="pysocialsim.common.base.object.Object-class.html">base.object.Object</a> --+
                      |
-                    <strong class="uidshort">PriorityQueue</strong>
+                    <strong class="uidshort">Node</strong>
 </pre>
 
 <hr />
-<p>Implements a synchronized priority queue of simulation event.</p>
+<p>Defines the implementation of network node.</p>
 
 <hr />
 <div class="fields">      <p><strong>Author:</strong>
@@ -84,7 +85,7 @@
         fbarros@gmail.com
       </p>
       <p><strong>Since:</strong>
-        27/08/2009
+        18/09/2009
       </p>
 </div><!-- ==================== INSTANCE METHODS ==================== -->
 <a name="section-InstanceMethods"></a>
@@ -105,101 +106,15 @@
 </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">None</span>
+      <span class="summary-type">NoneType</span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="pysocialsim.common.simulator.event.priority_queue.PriorityQueue-class.html#initialize" class="summary-sig-name">initialize</a>(<span class="summary-sig-arg">self</span>)</span><br />
-      Initializes an object.</td>
+          <td><span class="summary-sig"><a href="pysocialsim.common.p2p.topology.graph.node.Node-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">topology</span>)</span><br />
+      Constructor of Node class</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="pysocialsim.common.simulator.event.priority_queue-pysrc.html#PriorityQueue.initialize">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">ISimulationEvent</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a href="pysocialsim.common.simulator.event.priority_queue.PriorityQueue-class.html#enqueue" class="summary-sig-name">enqueue</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">item</span>,
-        <span class="summary-sig-arg">priority</span>)</span><br />
-      Enqueues a simulation event.</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="pysocialsim.common.simulator.event.priority_queue-pysrc.html#PriorityQueue.enqueue">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">ISimulationEvent</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a href="pysocialsim.common.simulator.event.priority_queue.PriorityQueue-class.html#dequeue" class="summary-sig-name">dequeue</a>(<span class="summary-sig-arg">self</span>)</span><br />
-      Dequeues a simulation event.</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="pysocialsim.common.simulator.event.priority_queue-pysrc.html#PriorityQueue.dequeue">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">int</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a href="pysocialsim.common.simulator.event.priority_queue.PriorityQueue-class.html#size" class="summary-sig-name">size</a>(<span class="summary-sig-arg">self</span>)</span><br />
-      Returns the size of queue.</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="pysocialsim.common.simulator.event.priority_queue-pysrc.html#PriorityQueue.size">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">ISimulationEvent</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a href="pysocialsim.common.simulator.event.priority_queue.PriorityQueue-class.html#getFirst" class="summary-sig-name">getFirst</a>(<span class="summary-sig-arg">self</span>)</span><br />
-      Gets the first simulation event of queue.</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="pysocialsim.common.simulator.event.priority_queue-pysrc.html#PriorityQueue.getFirst">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">ISimulationEvent</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a href="pysocialsim.common.simulator.event.priority_queue.PriorityQueue-class.html#getLast" class="summary-sig-name">getLast</a>(<span class="summary-sig-arg">self</span>)</span><br />
-      Gets the first simulation event of queue.</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="pysocialsim.common.simulator.event.priority_queue-pysrc.html#PriorityQueue.getLast">source&nbsp;code</a></span>
+            <span class="codelink"><a href="pysocialsim.common.p2p.topology.graph.node-pysrc.html#Node.__init__">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -213,10 +128,152 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="pysocialsim.common.simulator.event.priority_queue.PriorityQueue-class.html#clear" class="summary-sig-name">clear</a>(<span class="summary-sig-arg">self</span>)</span><br />
-      Clean the queue of simulation events.</td>
+          <td><span class="summary-sig"><a href="pysocialsim.common.p2p.topology.graph.node.Node-class.html#initialize" class="summary-sig-name">initialize</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">topology</span>)</span><br />
+      Initializes the object</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="pysocialsim.common.simulator.event.priority_queue-pysrc.html#PriorityQueue.clear">source&nbsp;code</a></span>
+            <span class="codelink"><a href="pysocialsim.common.p2p.topology.graph.node-pysrc.html#Node.initialize">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">INodeDevice</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pysocialsim.common.p2p.topology.graph.node.Node-class.html#addNodeDevice" class="summary-sig-name">addNodeDevice</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">nodeDevice</span>)</span><br />
+      Adds a node device.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pysocialsim.common.p2p.topology.graph.node-pysrc.html#Node.addNodeDevice">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">INodeDevice</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pysocialsim.common.p2p.topology.graph.node.Node-class.html#removeNodeDevice" class="summary-sig-name">removeNodeDevice</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">nodeDevice</span>)</span><br />
+      Removes a node device.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pysocialsim.common.p2p.topology.graph.node-pysrc.html#Node.removeNodeDevice">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pysocialsim.common.p2p.topology.graph.node.Node-class.html#getNodeDevice" class="summary-sig-name">getNodeDevice</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">nodeDeviceType</span>)</span><br />
+      Gets a node device.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pysocialsim.common.p2p.topology.graph.node-pysrc.html#Node.getNodeDevice">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">list</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pysocialsim.common.p2p.topology.graph.node.Node-class.html#getNodeDevices" class="summary-sig-name">getNodeDevices</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Gets the list of node devices</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pysocialsim.common.p2p.topology.graph.node-pysrc.html#Node.getNodeDevices">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">int</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pysocialsim.common.p2p.topology.graph.node.Node-class.html#countNodeDevices" class="summary-sig-name">countNodeDevices</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Counts the number of node devices.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pysocialsim.common.p2p.topology.graph.node-pysrc.html#Node.countNodeDevices">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">IPeerToPeerTopology</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pysocialsim.common.p2p.topology.graph.node.Node-class.html#getPeerToPeerTopology" class="summary-sig-name">getPeerToPeerTopology</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Gets the peer-to-peer topology</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pysocialsim.common.p2p.topology.graph.node-pysrc.html#Node.getPeerToPeerTopology">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pysocialsim.common.p2p.topology.graph.node.Node-class.html#input" class="summary-sig-name">input</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">nodeDeviceType</span>,
+        <span class="summary-sig-arg">data</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pysocialsim.common.p2p.topology.graph.node-pysrc.html#Node.input">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pysocialsim.common.p2p.topology.graph.node.Node-class.html#output" class="summary-sig-name">output</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">nodeDeviceType</span>,
+        <span class="summary-sig-arg">data</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pysocialsim.common.p2p.topology.graph.node-pysrc.html#Node.output">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -241,25 +298,6 @@
 <tr bgcolor="#e8f0f8" >
   <th colspan="2" class="group-header"
     >&nbsp;&nbsp;&nbsp;&nbsp;Inherited from <a href="pysocialsim.common.base.object.Object-class.html">base.object.Object</a></th></tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a href="pysocialsim.common.base.object.Object-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">*args</span>,
-        <span class="summary-sig-arg">**kwargs</span>)</span><br />
-      x.__init__(...) initializes x; see x.__class__.__doc__ for signature</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="pysocialsim.common.base.object-pysrc.html#Object.__init__">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">Object</span>
@@ -318,6 +356,52 @@
     </td>
   </tr>
 </table>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="PROCESSOR"></a><span class="summary-name">PROCESSOR</span> = <code title="0">0</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="DISK"></a><span class="summary-name">DISK</span> = <code title="1">1</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="NETWORK_ADAPTER"></a><span class="summary-name">NETWORK_ADAPTER</span> = <code title="2">2</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="__public__"></a><span class="summary-name">__public__</span> = <code title="['PROCESSOR', 'DISK', 'NETWORK_ADAPTER']"><code class="variable-group">[</code><code class="variable-quote">'</code><code class="variable-string">PROCESSOR</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">DISK</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">NETWORK_ADAPTER</code><code class="variable-quote">'</code><code class="variable-group">]</code></code>
+    </td>
+  </tr>
+</table>
 <!-- ==================== PROPERTIES ==================== -->
 <a name="section-Properties"></a>
 <table class="summary" border="1" cellpadding="3"
@@ -361,6 +445,35 @@
   </td>
 </tr>
 </table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">topology</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pysocialsim.common.p2p.topology.graph.node-pysrc.html#Node.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Constructor of Node class</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>topology</code></strong> (IPeerToPeerTopology) - an IPeerToPeerTopology</li>
+    </ul></dd>
+    <dt>Returns: NoneType</dt>
+    <dt>Overrides:
+        object.__init__
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
 <a name="initialize"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
@@ -368,54 +481,50 @@
 <tr><td>
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">initialize</span>(<span class="sig-arg">self</span>)</span>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">initialize</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">topology</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="pysocialsim.common.simulator.event.priority_queue-pysrc.html#PriorityQueue.initialize">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="pysocialsim.common.p2p.topology.graph.node-pysrc.html#Node.initialize">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
-  <p>Initializes an object.</p>
+  <p>Initializes the object</p>
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>args</code></strong> - function's list of arguments</li>
-        <li><strong class="pname"><code>kwargs</code></strong> - parameter names</li>
+        <li><strong class="pname"><code>topology</code></strong> (IPeerToPeerTopology) - an IPeerToPeerTopology</li>
     </ul></dd>
-    <dt>Returns: None</dt>
+    <dt>Returns: NoneType</dt>
         <dd>Returns an object created by function.</dd>
     <dt>Overrides:
         <a href="pysocialsim.common.base.object.Object-class.html#initialize">base.object.Object.initialize</a>
-        <dd><em class="note">(inherited documentation)</em></dd>
     </dt>
   </dl>
 </td></tr></table>
 </div>
-<a name="enqueue"></a>
+<a name="addNodeDevice"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">enqueue</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">item</span>,
-        <span class="sig-arg">priority</span>)</span>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">addNodeDevice</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">nodeDevice</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="pysocialsim.common.simulator.event.priority_queue-pysrc.html#PriorityQueue.enqueue">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="pysocialsim.common.p2p.topology.graph.node-pysrc.html#Node.addNodeDevice">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
-  <p>Enqueues a simulation event.</p>
+  <p>Adds a node device.</p>
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>item</code></strong> (ISimulationEvent) - an ISimulationEvent</li>
-        <li><strong class="pname"><code>priority</code></strong> (int) - a int</li>
+        <li><strong class="pname"><code>nodeDevice</code></strong> - INodeDevice</li>
     </ul></dd>
-    <dt>Returns: ISimulationEvent</dt>
-        <dd>an ISimulationEvent</dd>
+    <dt>Returns: INodeDevice</dt>
     <dt>Decorators:</dt>
     <dd><ul class="nomargin-top">
         <li><code>@public</code></li>
@@ -423,24 +532,28 @@
   </dl>
 </td></tr></table>
 </div>
-<a name="dequeue"></a>
+<a name="removeNodeDevice"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">dequeue</span>(<span class="sig-arg">self</span>)</span>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">removeNodeDevice</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">nodeDevice</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="pysocialsim.common.simulator.event.priority_queue-pysrc.html#PriorityQueue.dequeue">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="pysocialsim.common.p2p.topology.graph.node-pysrc.html#Node.removeNodeDevice">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
-  <p>Dequeues a simulation event.</p>
+  <p>Removes a node device.</p>
   <dl class="fields">
-    <dt>Returns: ISimulationEvent</dt>
-        <dd>an ISimulationEvent</dd>
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>nodeDevice</code></strong> - INodeDevice</li>
+    </ul></dd>
+    <dt>Returns: INodeDevice</dt>
     <dt>Decorators:</dt>
     <dd><ul class="nomargin-top">
         <li><code>@public</code></li>
@@ -448,24 +561,77 @@
   </dl>
 </td></tr></table>
 </div>
-<a name="size"></a>
+<a name="getNodeDevice"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">size</span>(<span class="sig-arg">self</span>)</span>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getNodeDevice</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">nodeDeviceType</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="pysocialsim.common.simulator.event.priority_queue-pysrc.html#PriorityQueue.size">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="pysocialsim.common.p2p.topology.graph.node-pysrc.html#Node.getNodeDevice">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
-  <p>Returns the size of queue.</p>
+  <p>Gets a node device.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>nodeDeviceType</code></strong> (int) - the type of node device</li>
+    </ul></dd>
+    <dt>Decorators:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code>@public</code></li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="getNodeDevices"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getNodeDevices</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pysocialsim.common.p2p.topology.graph.node-pysrc.html#Node.getNodeDevices">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Gets the list of node devices</p>
+  <dl class="fields">
+    <dt>Returns: list</dt>
+        <dd>an list</dd>
+    <dt>Decorators:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code>@public</code></li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="countNodeDevices"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">countNodeDevices</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pysocialsim.common.p2p.topology.graph.node-pysrc.html#Node.countNodeDevices">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Counts the number of node devices.</p>
   <dl class="fields">
     <dt>Returns: int</dt>
-        <dd>an int</dd>
+        <dd>a int</dd>
     <dt>Decorators:</dt>
     <dd><ul class="nomargin-top">
         <li><code>@public</code></li>
@@ -473,24 +639,24 @@
   </dl>
 </td></tr></table>
 </div>
-<a name="getFirst"></a>
+<a name="getPeerToPeerTopology"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">getFirst</span>(<span class="sig-arg">self</span>)</span>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getPeerToPeerTopology</span>(<span class="sig-arg">self</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="pysocialsim.common.simulator.event.priority_queue-pysrc.html#PriorityQueue.getFirst">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="pysocialsim.common.p2p.topology.graph.node-pysrc.html#Node.getPeerToPeerTopology">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
-  <p>Gets the first simulation event of queue.</p>
+  <p>Gets the peer-to-peer topology</p>
   <dl class="fields">
-    <dt>Returns: ISimulationEvent</dt>
-        <dd>an ISimulationEvent</dd>
+    <dt>Returns: IPeerToPeerTopology</dt>
+        <dd>a IPeerToPeerTopology</dd>
     <dt>Decorators:</dt>
     <dd><ul class="nomargin-top">
         <li><code>@public</code></li>
@@ -498,24 +664,24 @@
   </dl>
 </td></tr></table>
 </div>
-<a name="getLast"></a>
+<a name="input"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">getLast</span>(<span class="sig-arg">self</span>)</span>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">input</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">nodeDeviceType</span>,
+        <span class="sig-arg">data</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="pysocialsim.common.simulator.event.priority_queue-pysrc.html#PriorityQueue.getLast">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="pysocialsim.common.p2p.topology.graph.node-pysrc.html#Node.input">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
-  <p>Gets the first simulation event of queue.</p>
+  
   <dl class="fields">
-    <dt>Returns: ISimulationEvent</dt>
-        <dd>an ISimulationEvent</dd>
     <dt>Decorators:</dt>
     <dd><ul class="nomargin-top">
         <li><code>@public</code></li>
@@ -523,23 +689,24 @@
   </dl>
 </td></tr></table>
 </div>
-<a name="clear"></a>
+<a name="output"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">clear</span>(<span class="sig-arg">self</span>)</span>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">output</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">nodeDeviceType</span>,
+        <span class="sig-arg">data</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="pysocialsim.common.simulator.event.priority_queue-pysrc.html#PriorityQueue.clear">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="pysocialsim.common.p2p.topology.graph.node-pysrc.html#Node.output">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
-  <p>Clean the queue of simulation events.</p>
+  
   <dl class="fields">
-    <dt>Returns: NoneType</dt>
     <dt>Decorators:</dt>
     <dd><ul class="nomargin-top">
         <li><code>@public</code></li>

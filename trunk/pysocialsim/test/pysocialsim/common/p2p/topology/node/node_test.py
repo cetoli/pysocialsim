@@ -6,12 +6,12 @@ Defines the module with the unit test of Node class.
 @contact: fbarros@gmail.com 
 @since: 18/09/2009
 """
-from pysocialsim.common.p2p.topology.node.node import Node
 from pysocialsim.common.p2p.topology.i_peer_to_peer_topology import IPeerToPeerTopology
 from pysocialsim.common.error.invalid_value_error import InvalidValueError
-from pysocialsim.common.p2p.topology.node.i_node_device import INodeDevice
 from pymockobject.events import ReturnValue
 from pysocialsim.common.error import io_error
+from pysocialsim.common.p2p.topology.graph.node import Node
+from pysocialsim.common.p2p.topology.graph.i_node_device import INodeDevice
 import pymockobject
 
 import unittest

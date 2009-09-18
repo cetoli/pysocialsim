@@ -3,7 +3,7 @@
           "DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>pysocialsim.common.p2p.topology.i_peer_to_peer_topology.IPeerToPeerTopology</title>
+  <title>pysocialsim.common.p2p.topology.graph.i_node_device.INodeDevice</title>
   <link rel="stylesheet" href="epydoc.css" type="text/css" />
   <script type="text/javascript" src="epydoc.js"></script>
 </head>
@@ -43,8 +43,9 @@
         Package&nbsp;common ::
         Package&nbsp;p2p ::
         Package&nbsp;topology ::
-        <a href="pysocialsim.common.p2p.topology.i_peer_to_peer_topology-module.html">Module&nbsp;i_peer_to_peer_topology</a> ::
-        Class&nbsp;IPeerToPeerTopology
+        Package&nbsp;graph ::
+        <a href="pysocialsim.common.p2p.topology.graph.i_node_device-module.html">Module&nbsp;i_node_device</a> ::
+        Class&nbsp;INodeDevice
       </span>
     </td>
     <td>
@@ -54,28 +55,22 @@
     onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
         <tr><td align="right"><span class="options"
             >[<a href="frames.html" target="_top">frames</a
-            >]&nbsp;|&nbsp;<a href="pysocialsim.common.p2p.topology.i_peer_to_peer_topology.IPeerToPeerTopology-class.html"
+            >]&nbsp;|&nbsp;<a href="pysocialsim.common.p2p.topology.graph.i_node_device.INodeDevice-class.html"
             target="_top">no&nbsp;frames</a>]</span></td></tr>
       </table>
     </td>
   </tr>
 </table>
 <!-- ==================== CLASS DESCRIPTION ==================== -->
-<h1 class="epydoc">Class IPeerToPeerTopology</h1><p class="nomargin-top"><span class="codelink"><a href="pysocialsim.common.p2p.topology.i_peer_to_peer_topology-pysrc.html#IPeerToPeerTopology">source&nbsp;code</a></span></p>
+<h1 class="epydoc">Class INodeDevice</h1><p class="nomargin-top"><span class="codelink"><a href="pysocialsim.common.p2p.topology.graph.i_node_device-pysrc.html#INodeDevice">source&nbsp;code</a></span></p>
 <pre class="base-tree">
 object --+
          |
-        <strong class="uidshort">IPeerToPeerTopology</strong>
+        <strong class="uidshort">INodeDevice</strong>
 </pre>
 
-<dl><dt>Known Subclasses:</dt>
-<dd>
-      <ul class="subclass-list">
-<li><a href="pysocialsim.common.p2p.topology.abstract_peer_to_peer_topology.AbstractPeerToPeerTopology-class.html">abstract_peer_to_peer_topology.AbstractPeerToPeerTopology</a></li>  </ul>
-</dd></dl>
-
 <hr />
-<p>Defines the operations of peer-to-peer topology.</p>
+<p>Defines common operations of node devices.</p>
 
 <hr />
 <div class="fields">      <p><strong>Author:</strong>
@@ -88,7 +83,7 @@ object --+
         fbarros@gmail.com
       </p>
       <p><strong>Since:</strong>
-        15/09/2009
+        18/09/2009
       </p>
 </div><!-- ==================== INSTANCE METHODS ==================== -->
 <a name="section-InstanceMethods"></a>
@@ -113,10 +108,10 @@ object --+
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="pysocialsim.common.p2p.topology.i_peer_to_peer_topology.IPeerToPeerTopology-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>)</span><br />
+          <td><span class="summary-sig"><a href="pysocialsim.common.p2p.topology.graph.i_node_device.INodeDevice-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>)</span><br />
       x.__init__(...) initializes x; see x.__class__.__doc__ for signature</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="pysocialsim.common.p2p.topology.i_peer_to_peer_topology-pysrc.html#IPeerToPeerTopology.__init__">source&nbsp;code</a></span>
+            <span class="codelink"><a href="pysocialsim.common.p2p.topology.graph.i_node_device-pysrc.html#INodeDevice.__init__">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -126,16 +121,14 @@ object --+
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">bool</span>
+      <span class="summary-type">int</span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="pysocialsim.common.p2p.topology.i_peer_to_peer_topology.IPeerToPeerTopology-class.html#addEdge" class="summary-sig-name">addEdge</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">sourceId</span>,
-        <span class="summary-sig-arg">targetId</span>)</span><br />
-      Creates a connection between two peers.</td>
+          <td><span class="summary-sig"><a href="pysocialsim.common.p2p.topology.graph.i_node_device.INodeDevice-class.html#getType" class="summary-sig-name">getType</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Gets the type of device</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="pysocialsim.common.p2p.topology.i_peer_to_peer_topology-pysrc.html#IPeerToPeerTopology.addEdge">source&nbsp;code</a></span>
+            <span class="codelink"><a href="pysocialsim.common.p2p.topology.graph.i_node_device-pysrc.html#INodeDevice.getType">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -145,15 +138,14 @@ object --+
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">bool</span>
+      <span class="summary-type">float</span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="pysocialsim.common.p2p.topology.i_peer_to_peer_topology.IPeerToPeerTopology-class.html#addNode" class="summary-sig-name">addNode</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">nodeId</span>)</span><br />
-      Adds a node in topology.</td>
+          <td><span class="summary-sig"><a href="pysocialsim.common.p2p.topology.graph.i_node_device.INodeDevice-class.html#getCapacity" class="summary-sig-name">getCapacity</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Gets the capacity of device.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="pysocialsim.common.p2p.topology.i_peer_to_peer_topology-pysrc.html#IPeerToPeerTopology.addNode">source&nbsp;code</a></span>
+            <span class="codelink"><a href="pysocialsim.common.p2p.topology.graph.i_node_device-pysrc.html#INodeDevice.getCapacity">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -163,15 +155,15 @@ object --+
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">Node</span>
+      <span class="summary-type">object</span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="pysocialsim.common.p2p.topology.i_peer_to_peer_topology.IPeerToPeerTopology-class.html#getNode" class="summary-sig-name">getNode</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">nodeId</span>)</span><br />
-      Gets a node in topology.</td>
+          <td><span class="summary-sig"><a href="pysocialsim.common.p2p.topology.graph.i_node_device.INodeDevice-class.html#input" class="summary-sig-name">input</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">data</span>)</span><br />
+      Inputs data in node device.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="pysocialsim.common.p2p.topology.i_peer_to_peer_topology-pysrc.html#IPeerToPeerTopology.getNode">source&nbsp;code</a></span>
+            <span class="codelink"><a href="pysocialsim.common.p2p.topology.graph.i_node_device-pysrc.html#INodeDevice.input">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -181,14 +173,15 @@ object --+
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">IPeerToPeerNetwork</span>
+      <span class="summary-type">object</span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="pysocialsim.common.p2p.topology.i_peer_to_peer_topology.IPeerToPeerTopology-class.html#getPeerToPeerNetwork" class="summary-sig-name">getPeerToPeerNetwork</a>(<span class="summary-sig-arg">self</span>)</span><br />
-      Gets the peer-to-peer network.</td>
+          <td><span class="summary-sig"><a href="pysocialsim.common.p2p.topology.graph.i_node_device.INodeDevice-class.html#output" class="summary-sig-name">output</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">data</span>)</span><br />
+      Outputs data in node device.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="pysocialsim.common.p2p.topology.i_peer_to_peer_topology-pysrc.html#IPeerToPeerTopology.getPeerToPeerNetwork">source&nbsp;code</a></span>
+            <span class="codelink"><a href="pysocialsim.common.p2p.topology.graph.i_node_device-pysrc.html#INodeDevice.output">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -198,16 +191,14 @@ object --+
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">bool</span>
+      <span class="summary-type">float</span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="pysocialsim.common.p2p.topology.i_peer_to_peer_topology.IPeerToPeerTopology-class.html#removeEdge" class="summary-sig-name">removeEdge</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">sourceId</span>,
-        <span class="summary-sig-arg">targetId</span>)</span><br />
-      Removes a connection between two peers.</td>
+          <td><span class="summary-sig"><a href="pysocialsim.common.p2p.topology.graph.i_node_device.INodeDevice-class.html#getUsedCapacity" class="summary-sig-name">getUsedCapacity</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Gets the used capacity of device.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="pysocialsim.common.p2p.topology.i_peer_to_peer_topology-pysrc.html#IPeerToPeerTopology.removeEdge">source&nbsp;code</a></span>
+            <span class="codelink"><a href="pysocialsim.common.p2p.topology.graph.i_node_device-pysrc.html#INodeDevice.getUsedCapacity">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -217,15 +208,14 @@ object --+
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">bool</span>
+      <span class="summary-type">float</span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="pysocialsim.common.p2p.topology.i_peer_to_peer_topology.IPeerToPeerTopology-class.html#removeNode" class="summary-sig-name">removeNode</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">nodeId</span>)</span><br />
-      Adds a node in topology.</td>
+          <td><span class="summary-sig"><a href="pysocialsim.common.p2p.topology.graph.i_node_device.INodeDevice-class.html#getFreeCapacity" class="summary-sig-name">getFreeCapacity</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Gets the free capacity of device.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="pysocialsim.common.p2p.topology.i_peer_to_peer_topology-pysrc.html#IPeerToPeerTopology.removeNode">source&nbsp;code</a></span>
+            <span class="codelink"><a href="pysocialsim.common.p2p.topology.graph.i_node_device-pysrc.html#INodeDevice.getFreeCapacity">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -235,15 +225,31 @@ object --+
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">IPeerToPeerNetwork</span>
+      <span class="summary-type">float</span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="pysocialsim.common.p2p.topology.i_peer_to_peer_topology.IPeerToPeerTopology-class.html#setPeerToPeerNetwork" class="summary-sig-name">setPeerToPeerNetwork</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">peerToPeerNetwork</span>)</span><br />
-      Sets the peer-to-peer network.</td>
+          <td><span class="summary-sig"><a href="pysocialsim.common.p2p.topology.graph.i_node_device.INodeDevice-class.html#getInputSpeed" class="summary-sig-name">getInputSpeed</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Gets the speed of data input</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="pysocialsim.common.p2p.topology.i_peer_to_peer_topology-pysrc.html#IPeerToPeerTopology.setPeerToPeerNetwork">source&nbsp;code</a></span>
+            <span class="codelink"><a href="pysocialsim.common.p2p.topology.graph.i_node_device-pysrc.html#INodeDevice.getInputSpeed">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">float</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pysocialsim.common.p2p.topology.graph.i_node_device.INodeDevice-class.html#getOutputSpeed" class="summary-sig-name">getOutputSpeed</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Gets the speed of data output</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pysocialsim.common.p2p.topology.graph.i_node_device-pysrc.html#INodeDevice.getOutputSpeed">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -321,7 +327,7 @@ object --+
     <br /><em class="fname">(Constructor)</em>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="pysocialsim.common.p2p.topology.i_peer_to_peer_topology-pysrc.html#IPeerToPeerTopology.__init__">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="pysocialsim.common.p2p.topology.graph.i_node_device-pysrc.html#INodeDevice.__init__">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
@@ -335,184 +341,181 @@ object --+
   </dl>
 </td></tr></table>
 </div>
-<a name="addEdge"></a>
+<a name="getType"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">addEdge</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">sourceId</span>,
-        <span class="sig-arg">targetId</span>)</span>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getType</span>(<span class="sig-arg">self</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="pysocialsim.common.p2p.topology.i_peer_to_peer_topology-pysrc.html#IPeerToPeerTopology.addEdge">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="pysocialsim.common.p2p.topology.graph.i_node_device-pysrc.html#INodeDevice.getType">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
-  <p>Creates a connection between two peers.</p>
+  <p>Gets the type of device</p>
   <dl class="fields">
-    <dt>Parameters:</dt>
-    <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>sourceId</code></strong> (int) - the identifier of source peer</li>
-        <li><strong class="pname"><code>targetId</code></strong> (int) - the identifier of target peer</li>
-    </ul></dd>
-    <dt>Returns: bool</dt>
-        <dd>If connection was created, returns True. Else, returns False.</dd>
+    <dt>Returns: int</dt>
+        <dd>an int</dd>
   </dl>
 </td></tr></table>
 </div>
-<a name="addNode"></a>
+<a name="getCapacity"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">addNode</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">nodeId</span>)</span>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getCapacity</span>(<span class="sig-arg">self</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="pysocialsim.common.p2p.topology.i_peer_to_peer_topology-pysrc.html#IPeerToPeerTopology.addNode">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="pysocialsim.common.p2p.topology.graph.i_node_device-pysrc.html#INodeDevice.getCapacity">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
-  <p>Adds a node in topology.</p>
+  <p>Gets the capacity of device.</p>
   <dl class="fields">
-    <dt>Parameters:</dt>
-    <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>nodeId</code></strong> (int) - the node identifier</li>
-    </ul></dd>
-    <dt>Returns: bool</dt>
-        <dd>If node was registered, returns True, else returns False.</dd>
+    <dt>Returns: float</dt>
+        <dd>a float</dd>
   </dl>
 </td></tr></table>
 </div>
-<a name="getNode"></a>
+<a name="input"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">getNode</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">nodeId</span>)</span>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">input</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">data</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="pysocialsim.common.p2p.topology.i_peer_to_peer_topology-pysrc.html#IPeerToPeerTopology.getNode">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="pysocialsim.common.p2p.topology.graph.i_node_device-pysrc.html#INodeDevice.input">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
-  <p>Gets a node in topology.</p>
+  <p>Inputs data in node device.</p>
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>nodeId</code></strong> (int) - the node identifier</li>
+        <li><strong class="pname"><code>data</code></strong> - an object</li>
     </ul></dd>
-    <dt>Returns: Node</dt>
-        <dd>a Node</dd>
+    <dt>Returns: object</dt>
+        <dd>an object</dd>
   </dl>
 </td></tr></table>
 </div>
-<a name="getPeerToPeerNetwork"></a>
+<a name="output"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">getPeerToPeerNetwork</span>(<span class="sig-arg">self</span>)</span>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">output</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">data</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="pysocialsim.common.p2p.topology.i_peer_to_peer_topology-pysrc.html#IPeerToPeerTopology.getPeerToPeerNetwork">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="pysocialsim.common.p2p.topology.graph.i_node_device-pysrc.html#INodeDevice.output">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
-  <p>Gets the peer-to-peer network.</p>
-  <dl class="fields">
-    <dt>Returns: IPeerToPeerNetwork</dt>
-        <dd>an IPeerToPeerNetwork</dd>
-  </dl>
-</td></tr></table>
-</div>
-<a name="removeEdge"></a>
-<div>
-<table class="details" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr><td>
-  <table width="100%" cellpadding="0" cellspacing="0" border="0">
-  <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">removeEdge</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">sourceId</span>,
-        <span class="sig-arg">targetId</span>)</span>
-  </h3>
-  </td><td align="right" valign="top"
-    ><span class="codelink"><a href="pysocialsim.common.p2p.topology.i_peer_to_peer_topology-pysrc.html#IPeerToPeerTopology.removeEdge">source&nbsp;code</a></span>&nbsp;
-    </td>
-  </tr></table>
-  
-  <p>Removes a connection between two peers.</p>
+  <p>Outputs data in node device.</p>
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>sourceId</code></strong> (int) - the identifier of source peer</li>
-        <li><strong class="pname"><code>targetId</code></strong> (int) - the identifier of target peer</li>
+        <li><strong class="pname"><code>data</code></strong> - an object</li>
     </ul></dd>
-    <dt>Returns: bool</dt>
-        <dd>If connection was removed, returns True. Else, returns False.</dd>
+    <dt>Returns: object</dt>
+        <dd>an object</dd>
   </dl>
 </td></tr></table>
 </div>
-<a name="removeNode"></a>
+<a name="getUsedCapacity"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">removeNode</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">nodeId</span>)</span>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getUsedCapacity</span>(<span class="sig-arg">self</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="pysocialsim.common.p2p.topology.i_peer_to_peer_topology-pysrc.html#IPeerToPeerTopology.removeNode">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="pysocialsim.common.p2p.topology.graph.i_node_device-pysrc.html#INodeDevice.getUsedCapacity">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
-  <p>Adds a node in topology.</p>
+  <p>Gets the used capacity of device.</p>
   <dl class="fields">
-    <dt>Parameters:</dt>
-    <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>nodeId</code></strong> (int) - the node identifier</li>
-    </ul></dd>
-    <dt>Returns: bool</dt>
-        <dd>If node was removed, returns True, else returns False.</dd>
+    <dt>Returns: float</dt>
+        <dd>a float</dd>
   </dl>
 </td></tr></table>
 </div>
-<a name="setPeerToPeerNetwork"></a>
+<a name="getFreeCapacity"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">setPeerToPeerNetwork</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">peerToPeerNetwork</span>)</span>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getFreeCapacity</span>(<span class="sig-arg">self</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="pysocialsim.common.p2p.topology.i_peer_to_peer_topology-pysrc.html#IPeerToPeerTopology.setPeerToPeerNetwork">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="pysocialsim.common.p2p.topology.graph.i_node_device-pysrc.html#INodeDevice.getFreeCapacity">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
-  <p>Sets the peer-to-peer network.</p>
+  <p>Gets the free capacity of device.</p>
   <dl class="fields">
-    <dt>Parameters:</dt>
-    <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>peerToPeerNetwork</code></strong> (IPeerToPeerNetwork) - an IPeerToPeerNetwork</li>
-    </ul></dd>
-    <dt>Returns: IPeerToPeerNetwork</dt>
-        <dd>an IPeerToPeerNetwork</dd>
+    <dt>Returns: float</dt>
+        <dd>a float</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="getInputSpeed"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getInputSpeed</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pysocialsim.common.p2p.topology.graph.i_node_device-pysrc.html#INodeDevice.getInputSpeed">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Gets the speed of data input</p>
+  <dl class="fields">
+    <dt>Returns: float</dt>
+        <dd>a float</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="getOutputSpeed"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getOutputSpeed</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pysocialsim.common.p2p.topology.graph.i_node_device-pysrc.html#INodeDevice.getOutputSpeed">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Gets the speed of data output</p>
+  <dl class="fields">
+    <dt>Returns: float</dt>
+        <dd>a float</dd>
   </dl>
 </td></tr></table>
 </div>

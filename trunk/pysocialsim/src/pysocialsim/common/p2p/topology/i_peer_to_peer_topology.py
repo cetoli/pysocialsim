@@ -19,7 +19,7 @@ class IPeerToPeerTopology(object):
     def __init__(self):
         raise NotImplementedError()
     
-    def createConnection(self, sourceId, targetId):
+    def addEdge(self, sourceId, targetId):
         """
         Creates a connection between two peers.
         @param sourceId: the identifier of source peer
@@ -31,7 +31,7 @@ class IPeerToPeerTopology(object):
         """
         raise NotImplementedError()
     
-    def removeConnection(self, sourceId, targetId):
+    def removeEdge(self, sourceId, targetId):
         """
         Removes a connection between two peers.
         @param sourceId: the identifier of source peer
@@ -58,5 +58,35 @@ class IPeerToPeerTopology(object):
         Gets the peer-to-peer network.
         @return: an IPeerToPeerNetwork
         @rtype: IPeerToPeerNetwork
+        """
+        raise NotImplementedError()
+    
+    def addNode(self, nodeId):
+        """
+        Adds a node in topology.
+        @param nodeId: the node identifier
+        @type nodeId: int
+        @return: If node was registered, returns True, else returns False.
+        @rtype: bool
+        """
+        raise NotImplementedError()
+    
+    def removeNode(self, nodeId):
+        """
+        Adds a node in topology.
+        @param nodeId: the node identifier
+        @type nodeId: int
+        @return: If node was removed, returns True, else returns False.
+        @rtype: bool
+        """
+        raise NotImplementedError()
+    
+    def getNode(self, nodeId):
+        """
+        Gets a node in topology.
+        @param nodeId: the node identifier
+        @type nodeId: int
+        @return: a Node
+        @rtype: Node
         """
         raise NotImplementedError()

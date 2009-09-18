@@ -101,8 +101,7 @@ class Scheduler(Object):
         pre_condition(peerId, lambda x: x > 0)
 
         peers = self.__peerTimes[peerType]
-        if not peers.has_key(peerId):
-            raise InvalidValueError()
+        pre_condition(peerId, lambda x: peers.has_key(x))
         times = peers[peerId]
         return returns(times.pop(len(times) - 1), int)
         

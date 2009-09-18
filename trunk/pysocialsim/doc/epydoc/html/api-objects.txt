@@ -100,6 +100,7 @@ pysocialsim.common.p2p.topology.graph.node.Node.DISK	pysocialsim.common.p2p.topo
 pysocialsim.common.p2p.topology.graph.node.Node.PROCESSOR	pysocialsim.common.p2p.topology.graph.node.Node-class.html#PROCESSOR
 pysocialsim.common.p2p.topology.graph.node.Node.__init__	pysocialsim.common.p2p.topology.graph.node.Node-class.html#__init__
 pysocialsim.common.p2p.topology.graph.node.Node.__public__	pysocialsim.common.p2p.topology.graph.node.Node-class.html#__public__
+pysocialsim.common.p2p.topology.graph.node.Node.getId	pysocialsim.common.p2p.topology.graph.node.Node-class.html#getId
 pysocialsim.common.p2p.topology.graph.node.Node.getNodeDevices	pysocialsim.common.p2p.topology.graph.node.Node-class.html#getNodeDevices
 pysocialsim.common.p2p.topology.graph.node.Node.input	pysocialsim.common.p2p.topology.graph.node.Node-class.html#input
 pysocialsim.common.p2p.topology.graph.node.Node.removeNodeDevice	pysocialsim.common.p2p.topology.graph.node.Node-class.html#removeNodeDevice

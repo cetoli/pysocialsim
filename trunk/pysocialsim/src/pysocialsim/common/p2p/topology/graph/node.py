@@ -28,26 +28,35 @@ class Node(Object):
     
     __public__ = ["PROCESSOR", "DISK", "NETWORK_ADAPTER"]
     
-    def __init__(self, topology):
+    def __init__(self, id, topology):
         """
         Constructor of Node class
+        @param id: the node identifier
+        @type id: int
         @param topology: an IPeerToPeerTopology
         @type topology: IPeerToPeerTopology
         @rtype: NoneType
         """
-        self.initialize(topology)
+        self.initialize(id, topology)
     
-    def initialize(self, topology):
+    def initialize(self, id, topology):
         """
         Initializes the object
+        @param id: the node identifier
+        @type id: int
         @param topology: an IPeerToPeerTopology
         @type topology: IPeerToPeerTopology
         @rtype: NoneType
         """
         requires(topology, IPeerToPeerTopology)
+        self.__id = id
         self.__topology = topology
         self.__edges = {}
         self.__devices = {}
+    
+    @public
+    def getId(self):
+        return returns(self.__id, int)
     
     @public    
     def addNodeDevice(self, nodeDevice):

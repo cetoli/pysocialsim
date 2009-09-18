@@ -19,8 +19,8 @@ import unittest
 class NodeTest(unittest.TestCase):
     
     def testCreateClassInstance(self):
-        self.assertTrue(Node(pymockobject.create(IPeerToPeerTopology)))
-        node = Node(pymockobject.create(IPeerToPeerTopology))
+        self.assertTrue(Node(1, pymockobject.create(IPeerToPeerTopology)))
+        node = Node(1, pymockobject.create(IPeerToPeerTopology))
         self.assertEquals(0, node.countNodeDevices())
         self.assertTrue(node.getNodeDevices())
         self.assertRaises(InvalidValueError, node.getNodeDevice, Node.PROCESSOR)
@@ -34,7 +34,7 @@ class NodeTest(unittest.TestCase):
         self.assertRaises(TypeError, Node, False)
     
     def testAddNodeDevices(self):
-        node = Node(pymockobject.create(IPeerToPeerTopology))
+        node = Node(1, pymockobject.create(IPeerToPeerTopology))
         
         device = pymockobject.create(INodeDevice)
         device.getType.will(ReturnValue(Node.PROCESSOR))
@@ -69,7 +69,7 @@ class NodeTest(unittest.TestCase):
         self.assertRaises(InvalidValueError, node.addNodeDevice, None)
     
     def testRemoveNodeDevices(self):
-        node = Node(pymockobject.create(IPeerToPeerTopology))
+        node = Node(1, pymockobject.create(IPeerToPeerTopology))
         
         device = pymockobject.create(INodeDevice)
         device.getType.will(ReturnValue(Node.PROCESSOR))
@@ -111,7 +111,7 @@ class NodeTest(unittest.TestCase):
         self.assertTrue(node.getNodeDevices())
         
     def testInputData(self):
-        node = Node(pymockobject.create(IPeerToPeerTopology))
+        node = Node(1, pymockobject.create(IPeerToPeerTopology))
         
         self.assertRaises(io_error.IOError, node.input, Node.DISK, "teste")
         self.assertRaises(io_error.IOError, node.input, Node.NETWORK_ADAPTER, "message")
@@ -141,7 +141,7 @@ class NodeTest(unittest.TestCase):
         self.assertRaises(InvalidValueError, node.input, None, "TESTE")
 
     def testOutputData(self):
-        node = Node(pymockobject.create(IPeerToPeerTopology))
+        node = Node(1, pymockobject.create(IPeerToPeerTopology))
         
         self.assertRaises(io_error.IOError, node.output, Node.DISK, "teste")
         self.assertRaises(io_error.IOError, node.output, Node.NETWORK_ADAPTER, "message")
@@ -169,4 +169,3 @@ class NodeTest(unittest.TestCase):
         self.assertRaises(TypeError, node.output, "DISK", "TESTE")
         self.assertRaises(TypeError, node.output, 1.0, "TESTE")
         self.assertRaises(InvalidValueError, node.output, None, "TESTE")
-          

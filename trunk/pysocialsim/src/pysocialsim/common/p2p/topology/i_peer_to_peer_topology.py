@@ -6,8 +6,6 @@ Defines the module with the specification of IPeerToPeerTopology interface.
 @contact: fbarros@gmail.com 
 @since: 15/09/2009
 """
-from pysocialsim.common.util.rotines import requires, pre_condition
-
 class IPeerToPeerTopology(object):
     """
     Defines the operations of peer-to-peer topology.
@@ -137,5 +135,13 @@ class IPeerToPeerTopology(object):
         Counts the number of nodes.
         @return: an int
         @rtype: int
+        """
+        raise NotImplementedError()
+    
+    def getNeighbors(self, nodeId):
+        """
+        Gets the neighbors of node
+        @return: a list
+        @rtype: list
         """
         raise NotImplementedError()

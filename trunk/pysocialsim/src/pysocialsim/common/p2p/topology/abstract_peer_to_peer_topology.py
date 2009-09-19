@@ -157,3 +157,17 @@ class AbstractPeerToPeerTopology(Object, IPeerToPeerTopology):
         
         node = self.__graph[nodeId]
         return returns(node.countEdges(), int)
+    
+    @public
+    def getNeighbors(self, nodeId):
+        requires(nodeId, int)
+        
+        pre_condition(nodeId, lambda x: x > 0)
+        pre_condition(nodeId, lambda x: x <> None)
+        pre_condition(nodeId, lambda x: self.__graph.has_key(nodeId))
+        
+        neighbors = []
+        for edge in self.__graph[nodeId].getEdges():
+            neighbors.append(edge.getTargetNode())
+        
+        return neighbors.__iter__()

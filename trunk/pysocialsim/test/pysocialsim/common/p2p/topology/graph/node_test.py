@@ -12,6 +12,7 @@ from pymockobject.events import ReturnValue
 from pysocialsim.common.error import io_error
 from pysocialsim.common.p2p.topology.graph.node import Node
 from pysocialsim.common.p2p.topology.graph.i_node_device import INodeDevice
+from pysocialsim.common.p2p.topology.graph.edge import Edge
 import pymockobject
 
 import unittest
@@ -169,3 +170,66 @@ class NodeTest(unittest.TestCase):
         self.assertRaises(TypeError, node.output, "DISK", "TESTE")
         self.assertRaises(TypeError, node.output, 1.0, "TESTE")
         self.assertRaises(InvalidValueError, node.output, None, "TESTE")
+        
+    def testAddEdge(self):
+        node1 = Node(12, pymockobject.create(IPeerToPeerTopology))
+        node2 = Node(15, pymockobject.create(IPeerToPeerTopology))
+        
+        edge1 = Edge(node2)
+        self.assertTrue(node1.addEdge(edge1))
+        self.assertEquals(1, node1.countEdges())
+        self.assertEquals(edge1, node1.getEdge(15))
+        self.assertTrue(node1.getEdges())
+        
+        edge2 = Edge(node1)
+        self.assertTrue(node2.addEdge(edge2))
+        self.assertEquals(1, node2.countEdges())
+        self.assertEquals(edge2, node2.getEdge(12))
+        self.assertTrue(node2.getEdges())
+        
+        self.assertFalse(node1.addEdge(edge1))
+        self.assertFalse(node1.addEdge(edge2))
+        self.assertRaises(InvalidValueError, node1.getEdge, 12)
+        
+        self.assertFalse(node2.addEdge(edge2))
+        self.assertFalse(node2.addEdge(edge1))
+        self.assertRaises(InvalidValueError, node2.getEdge, 15)
+        
+        self.assertRaises(TypeError, node1.addEdge, "aaa")
+        self.assertRaises(TypeError, node1.addEdge, 1)
+        self.assertRaises(TypeError, node1.addEdge, 1.3)
+        self.assertRaises(TypeError, node1.addEdge, True)
+        self.assertRaises(TypeError, node1.addEdge, False)
+        
+    def testRemoveEdge(self):
+        node1 = Node(12, pymockobject.create(IPeerToPeerTopology))
+        node2 = Node(15, pymockobject.create(IPeerToPeerTopology))
+        
+        edge1 = Edge(node2)
+        self.assertTrue(node1.addEdge(edge1))
+        self.assertEquals(1, node1.countEdges())
+        self.assertEquals(edge1, node1.getEdge(15))
+        self.assertTrue(node1.getEdges())
+        
+        edge2 = Edge(node1)
+        self.assertTrue(node2.addEdge(edge2))
+        self.assertEquals(1, node2.countEdges())
+        self.assertEquals(edge2, node2.getEdge(12))
+        self.assertTrue(node2.getEdges())
+        
+        self.assertTrue(node1.removeEdge(edge1))
+        self.assertEquals(0, node1.countEdges())
+        self.assertRaises(InvalidValueError, node1.getEdge, 15)
+        
+        self.assertTrue(node2.removeEdge(edge2))
+        self.assertEquals(0, node2.countEdges())
+        self.assertRaises(InvalidValueError, node2.getEdge, 12)
+        
+        self.assertRaises(TypeError, node1.removeEdge, "edge")
+        self.assertRaises(TypeError, node1.removeEdge, 1)
+        self.assertRaises(TypeError, node1.removeEdge, 0.65)
+        self.assertRaises(TypeError, node1.removeEdge, True)
+        self.assertRaises(TypeError, node1.removeEdge, False)
+        
+        self.assertRaises(InvalidValueError, node1.removeEdge, None)
+        self.assertRaises(InvalidValueError, node1.output, None, "TESTE")

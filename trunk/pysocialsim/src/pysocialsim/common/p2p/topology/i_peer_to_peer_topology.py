@@ -6,6 +6,7 @@ Defines the module with the specification of IPeerToPeerTopology interface.
 @contact: fbarros@gmail.com 
 @since: 15/09/2009
 """
+from pysocialsim.common.util.rotines import requires, pre_condition
 
 class IPeerToPeerTopology(object):
     """
@@ -40,6 +41,38 @@ class IPeerToPeerTopology(object):
         @type targetId: int
         @return: If connection was removed, returns True. Else, returns False.
         @rtype: bool
+        """
+        raise NotImplementedError()
+    
+    def getEdge(self, sourceId, targetId):
+        """
+        Gets a edge.
+        @param sourceId: the identifier of source node
+        @type sourceId: int
+        @param targetId: the identifier of target node
+        @type targetId: int
+        @return: an IEdge
+        @rtype: IEdge
+        """
+        raise NotImplementedError()
+    
+    def getEdges(self, nodeId):
+        """
+        Gets the list of edges in node
+        @param nodeId: the identifier of node
+        @type nodeId: int
+        @return: a list
+        @rtype: list
+        """
+        raise NotImplementedError()
+    
+    def countEdges(self, nodeId):
+        """
+        Counts the number of edges in node
+        @param nodeId: the identifier of node
+        @type nodeId: int
+        @return: an int
+        @rtype: int
         """
         raise NotImplementedError()
     
@@ -88,5 +121,21 @@ class IPeerToPeerTopology(object):
         @type nodeId: int
         @return: a Node
         @rtype: Node
+        """
+        raise NotImplementedError()
+    
+    def getNodes(self):
+        """
+        Gets the list of node
+        @return: a list
+        @rtype: list
+        """
+        raise NotImplementedError()
+    
+    def countNodes(self):
+        """
+        Counts the number of nodes.
+        @return: an int
+        @rtype: int
         """
         raise NotImplementedError()

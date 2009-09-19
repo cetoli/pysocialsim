@@ -12,8 +12,10 @@ from pysocialsim.common.p2p.topology.i_peer_to_peer_topology import IPeerToPeerT
 from pysocialsim.common.base.decorators import public
 from pysocialsim.common.error import io_error
 from pysocialsim.common.p2p.topology.graph.i_node_device import INodeDevice
+from pysocialsim.common.p2p.topology.graph.i_edge import IEdge
+from pysocialsim.common.p2p.topology.graph.i_node import INode
 
-class Node(Object):
+class Node(Object, INode):
     """
     Defines the implementation of network node.
     @author: Fabricio
@@ -148,3 +150,47 @@ class Node(Object):
             raise io_error.IOError()
         
         return self.__devices[nodeDeviceType].output(data)
+    
+    @public
+    def addEdge(self, edge):
+        requires(edge, IEdge)
+        pre_condition(edge, lambda x: x <> None)
+        
+        if self.__edges.has_key(edge.getTargetNode().getId()):
+            return False
+        if self.__id == edge.getTargetNode().getId():
+            return False
+        self.__edges[edge.getTargetNode().getId()] = edge
+        return returns(self.__edges.has_key(edge.getTargetNode().getId()), bool)
+    
+    @public
+    def removeEdge(self, edge):
+        requires(edge, IEdge)
+        pre_condition(edge, lambda x: x <> None)
+        
+        if not self.__edges.has_key(edge.getTargetNode().getId()):
+            return False
+        del self.__edges[edge.getTargetNode().getId()]
+        return returns(not self.__edges.has_key(edge.getTargetNode().getId()), bool)
+    
+    @public
+    def getEdge(self, targetNodeId):
+        requires(targetNodeId, int)
+        
+        pre_condition(targetNodeId, lambda x: x <> None)
+        pre_condition(targetNodeId, lambda x: x > 0)
+        pre_condition(targetNodeId, lambda x: self.__edges.has_key(targetNodeId))
+        
+        return returns(self.__edges[targetNodeId], IEdge)
+    
+    @public
+    def getEdges(self):
+        return self.__edges.itervalues()
+    
+    @public
+    def countEdges(self):
+        return returns(len(self.__edges), int)
+    
+    @public
+    def hasEdge(self, targetNodeId):
+        return returns(self.__edges.has_key(targetNodeId), bool)

@@ -61,99 +61,154 @@
 </table>
 <h1 class="epydoc">Source Code for <a href="pysocialsim.common.p2p.topology.i_peer_to_peer_topology-module.html">Module pysocialsim.common.p2p.topology.i_peer_to_peer_topology</a></h1>
 <pre class="py-src">
-<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
-<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-docstring">Defines the module with the specification of IPeerToPeerTopology interface.</tt> </tt>
-<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-docstring">@author: Fabricio</tt> </tt>
-<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-docstring">@organization: Federal University of Rio de Janeiro</tt> </tt>
-<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"><tt class="py-docstring">@contact: fbarros@gmail.com </tt> </tt>
-<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"><tt class="py-docstring">@since: 15/09/2009</tt> </tt>
-<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
-<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"> </tt>
-<a name="IPeerToPeerTopology"></a><div id="IPeerToPeerTopology-def"><a name="L10"></a><tt class="py-lineno">10</tt> <a class="py-toggle" href="#" id="IPeerToPeerTopology-toggle" onclick="return toggle('IPeerToPeerTopology');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="pysocialsim.common.p2p.topology.i_peer_to_peer_topology.IPeerToPeerTopology-class.html">IPeerToPeerTopology</a><tt class="py-op">(</tt><tt class="py-base-class">object</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
-</div><div id="IPeerToPeerTopology-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="IPeerToPeerTopology-expanded"><a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
-<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"><tt class="py-docstring">    Defines the operations of peer-to-peer topology.</tt> </tt>
-<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line"><tt class="py-docstring">    @author: Fabricio</tt> </tt>
-<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line"><tt class="py-docstring">    @organization: Federal University of Rio de Janeiro</tt> </tt>
-<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line"><tt class="py-docstring">    @contact: fbarros@gmail.com </tt> </tt>
-<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line"><tt class="py-docstring">    @since: 15/09/2009</tt> </tt>
-<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
-<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line"> </tt>
-<a name="IPeerToPeerTopology.__init__"></a><div id="IPeerToPeerTopology.__init__-def"><a name="L19"></a><tt class="py-lineno">19</tt> <a class="py-toggle" href="#" id="IPeerToPeerTopology.__init__-toggle" onclick="return toggle('IPeerToPeerTopology.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="pysocialsim.common.p2p.topology.i_peer_to_peer_topology.IPeerToPeerTopology-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
-</div><div id="IPeerToPeerTopology.__init__-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="IPeerToPeerTopology.__init__-expanded"><a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line">        <tt class="py-keyword">raise</tt> <tt class="py-name">NotImplementedError</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
-</div><a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line">     </tt>
-<a name="IPeerToPeerTopology.addEdge"></a><div id="IPeerToPeerTopology.addEdge-def"><a name="L22"></a><tt class="py-lineno">22</tt> <a class="py-toggle" href="#" id="IPeerToPeerTopology.addEdge-toggle" onclick="return toggle('IPeerToPeerTopology.addEdge');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="pysocialsim.common.p2p.topology.i_peer_to_peer_topology.IPeerToPeerTopology-class.html#addEdge">addEdge</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">sourceId</tt><tt class="py-op">,</tt> <tt class="py-param">targetId</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
-</div><div id="IPeerToPeerTopology.addEdge-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="IPeerToPeerTopology.addEdge-expanded"><a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
-<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line"><tt class="py-docstring">        Creates a connection between two peers.</tt> </tt>
-<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line"><tt class="py-docstring">        @param sourceId: the identifier of source peer</tt> </tt>
-<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line"><tt class="py-docstring">        @type sourceId: int</tt> </tt>
-<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line"><tt class="py-docstring">        @param targetId: the identifier of target peer</tt> </tt>
-<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line"><tt class="py-docstring">        @type targetId: int</tt> </tt>
-<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line"><tt class="py-docstring">        @return: If connection was created, returns True. Else, returns False.</tt> </tt>
-<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line"><tt class="py-docstring">        @rtype: bool</tt> </tt>
-<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
-<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line">        <tt class="py-keyword">raise</tt> <tt class="py-name">NotImplementedError</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
-</div><a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line">     </tt>
-<a name="IPeerToPeerTopology.removeEdge"></a><div id="IPeerToPeerTopology.removeEdge-def"><a name="L34"></a><tt class="py-lineno">34</tt> <a class="py-toggle" href="#" id="IPeerToPeerTopology.removeEdge-toggle" onclick="return toggle('IPeerToPeerTopology.removeEdge');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="pysocialsim.common.p2p.topology.i_peer_to_peer_topology.IPeerToPeerTopology-class.html#removeEdge">removeEdge</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">sourceId</tt><tt class="py-op">,</tt> <tt class="py-param">targetId</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
-</div><div id="IPeerToPeerTopology.removeEdge-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="IPeerToPeerTopology.removeEdge-expanded"><a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
-<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line"><tt class="py-docstring">        Removes a connection between two peers.</tt> </tt>
-<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line"><tt class="py-docstring">        @param sourceId: the identifier of source peer</tt> </tt>
-<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line"><tt class="py-docstring">        @type sourceId: int</tt> </tt>
-<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line"><tt class="py-docstring">        @param targetId: the identifier of target peer</tt> </tt>
-<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line"><tt class="py-docstring">        @type targetId: int</tt> </tt>
-<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line"><tt class="py-docstring">        @return: If connection was removed, returns True. Else, returns False.</tt> </tt>
-<a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line"><tt class="py-docstring">        @rtype: bool</tt> </tt>
-<a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
-<a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line">        <tt class="py-keyword">raise</tt> <tt class="py-name">NotImplementedError</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
-</div><a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line">     </tt>
-<a name="IPeerToPeerTopology.setPeerToPeerNetwork"></a><div id="IPeerToPeerTopology.setPeerToPeerNetwork-def"><a name="L46"></a><tt class="py-lineno">46</tt> <a class="py-toggle" href="#" id="IPeerToPeerTopology.setPeerToPeerNetwork-toggle" onclick="return toggle('IPeerToPeerTopology.setPeerToPeerNetwork');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="pysocialsim.common.p2p.topology.i_peer_to_peer_topology.IPeerToPeerTopology-class.html#setPeerToPeerNetwork">setPeerToPeerNetwork</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">peerToPeerNetwork</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
-</div><div id="IPeerToPeerTopology.setPeerToPeerNetwork-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="IPeerToPeerTopology.setPeerToPeerNetwork-expanded"><a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
-<a name="L48"></a><tt class="py-lineno">48</tt>  <tt class="py-line"><tt class="py-docstring">        Sets the peer-to-peer network.</tt> </tt>
-<a name="L49"></a><tt class="py-lineno">49</tt>  <tt class="py-line"><tt class="py-docstring">        @param peerToPeerNetwork: an IPeerToPeerNetwork</tt> </tt>
-<a name="L50"></a><tt class="py-lineno">50</tt>  <tt class="py-line"><tt class="py-docstring">        @type peerToPeerNetwork: IPeerToPeerNetwork</tt> </tt>
-<a name="L51"></a><tt class="py-lineno">51</tt>  <tt class="py-line"><tt class="py-docstring">        @return: an IPeerToPeerNetwork</tt> </tt>
-<a name="L52"></a><tt class="py-lineno">52</tt>  <tt class="py-line"><tt class="py-docstring">        @rtype: IPeerToPeerNetwork</tt> </tt>
-<a name="L53"></a><tt class="py-lineno">53</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
-<a name="L54"></a><tt class="py-lineno">54</tt>  <tt class="py-line">        <tt class="py-keyword">raise</tt> <tt class="py-name">NotImplementedError</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
-</div><a name="L55"></a><tt class="py-lineno">55</tt>  <tt class="py-line">     </tt>
-<a name="IPeerToPeerTopology.getPeerToPeerNetwork"></a><div id="IPeerToPeerTopology.getPeerToPeerNetwork-def"><a name="L56"></a><tt class="py-lineno">56</tt> <a class="py-toggle" href="#" id="IPeerToPeerTopology.getPeerToPeerNetwork-toggle" onclick="return toggle('IPeerToPeerTopology.getPeerToPeerNetwork');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="pysocialsim.common.p2p.topology.i_peer_to_peer_topology.IPeerToPeerTopology-class.html#getPeerToPeerNetwork">getPeerToPeerNetwork</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
-</div><div id="IPeerToPeerTopology.getPeerToPeerNetwork-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="IPeerToPeerTopology.getPeerToPeerNetwork-expanded"><a name="L57"></a><tt class="py-lineno">57</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
-<a name="L58"></a><tt class="py-lineno">58</tt>  <tt class="py-line"><tt class="py-docstring">        Gets the peer-to-peer network.</tt> </tt>
-<a name="L59"></a><tt class="py-lineno">59</tt>  <tt class="py-line"><tt class="py-docstring">        @return: an IPeerToPeerNetwork</tt> </tt>
-<a name="L60"></a><tt class="py-lineno">60</tt>  <tt class="py-line"><tt class="py-docstring">        @rtype: IPeerToPeerNetwork</tt> </tt>
-<a name="L61"></a><tt class="py-lineno">61</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
-<a name="L62"></a><tt class="py-lineno">62</tt>  <tt class="py-line">        <tt class="py-keyword">raise</tt> <tt class="py-name">NotImplementedError</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
-</div><a name="L63"></a><tt class="py-lineno">63</tt>  <tt class="py-line">     </tt>
-<a name="IPeerToPeerTopology.addNode"></a><div id="IPeerToPeerTopology.addNode-def"><a name="L64"></a><tt class="py-lineno">64</tt> <a class="py-toggle" href="#" id="IPeerToPeerTopology.addNode-toggle" onclick="return toggle('IPeerToPeerTopology.addNode');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="pysocialsim.common.p2p.topology.i_peer_to_peer_topology.IPeerToPeerTopology-class.html#addNode">addNode</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">nodeId</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
-</div><div id="IPeerToPeerTopology.addNode-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="IPeerToPeerTopology.addNode-expanded"><a name="L65"></a><tt class="py-lineno">65</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
-<a name="L66"></a><tt class="py-lineno">66</tt>  <tt class="py-line"><tt class="py-docstring">        Adds a node in topology.</tt> </tt>
-<a name="L67"></a><tt class="py-lineno">67</tt>  <tt class="py-line"><tt class="py-docstring">        @param nodeId: the node identifier</tt> </tt>
-<a name="L68"></a><tt class="py-lineno">68</tt>  <tt class="py-line"><tt class="py-docstring">        @type nodeId: int</tt> </tt>
-<a name="L69"></a><tt class="py-lineno">69</tt>  <tt class="py-line"><tt class="py-docstring">        @return: If node was registered, returns True, else returns False.</tt> </tt>
-<a name="L70"></a><tt class="py-lineno">70</tt>  <tt class="py-line"><tt class="py-docstring">        @rtype: bool</tt> </tt>
-<a name="L71"></a><tt class="py-lineno">71</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
-<a name="L72"></a><tt class="py-lineno">72</tt>  <tt class="py-line">        <tt class="py-keyword">raise</tt> <tt class="py-name">NotImplementedError</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
-</div><a name="L73"></a><tt class="py-lineno">73</tt>  <tt class="py-line">     </tt>
-<a name="IPeerToPeerTopology.removeNode"></a><div id="IPeerToPeerTopology.removeNode-def"><a name="L74"></a><tt class="py-lineno">74</tt> <a class="py-toggle" href="#" id="IPeerToPeerTopology.removeNode-toggle" onclick="return toggle('IPeerToPeerTopology.removeNode');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="pysocialsim.common.p2p.topology.i_peer_to_peer_topology.IPeerToPeerTopology-class.html#removeNode">removeNode</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">nodeId</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
-</div><div id="IPeerToPeerTopology.removeNode-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="IPeerToPeerTopology.removeNode-expanded"><a name="L75"></a><tt class="py-lineno">75</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
-<a name="L76"></a><tt class="py-lineno">76</tt>  <tt class="py-line"><tt class="py-docstring">        Adds a node in topology.</tt> </tt>
-<a name="L77"></a><tt class="py-lineno">77</tt>  <tt class="py-line"><tt class="py-docstring">        @param nodeId: the node identifier</tt> </tt>
-<a name="L78"></a><tt class="py-lineno">78</tt>  <tt class="py-line"><tt class="py-docstring">        @type nodeId: int</tt> </tt>
-<a name="L79"></a><tt class="py-lineno">79</tt>  <tt class="py-line"><tt class="py-docstring">        @return: If node was removed, returns True, else returns False.</tt> </tt>
-<a name="L80"></a><tt class="py-lineno">80</tt>  <tt class="py-line"><tt class="py-docstring">        @rtype: bool</tt> </tt>
-<a name="L81"></a><tt class="py-lineno">81</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
-<a name="L82"></a><tt class="py-lineno">82</tt>  <tt class="py-line">        <tt class="py-keyword">raise</tt> <tt class="py-name">NotImplementedError</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
-</div><a name="L83"></a><tt class="py-lineno">83</tt>  <tt class="py-line">     </tt>
-<a name="IPeerToPeerTopology.getNode"></a><div id="IPeerToPeerTopology.getNode-def"><a name="L84"></a><tt class="py-lineno">84</tt> <a class="py-toggle" href="#" id="IPeerToPeerTopology.getNode-toggle" onclick="return toggle('IPeerToPeerTopology.getNode');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="pysocialsim.common.p2p.topology.i_peer_to_peer_topology.IPeerToPeerTopology-class.html#getNode">getNode</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">nodeId</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
-</div><div id="IPeerToPeerTopology.getNode-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="IPeerToPeerTopology.getNode-expanded"><a name="L85"></a><tt class="py-lineno">85</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
-<a name="L86"></a><tt class="py-lineno">86</tt>  <tt class="py-line"><tt class="py-docstring">        Gets a node in topology.</tt> </tt>
-<a name="L87"></a><tt class="py-lineno">87</tt>  <tt class="py-line"><tt class="py-docstring">        @param nodeId: the node identifier</tt> </tt>
-<a name="L88"></a><tt class="py-lineno">88</tt>  <tt class="py-line"><tt class="py-docstring">        @type nodeId: int</tt> </tt>
-<a name="L89"></a><tt class="py-lineno">89</tt>  <tt class="py-line"><tt class="py-docstring">        @return: a Node</tt> </tt>
-<a name="L90"></a><tt class="py-lineno">90</tt>  <tt class="py-line"><tt class="py-docstring">        @rtype: Node</tt> </tt>
-<a name="L91"></a><tt class="py-lineno">91</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
-<a name="L92"></a><tt class="py-lineno">92</tt>  <tt class="py-line">        <tt class="py-keyword">raise</tt> <tt class="py-name">NotImplementedError</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
-</div></div><a name="L93"></a><tt class="py-lineno">93</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-docstring">Defines the module with the specification of IPeerToPeerTopology interface.</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-docstring">@author: Fabricio</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-docstring">@organization: Federal University of Rio de Janeiro</tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-docstring">@contact: fbarros@gmail.com </tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-docstring">@since: 15/09/2009</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="IPeerToPeerTopology"></a><div id="IPeerToPeerTopology-def"><a name="L9"></a><tt class="py-lineno">  9</tt> <a class="py-toggle" href="#" id="IPeerToPeerTopology-toggle" onclick="return toggle('IPeerToPeerTopology');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="pysocialsim.common.p2p.topology.i_peer_to_peer_topology.IPeerToPeerTopology-class.html">IPeerToPeerTopology</a><tt class="py-op">(</tt><tt class="py-base-class">object</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="IPeerToPeerTopology-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="IPeerToPeerTopology-expanded"><a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line">    <tt class="py-docstring">"""</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-docstring">    Defines the operations of peer-to-peer topology.</tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-docstring">    @author: Fabricio</tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-docstring">    @organization: Federal University of Rio de Janeiro</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-docstring">    @contact: fbarros@gmail.com </tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-docstring">    @since: 15/09/2009</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"> </tt>
+<a name="IPeerToPeerTopology.__init__"></a><div id="IPeerToPeerTopology.__init__-def"><a name="L18"></a><tt class="py-lineno"> 18</tt> <a class="py-toggle" href="#" id="IPeerToPeerTopology.__init__-toggle" onclick="return toggle('IPeerToPeerTopology.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="pysocialsim.common.p2p.topology.i_peer_to_peer_topology.IPeerToPeerTopology-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="IPeerToPeerTopology.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="IPeerToPeerTopology.__init__-expanded"><a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line">        <tt class="py-keyword">raise</tt> <tt class="py-name">NotImplementedError</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line">     </tt>
+<a name="IPeerToPeerTopology.addEdge"></a><div id="IPeerToPeerTopology.addEdge-def"><a name="L21"></a><tt class="py-lineno"> 21</tt> <a class="py-toggle" href="#" id="IPeerToPeerTopology.addEdge-toggle" onclick="return toggle('IPeerToPeerTopology.addEdge');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="pysocialsim.common.p2p.topology.i_peer_to_peer_topology.IPeerToPeerTopology-class.html#addEdge">addEdge</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">sourceId</tt><tt class="py-op">,</tt> <tt class="py-param">targetId</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="IPeerToPeerTopology.addEdge-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="IPeerToPeerTopology.addEdge-expanded"><a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line"><tt class="py-docstring">        Creates a connection between two peers.</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line"><tt class="py-docstring">        @param sourceId: the identifier of source peer</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line"><tt class="py-docstring">        @type sourceId: int</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line"><tt class="py-docstring">        @param targetId: the identifier of target peer</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line"><tt class="py-docstring">        @type targetId: int</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line"><tt class="py-docstring">        @return: If connection was created, returns True. Else, returns False.</tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line"><tt class="py-docstring">        @rtype: bool</tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line">        <tt class="py-keyword">raise</tt> <tt class="py-name">NotImplementedError</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line">     </tt>
+<a name="IPeerToPeerTopology.removeEdge"></a><div id="IPeerToPeerTopology.removeEdge-def"><a name="L33"></a><tt class="py-lineno"> 33</tt> <a class="py-toggle" href="#" id="IPeerToPeerTopology.removeEdge-toggle" onclick="return toggle('IPeerToPeerTopology.removeEdge');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="pysocialsim.common.p2p.topology.i_peer_to_peer_topology.IPeerToPeerTopology-class.html#removeEdge">removeEdge</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">sourceId</tt><tt class="py-op">,</tt> <tt class="py-param">targetId</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="IPeerToPeerTopology.removeEdge-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="IPeerToPeerTopology.removeEdge-expanded"><a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line"><tt class="py-docstring">        Removes a connection between two peers.</tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line"><tt class="py-docstring">        @param sourceId: the identifier of source peer</tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line"><tt class="py-docstring">        @type sourceId: int</tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line"><tt class="py-docstring">        @param targetId: the identifier of target peer</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line"><tt class="py-docstring">        @type targetId: int</tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line"><tt class="py-docstring">        @return: If connection was removed, returns True. Else, returns False.</tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line"><tt class="py-docstring">        @rtype: bool</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line">        <tt class="py-keyword">raise</tt> <tt class="py-name">NotImplementedError</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line">     </tt>
+<a name="IPeerToPeerTopology.getEdge"></a><div id="IPeerToPeerTopology.getEdge-def"><a name="L45"></a><tt class="py-lineno"> 45</tt> <a class="py-toggle" href="#" id="IPeerToPeerTopology.getEdge-toggle" onclick="return toggle('IPeerToPeerTopology.getEdge');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="pysocialsim.common.p2p.topology.i_peer_to_peer_topology.IPeerToPeerTopology-class.html#getEdge">getEdge</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">sourceId</tt><tt class="py-op">,</tt> <tt class="py-param">targetId</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="IPeerToPeerTopology.getEdge-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="IPeerToPeerTopology.getEdge-expanded"><a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line"><tt class="py-docstring">        Gets a edge.</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line"><tt class="py-docstring">        @param sourceId: the identifier of source node</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line"><tt class="py-docstring">        @type sourceId: int</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line"><tt class="py-docstring">        @param targetId: the identifier of target node</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line"><tt class="py-docstring">        @type targetId: int</tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line"><tt class="py-docstring">        @return: an IEdge</tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line"><tt class="py-docstring">        @rtype: IEdge</tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line">        <tt class="py-keyword">raise</tt> <tt class="py-name">NotImplementedError</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line">     </tt>
+<a name="IPeerToPeerTopology.getEdges"></a><div id="IPeerToPeerTopology.getEdges-def"><a name="L57"></a><tt class="py-lineno"> 57</tt> <a class="py-toggle" href="#" id="IPeerToPeerTopology.getEdges-toggle" onclick="return toggle('IPeerToPeerTopology.getEdges');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="pysocialsim.common.p2p.topology.i_peer_to_peer_topology.IPeerToPeerTopology-class.html#getEdges">getEdges</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">nodeId</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="IPeerToPeerTopology.getEdges-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="IPeerToPeerTopology.getEdges-expanded"><a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line"><tt class="py-docstring">        Gets the list of edges in node</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line"><tt class="py-docstring">        @param nodeId: the identifier of node</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line"><tt class="py-docstring">        @type nodeId: int</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line"><tt class="py-docstring">        @return: a list</tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line"><tt class="py-docstring">        @rtype: list</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line">        <tt class="py-keyword">raise</tt> <tt class="py-name">NotImplementedError</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line">     </tt>
+<a name="IPeerToPeerTopology.countEdges"></a><div id="IPeerToPeerTopology.countEdges-def"><a name="L67"></a><tt class="py-lineno"> 67</tt> <a class="py-toggle" href="#" id="IPeerToPeerTopology.countEdges-toggle" onclick="return toggle('IPeerToPeerTopology.countEdges');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="pysocialsim.common.p2p.topology.i_peer_to_peer_topology.IPeerToPeerTopology-class.html#countEdges">countEdges</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">nodeId</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="IPeerToPeerTopology.countEdges-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="IPeerToPeerTopology.countEdges-expanded"><a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line"><tt class="py-docstring">        Counts the number of edges in node</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line"><tt class="py-docstring">        @param nodeId: the identifier of node</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line"><tt class="py-docstring">        @type nodeId: int</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line"><tt class="py-docstring">        @return: an int</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line"><tt class="py-docstring">        @rtype: int</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">        <tt class="py-keyword">raise</tt> <tt class="py-name">NotImplementedError</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">     </tt>
+<a name="IPeerToPeerTopology.setPeerToPeerNetwork"></a><div id="IPeerToPeerTopology.setPeerToPeerNetwork-def"><a name="L77"></a><tt class="py-lineno"> 77</tt> <a class="py-toggle" href="#" id="IPeerToPeerTopology.setPeerToPeerNetwork-toggle" onclick="return toggle('IPeerToPeerTopology.setPeerToPeerNetwork');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="pysocialsim.common.p2p.topology.i_peer_to_peer_topology.IPeerToPeerTopology-class.html#setPeerToPeerNetwork">setPeerToPeerNetwork</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">peerToPeerNetwork</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="IPeerToPeerTopology.setPeerToPeerNetwork-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="IPeerToPeerTopology.setPeerToPeerNetwork-expanded"><a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line"><tt class="py-docstring">        Sets the peer-to-peer network.</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line"><tt class="py-docstring">        @param peerToPeerNetwork: an IPeerToPeerNetwork</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line"><tt class="py-docstring">        @type peerToPeerNetwork: IPeerToPeerNetwork</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line"><tt class="py-docstring">        @return: an IPeerToPeerNetwork</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line"><tt class="py-docstring">        @rtype: IPeerToPeerNetwork</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">        <tt class="py-keyword">raise</tt> <tt class="py-name">NotImplementedError</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">     </tt>
+<a name="IPeerToPeerTopology.getPeerToPeerNetwork"></a><div id="IPeerToPeerTopology.getPeerToPeerNetwork-def"><a name="L87"></a><tt class="py-lineno"> 87</tt> <a class="py-toggle" href="#" id="IPeerToPeerTopology.getPeerToPeerNetwork-toggle" onclick="return toggle('IPeerToPeerTopology.getPeerToPeerNetwork');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="pysocialsim.common.p2p.topology.i_peer_to_peer_topology.IPeerToPeerTopology-class.html#getPeerToPeerNetwork">getPeerToPeerNetwork</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="IPeerToPeerTopology.getPeerToPeerNetwork-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="IPeerToPeerTopology.getPeerToPeerNetwork-expanded"><a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line"><tt class="py-docstring">        Gets the peer-to-peer network.</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line"><tt class="py-docstring">        @return: an IPeerToPeerNetwork</tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line"><tt class="py-docstring">        @rtype: IPeerToPeerNetwork</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">        <tt class="py-keyword">raise</tt> <tt class="py-name">NotImplementedError</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">     </tt>
+<a name="IPeerToPeerTopology.addNode"></a><div id="IPeerToPeerTopology.addNode-def"><a name="L95"></a><tt class="py-lineno"> 95</tt> <a class="py-toggle" href="#" id="IPeerToPeerTopology.addNode-toggle" onclick="return toggle('IPeerToPeerTopology.addNode');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="pysocialsim.common.p2p.topology.i_peer_to_peer_topology.IPeerToPeerTopology-class.html#addNode">addNode</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">nodeId</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="IPeerToPeerTopology.addNode-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="IPeerToPeerTopology.addNode-expanded"><a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line"><tt class="py-docstring">        Adds a node in topology.</tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line"><tt class="py-docstring">        @param nodeId: the node identifier</tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line"><tt class="py-docstring">        @type nodeId: int</tt> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line"><tt class="py-docstring">        @return: If node was registered, returns True, else returns False.</tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line"><tt class="py-docstring">        @rtype: bool</tt> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line">        <tt class="py-keyword">raise</tt> <tt class="py-name">NotImplementedError</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">     </tt>
+<a name="IPeerToPeerTopology.removeNode"></a><div id="IPeerToPeerTopology.removeNode-def"><a name="L105"></a><tt class="py-lineno">105</tt> <a class="py-toggle" href="#" id="IPeerToPeerTopology.removeNode-toggle" onclick="return toggle('IPeerToPeerTopology.removeNode');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="pysocialsim.common.p2p.topology.i_peer_to_peer_topology.IPeerToPeerTopology-class.html#removeNode">removeNode</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">nodeId</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="IPeerToPeerTopology.removeNode-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="IPeerToPeerTopology.removeNode-expanded"><a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line"><tt class="py-docstring">        Adds a node in topology.</tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line"><tt class="py-docstring">        @param nodeId: the node identifier</tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line"><tt class="py-docstring">        @type nodeId: int</tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line"><tt class="py-docstring">        @return: If node was removed, returns True, else returns False.</tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line"><tt class="py-docstring">        @rtype: bool</tt> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line">        <tt class="py-keyword">raise</tt> <tt class="py-name">NotImplementedError</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line">     </tt>
+<a name="IPeerToPeerTopology.getNode"></a><div id="IPeerToPeerTopology.getNode-def"><a name="L115"></a><tt class="py-lineno">115</tt> <a class="py-toggle" href="#" id="IPeerToPeerTopology.getNode-toggle" onclick="return toggle('IPeerToPeerTopology.getNode');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="pysocialsim.common.p2p.topology.i_peer_to_peer_topology.IPeerToPeerTopology-class.html#getNode">getNode</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">nodeId</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="IPeerToPeerTopology.getNode-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="IPeerToPeerTopology.getNode-expanded"><a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line"><tt class="py-docstring">        Gets a node in topology.</tt> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line"><tt class="py-docstring">        @param nodeId: the node identifier</tt> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line"><tt class="py-docstring">        @type nodeId: int</tt> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line"><tt class="py-docstring">        @return: a Node</tt> </tt>
+<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line"><tt class="py-docstring">        @rtype: Node</tt> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line">        <tt class="py-keyword">raise</tt> <tt class="py-name">NotImplementedError</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line">     </tt>
+<a name="IPeerToPeerTopology.getNodes"></a><div id="IPeerToPeerTopology.getNodes-def"><a name="L125"></a><tt class="py-lineno">125</tt> <a class="py-toggle" href="#" id="IPeerToPeerTopology.getNodes-toggle" onclick="return toggle('IPeerToPeerTopology.getNodes');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="pysocialsim.common.p2p.topology.i_peer_to_peer_topology.IPeerToPeerTopology-class.html#getNodes">getNodes</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="IPeerToPeerTopology.getNodes-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="IPeerToPeerTopology.getNodes-expanded"><a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
+<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line"><tt class="py-docstring">        Gets the list of node</tt> </tt>
+<a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line"><tt class="py-docstring">        @return: a list</tt> </tt>
+<a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line"><tt class="py-docstring">        @rtype: list</tt> </tt>
+<a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line">        <tt class="py-keyword">raise</tt> <tt class="py-name">NotImplementedError</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line">     </tt>
+<a name="IPeerToPeerTopology.countNodes"></a><div id="IPeerToPeerTopology.countNodes-def"><a name="L133"></a><tt class="py-lineno">133</tt> <a class="py-toggle" href="#" id="IPeerToPeerTopology.countNodes-toggle" onclick="return toggle('IPeerToPeerTopology.countNodes');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="pysocialsim.common.p2p.topology.i_peer_to_peer_topology.IPeerToPeerTopology-class.html#countNodes">countNodes</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="IPeerToPeerTopology.countNodes-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="IPeerToPeerTopology.countNodes-expanded"><a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
+<a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line"><tt class="py-docstring">        Counts the number of nodes.</tt> </tt>
+<a name="L136"></a><tt class="py-lineno">136</tt>  <tt class="py-line"><tt class="py-docstring">        @return: an int</tt> </tt>
+<a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line"><tt class="py-docstring">        @rtype: int</tt> </tt>
+<a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line">        <tt class="py-keyword">raise</tt> <tt class="py-name">NotImplementedError</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line">     </tt>
+<a name="IPeerToPeerTopology.getNeighbors"></a><div id="IPeerToPeerTopology.getNeighbors-def"><a name="L141"></a><tt class="py-lineno">141</tt> <a class="py-toggle" href="#" id="IPeerToPeerTopology.getNeighbors-toggle" onclick="return toggle('IPeerToPeerTopology.getNeighbors');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="pysocialsim.common.p2p.topology.i_peer_to_peer_topology.IPeerToPeerTopology-class.html#getNeighbors">getNeighbors</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">nodeId</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="IPeerToPeerTopology.getNeighbors-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="IPeerToPeerTopology.getNeighbors-expanded"><a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
+<a name="L143"></a><tt class="py-lineno">143</tt>  <tt class="py-line"><tt class="py-docstring">        Gets the neighbors of node</tt> </tt>
+<a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line"><tt class="py-docstring">        @return: a list</tt> </tt>
+<a name="L145"></a><tt class="py-lineno">145</tt>  <tt class="py-line"><tt class="py-docstring">        @rtype: list</tt> </tt>
+<a name="L146"></a><tt class="py-lineno">146</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L147"></a><tt class="py-lineno">147</tt>  <tt class="py-line">        <tt class="py-keyword">raise</tt> <tt class="py-name">NotImplementedError</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L148"></a><tt class="py-lineno">148</tt>  <tt class="py-line"> </tt><script type="text/javascript">
 <!--
 expandto(location.href);
 // -->
@@ -188,7 +243,7 @@ expandto(location.href);
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Fri Sep 18 16:54:36 2009
+    Generated by Epydoc 3.0.1 on Sat Sep 19 20:24:19 2009
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

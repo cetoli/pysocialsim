@@ -14,6 +14,7 @@ from pysocialsim.common.error import io_error
 from pysocialsim.common.p2p.topology.graph.i_node_device import INodeDevice
 from pysocialsim.common.p2p.topology.graph.i_edge import IEdge
 from pysocialsim.common.p2p.topology.graph.i_node import INode
+from pysocialsim.common.p2p.peer.i_peer import IPeer
 
 class Node(Object, INode):
     """
@@ -55,6 +56,7 @@ class Node(Object, INode):
         self.__topology = topology
         self.__edges = {}
         self.__devices = {}
+        self.__peer = None
     
     @public
     def getId(self):
@@ -194,3 +196,15 @@ class Node(Object, INode):
     @public
     def hasEdge(self, targetNodeId):
         return returns(self.__edges.has_key(targetNodeId), bool)
+    
+    @public
+    def setPeer(self, peer):
+        requires(peer, IPeer)
+        pre_condition(peer, lambda x: x <> None)
+        
+        self.__peer = peer
+        return returns(self.__peer, IPeer)
+    
+    @public
+    def getPeer(self):
+        return returns(self.__peer, IPeer)

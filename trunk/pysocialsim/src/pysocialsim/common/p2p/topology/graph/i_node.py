@@ -56,3 +56,9 @@ class INode(object):
     
     def hasEdge(self, targetNodeId):
         raise NotImplementedError()
+    
+    def setPeer(self, peer):
+        raise NotImplementedError()
+    
+    def getPeer(self):
+        raise NotImplementedError()

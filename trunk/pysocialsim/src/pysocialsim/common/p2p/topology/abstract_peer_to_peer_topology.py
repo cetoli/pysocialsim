@@ -15,6 +15,7 @@ from pysocialsim.common.p2p.topology.graph.node import Node
 from pysocialsim.common.p2p.topology.graph.i_node import INode
 from pysocialsim.common.p2p.topology.graph.edge import Edge
 from pysocialsim.common.p2p.topology.graph.i_edge import IEdge
+from threading import Semaphore
 
 class AbstractPeerToPeerTopology(Object, IPeerToPeerTopology):
     """
@@ -56,12 +57,15 @@ class AbstractPeerToPeerTopology(Object, IPeerToPeerTopology):
         pre_condition(sourceId, lambda x: self.__graph.has_key(sourceId))
         pre_condition(targetId, lambda x: self.__graph.has_key(targetId))
         
+        semaphore = Semaphore()
+        semaphore.acquire()
         node = self.__graph[sourceId]
         if node.hasEdge(targetId):
             return False
         targetNode = self.__graph[targetId]
         edge = Edge(targetNode)
         node.addEdge(edge)
+        semaphore.release()
         return returns(node.hasEdge(targetId), bool)
         
 
@@ -77,7 +81,11 @@ class AbstractPeerToPeerTopology(Object, IPeerToPeerTopology):
         pre_condition(sourceId, lambda x: self.__graph.has_key(sourceId))
         pre_condition(targetId, lambda x: self.__graph[sourceId].hasEdge(x))
         
-        return returns(self.__graph[sourceId].removeEdge(self.__graph[sourceId].getEdge(targetId)), bool)
+        semaphore = Semaphore()
+        semaphore.acquire()
+        rtrn = returns(self.__graph[sourceId].removeEdge(self.__graph[sourceId].getEdge(targetId)), bool)
+        semaphore.release()
+        return rtrn
         
     @public
     def addNode(self, nodeId):
@@ -86,10 +94,13 @@ class AbstractPeerToPeerTopology(Object, IPeerToPeerTopology):
         pre_condition(nodeId, lambda x: x > 0)
         pre_condition(nodeId, lambda x: x <> None)
         
+        semaphore = Semaphore()
+        semaphore.acquire()
         if self.__graph.has_key(nodeId):
             return False
         node = Node(nodeId, self)
         self.__graph[node.getId()] = node
+        semaphore.release()
         return returns(self.__graph.has_key(node.getId()), bool)
 
     @public
@@ -99,10 +110,13 @@ class AbstractPeerToPeerTopology(Object, IPeerToPeerTopology):
         pre_condition(nodeId, lambda x: x > 0)
         pre_condition(nodeId, lambda x: x <> None)
         
+        semaphore = Semaphore()
+        semaphore.acquire()
         if not self.__graph.has_key(nodeId):
             return False
         
         del self.__graph[nodeId]
+        semaphore.release()
         return returns(not self.__graph.has_key(nodeId), bool)
 
     @public
@@ -113,16 +127,27 @@ class AbstractPeerToPeerTopology(Object, IPeerToPeerTopology):
         pre_condition(nodeId, lambda x: x <> None)
         pre_condition(nodeId, lambda x: self.__graph.has_key(nodeId))
         
-        return returns(self.__graph[nodeId], INode)
+        semaphore = Semaphore()
+        semaphore.acquire()
+        rtnr = returns(self.__graph[nodeId], INode)
+        semaphore.release()
+        return rtnr
 
     @public
     def getNodes(self):
-        return self.__graph.itervalues()
+        semaphore = Semaphore()
+        semaphore.acquire()
+        rtrn = self.__graph.itervalues()
+        semaphore.release()
+        return rtrn
 
     @public
     def countNodes(self):
-        return returns(len(self.__graph), int)
-    
+        semaphore = Semaphore()
+        semaphore.acquire()
+        rtrn = returns(len(self.__graph), int)
+        semaphore.release()
+        return rtrn
     @public
     def getEdge(self, sourceId, targetId):
         requires(sourceId, int)
@@ -135,8 +160,12 @@ class AbstractPeerToPeerTopology(Object, IPeerToPeerTopology):
         pre_condition(sourceId, lambda x: self.__graph.has_key(x))
         pre_condition(targetId, lambda x: self.__graph[sourceId].hasEdge(x))
         
-        return returns(self.__graph[sourceId].getEdge(targetId), IEdge)
-
+        semaphore = Semaphore()
+        semaphore.acquire()
+        rtrn = returns(self.__graph[sourceId].getEdge(targetId), IEdge)
+        semaphore.release()
+        return rtrn
+    
     @public
     def getEdges(self, nodeId):
         requires(nodeId, int)
@@ -145,7 +174,11 @@ class AbstractPeerToPeerTopology(Object, IPeerToPeerTopology):
         pre_condition(nodeId, lambda x: x <> None)
         pre_condition(nodeId, lambda x: self.__graph.has_key(x))
         
-        return self.__graph[nodeId].getEdges()
+        semaphore = Semaphore()
+        semaphore.acquire()
+        rtrn = self.__graph[nodeId].getEdges()
+        semaphore.release()
+        return rtrn
 
     @public
     def countEdges(self, nodeId):
@@ -155,8 +188,12 @@ class AbstractPeerToPeerTopology(Object, IPeerToPeerTopology):
         pre_condition(nodeId, lambda x: x <> None)
         pre_condition(nodeId, lambda x: self.__graph.has_key(nodeId))
         
+        semaphore = Semaphore()
+        semaphore.acquire()
         node = self.__graph[nodeId]
-        return returns(node.countEdges(), int)
+        rtrn = returns(node.countEdges(), int)
+        semaphore.release()
+        return rtrn
     
     @public
     def getNeighbors(self, nodeId):
@@ -166,8 +203,11 @@ class AbstractPeerToPeerTopology(Object, IPeerToPeerTopology):
         pre_condition(nodeId, lambda x: x <> None)
         pre_condition(nodeId, lambda x: self.__graph.has_key(nodeId))
         
+        semaphore = Semaphore()
+        semaphore.acquire()
         neighbors = []
         for edge in self.__graph[nodeId].getEdges():
             neighbors.append(edge.getTargetNode())
-        
-        return neighbors.__iter__()
+        rtrn = neighbors.__iter__()
+        semaphore.release()
+        return rtrn

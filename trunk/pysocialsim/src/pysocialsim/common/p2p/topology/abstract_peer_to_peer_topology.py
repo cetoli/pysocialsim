@@ -211,3 +211,11 @@ class AbstractPeerToPeerTopology(Object, IPeerToPeerTopology):
         rtrn = neighbors.__iter__()
         semaphore.release()
         return rtrn
+    
+    @public
+    def hasNode(self, nodeId):
+        return returns(self.__graph.has_key(nodeId), bool)
+    
+    @public
+    def hasEdge(self):
+        raise NotImplementedError()

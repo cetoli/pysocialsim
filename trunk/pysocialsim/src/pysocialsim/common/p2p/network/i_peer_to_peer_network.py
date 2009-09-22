@@ -58,3 +58,33 @@ class IPeerToPeerNetwork(object):
         @rtype: IPeer
         """
         raise NotImplementedError()
+    
+    def getPeers(self, peerType):
+        """
+        Gets the list of peers, according to type of peer
+        @param peerType: the type of peer
+        @type peerType: int
+        @return: a list
+        @rtype: list
+        """
+        raise NotImplementedError()
+    
+    def getConnectedPeers(self, peerType):
+        """
+        Gets the list of connected peers in network.
+        @param peerType: the type of peer
+        @type peerType: int
+        @return: a list
+        @rtype: list
+        """
+        raise NotImplementedError()
+    
+    def getDisconnectedPeers(self, peerType):
+        """
+        Gets the list of disconnected peers in network.
+        @param peerType: the type of peer
+        @type peerType: int
+        @return: a list
+        @rtype: list
+        """
+        raise NotImplementedError()

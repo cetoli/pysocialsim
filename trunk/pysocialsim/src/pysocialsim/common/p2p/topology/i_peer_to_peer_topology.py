@@ -145,3 +145,9 @@ class IPeerToPeerTopology(object):
         @rtype: list
         """
         raise NotImplementedError()
+    
+    def hasNode(self, nodeId):
+        raise NotImplementedError()
+    
+    def hasEdge(self):
+        raise NotImplementedError()

@@ -37,4 +37,21 @@ class IPeer(object):
         @rtype: int
         """
         raise NotImplementedError()
-        
+    
+    def isJoined(self):
+        raise NotImplementedError()
+    
+    def isLeaved(self):
+        raise NotImplementedError()
+    
+    def setNode(self, node):
+        raise NotImplementedError()
+    
+    def getNode(self):
+        raise NotImplementedError()
+    
+    def joined(self):
+        raise NotImplementedError()
+    
+    def leaved(self):
+        raise NotImplementedError()

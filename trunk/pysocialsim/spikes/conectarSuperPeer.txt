@@ -108,7 +108,8 @@ conectarSuperPeer:
 				enviar ADD_TARGET_SUPER_PEER(msgId, sourceId, targetId, ttl, hops, atributos);
 				
 				atualizarSuperPeers(sourceId)
-				atualizarListaSuperPeers(msgi.atributos['listaSuperPeers']
+				atualizarListaSuperPeers(msgi.atributos['listaSuperPeers'])
+				conectado = Verdadeiro
 			fim;
 	
 	Entrada:
@@ -139,14 +140,15 @@ conectarSuperPeer:
 				
 				atualizarSuperPeers(sourceId)
 				atualizarListaSuperPeers(msgi.atributos['listaSuperPeers']
+				conectado = Falso
 			fim;
 	
 	Entrada:
 		msgi = 	TIME_OUT_ADD_TARGET_SUPER_PEER(msgId, sourceId, targetId, ttl, hops)
 	Ação:
-		cancelar();
+		liberarSlotSuperPeer(sourceId);
 		
 	Entrada:
 		msgi = 	TIME_OUT_ADD_SOURCE_SUPER_PEER(msgId, sourceId, targetId, ttl, hops);
 	Ação:
-		cancelar();
+		liberarSlotSuperPeer(sourceId);

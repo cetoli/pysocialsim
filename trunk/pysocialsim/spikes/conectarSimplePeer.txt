@@ -1,0 +1,133 @@
+conectarSimplePeer:
+	Variáveis:
+		p' = referência ao contexto local do simple-peer
+		sp' = referência ao contexto local do super-peer
+		spi = referência a um super-peer remoto i
+		pi = referência a um peer remoto i
+		msgi = referência a mensagem de entrada recebida por um super-peer i
+	Entrada:
+		msgi = nulo
+	Ação:
+		conectado = Falso
+		para todo(spi) em p'.listaSuperPeers faça
+			inicio
+				msgId = gerarMsgId();
+				sourceId = p'.id;
+				targetId = spi.id;
+				ttl = p'.configuracao.ttl;
+				hops = 0;
+				
+				enviar JOIN_SIMPLE_PEER(msgId, sourceId, targetId, ttl, hops);
+			fim;
+			
+	Entrada:
+		msgi = JOIN_SIMPLE_PEER(msgId, sourceId, targetId, ttl, hops);
+	Ação:
+		se sp'.peers == sp'.configuracao.numMaxPeers então
+			início
+				msgId = gerarMsgId();
+				sourceId = msgi.targetId;
+				targetId = msgi.sourceId;
+				ttl = sp'.configuracao.ttl;
+				hops = 0;
+				enviar REJECTED_NUM_MAX_SIMPLE_PEER(msgId, sourceId, targetId, ttl, hops);
+			fim 
+		senão
+			inicio
+				msgId = gerarMsgId();
+				sourceId = msgi.targetId;
+				targetId = msgi.sourceId;
+				ttl = sp'.configuracao.ttl;
+				hops = 0;
+				enviar ACCEPT_JOIN_SIMPLE_PEER(msgId, sourceId, targetId, ttl, hops);
+				
+				reservarSlotSimplePeer(sourceId);
+			fim;
+	
+	Entrada:
+		msgi = ACCEPT_JOIN_SIMPLE_PEER(msgId, sourceId, targetId, ttl, hops);
+	Ação:
+		se p'.superPeers == p'.configuracao.numMaxSuperPeers então
+			início
+				msgId = gerarMsgId();
+				sourceId = msgi.targetId;
+				targetId = msgi.sourceId;
+				ttl = p'.configuracao.ttl;
+				hops = 0;
+				
+				enviar CANCEL_JOIN_SIMPLE_PEER(msgId, sourceId, targetId, ttl, hops);
+			fim
+		senão
+			início
+				msgId = gerarMsgId();
+				sourceId = msgi.targetId;
+				targetId = msgi.sourceId;
+				ttl = p'.configuracao.ttl;
+				atributos = {'listaSuperPeers': p'.listaSuperPeers}
+				hops = 0;
+				
+				enviar ADD_SOURCE_SIMPLE_PEER(msgId, sourceId, targetId, ttl, hops, atributos);
+				reservarSlotSuperPeer(sourceId)
+			fim;
+	
+	Entrada:
+		msgi = ADD_SOURCE_SIMPLE_PEER(msgId, sourceId, targetId, ttl, hops);
+	Ação:
+		se não slotSimplePeerAlocado(msgi.sourceId) então
+			inicio
+				msgId = gerarMsgId();
+				sourceId = msgi.targetId;
+				targetId = msgi.sourceId;
+				ttl = sp'.configuracao.ttl;
+				hops = 0;
+				enviar TIME_OUT_ADD_SOURCE_SIMPLE_PEER(msgId, sourceId, targetId, ttl, hops)
+			fim
+		else
+			inicio
+				msgId = gerarMsgId();
+				sourceId = msgi.targetId;
+				targetId = msgi.sourceId;
+				ttl = sp'.configuracao.ttl;
+				atributos = {'listaSuperPeers': sp'.listaSuperPeers}
+				hops = 0;
+				
+				enviar ADD_TARGET_SUPER_PEER(msgId, sourceId, targetId, ttl, hops, atributos);
+				atualizarSimplePeers(sourceId);
+				atualizarListaSuperPeers(msgi.atributos['listaSuperPeers']);
+			fim;
+	
+	Entrada:
+		msgi = ADD_TARGET_SUPER_PEER(msgId, sourceId, targetId, ttl, hops, atributos)
+	Ação:
+		se não slotSuperPeerReservado(sourceId) então
+			inicio
+				msgId = gerarMsgId();
+				sourceId = msgi.targetId;
+				targetId = msgi.sourceId;
+				ttl = p'.configuracao.ttl;
+				hops = 0;
+				enviar TIME_OUT_ADD_SOURCE_SUPER_PEER(msgId, sourceId, targetId, ttl, hops, atributos)
+			end
+		else
+			begin
+			
+			end;
+	
+	Entrada:
+		msgi = REJECTED_NUM_MAX_SIMPLE_PEER(msgId, sourceId, targetId, ttl, hops)
+	Ação:
+		calcelar();
+		
+	Entrada:
+		msgi = CANCEL_JOIN_SIMPLE_PEER(msgId, sourceId, targetId, ttl, hops)
+	Ação:
+		liberarSlotSimplePeer(sourceId)
+		
+	Entrada:
+		msgi = TIME_OUT_ADD_SOURCE_SIMPLE_PEER(msgId, sourceId, targetId, ttl, hops)
+	Ação:
+		liberarSlotSimplePeer(sourceId)
+		
+	Entrada:
+		
+	

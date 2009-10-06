@@ -88,3 +88,21 @@ class IPeerToPeerNetwork(object):
         @rtype: list
         """
         raise NotImplementedError()
+    
+    def setConnectionsBetweenSuperPeers(self, numberOfConnections):
+        """
+        Sets the number of connections between super peers.
+        @param numberOfConnections: the number of connections
+        @type numberOfConnections: int
+        @return: an int
+        @rtype: int
+        """
+        raise NotImplementedError()
+    
+    def getConnectionsBetweenSuperPeers(self):
+        """
+        Gets the number of connections between super peers.
+        @return: an int
+        @rtype: int
+        """
+        raise NotImplementedError()

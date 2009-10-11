@@ -13,8 +13,8 @@ import unittest
 class NewSimplePeerSimulationEventTest(unittest.TestCase):
     
     def testCreateClassInstance(self):
-        self.assertTrue(NewSimplePeerSimulationEvent(1, 10))
-        event = NewSimplePeerSimulationEvent(1, 10)
+        self.assertTrue(NewSimplePeerSimulationEvent("1", 10))
+        event = NewSimplePeerSimulationEvent("1", 10)
         self.assertEquals("NEW_SIMPLE_PEER", event.getHandle())
-        self.assertEquals(1, event.getPeerId())
+        self.assertEquals("1", event.getPeerId())
         self.assertEquals(10, event.getPriority())

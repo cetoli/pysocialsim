@@ -24,5 +24,5 @@ class BeginSimulationEvent(AbstractSimulationEvent):
         @contact: fbarros@gmail.com 
         @since: 11/09/2009
         """
-        AbstractSimulationEvent.initialize(self, "BEGIN_SIMULATION", -1, 1)
+        AbstractSimulationEvent.initialize(self, "BEGIN_SIMULATION", "", 1)
         

@@ -18,5 +18,5 @@ class EndSimulationEvent(AbstractSimulationEvent):
     """
 
     def __init__(self, priority):
-        AbstractSimulationEvent.initialize(self, "END_SIMULATION", -1, priority)
+        AbstractSimulationEvent.initialize(self, "END_SIMULATION", "", priority)
         

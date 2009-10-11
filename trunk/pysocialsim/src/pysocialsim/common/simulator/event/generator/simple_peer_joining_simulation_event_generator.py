@@ -11,7 +11,6 @@ from pysocialsim.common.base.decorators import public
 from pysocialsim.common.util.rotines import requires, pre_condition
 from pysocialsim.common.p2p.network.i_peer_to_peer_network import IPeerToPeerNetwork
 from random import uniform
-import math
 
 class SimplePeerJoiningSimulationEventGenerator(AbstractSimulationEventGenerator):
     """
@@ -49,7 +48,6 @@ class SimplePeerJoiningSimulationEventGenerator(AbstractSimulationEventGenerator
         for peerId in range(1, self.__peers + 1):
             lastTime = scheduler.getTimeForPeer(IPeerToPeerNetwork.SIMPLE_PEER, peerId)
             time = self.__minimum/pow(uniform(0,1), 1/self.__alpha)
-            print peerId, lastTime, time, (lastTime + time)
             scheduler.registerTimeForPeer(IPeerToPeerNetwork.SIMPLE_PEER, peerId, int(time))
             generatedEvents += 1
         return generatedEvents      

@@ -111,8 +111,6 @@ class DefaultSimulator(Object, ISimulator):
             simulation = self.__simulator.getSimulation()
             while simulation.countSimulationEvents(self.__handle) > 0:
                 event = simulation.getSimulationEvent(self.__handle)
-#                if simulation.getCurrentSimulationTime() == 15300:
-#                    print 276472647246274627462472642764
                 if simulation.getCurrentSimulationTime() == event.getPriority():
                     self.__simulator.handleSimulationEvent(simulation.unregisterSimulationEvent(self.__handle))
         

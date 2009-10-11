@@ -20,9 +20,9 @@ class PriorityQueueTest(unittest.TestCase):
     def testEnqueueEvents(self):
         queue = PriorityQueue()
         
-        event1 = self.SimulationEventForTest(randint(0, 1000), 2)
-        event2 = self.SimulationEventForTest(randint(0, 1000), 1)
-        event3 = self.SimulationEventForTest(randint(0, 1000), 3)
+        event1 = self.SimulationEventForTest(str(randint(0, 1000)), 2)
+        event2 = self.SimulationEventForTest(str(randint(0, 1000)), 1)
+        event3 = self.SimulationEventForTest(str(randint(0, 1000)), 3)
         
         self.assertEquals(event1, queue.enqueue(event1, event1.getPriority()))
         self.assertEquals(1, queue.size())
@@ -41,9 +41,9 @@ class PriorityQueueTest(unittest.TestCase):
     def testDequeueEvents(self):
         queue = PriorityQueue()
         
-        event1 = self.SimulationEventForTest(randint(0, 1000), 2)
-        event2 = self.SimulationEventForTest(randint(0, 1000), 1)
-        event3 = self.SimulationEventForTest(randint(0, 1000), 3)
+        event1 = self.SimulationEventForTest(str(randint(0, 1000)), 2)
+        event2 = self.SimulationEventForTest(str(randint(0, 1000)), 1)
+        event3 = self.SimulationEventForTest(str(randint(0, 1000)), 3)
         
         self.assertEquals(event1, queue.enqueue(event1, event1.getPriority()))
         self.assertEquals(1, queue.size())
@@ -66,9 +66,9 @@ class PriorityQueueTest(unittest.TestCase):
     def testClearPriority(self):
         queue = PriorityQueue()
         
-        event1 = self.SimulationEventForTest(randint(0, 1000), 2)
-        event2 = self.SimulationEventForTest(randint(0, 1000), 1)
-        event3 = self.SimulationEventForTest(randint(0, 1000), 3)
+        event1 = self.SimulationEventForTest(str(randint(0, 1000)), 2)
+        event2 = self.SimulationEventForTest(str(randint(0, 1000)), 1)
+        event3 = self.SimulationEventForTest(str(randint(0, 1000)), 3)
         
         self.assertEquals(event1, queue.enqueue(event1, event1.getPriority()))
         self.assertEquals(1, queue.size())

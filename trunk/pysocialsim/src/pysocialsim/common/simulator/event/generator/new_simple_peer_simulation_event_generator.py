@@ -12,6 +12,7 @@ from pysocialsim.common.base.decorators import public
 from pysocialsim.common.simulator.event.generator.new_super_peer_simulation_event import NewSuperPeerSimulationEvent
 from pysocialsim.common.simulator.event.generator.new_simple_peer_simulation_event import NewSimplePeerSimulationEvent
 from pysocialsim.common.p2p.network.i_peer_to_peer_network import IPeerToPeerNetwork
+from pysocialsim.common.p2p.peer.peer_id_generator import PeerIdGenerator
 import math
 
 class NewSimplePeerSimulationEventGenerator(AbstractSimulationEventGenerator):
@@ -59,19 +60,21 @@ class NewSimplePeerSimulationEventGenerator(AbstractSimulationEventGenerator):
         scheduler = simulator.getScheduler()
         generatedEvents = 0
         priority = 0
-        peerId = 0
+        peerId = PeerIdGenerator.generatePeerId(IPeerToPeerNetwork.SIMPLE_PEER)
+        peer = 0
         for i in range(1, int(self.__average * 2)):
             distPoisson = (pow(self.__average, i) / factorial(i)) * pow(math.e, -self.__average)
             times = round((simulation.getSimulationTime() / self.__time) * distPoisson)
             for i in range(1, int(times) + 1):
                 priority += self.__time
                 for j in range(i):
-                    peerId += 1
+                    peer += 1
                     event = NewSimplePeerSimulationEvent(peerId, priority)
                     simulation.registerSimulationEvent(event)
                     generatedEvents += 1
+                    peerId = PeerIdGenerator.generatePeerId(IPeerToPeerNetwork.SIMPLE_PEER)
                     scheduler.registerTimeForPeer(IPeerToPeerNetwork.SIMPLE_PEER, peerId, priority)
-                    if self.__superPeers == peerId:
+                    if self.__superPeers == peer:
                         return generatedEvents
                 
         return generatedEvents

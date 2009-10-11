@@ -59,13 +59,13 @@ class Scheduler(Object):
         @rtype: int
         """
         requires(peerType, int)
-        requires(peerId, int)
+        requires(peerId, str)
         requires(time, int)
         
         pre_condition(peerType, lambda x: x <> None)
         pre_condition(peerType, lambda x: self.__peerTimes.has_key(x))
         pre_condition(peerId, lambda x: x <> None)
-        pre_condition(peerId, lambda x: x > 0)
+        pre_condition(peerId, lambda x: x <> "")
         pre_condition(time, lambda x: x <> None)
         pre_condition(time, lambda x: x > 0)
         
@@ -88,7 +88,7 @@ class Scheduler(Object):
         @rtype: int
         """
         requires(peerType, int)
-        requires(peerId, int)
+        requires(peerId, str)
         
         pre_condition(peerType, lambda x: x <> None)
         pre_condition(peerType, lambda x: self.__peerTimes.has_key(x))
@@ -117,7 +117,7 @@ class Scheduler(Object):
         @rtype: int
         """
         requires(peerType, int)
-        requires(peerId, int)
+        requires(peerId, str)
         
         pre_condition(peerType, lambda x: x <> None)
         pre_condition(peerType, lambda x: self.__peerTimes.has_key(x))
@@ -142,7 +142,7 @@ class Scheduler(Object):
         @rtype: int
         """
         requires(peerType, int)
-        requires(peerId, int)
+        requires(peerId, str)
         
         pre_condition(peerType, lambda x: x <> None)
         pre_condition(peerType, lambda x: self.__peerTimes.has_key(x))
@@ -167,7 +167,7 @@ class Scheduler(Object):
         @rtype: int
         """
         requires(peerType, int)
-        requires(peerId, int)
+        requires(peerId, str)
         
         pre_condition(peerType, lambda x: x <> None)
         pre_condition(peerType, lambda x: self.__peerTimes.has_key(x))

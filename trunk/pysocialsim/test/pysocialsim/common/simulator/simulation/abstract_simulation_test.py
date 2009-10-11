@@ -176,27 +176,27 @@ class AbstractSimulationTest(unittest.TestCase):
         simulation.configure()
         self.assertEquals(3, simulation.countSimulationEventQueues())
         
-        connectEvent1 = self.SimulationEventForTest("CONNECT", randint(0, 1000), 1)
+        connectEvent1 = self.SimulationEventForTest("CONNECT", str(randint(0, 1000)), 1)
         self.assertEquals(connectEvent1, simulation.registerSimulationEvent(connectEvent1))
         self.assertEquals(1, simulation.countSimulationEvents("CONNECT"))
         
-        connectEvent2 = self.SimulationEventForTest("CONNECT", randint(0, 1000), 2)
+        connectEvent2 = self.SimulationEventForTest("CONNECT", str(randint(0, 1000)), 2)
         self.assertEquals(connectEvent2, simulation.registerSimulationEvent(connectEvent2))
         self.assertEquals(2, simulation.countSimulationEvents("CONNECT"))
         
-        disconnectEvent1 = self.SimulationEventForTest("DISCONNECT", randint(0, 1000), 1)
+        disconnectEvent1 = self.SimulationEventForTest("DISCONNECT", str(randint(0, 1000)), 1)
         self.assertEquals(disconnectEvent1, simulation.registerSimulationEvent(disconnectEvent1))
         self.assertEquals(1, simulation.countSimulationEvents("DISCONNECT"))
         
-        advertise1 = self.SimulationEventForTest("ADVERTISE", randint(0, 1000), 1)
+        advertise1 = self.SimulationEventForTest("ADVERTISE", str(randint(0, 1000)), 1)
         self.assertEquals(advertise1, simulation.registerSimulationEvent(advertise1))
         self.assertEquals(1, simulation.countSimulationEvents("ADVERTISE"))
         
-        advertise2 = self.SimulationEventForTest("ADVERTISE", randint(0, 1000), 2)
+        advertise2 = self.SimulationEventForTest("ADVERTISE", str(randint(0, 1000)), 2)
         self.assertEquals(advertise2, simulation.registerSimulationEvent(advertise2))
         self.assertEquals(2, simulation.countSimulationEvents("ADVERTISE"))
         
-        advertise3 = self.SimulationEventForTest("ADVERTISE", randint(0, 1000), 3)
+        advertise3 = self.SimulationEventForTest("ADVERTISE", str(randint(0, 1000)), 3)
         self.assertEquals(advertise3, simulation.registerSimulationEvent(advertise3))
         self.assertEquals(3, simulation.countSimulationEvents("ADVERTISE"))
         

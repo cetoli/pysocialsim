@@ -10,6 +10,8 @@ from pysocialsim.common.simulator.event.abstract_simulation_event_generator impo
 from pysocialsim.common.util.rotines import requires, pre_condition, factorial
 from pysocialsim.common.base.decorators import public
 from pysocialsim.common.simulator.event.generator.new_super_peer_simulation_event import NewSuperPeerSimulationEvent
+from pysocialsim.common.p2p.peer.peer_id_generator import PeerIdGenerator
+from pysocialsim.common.p2p.network.i_peer_to_peer_network import IPeerToPeerNetwork
 import math
 
 class NewSuperPeerSimulationEventGenerator(AbstractSimulationEventGenerator):
@@ -55,7 +57,8 @@ class NewSuperPeerSimulationEventGenerator(AbstractSimulationEventGenerator):
         simulation = self.getSimulation()
         generatedEvents = 1
         priority = 1
-        superPeerId = 1
+        superPeerId = PeerIdGenerator.generatePeerId(IPeerToPeerNetwork.SUPER_PEER)
+        superPeer = 1
         event = NewSuperPeerSimulationEvent(superPeerId, priority)
         simulation.registerSimulationEvent(event)
         for i in range(1, int(self.__average * 2)):
@@ -64,10 +67,11 @@ class NewSuperPeerSimulationEventGenerator(AbstractSimulationEventGenerator):
             for i in range(1, int(times) + 1):
                 priority += self.__time
                 for j in range(i):
-                    superPeerId += 1
+                    superPeer += 1
+                    superPeerId = PeerIdGenerator.generatePeerId(IPeerToPeerNetwork.SUPER_PEER)
                     event = NewSuperPeerSimulationEvent(superPeerId, priority)
                     simulation.registerSimulationEvent(event)
                     generatedEvents += 1
-                    if self.__superPeers == superPeerId:
+                    if self.__superPeers == superPeer:
                         return generatedEvents
         return generatedEvents

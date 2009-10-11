@@ -37,7 +37,7 @@ class AbstractSimulationEvent(ISimulationEvent, Object):
         @note: All simulation events are initialized as unhandled.
         """
         requires(handle, str)
-        requires(peerId, int)
+        requires(peerId, str)
         requires(priority, int)
         
         self.__handle = handle
@@ -51,7 +51,7 @@ class AbstractSimulationEvent(ISimulationEvent, Object):
 
     @public
     def getPeerId(self):
-        return returns(self.__peerId, int)
+        return returns(self.__peerId, str)
 
     @public
     def getPriority(self):
@@ -82,7 +82,7 @@ class AbstractSimulationEvent(ISimulationEvent, Object):
 
     priority = property(getPriority, None, None, None)
     """
-    @type: int 
+    @type: str 
     """
     
     

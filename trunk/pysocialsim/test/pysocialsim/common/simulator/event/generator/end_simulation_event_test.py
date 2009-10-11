@@ -16,5 +16,5 @@ class BeginSimulationEventTest(unittest.TestCase):
         self.assertTrue(BeginSimulationEvent())
         event = BeginSimulationEvent()
         self.assertEquals("BEGIN_SIMULATION", event.getHandle())
-        self.assertEquals(-1, event.getPeerId())
+        self.assertEquals("", event.getPeerId())
         self.assertEquals(1, event.getPriority())

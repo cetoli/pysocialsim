@@ -25,7 +25,7 @@ class NewSuperPeerSimulationEventHandlerTest(unittest.TestCase):
     def testHandleSimulationEvent(self):
         handler = NewSuperPeerSimulationEventHandler()
         simulation = pymockobject.create(ISimulation)
-        simulationEvent = NewSuperPeerSimulationEvent(1, 10)
+        simulationEvent = NewSuperPeerSimulationEvent("1", 10)
         
         handler.init(simulation)
         

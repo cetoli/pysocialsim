@@ -13,8 +13,8 @@ import unittest
 class NewSuperPeerSimulationEventTest(unittest.TestCase):
     
     def testCreateClassInstance(self):
-        self.assertTrue(NewSuperPeerSimulationEvent(1, 10))
-        event = NewSuperPeerSimulationEvent(1, 10)
+        self.assertTrue(NewSuperPeerSimulationEvent("1", 10))
+        event = NewSuperPeerSimulationEvent("1", 10)
         self.assertEquals("NEW_SUPER_PEER", event.getHandle())
-        self.assertEquals(1, event.getPeerId())
+        self.assertEquals("1", event.getPeerId())
         self.assertEquals(10, event.getPriority())

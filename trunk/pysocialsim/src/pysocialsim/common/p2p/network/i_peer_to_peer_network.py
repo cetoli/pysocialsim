@@ -29,6 +29,8 @@ class IPeerToPeerNetwork(object):
     def __init__(self):
         raise NotImplementedError()
     
+    
+    
     def getSimulation(self):
         """
         Gets a simulation object.
@@ -44,6 +46,30 @@ class IPeerToPeerNetwork(object):
         @type simulation: ISimulation
         @return: an ISimulation
         @rtype: ISimulation
+        """
+        raise NotImplementedError()
+    
+    def addPeer(self, peerType, peer):
+        """
+        Adds a peer in peer-to-peer network.
+        @param peerType: type of peer
+        @type peerType: int
+        @param peer: a IPeer
+        @type peer: IPeer
+        @return: Returs True, if peer was added in peer-to-peer network. Else, returns False.
+        @rtype: bool
+        """
+        raise NotImplementedError()
+    
+    def removePeer(self, peerType, peerId):
+        """
+        Gets a peer.
+        @param peerType: the type of peer
+        @type peerType: int
+        @param peerId: the peer identifier
+        @type peerId: str
+        @return: Returs True, if peer was removed in peer-to-peer network. Else, returns False.
+        @rtype: bool
         """
         raise NotImplementedError()
     
@@ -66,6 +92,16 @@ class IPeerToPeerNetwork(object):
         @type peerType: int
         @return: a list
         @rtype: list
+        """
+        raise NotImplementedError()
+    
+    def countPeers(self, peerType):
+        """
+        Gets the number of peers, according to type of peer
+        @param peerType: the type of peer
+        @type peerType: int
+        @return: an int
+        @rtype: int
         """
         raise NotImplementedError()
     

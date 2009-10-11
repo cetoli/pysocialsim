@@ -11,8 +11,8 @@ from pysocialsim.common.p2p.topology.abstract_peer_to_peer_topology import Abstr
 from pysocialsim.common.p2p.peer.i_peer import IPeer
 from pymockobject.events import ReturnValue
 from pysocialsim.common.p2p.network.i_peer_to_peer_network import IPeerToPeerNetwork
-from pysocialsim.common.p2p.topology.graph.node import Node
 from pysocialsim.common.error.invalid_value_error import InvalidValueError
+from pysocialsim.common.p2p.protocol.i_peer_to_peer_protocol import IPeerToPeerProtocol
 import pymockobject
 
 import unittest
@@ -40,29 +40,29 @@ class GnutellaSuperPeerProtocolTest(unittest.TestCase):
         
         peer2 = pymockobject.create(IPeer)
         peer2.isJoined.will(ReturnValue(False))
-        peer2.getId.will(ReturnValue(2))
+        peer2.getId.will(ReturnValue("2"))
         
         self.assertTrue(protocol.join(peer2))
         self.assertEquals(1, topology.countNodes())
         
         peer3 = pymockobject.create(IPeer)
-        peer3.getId.will(ReturnValue(3))
+        peer3.getId.will(ReturnValue("3"))
         peer3.isJoined.will(ReturnValue(False))
         
         peer4 = pymockobject.create(IPeer)
-        peer4.getId.will(ReturnValue(4))
-        self.assertTrue(topology.addNode(4))
-        peer4.getNode.will(ReturnValue(topology.getNode(4)))
+        peer4.getId.will(ReturnValue("4"))
+        self.assertTrue(topology.addNode("4"))
+        peer4.getNode.will(ReturnValue(topology.getNode("4")))
         
         peer5 = pymockobject.create(IPeer)
-        peer5.getId.will(ReturnValue(5))
-        self.assertTrue(topology.addNode(5))
-        peer5.getNode.will(ReturnValue(topology.getNode(5)))
+        peer5.getId.will(ReturnValue("5"))
+        self.assertTrue(topology.addNode("5"))
+        peer5.getNode.will(ReturnValue(topology.getNode("5")))
         
         peer6 = pymockobject.create(IPeer)
-        peer6.getId.will(ReturnValue(6))
-        self.assertTrue(topology.addNode(6))
-        peer6.getNode.will(ReturnValue(topology.getNode(6)))
+        peer6.getId.will(ReturnValue("6"))
+        self.assertTrue(topology.addNode("6"))
+        peer6.getNode.will(ReturnValue(topology.getNode("6")))
         
         self.assertEquals(4, topology.countNodes())
         
@@ -71,7 +71,7 @@ class GnutellaSuperPeerProtocolTest(unittest.TestCase):
         network.getConnectionsBetweenSuperPeers.will(ReturnValue(10))
         
         self.assertTrue(protocol.join(peer3))
-        self.assertEquals(3, topology.countEdges(3))
+        self.assertEquals(3, topology.countEdges("3"))
         
         self.assertRaises(TypeError, protocol.join, 1)
         self.assertRaises(TypeError, protocol.join, "1")
@@ -91,35 +91,35 @@ class GnutellaSuperPeerProtocolTest(unittest.TestCase):
         
         peer1 = pymockobject.create(IPeer)
         peer1.isJoined.will(ReturnValue(True))
-        peer1.getId.will(ReturnValue(1))
+        peer1.getId.will(ReturnValue("1"))
         
         self.assertFalse(protocol.join(peer1))
         
         peer2 = pymockobject.create(IPeer)
         peer2.isJoined.will(ReturnValue(False))
-        peer2.getId.will(ReturnValue(2))
+        peer2.getId.will(ReturnValue("2"))
         
         self.assertTrue(protocol.join(peer2))
         self.assertEquals(1, topology.countNodes())
         
         peer3 = pymockobject.create(IPeer)
-        peer3.getId.will(ReturnValue(3))
+        peer3.getId.will(ReturnValue("3"))
         peer3.isJoined.will(ReturnValue(False))
         
         peer4 = pymockobject.create(IPeer)
-        peer4.getId.will(ReturnValue(4))
-        self.assertTrue(topology.addNode(4))
-        peer4.getNode.will(ReturnValue(topology.getNode(4)))
+        peer4.getId.will(ReturnValue("4"))
+        self.assertTrue(topology.addNode("4"))
+        peer4.getNode.will(ReturnValue(topology.getNode("4")))
         
         peer5 = pymockobject.create(IPeer)
-        peer5.getId.will(ReturnValue(5))
-        self.assertTrue(topology.addNode(5))
-        peer5.getNode.will(ReturnValue(topology.getNode(5)))
+        peer5.getId.will(ReturnValue("5"))
+        self.assertTrue(topology.addNode("5"))
+        peer5.getNode.will(ReturnValue(topology.getNode("5")))
         
         peer6 = pymockobject.create(IPeer)
-        peer6.getId.will(ReturnValue(6))
-        self.assertTrue(topology.addNode(6))
-        peer6.getNode.will(ReturnValue(topology.getNode(6)))
+        peer6.getId.will(ReturnValue("6"))
+        self.assertTrue(topology.addNode("6"))
+        peer6.getNode.will(ReturnValue(topology.getNode("6")))
         
         self.assertEquals(4, topology.countNodes())
         
@@ -128,7 +128,7 @@ class GnutellaSuperPeerProtocolTest(unittest.TestCase):
         network.getConnectionsBetweenSuperPeers.will(ReturnValue(10))
         
         self.assertTrue(protocol.join(peer3))
-        self.assertEquals(3, topology.countEdges(3))
+        self.assertEquals(3, topology.countEdges("3"))
         
         peer7 = pymockobject.create(IPeer)
         peer7.isJoined.will(ReturnValue(False))
@@ -136,11 +136,11 @@ class GnutellaSuperPeerProtocolTest(unittest.TestCase):
         self.assertFalse(protocol.leave(peer7))
         self.assertFalse(protocol.leave(peer2))
         
-        peer3.getNode.will(ReturnValue(topology.getNode(3)))
+        peer3.getNode.will(ReturnValue(topology.getNode("3")))
         peer3.isJoined.will(ReturnValue(True))
         self.assertTrue(protocol.leave(peer3))
         
-        self.assertEquals(0, topology.countEdges(3))
+        self.assertEquals(0, topology.countEdges("3"))
         
         self.assertRaises(TypeError, protocol.leave, 1)
         self.assertRaises(TypeError, protocol.leave, 0.8)
@@ -153,8 +153,13 @@ class GnutellaSuperPeerProtocolTest(unittest.TestCase):
         peer.getNode.will(ReturnValue(None))
         self.assertRaises(InvalidValueError, protocol.leave, peer)
         
+    def testCreatePeerToPeerMessage(self):
+        protocol = GnutellaSuperPeerProtocol()
+        self.assertTrue(protocol.createPeerToPeerMessage(IPeerToPeerProtocol.PING))
+        
         
     class TopologyForTest(AbstractPeerToPeerTopology):
         
         def __init__(self):
             AbstractPeerToPeerTopology.initialize(self)
+            

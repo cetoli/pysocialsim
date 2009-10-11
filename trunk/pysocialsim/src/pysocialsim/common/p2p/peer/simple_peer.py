@@ -18,6 +18,6 @@ class SimplePeer(AbstractPeer):
     @since: 11/09/2009
     """
 
-    def __init__(self, id):
-        AbstractPeer.initialize(self, IPeerToPeerNetwork.SIMPLE_PEER, id)
+    def __init__(self, id, peerToPeerNetwork):
+        AbstractPeer.initialize(self, IPeerToPeerNetwork.SIMPLE_PEER, id, peerToPeerNetwork)
         

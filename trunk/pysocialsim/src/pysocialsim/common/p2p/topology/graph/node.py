@@ -52,6 +52,8 @@ class Node(Object, INode):
         @rtype: NoneType
         """
         requires(topology, IPeerToPeerTopology)
+        requires(id, str)
+        
         self.__id = id
         self.__topology = topology
         self.__edges = {}
@@ -60,7 +62,7 @@ class Node(Object, INode):
     
     @public
     def getId(self):
-        return returns(self.__id, int)
+        return returns(self.__id, str)
     
     @public    
     def addNodeDevice(self, nodeDevice):
@@ -177,7 +179,7 @@ class Node(Object, INode):
     
     @public
     def getEdge(self, targetNodeId):
-        requires(targetNodeId, int)
+        requires(targetNodeId, str)
         
         pre_condition(targetNodeId, lambda x: x <> None)
         pre_condition(targetNodeId, lambda x: x > 0)

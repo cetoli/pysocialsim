@@ -21,5 +21,7 @@ class NewSimplePeerSimulationEventHandler(AbstractSimulationEventHandler):
         AbstractSimulationEventHandler.initialize(self, "NEW_SIMPLE_PEER")
     
     def execute(self):
+        
+        
         return AbstractSimulationEventHandler.execute(self)
         

@@ -47,8 +47,8 @@ class AbstractPeerToPeerTopology(Object, IPeerToPeerTopology):
     
     @public
     def addEdge(self, sourceId, targetId):
-        requires(sourceId, int)
-        requires(targetId, int)
+        requires(sourceId, str)
+        requires(targetId, str)
         
         pre_condition(sourceId, lambda x: x > 0)
         pre_condition(targetId, lambda x: x > 0)
@@ -71,8 +71,8 @@ class AbstractPeerToPeerTopology(Object, IPeerToPeerTopology):
 
     @public
     def removeEdge(self, sourceId, targetId):
-        requires(sourceId, int)
-        requires(targetId, int)
+        requires(sourceId, str)
+        requires(targetId, str)
         
         pre_condition(sourceId, lambda x: x > 0)
         pre_condition(targetId, lambda x: x > 0)
@@ -89,7 +89,7 @@ class AbstractPeerToPeerTopology(Object, IPeerToPeerTopology):
         
     @public
     def addNode(self, nodeId):
-        requires(nodeId, int)
+        requires(nodeId, str)
         
         pre_condition(nodeId, lambda x: x > 0)
         pre_condition(nodeId, lambda x: x <> None)
@@ -105,7 +105,7 @@ class AbstractPeerToPeerTopology(Object, IPeerToPeerTopology):
 
     @public
     def removeNode(self, nodeId):
-        requires(nodeId, int)
+        requires(nodeId, str)
         
         pre_condition(nodeId, lambda x: x > 0)
         pre_condition(nodeId, lambda x: x <> None)
@@ -121,7 +121,7 @@ class AbstractPeerToPeerTopology(Object, IPeerToPeerTopology):
 
     @public
     def getNode(self, nodeId):
-        requires(nodeId, int)
+        requires(nodeId, str)
         
         pre_condition(nodeId, lambda x: x > 0)
         pre_condition(nodeId, lambda x: x <> None)
@@ -150,8 +150,8 @@ class AbstractPeerToPeerTopology(Object, IPeerToPeerTopology):
         return rtrn
     @public
     def getEdge(self, sourceId, targetId):
-        requires(sourceId, int)
-        requires(targetId, int)
+        requires(sourceId, str)
+        requires(targetId, str)
         
         pre_condition(sourceId, lambda x: x > 0)
         pre_condition(targetId, lambda x: x > 0)
@@ -168,7 +168,7 @@ class AbstractPeerToPeerTopology(Object, IPeerToPeerTopology):
     
     @public
     def getEdges(self, nodeId):
-        requires(nodeId, int)
+        requires(nodeId, str)
         
         pre_condition(nodeId, lambda x: x > 0)
         pre_condition(nodeId, lambda x: x <> None)
@@ -182,7 +182,7 @@ class AbstractPeerToPeerTopology(Object, IPeerToPeerTopology):
 
     @public
     def countEdges(self, nodeId):
-        requires(nodeId, int)
+        requires(nodeId, str)
         
         pre_condition(nodeId, lambda x: x > 0)
         pre_condition(nodeId, lambda x: x <> None)
@@ -197,7 +197,7 @@ class AbstractPeerToPeerTopology(Object, IPeerToPeerTopology):
     
     @public
     def getNeighbors(self, nodeId):
-        requires(nodeId, int)
+        requires(nodeId, str)
         
         pre_condition(nodeId, lambda x: x > 0)
         pre_condition(nodeId, lambda x: x <> None)

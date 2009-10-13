@@ -12,6 +12,7 @@ from pysocialsim.common.base.decorators import public
 from pysocialsim.common.simulator.event.generator.new_super_peer_simulation_event import NewSuperPeerSimulationEvent
 from pysocialsim.common.p2p.peer.peer_id_generator import PeerIdGenerator
 from pysocialsim.common.p2p.network.i_peer_to_peer_network import IPeerToPeerNetwork
+from pysocialsim.common.p2p.peer.super_peer import SuperPeer
 import math
 
 class NewSuperPeerSimulationEventGenerator(AbstractSimulationEventGenerator):
@@ -57,9 +58,9 @@ class NewSuperPeerSimulationEventGenerator(AbstractSimulationEventGenerator):
         simulation = self.getSimulation()
         generatedEvents = 1
         priority = 1
-        superPeerId = PeerIdGenerator.generatePeerId(IPeerToPeerNetwork.SUPER_PEER)
-        superPeer = 1
-        event = NewSuperPeerSimulationEvent(superPeerId, priority)
+        superPeer = SuperPeer(PeerIdGenerator.generatePeerId(IPeerToPeerNetwork.SUPER_PEER), simulation.getPeerToPeerNetwork())
+        aux = 1
+        event = NewSuperPeerSimulationEvent(superPeer.getId(), priority)
         simulation.registerSimulationEvent(event)
         for i in range(1, int(self.__average * 2)):
             distPoisson = (pow(self.__average, i) / factorial(i)) * pow(math.e, -self.__average)
@@ -67,11 +68,11 @@ class NewSuperPeerSimulationEventGenerator(AbstractSimulationEventGenerator):
             for i in range(1, int(times) + 1):
                 priority += self.__time
                 for j in range(i):
-                    superPeer += 1
-                    superPeerId = PeerIdGenerator.generatePeerId(IPeerToPeerNetwork.SUPER_PEER)
-                    event = NewSuperPeerSimulationEvent(superPeerId, priority)
+                    aux += 1
+                    superPeer = SuperPeer(PeerIdGenerator.generatePeerId(IPeerToPeerNetwork.SUPER_PEER), simulation.getPeerToPeerNetwork())
+                    event = NewSuperPeerSimulationEvent(superPeer.getId(), priority)
                     simulation.registerSimulationEvent(event)
                     generatedEvents += 1
-                    if self.__superPeers == superPeer:
+                    if self.__superPeers == aux:
                         return generatedEvents
         return generatedEvents

@@ -14,6 +14,9 @@ import unittest
 
 class PeerIdGeneratorTest(unittest.TestCase):
     
+    def testTryCreateClassInstance(self):
+        self.assertRaises(NotImplementedError, PeerIdGenerator)
+    
     def testGeneratePeerId(self):
         self.assertTrue(PeerIdGenerator.generatePeerId(IPeerToPeerNetwork.SUPER_PEER))
         self.assertEquals(57, len(PeerIdGenerator.generatePeerId(IPeerToPeerNetwork.SUPER_PEER)))

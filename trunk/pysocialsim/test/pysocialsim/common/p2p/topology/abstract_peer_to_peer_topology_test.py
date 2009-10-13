@@ -28,6 +28,7 @@ class AbstractPeerToPeerTopologyTest(unittest.TestCase):
         topology = self.PeerToPeerTopologyForTest()
         
         self.assertTrue(topology.addNode("1"))
+        self.assertTrue(topology.hasNode("1"))
         self.assertEquals(1, topology.countNodes())
         self.assertTrue(topology.getNodes())
         self.assertTrue(topology.getNode("1"))
@@ -35,6 +36,7 @@ class AbstractPeerToPeerTopologyTest(unittest.TestCase):
         self.assertEquals("1", node.getId())
         
         self.assertTrue(topology.addNode("100"))
+        self.assertTrue(topology.hasNode("100"))
         self.assertEquals(2, topology.countNodes())
         self.assertTrue(topology.getNodes())
         self.assertTrue(topology.getNode("100"))
@@ -84,13 +86,17 @@ class AbstractPeerToPeerTopologyTest(unittest.TestCase):
         topology = self.PeerToPeerTopologyForTest()
         
         self.assertTrue(topology.addNode("1"))
+        self.assertTrue(topology.hasNode("1"))
         self.assertEquals(1, topology.countNodes())
         self.assertTrue(topology.addNode("2"))
+        self.assertTrue(topology.hasNode("2"))
         self.assertEquals(2, topology.countNodes())
         self.assertTrue(topology.addNode("3"))
+        self.assertTrue(topology.hasNode("3"))
         self.assertEquals(3, topology.countNodes())
         
         self.assertTrue(topology.addEdge("1", "2"))
+        self.assertTrue(topology.hasEdge("1", "2"))
         self.assertEquals(1, topology.countEdges("1"))
         self.assertTrue(topology.getEdges("1"))
         self.assertTrue(topology.getNode("2") in topology.getNeighbors("1"))
@@ -100,6 +106,7 @@ class AbstractPeerToPeerTopologyTest(unittest.TestCase):
         self.assertEquals("2", edge.getTargetNode().getId())
         
         self.assertTrue(topology.addEdge("2", "1"))
+        self.assertTrue(topology.hasEdge("2", "1"))
         self.assertEquals(1, topology.countEdges("2"))
         self.assertEquals(1, topology.countEdges("1"))
         self.assertTrue(topology.getNode("1") in topology.getNeighbors("2"))
@@ -107,6 +114,7 @@ class AbstractPeerToPeerTopologyTest(unittest.TestCase):
         self.assertEquals("1", edge.getTargetNode().getId())
         
         self.assertTrue(topology.addEdge("1", "3"))
+        self.assertTrue(topology.hasEdge("1", "3"))
         self.assertEquals(2, topology.countEdges("1"))
         self.assertEquals(0, topology.countEdges("3"))
         self.assertTrue(topology.getNode("3") in topology.getNeighbors("1"))
@@ -114,6 +122,7 @@ class AbstractPeerToPeerTopologyTest(unittest.TestCase):
         self.assertEquals("3", edge.getTargetNode().getId())
         
         self.assertTrue(topology.addEdge("3", "1"))
+        self.assertTrue(topology.hasEdge("3", "1"))
         self.assertEquals(1, topology.countEdges("3"))
         self.assertEquals(2, topology.countEdges("1"))
         self.assertTrue(topology.getNode("1") in topology.getNeighbors("3"))

@@ -214,8 +214,15 @@ class AbstractPeerToPeerTopology(Object, IPeerToPeerTopology):
     
     @public
     def hasNode(self, nodeId):
+        requires(nodeId, str)
+        pre_condition(nodeId, lambda x: x <> None)
         return returns(self.__graph.has_key(nodeId), bool)
     
     @public
-    def hasEdge(self):
-        raise NotImplementedError()
+    def hasEdge(self, sourceId, targetId):
+        requires(sourceId, str)
+        pre_condition(sourceId, lambda x: x <> None)
+        requires(targetId, str)
+        pre_condition(targetId, lambda x: x <> None)
+        
+        return returns(self.__graph[sourceId].hasEdge(targetId), bool)

@@ -10,7 +10,9 @@ from pysocialsim.common.base.object import Object
 from pysocialsim.common.p2p.peer.i_peer import IPeer
 from pysocialsim.common.base.decorators import public
 from pysocialsim.common.util.rotines import returns
-from pysocialsim.common.p2p.topology.graph.node import Node
+from pysocialsim.common.p2p.topology.graph.i_node import INode
+from threading import Semaphore
+import time
 
 class AbstractPeer(Object, IPeer):
     """
@@ -36,9 +38,11 @@ class AbstractPeer(Object, IPeer):
         """
         self.__id = id
         self.__type = type
-        self.__joined = False
+        self.__connected = False
         self.__node = None
         self.__peerToPeerNetwork = peerToPeerNetwork
+        self.__peerToPeerNetwork.addPeer(self.__type, self)
+        self.__peerToPeerProtocol = self.__peerToPeerNetwork.getPeerToPeerProtocol(self.__type)
     
     @public    
     def getId(self):
@@ -50,31 +54,50 @@ class AbstractPeer(Object, IPeer):
     
     @public
     def isJoined(self):
-        return returns(self.__joined, bool)
+        sem = Semaphore()
+        sem.acquire()
+        aux = self.__connected
+        sem.release()
+        return returns(aux == True, bool)
 
     @public
     def isLeaved(self):
-        return returns(self.__joined, bool)
+        return returns(self.__connected == False, bool)
 
     @public
     def joined(self):
-        self.__joined = True
-        return returns(self.__joined, bool)
+        semaphore = Semaphore()
+        semaphore.acquire()
+        del self.__connected
+        self.__connected = True
+        semaphore.release()
+        return returns(self.__connected, bool)
 
     @public
     def leaved(self):
-        self.__joined = False
-        return returns(self.__joined, bool)
+        self.__connected = False
+        return returns(self.__connected, bool)
     
     @public
     def getNode(self):
-        return returns(self.__node, Node)
+        return returns(self.__node, INode)
 
     @public
     def setNode(self, node):
+        sem = Semaphore()
+        sem.acquire()
         self.__node = node
-        return returns(self.__node, Node)
-
+        self.__node.setPeer(self.__peerToPeerNetwork.getPeer(self.__type, self.__id))
+        sem.release()
+        return self.__node
+    
+    @public
+    def join(self):
+        aux = self.__peerToPeerProtocol.join(self)
+        topology = self.__peerToPeerProtocol.getPeerToPeerTopology()
+        self.setNode(topology.getNode(self.__id))
+        return aux  
+    
     id = property(getId, None, None, None)
 
     type = property(getType, None, None, None)

@@ -11,6 +11,9 @@ from pysocialsim.common.p2p.network.i_peer_to_peer_network import IPeerToPeerNet
 from pysocialsim.common.util.rotines import requires, pre_condition, returns
 from pysocialsim.common.simulator.simulation.i_simulation import ISimulation
 from pysocialsim.common.base.decorators import public
+from pysocialsim.common.p2p.peer.i_peer import IPeer
+from pysocialsim.common.p2p.protocol.i_peer_to_peer_protocol import IPeerToPeerProtocol
+from threading import Semaphore
 
 class AbstractPeerToPeerNetwork(Object, IPeerToPeerNetwork):
     """
@@ -26,15 +29,22 @@ class AbstractPeerToPeerNetwork(Object, IPeerToPeerNetwork):
 
     def initialize(self, simulation):
         requires(simulation, ISimulation)
-        
         pre_condition(simulation, lambda x: x <> None)
         
         self.__simulation = simulation
         self.__peers = {IPeerToPeerNetwork.SUPER_PEER: {}, IPeerToPeerNetwork.SIMPLE_PEER: {}}
         self.__connectionsBetweenSuperPeers = 0
+        self.__peerToPeerProtocols = {}
     
     @public
     def getSimulation(self):
+        return returns(self.__simulation, ISimulation)
+    
+    @public
+    def setSimulation(self, simulation):
+        requires(simulation, ISimulation)
+        pre_condition(simulation, lambda x: x <> None)
+        self.__simulation = simulation
         return returns(self.__simulation, ISimulation)
 
     @public
@@ -42,46 +52,130 @@ class AbstractPeerToPeerNetwork(Object, IPeerToPeerNetwork):
         return returns(self.__connectionsBetweenSuperPeers, int)
 
     @public
-    def setSimulation(self, simulation):
-        self.__simulation = simulation
-        return returns(self.__simulation, ISimulation)
-
-    @public
     def setConnectionsBetweenSuperPeers(self, connectionsBetweenSuperPeers):
+        requires(connectionsBetweenSuperPeers, int)
+        
+        pre_condition(connectionsBetweenSuperPeers, lambda x: x > 0)
+        pre_condition(connectionsBetweenSuperPeers, lambda x: x <> None)
+        
         self.__connectionsBetweenSuperPeers = connectionsBetweenSuperPeers
         return returns(self.__connectionsBetweenSuperPeers, int)
     
     @public
     def addPeer(self, peerType, peer):
-        return IPeerToPeerNetwork.addPeer(self, peerType, peer)
+        requires(peerType, int)
+        requires(peer, IPeer)
+        
+        pre_condition(peerType, lambda x: x == IPeerToPeerNetwork.SUPER_PEER or x == IPeerToPeerNetwork.SIMPLE_PEER)
+        pre_condition(peerType, lambda x: self.__peers.has_key(x))
+        
+        pre_condition(peer, lambda x: x <> None)
+        
+        if self.__peers[peerType].has_key(peer.getId()):
+            return False
+        
+        self.__peers[peerType][peer.getId()] = peer
+        return self.__peers[peerType].has_key(peer.getId())
 
     @public
     def removePeer(self, peerType, peerId):
+        requires(peerType, int)
+        pre_condition(peerType, lambda x: x == IPeerToPeerNetwork.SUPER_PEER or x == IPeerToPeerNetwork.SIMPLE_PEER)
+        
         return IPeerToPeerNetwork.removePeer(self, peerType, peerId)
 
     @public
     def getPeer(self, peerType, peerId):
-        return IPeerToPeerNetwork.getPeer(self, peerType, peerId)
-
+        requires(peerType, int)
+        pre_condition(peerType, lambda x: x == IPeerToPeerNetwork.SUPER_PEER or x == IPeerToPeerNetwork.SIMPLE_PEER)
+        
+        return self.__peers[peerType][peerId]
     @public
     def getPeers(self, peerType):
-        return IPeerToPeerNetwork.getPeers(self, peerType)
+        requires(peerType, int)
+        pre_condition(peerType, lambda x: x == IPeerToPeerNetwork.SUPER_PEER or x == IPeerToPeerNetwork.SIMPLE_PEER)
+        
+        return self.__peers[peerType].itervalues()
 
     @public
     def countPeers(self, peerType):
-        return IPeerToPeerNetwork.countPeers(self, peerType)
+        requires(peerType, int)
+        pre_condition(peerType, lambda x: x == IPeerToPeerNetwork.SUPER_PEER or x == IPeerToPeerNetwork.SIMPLE_PEER)
+        
+        return len(self.__peers[peerType])
 
     @public
     def getConnectedPeers(self, peerType):
-        return IPeerToPeerNetwork.getConnectedPeers(self, peerType)
+        requires(peerType, int)
+        pre_condition(peerType, lambda x: x == IPeerToPeerNetwork.SUPER_PEER or x == IPeerToPeerNetwork.SIMPLE_PEER)
+        
+        sem = Semaphore()
+        sem.acquire()
+        peers = []
+        
+        for peer in self.__peers[peerType].values():
+            if peer.isJoined():
+                peers.append(peer)
+                
+        sem.release()
+        return peers.__iter__()
 
     @public
     def getDisconnectedPeers(self, peerType):
-        return IPeerToPeerNetwork.getDisconnectedPeers(self, peerType)
+        requires(peerType, int)
+        pre_condition(peerType, lambda x: x == IPeerToPeerNetwork.SUPER_PEER or x == IPeerToPeerNetwork.SIMPLE_PEER)
+        
+        peers = []
+        
+        for peer in self.__peers[peerType].values():
+            if peer.isLeaved() == True:
+                print peer
+                peers.append(peer)
+        
+        return peers.__iter__()
+    
+    @public
+    def registerPeerToPeerProtocol(self, peerType, peerToPeerProtocol):
+        requires(peerType, int)
+        requires(peerToPeerProtocol, IPeerToPeerProtocol)
+        pre_condition(peerType, lambda x: x == IPeerToPeerNetwork.SUPER_PEER or x == IPeerToPeerNetwork.SIMPLE_PEER)
+        pre_condition(peerType, lambda x: not self.__peerToPeerProtocols.has_key(x))
+        pre_condition(peerToPeerProtocol, lambda x: x <> None)
+        
+        self.__peerToPeerProtocols[peerType] = peerToPeerProtocol
+        return self.__peerToPeerProtocols.has_key(peerType)
+
+    @public
+    def unregisterPeerToPeerProtocol(self, peerType):
+        requires(peerType, int)
+        pre_condition(peerType, lambda x: x == IPeerToPeerNetwork.SUPER_PEER or x == IPeerToPeerNetwork.SIMPLE_PEER)
+        pre_condition(peerType, lambda x: self.__peerToPeerProtocols.has_key(x))
+
+        del self.__peerToPeerProtocols[peerType]
+        
+        return returns(not self.__peerToPeerProtocols.has_key(peerType), bool)
+
+    @public
+    def getPeerToPeerProtocol(self, peerType):
+        requires(peerType, int)
+        pre_condition(peerType, lambda x: x == IPeerToPeerNetwork.SUPER_PEER or x == IPeerToPeerNetwork.SIMPLE_PEER)
+        pre_condition(peerType, lambda x: self.__peerToPeerProtocols.has_key(x))
+
+        return returns(self.__peerToPeerProtocols[peerType], IPeerToPeerProtocol)
+    
+    @public
+    def hasPeer(self, peer):
+        requires(peer, IPeer)
+        pre_condition(peer, lambda x: x <> None)
+        
+        return self.__peers[peer.getType()].has_key(peer.getId())
     
     simulation = property(getSimulation, setSimulation, None, None)
 
     connectionsBetweenSuperPeers = property(getConnectionsBetweenSuperPeers, setConnectionsBetweenSuperPeers, None, None)
+
+    
+
 
     
 

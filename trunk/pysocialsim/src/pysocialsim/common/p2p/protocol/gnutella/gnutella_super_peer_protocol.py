@@ -42,14 +42,15 @@ class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
         topology = self.getPeerToPeerTopology()
         if topology.countNodes() == 0:
             topology.addNode(peer.getId())
-            peer.setNode(topology.getNode(peer.getId()))
-            peer.joined()
+            network = topology.getPeerToPeerNetwork()
+            network.getPeer(IPeerToPeerNetwork.SUPER_PEER, peer.getId()).joined()
+            network.getPeer(IPeerToPeerNetwork.SUPER_PEER, peer.getId()).setNode(topology.getNode(peer.getId()))
             semaphore.release()
             return topology.hasNode(peer.getId())
         else:
             topology.addNode(peer.getId())
-            peer.setNode(topology.getNode(peer.getId()))
-            network = topology.getPeerToPeerNetwork
+            network = topology.getPeerToPeerNetwork()
+            network.getPeer(IPeerToPeerNetwork.SUPER_PEER, peer.getId()).setNode(topology.getNode(peer.getId()))
             if topology.countNodes() > 0:
                 network = topology.getPeerToPeerNetwork()
                 peers = [n for n in network.getConnectedPeers(IPeerToPeerNetwork.SUPER_PEER) if n.getId() <> peer.getId()]
@@ -59,10 +60,10 @@ class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
                     node = neighbor.getNode()
                     topology.addEdge(peer.getId(), node.getId())
                     topology.addEdge(node.getId(), peer.getId())
+                    network.getPeer(IPeerToPeerNetwork.SUPER_PEER, peer.getId()).joined()
                     del peers[ix]
                     if len(peers) == 0:
                         break
-                peer.joined()
             semaphore.release()
             return topology.hasNode(peer.getId())
 

@@ -149,5 +149,5 @@ class IPeerToPeerTopology(object):
     def hasNode(self, nodeId):
         raise NotImplementedError()
     
-    def hasEdge(self):
+    def hasEdge(self, sourceId, targetId):
         raise NotImplementedError()

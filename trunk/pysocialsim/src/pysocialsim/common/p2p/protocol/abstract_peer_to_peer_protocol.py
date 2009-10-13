@@ -23,7 +23,9 @@ class AbstractPeerToPeerProtocol(Object, IPeerToPeerProtocol):
     @contact: fbarros@gmail.com 
     @since: 20/09/2009
     """
-
+    
+    __public__ = ["PING"]
+    
     def __init__(self):
         raise NotImplementedError()
 
@@ -51,6 +53,34 @@ class AbstractPeerToPeerProtocol(Object, IPeerToPeerProtocol):
     @public
     def createPeerToPeerMessage(self, handle):
         return self.__peerToPeerMessageCreator.createPeerToPeerMessage(handle)
+    
+    @public
+    def pushPeerToPeerMessage(self, peer, peerToPeerMessage):
+        raise NotImplementedError()
+    
+    @public
+    def pullPeerToPeerMessage(self, peer, peerToPeerMessage):
+        raise NotImplementedError()
+    
+    @public
+    def pingPeerToPeerMessage(self, peer, peerToPeerMessage):
+        raise NotImplementedError()
+    
+    @public
+    def pongPeerToPeerMessage(self, peer, peerToPeerMessage):
+        raise NotImplementedError()
+    
+    @public
+    def routePeerToPeerMessage(self, peerToPeerMessage):
+        raise NotImplementedError()
+    
+    @public
+    def sendPeerToPeerMessage(self, peerToPeerMessage):
+        raise NotImplementedError()
+    
+    @public
+    def receivePeerToPeerMessage(self, peerToPeerMessage):
+        raise NotImplementedError()
     
     class PingPeerToPeerMessage(AbstractPeertoPeerMessage):
         

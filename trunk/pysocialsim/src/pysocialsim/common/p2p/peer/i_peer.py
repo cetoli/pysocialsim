@@ -55,3 +55,8 @@ class IPeer(object):
     
     def leaved(self):
         raise NotImplementedError()
+    
+    def join(self):
+        raise NotImplementedError()
+    
+    

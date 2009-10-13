@@ -142,3 +142,38 @@ class IPeerToPeerNetwork(object):
         @rtype: int
         """
         raise NotImplementedError()
+    
+    def registerPeerToPeerProtocol(self, peerType, peerToPeerProtocol):
+        """
+        Registers the peer-to-peer protocol by type of peer.
+        @param peerType: the type of peer
+        @type peerType: int
+        @param peerToPeerProtocol: an IPeerToPeerProtocol
+        @type peerToPeerProtocol: IPeerToPeerProtocol
+        @return: Returns True, if peer-to-peer protocol was registered. Else, returns False.
+        @rtype: bool
+        """
+        raise NotImplementedError()
+    
+    def unregisterPeerToPeerProtocol(self, peerType):
+        """
+        Unregisters the peer-to-peer protocol by type of peer.
+        @param peerType: the type of peer
+        @type peerType: int
+        @return: Returns True, if peer-to-peer protocol was unregistered. Else, returns False.
+        @rtype: bool
+        """
+        raise NotImplementedError()
+    
+    def getPeerToPeerProtocol(self, peerType):
+        """
+        Gets the peer-to-peer protocol by type of peer.
+        @param peerType: the type of peer
+        @type peerType: int
+        @return: an IPeerToPeerProtocol
+        @rtype: IPeerToPeerProtocol
+        """
+        raise NotImplementedError()
+    
+    def hasPeer(self, peer):
+        raise NotImplementedError()

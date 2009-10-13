@@ -84,3 +84,20 @@ class INodeDevice(object):
         @rtype: float
         """
         raise NotImplementedError()
+    
+    def getNode(self):
+        """
+        Gets the node.
+        @return: an INode
+        @rtype: INode
+        """
+        raise NotImplementedError()
+    
+    def setNode(self, node):
+        """
+        Sets the node.
+        @param node: an INode
+        @return: an INode
+        @rtype: INode
+        """
+        raise NotImplementedError()

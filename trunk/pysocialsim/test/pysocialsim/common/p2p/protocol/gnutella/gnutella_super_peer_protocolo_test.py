@@ -57,17 +57,20 @@ class GnutellaSuperPeerProtocolTest(unittest.TestCase):
         peer4.getId.will(ReturnValue("4"))
         self.assertTrue(topology.addNode("4"))
         peer4.getNode.will(ReturnValue(topology.getNode("4")))
+        topology.getNode("4").setPeer(peer4)
         network.getPeer.expects(IPeerToPeerNetwork.SUPER_PEER, "4").will(ReturnValue(peer4))
         
         peer5 = pymockobject.create(IPeer)
         peer5.getId.will(ReturnValue("5"))
         self.assertTrue(topology.addNode("5"))
         peer5.getNode.will(ReturnValue(topology.getNode("5")))
+        topology.getNode("5").setPeer(peer5)
         network.getPeer.expects(IPeerToPeerNetwork.SUPER_PEER, "5").will(ReturnValue(peer5))
         
         peer6 = pymockobject.create(IPeer)
         peer6.getId.will(ReturnValue("6"))
         self.assertTrue(topology.addNode("6"))
+        topology.getNode("6").setPeer(peer6)
         peer6.getNode.will(ReturnValue(topology.getNode("6")))
         network.getPeer.expects(IPeerToPeerNetwork.SUPER_PEER, "6").will(ReturnValue(peer6))
         
@@ -121,18 +124,22 @@ class GnutellaSuperPeerProtocolTest(unittest.TestCase):
         peer4.getId.will(ReturnValue("4"))
         self.assertTrue(topology.addNode("4"))
         peer4.getNode.will(ReturnValue(topology.getNode("4")))
+        topology.getNode("4").setPeer(peer4)
+        
         network.getPeer.expects(IPeerToPeerNetwork.SUPER_PEER, "4").will(ReturnValue(peer4))
         
         peer5 = pymockobject.create(IPeer)
         peer5.getId.will(ReturnValue("5"))
         self.assertTrue(topology.addNode("5"))
         peer5.getNode.will(ReturnValue(topology.getNode("5")))
+        topology.getNode("5").setPeer(peer5)
         network.getPeer.expects(IPeerToPeerNetwork.SUPER_PEER, "5").will(ReturnValue(peer5))
         
         peer6 = pymockobject.create(IPeer)
         peer6.getId.will(ReturnValue("6"))
         self.assertTrue(topology.addNode("6"))
         peer6.getNode.will(ReturnValue(topology.getNode("6")))
+        topology.getNode("6").setPeer(peer6)
         network.getPeer.expects(IPeerToPeerNetwork.SUPER_PEER, "6").will(ReturnValue(peer6))
         
         self.assertEquals(4, topology.countNodes())

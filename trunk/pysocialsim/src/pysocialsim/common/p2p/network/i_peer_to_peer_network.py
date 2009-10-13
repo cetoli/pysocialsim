@@ -177,3 +177,5 @@ class IPeerToPeerNetwork(object):
     
     def hasPeer(self, peer):
         raise NotImplementedError()
+    
+    

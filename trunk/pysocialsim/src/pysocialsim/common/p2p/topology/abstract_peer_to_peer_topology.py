@@ -63,7 +63,8 @@ class AbstractPeerToPeerTopology(Object, IPeerToPeerTopology):
         if node.hasEdge(targetId):
             return False
         targetNode = self.__graph[targetId]
-        edge = Edge(targetNode)
+        node = self.__graph[sourceId]
+        edge = Edge(node, targetNode)
         node.addEdge(edge)
         semaphore.release()
         return returns(node.hasEdge(targetId), bool)
@@ -196,7 +197,7 @@ class AbstractPeerToPeerTopology(Object, IPeerToPeerTopology):
         return rtrn
     
     @public
-    def getNeighbors(self, nodeId):
+    def getAdjacentNodes(self, nodeId):
         requires(nodeId, str)
         
         pre_condition(nodeId, lambda x: x > 0)

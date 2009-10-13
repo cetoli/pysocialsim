@@ -55,31 +55,31 @@ class AbstractPeerToPeerProtocol(Object, IPeerToPeerProtocol):
         return self.__peerToPeerMessageCreator.createPeerToPeerMessage(handle)
     
     @public
-    def pushPeerToPeerMessage(self, peer, peerToPeerMessage):
+    def push(self, peer, peerToPeerMessage):
         raise NotImplementedError()
     
     @public
-    def pullPeerToPeerMessage(self, peer, peerToPeerMessage):
+    def pull(self, peer, peerToPeerMessage):
         raise NotImplementedError()
     
     @public
-    def pingPeerToPeerMessage(self, peer, peerToPeerMessage):
+    def ping(self, peer, peerToPeerMessage):
         raise NotImplementedError()
     
     @public
-    def pongPeerToPeerMessage(self, peer, peerToPeerMessage):
+    def pong(self, peer, peerToPeerMessage):
         raise NotImplementedError()
     
     @public
-    def routePeerToPeerMessage(self, peerToPeerMessage):
+    def route(self, peerToPeerMessage):
         raise NotImplementedError()
     
     @public
-    def sendPeerToPeerMessage(self, peerToPeerMessage):
+    def send(self, peer, peerToPeerMessage):
         raise NotImplementedError()
     
     @public
-    def receivePeerToPeerMessage(self, peerToPeerMessage):
+    def receive(self, peer, peerToPeerMessage):
         raise NotImplementedError()
     
     class PingPeerToPeerMessage(AbstractPeertoPeerMessage):

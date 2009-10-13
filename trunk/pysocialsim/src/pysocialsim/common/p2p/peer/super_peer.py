@@ -15,5 +15,5 @@ class SuperPeer(AbstractPeer):
     """
 
     def __init__(self, id, peerToPeerNetwork):
-        AbstractPeer.initialize(self, IPeerToPeerNetwork.SUPER_PEER, id, peerToPeerNetwork)
+        AbstractPeer.initialize(self, IPeerToPeerNetwork.SUPER_PEER, id, peerToPeerNetwork)    
         

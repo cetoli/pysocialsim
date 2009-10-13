@@ -9,10 +9,12 @@ Defines the module with objective the implementation of AbstractPeer class.
 from pysocialsim.common.base.object import Object
 from pysocialsim.common.p2p.peer.i_peer import IPeer
 from pysocialsim.common.base.decorators import public
-from pysocialsim.common.util.rotines import returns
+from pysocialsim.common.util.rotines import returns, requires, pre_condition
 from pysocialsim.common.p2p.topology.graph.i_node import INode
 from threading import Semaphore
-import time
+from pysocialsim.common.p2p.protocol.i_peer_to_peer_protocol import IPeerToPeerProtocol
+from pysocialsim.common.p2p.message.peer_to_peer_message_id_generator import PeerToPeerMessageIdGenerator
+from pysocialsim.common.p2p.network.i_peer_to_peer_network import IPeerToPeerNetwork
 
 class AbstractPeer(Object, IPeer):
     """
@@ -43,6 +45,7 @@ class AbstractPeer(Object, IPeer):
         self.__peerToPeerNetwork = peerToPeerNetwork
         self.__peerToPeerNetwork.addPeer(self.__type, self)
         self.__peerToPeerProtocol = self.__peerToPeerNetwork.getPeerToPeerProtocol(self.__type)
+        self.__neighbors = {}
     
     @public    
     def getId(self):
@@ -66,11 +69,7 @@ class AbstractPeer(Object, IPeer):
 
     @public
     def joined(self):
-        semaphore = Semaphore()
-        semaphore.acquire()
-        del self.__connected
         self.__connected = True
-        semaphore.release()
         return returns(self.__connected, bool)
 
     @public
@@ -87,7 +86,6 @@ class AbstractPeer(Object, IPeer):
         sem = Semaphore()
         sem.acquire()
         self.__node = node
-        self.__node.setPeer(self.__peerToPeerNetwork.getPeer(self.__type, self.__id))
         sem.release()
         return self.__node
     
@@ -96,13 +94,56 @@ class AbstractPeer(Object, IPeer):
         aux = self.__peerToPeerProtocol.join(self)
         topology = self.__peerToPeerProtocol.getPeerToPeerTopology()
         self.setNode(topology.getNode(self.__id))
-        return aux  
+        simulation = self.__peerToPeerNetwork.getSimulation()
+        if len(self.__neighbors) > 0:
+            for n in self.__neighbors.values():
+                message = self.__peerToPeerProtocol.createPeerToPeerMessage(IPeerToPeerProtocol.PING)
+                messageId = PeerToPeerMessageIdGenerator.generatePeerToPeerMessageId(self)           
+                message.init(messageId, self.__id, n.getId(), self.__peerToPeerNetwork.countPeers(IPeerToPeerNetwork.SUPER_PEER), simulation.getCurrentSimulationTime())
+                self.send(message)
+        return aux
+    
+    @public
+    def receive(self, peerToPeerMessage):
+        print peerToPeerMessage.getHandle()
+    
+    @public
+    def send(self, peerToPeerMessage):
+        return self.__peerToPeerProtocol.send(self, peerToPeerMessage)  
+    
+    @public
+    def getPeerToPeerNetwork(self):
+        return self.__peerToPeerNetwork
+    
+    def __eq__(self, other):
+        requires(other, IPeer)
+        pre_condition(other, lambda x: x <> None)
+        return self.__id == other.getId()
+    
+    @public
+    def addNeighbor(self, neighbor):
+        self.__neighbors[neighbor.getId()] = neighbor
+        return self.__neighbors.has_key(neighbor.getId())
+    
+    @public
+    def countNeighbors(self):
+        return len(self.__neighbors)
+    
+    @public
+    def hasNeighbor(self, peerId):
+        return self.__neighbors.has_key(peerId)
+    
+    @public
+    def getNeighbor(self, peerId):
+        return self.__neighbors[peerId]
     
     id = property(getId, None, None, None)
 
     type = property(getType, None, None, None)
 
     node = property(getNode, setNode, None, None)
+
+    peerToPeerNetwork = property(getPeerToPeerNetwork, None, None, None)
         
     
         

@@ -138,7 +138,7 @@ class IPeerToPeerTopology(object):
         """
         raise NotImplementedError()
     
-    def getNeighbors(self, nodeId):
+    def getAdjacentNodes(self, nodeId):
         """
         Gets the neighbors of node
         @return: a list

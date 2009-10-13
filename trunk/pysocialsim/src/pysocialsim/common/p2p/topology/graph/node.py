@@ -15,6 +15,8 @@ from pysocialsim.common.p2p.topology.graph.i_node_device import INodeDevice
 from pysocialsim.common.p2p.topology.graph.i_edge import IEdge
 from pysocialsim.common.p2p.topology.graph.i_node import INode
 from pysocialsim.common.p2p.peer.i_peer import IPeer
+from pysocialsim.common.p2p.peer.neighbor import Neighbor
+from pysocialsim.common.p2p.topology.graph.network_adapter import NetworkAdapter
 
 class Node(Object, INode):
     """
@@ -24,12 +26,6 @@ class Node(Object, INode):
     @contact: fbarros@gmail.com 
     @since: 18/09/2009
     """
-    
-    PROCESSOR = 0
-    DISK = 1
-    NETWORK_ADAPTER = 2
-    
-    __public__ = ["PROCESSOR", "DISK", "NETWORK_ADAPTER"]
     
     def __init__(self, id, topology):
         """
@@ -76,6 +72,7 @@ class Node(Object, INode):
         pre_condition(nodeDevice, lambda x: x <> None)
         
         self.__devices[nodeDevice.getType()] = nodeDevice
+        nodeDevice.setNode(self)
         return returns(self.__devices.has_key(nodeDevice.getType()), bool)
     
     @public
@@ -165,6 +162,9 @@ class Node(Object, INode):
         if self.__id == edge.getTargetNode().getId():
             return False
         self.__edges[edge.getTargetNode().getId()] = edge
+        
+        neighbor = Neighbor(self.__peer, edge)
+        self.__peer.addNeighbor(neighbor)
         return returns(self.__edges.has_key(edge.getTargetNode().getId()), bool)
     
     @public
@@ -203,8 +203,10 @@ class Node(Object, INode):
     def setPeer(self, peer):
         requires(peer, IPeer)
         pre_condition(peer, lambda x: x <> None)
-        
         self.__peer = peer
+        
+        self.addNodeDevice(NetworkAdapter(100000000, 100000000, 100000000))
+        
         return returns(self.__peer, IPeer)
     
     @public

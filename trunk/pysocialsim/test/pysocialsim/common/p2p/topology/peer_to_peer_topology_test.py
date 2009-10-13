@@ -1,12 +1,12 @@
 """
-Defines the module with the unit test of AbstractPeerToPeerTopology class.
+Defines the module with unit test of PeerToPeerTopology class.
 
 @author: Fabricio
 @organization: Federal University of Rio de Janeiro
 @contact: fbarros@gmail.com 
-@since: 19/09/2009
+@since: 12/10/2009
 """
-from pysocialsim.common.p2p.topology.abstract_peer_to_peer_topology import AbstractPeerToPeerTopology
+from pysocialsim.common.p2p.topology.peer_to_peer_topology import PeerToPeerTopology
 from pysocialsim.common.p2p.network.i_peer_to_peer_network import IPeerToPeerNetwork
 from pysocialsim.common.error.invalid_value_error import InvalidValueError
 from pysocialsim.common.p2p.peer.i_peer import IPeer
@@ -14,19 +14,23 @@ import pymockobject
 
 import unittest
 
-class AbstractPeerToPeerTopologyTest(unittest.TestCase):
+class PeerToPeerTopologyTest(unittest.TestCase):
     
-    def testTryCreateClassInstance(self):
-        self.assertRaises(NotImplementedError, AbstractPeerToPeerTopology)
+    def testCreateClassInstance(self):
+        self.assertTrue(PeerToPeerTopology())
+        
+        topology = PeerToPeerTopology()
+        self.assertFalse(topology.getPeerToPeerNetwork())
+        self.assertEquals(0, topology.countNodes())
         
     def testSetPeerToPeerNetwork(self):
-        topology = self.PeerToPeerTopologyForTest()
+        topology = PeerToPeerTopology()
         network = pymockobject.create(IPeerToPeerNetwork)
         self.assertEquals(network, topology.setPeerToPeerNetwork(network))
         self.assertEquals(network, topology.getPeerToPeerNetwork())
         
     def testAddNode(self):
-        topology = self.PeerToPeerTopologyForTest()
+        topology = PeerToPeerTopology()
         
         self.assertTrue(topology.addNode("1"))
         self.assertTrue(topology.hasNode("1"))
@@ -57,7 +61,7 @@ class AbstractPeerToPeerTopologyTest(unittest.TestCase):
         self.assertRaises(InvalidValueError, topology.getNode, "500")
         
     def testRemoveNode(self):
-        topology = self.PeerToPeerTopologyForTest()
+        topology = PeerToPeerTopology()
         
         self.assertTrue(topology.addNode("1"))
         self.assertEquals(1, topology.countNodes())
@@ -84,7 +88,7 @@ class AbstractPeerToPeerTopologyTest(unittest.TestCase):
         self.assertFalse(topology.removeNode("100"))
         
     def testAddEdge(self):
-        topology = self.PeerToPeerTopologyForTest()
+        topology = PeerToPeerTopology()
         
         self.assertTrue(topology.addNode("1"))
         self.assertTrue(topology.hasNode("1"))
@@ -134,7 +138,7 @@ class AbstractPeerToPeerTopologyTest(unittest.TestCase):
         self.assertEquals("1", edge.getTargetNode().getId())
         
     def testRemoveEdge(self):
-        topology = self.PeerToPeerTopologyForTest()
+        topology = PeerToPeerTopology()
         
         self.assertTrue(topology.addNode("1"))
         topology.getNode("1").setPeer(pymockobject.create(IPeer))
@@ -190,9 +194,4 @@ class AbstractPeerToPeerTopologyTest(unittest.TestCase):
         
         self.assertTrue(topology.removeEdge("3", "1"))
         self.assertEquals(0, topology.countEdges("1"))
-        self.assertEquals(0, topology.countEdges("3"))  
-        
-    class PeerToPeerTopologyForTest(AbstractPeerToPeerTopology):
-        
-        def __init__(self):
-            self.initialize()
+        self.assertEquals(0, topology.countEdges("3"))

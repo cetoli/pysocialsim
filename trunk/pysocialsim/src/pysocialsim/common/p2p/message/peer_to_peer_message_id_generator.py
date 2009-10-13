@@ -29,6 +29,6 @@ class PeerToPeerMessageIdGenerator(object):
         requires(peer, IPeer)
         pre_condition(peer, lambda x: x <> None)
         
-        id = "urn:message:id:"+sha.new(str(peer.getType()) + peer.getId() + str(random.random() * 100000000000000000) + str(time())).hexdigest()
+        id = "urn:message:id:"+sha.new(str(peer.getType()) + peer.getId() + str(random.random() * 100000000000000000) + str(time.time())).hexdigest()
         
         return id

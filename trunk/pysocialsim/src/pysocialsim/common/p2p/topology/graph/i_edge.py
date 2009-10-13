@@ -26,4 +26,12 @@ class IEdge(object):
         @rtype: object
         """
         raise NotImplementedError()
+    
+    def getNode(self):
+        """
+        Gets the node.
+        @return: an INode
+        @rtype: INode
+        """
+        raise NotImplementedError()
         

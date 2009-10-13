@@ -13,6 +13,7 @@ from pysocialsim.common.error import io_error
 from pysocialsim.common.p2p.topology.graph.node import Node
 from pysocialsim.common.p2p.topology.graph.i_node_device import INodeDevice
 from pysocialsim.common.p2p.topology.graph.edge import Edge
+from pysocialsim.common.p2p.peer.i_peer import IPeer
 import pymockobject
 
 import unittest
@@ -175,13 +176,16 @@ class NodeTest(unittest.TestCase):
         node1 = Node("12", pymockobject.create(IPeerToPeerTopology))
         node2 = Node("15", pymockobject.create(IPeerToPeerTopology))
         
-        edge1 = Edge(node2)
+        node1.setPeer(pymockobject.create(IPeer))
+        node2.setPeer(pymockobject.create(IPeer))
+        
+        edge1 = Edge(node1, node2)
         self.assertTrue(node1.addEdge(edge1))
         self.assertEquals(1, node1.countEdges())
         self.assertEquals(edge1, node1.getEdge("15"))
         self.assertTrue(node1.getEdges())
         
-        edge2 = Edge(node1)
+        edge2 = Edge(node2, node1)
         self.assertTrue(node2.addEdge(edge2))
         self.assertEquals(1, node2.countEdges())
         self.assertEquals(edge2, node2.getEdge("12"))
@@ -204,13 +208,16 @@ class NodeTest(unittest.TestCase):
         node1 = Node("12", pymockobject.create(IPeerToPeerTopology))
         node2 = Node("15", pymockobject.create(IPeerToPeerTopology))
         
-        edge1 = Edge(node2)
+        node1.setPeer(pymockobject.create(IPeer))
+        node2.setPeer(pymockobject.create(IPeer))
+        
+        edge1 = Edge(node1, node2)
         self.assertTrue(node1.addEdge(edge1))
         self.assertEquals(1, node1.countEdges())
         self.assertEquals(edge1, node1.getEdge("15"))
         self.assertTrue(node1.getEdges())
         
-        edge2 = Edge(node1)
+        edge2 = Edge(node2, node1)
         self.assertTrue(node2.addEdge(edge2))
         self.assertEquals(1, node2.countEdges())
         self.assertEquals(edge2, node2.getEdge("12"))

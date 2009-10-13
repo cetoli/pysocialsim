@@ -45,27 +45,34 @@ class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
             network = topology.getPeerToPeerNetwork()
             network.getPeer(IPeerToPeerNetwork.SUPER_PEER, peer.getId()).joined()
             network.getPeer(IPeerToPeerNetwork.SUPER_PEER, peer.getId()).setNode(topology.getNode(peer.getId()))
+            topology.getNode(peer.getId()).setPeer(peer)
             semaphore.release()
             return topology.hasNode(peer.getId())
         else:
             topology.addNode(peer.getId())
             network = topology.getPeerToPeerNetwork()
             network.getPeer(IPeerToPeerNetwork.SUPER_PEER, peer.getId()).setNode(topology.getNode(peer.getId()))
+            topology.getNode(peer.getId()).setPeer(peer)
+            aux = False
             if topology.countNodes() > 0:
                 network = topology.getPeerToPeerNetwork()
                 peers = [n for n in network.getConnectedPeers(IPeerToPeerNetwork.SUPER_PEER) if n.getId() <> peer.getId()]
                 for i in range(network.getConnectionsBetweenSuperPeers()):
                     ix = randint(0, len(peers) - 1)
                     neighbor = peers[ix]
+                    
                     node = neighbor.getNode()
-                    topology.addEdge(peer.getId(), node.getId())
-                    topology.addEdge(node.getId(), peer.getId())
-                    network.getPeer(IPeerToPeerNetwork.SUPER_PEER, peer.getId()).joined()
-                    del peers[ix]
-                    if len(peers) == 0:
-                        break
+                    if node.countEdges() < network.getConnectionsBetweenSuperPeers():
+                        topology.addEdge(peer.getId(), neighbor.getId())
+                        topology.addEdge(neighbor.getId(), peer.getId())
+                        network.getPeer(IPeerToPeerNetwork.SUPER_PEER, peer.getId()).joined()
+                        aux = network.getPeer(IPeerToPeerNetwork.SUPER_PEER, peer.getId()).isJoined()
+                        del peers[ix]
+                        if len(peers) == 0:
+                            break
+                
             semaphore.release()
-            return topology.hasNode(peer.getId())
+            return aux
 
     @public
     def leave(self, peer):
@@ -96,7 +103,14 @@ class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
         return True
     
     @public
-    def routePeerToPeerMessage(self, peer, peerToPeerMessage):
+    def send(self, peer, peerToPeerMessage):
+        if not peer.hasNeighbor(peerToPeerMessage.getTargetId()):
+            return None
+        neighbor = peer.getNeighbor(peerToPeerMessage.getTargetId())
+        return neighbor.dispatchData(peerToPeerMessage)
+    
+    @public
+    def route(self, peer, peerToPeerMessage):
         semaphore = Semaphore()
         semaphore.acquire()
         
@@ -107,7 +121,7 @@ class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
         return True
     
     @public
-    def pushPeerToPeerMessage(self, peer, peerToPeerMessage):
+    def push(self, peer, peerToPeerMessage):
         semaphore = Semaphore()
         semaphore.acquire()
         
@@ -118,7 +132,7 @@ class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
         return peerToPeerMessage
     
     @public
-    def pingPeerToPeerMessage(self, peer, peerToPeerMessage):
+    def ping(self, peer, peerToPeerMessage):
         semaphore = Semaphore()
         semaphore.acquire()
         
@@ -135,5 +149,5 @@ class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
         return peerToPeerMessage
     
     @public
-    def pongPeerToPeerMessage(self, peer, peerToPeerMessage):
+    def pong(self, peer, peerToPeerMessage):
         raise NotImplementedError()

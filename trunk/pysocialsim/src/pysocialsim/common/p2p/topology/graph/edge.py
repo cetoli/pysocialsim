@@ -22,35 +22,37 @@ class Edge(Object, IEdge):
     @since: 18/09/2009
     """
 
-    def __init__(self, targetNode):
+    def __init__(self, node, targetNode):
         """
         Constructor of class
         @param targetNode: an Node
         @type targetNode: Node
         @rtype: None
         """
-        self.initialize(targetNode)
-        
-    def initialize(self, targetNode):
+        self.initialize(node, targetNode)
+
+    def initialize(self, node, targetNode):
         """
         Initialize the object.
         @param targetNode: an Node
         @type targetNode: Node
         @rtype: None
         """
+        requires(node, INode)
+        pre_condition(node, lambda x: x <> None)
         requires(targetNode, INode)
         pre_condition(targetNode, lambda x: x <> None)
         
+        self.__node = node
         self.__targetNode = targetNode
     
     @public
     def getTargetNode(self):
-        """
-        Gets the target node.
-        @return: a Node
-        @rtype: Node
-        """
-        return returns(self.__targetNode, INode)
+        return self.__targetNode
+
+    @public
+    def getNode(self):
+        return self.__node
     
     @public
     def dispatchData(self, data):
@@ -62,4 +64,10 @@ class Edge(Object, IEdge):
         @rtype: object
         """
         pre_condition(data, lambda x: x <> None)
-        return self.__targetNode.input(Node.NETWORK_ADAPTER, data)
+        return self.__node.output(Node.NETWORK_ADAPTER, data)
+
+    node = property(getNode, None, None, None)
+
+    targetNode = property(getTargetNode, None, None, None)
+    
+    

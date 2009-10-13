@@ -59,4 +59,23 @@ class IPeer(object):
     def join(self):
         raise NotImplementedError()
     
+    def receive(self, peerToPeerMessage):
+        raise NotImplementedError()
     
+    def send(self, peerToPeerMessage):
+        raise NotImplementedError()
+    
+    def getPeerToPeerNetwork(self):
+        raise NotImplementedError()
+    
+    def addNeighbor(self, neighbor):
+        raise NotImplementedError()
+    
+    def countNeighbors(self):
+        raise NotImplementedError()
+    
+    def hasNeighbor(self, peerId):
+        raise NotImplementedError()
+    
+    def getNeighbor(self, peerId):
+        raise NotImplementedError()

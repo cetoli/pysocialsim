@@ -9,6 +9,10 @@ Defines the module with the specification of INode class.
 
 class INode(object):
     
+    PROCESSOR = 0
+    DISK = 1
+    NETWORK_ADAPTER = 2
+    
     def __init__(self):
         raise NotImplementedError()
     

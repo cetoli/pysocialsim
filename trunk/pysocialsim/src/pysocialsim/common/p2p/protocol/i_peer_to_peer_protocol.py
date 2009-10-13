@@ -61,7 +61,7 @@ class IPeerToPeerProtocol(IPeerToPeerMessageCreator):
         """
         raise NotImplementedError()
     
-    def routePeerToPeerMessage(self, peerToPeerMessage):
+    def route(self, peer, peerToPeerMessage):
         """
         Routes the message to target.
         @param peerToPeerMessage: 
@@ -70,7 +70,7 @@ class IPeerToPeerProtocol(IPeerToPeerMessageCreator):
         """
         raise NotImplementedError()
     
-    def sendPeerToPeerMessage(self, peerToPeerMessage):
+    def send(self, peer, peerToPeerMessage):
         """
         Sends a peer-to-peer message to target peer.
         @param peerToPeerMessage: an IPeerToPeerMessage
@@ -80,7 +80,7 @@ class IPeerToPeerProtocol(IPeerToPeerMessageCreator):
         """
         raise NotImplementedError()
     
-    def receivePeerToPeerMessage(self, peerToPeerMessage):
+    def receive(self, peer, peerToPeerMessage):
         """
         Receives a peer-to-peer message to target peer.
         @param peerToPeerMessage: an IPeerToPeerMessage
@@ -90,14 +90,14 @@ class IPeerToPeerProtocol(IPeerToPeerMessageCreator):
         """
         raise NotImplementedError()
     
-    def pushPeerToPeerMessage(self, peer, peerToPeerMessage):
+    def push(self, peer, peerToPeerMessage):
         raise NotImplementedError()
     
-    def pullPeerToPeerMessage(self, peer, peerToPeerMessage):
+    def pull(self, peer, peerToPeerMessage):
         raise NotImplementedError()
     
-    def pingPeerToPeerMessage(self, peer, peerToPeerMessage):
+    def ping(self, peer, peerToPeerMessage):
         raise NotImplementedError()
     
-    def pongPeerToPeerMessage(self, peer, peerToPeerMessage):
+    def pong(self, peer, peerToPeerMessage):
         raise NotImplementedError()

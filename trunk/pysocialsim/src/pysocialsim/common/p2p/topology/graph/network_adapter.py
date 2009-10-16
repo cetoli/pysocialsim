@@ -27,7 +27,8 @@ class NetworkAdapter(AbstractNodeDevice):
     def input(self, data):
         node = self.getNode()
         peer = node.getPeer()
-        peer.receive(data)
+        protocol = peer.getPeerToPeerProtocol()
+        protocol.receive(peer, data)
         
 
     @public

@@ -9,6 +9,10 @@ Defines the module with the specification of IPeerToPeerMessage.
 
 class IPeerToPeerMessage(object):
     
+    ADVERTISEMENT = 0
+    QUERY = 1
+    SERVICE = 2
+    
     def __init__(self):
         raise NotImplementedError()
     
@@ -98,5 +102,13 @@ class IPeerToPeerMessage(object):
         @type ttl: int
         @param priority: priority of peer-to-peer message
         @type priority: int
+        """
+        raise NotImplementedError()
+    
+    def getType(self):
+        """
+        Gets the type of message.
+        @return: an int
+        @rtype: int
         """
         raise NotImplementedError()

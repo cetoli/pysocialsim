@@ -14,6 +14,7 @@ from pysocialsim.common.p2p.topology.i_peer_to_peer_topology import IPeerToPeerT
 from pysocialsim.common.p2p.message.abstract_peer_to_peer_message import AbstractPeertoPeerMessage
 from pysocialsim.common.p2p.message.peer_to_peer_message_creator import PeerToPeerMessageCreator
 from pysocialsim.common.p2p.message.i_peer_to_peer_message_creator import IPeerToPeerMessageCreator
+from pysocialsim.common.p2p.message.i_peer_to_peer_message import IPeerToPeerMessage
 
 class AbstractPeerToPeerProtocol(Object, IPeerToPeerProtocol):
     """
@@ -85,4 +86,4 @@ class AbstractPeerToPeerProtocol(Object, IPeerToPeerProtocol):
     class PingPeerToPeerMessage(AbstractPeertoPeerMessage):
         
         def __init__(self):
-            AbstractPeertoPeerMessage.initialize(self, IPeerToPeerProtocol.PING)
+            AbstractPeertoPeerMessage.initialize(self, IPeerToPeerMessage.ADVERTISEMENT, IPeerToPeerProtocol.PING)

@@ -27,6 +27,10 @@ class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
 
     def __init__(self):
         self.initialize()
+    
+    def initialize(self):
+        AbstractPeerToPeerProtocol.initialize(self)
+        self.__peerToPeerMessageHandlers = []
 
     @public
     def join(self, peer):
@@ -151,3 +155,22 @@ class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
     @public
     def pong(self, peer, peerToPeerMessage):
         raise NotImplementedError()
+    
+    @public
+    def receive(self, peer, peerToPeerMessage):
+        requires(peer, IPeer)
+        requires(peerToPeerMessage, IPeerToPeerMessage)
+        
+        pre_condition(peer, lambda x: x <> None)
+        pre_condition(peerToPeerMessage, lambda x: x <> None)
+        
+        peer.receive(peerToPeerMessage)
+        
+    @public
+    def configurePeer(self, peer):
+        requires(peer, IPeer)
+        pre_condition(peer, lambda x: x <> None)
+        
+        peer.configure(self.__peerToPeerMessageHandlers)
+
+    

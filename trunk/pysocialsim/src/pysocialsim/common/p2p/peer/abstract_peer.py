@@ -15,6 +15,7 @@ from threading import Semaphore
 from pysocialsim.common.p2p.protocol.i_peer_to_peer_protocol import IPeerToPeerProtocol
 from pysocialsim.common.p2p.message.peer_to_peer_message_id_generator import PeerToPeerMessageIdGenerator
 from pysocialsim.common.p2p.network.i_peer_to_peer_network import IPeerToPeerNetwork
+from pysocialsim.common.p2p.message.peer_to_peer_message_dispatcher import PeerToPeerMessageDispatcher
 
 class AbstractPeer(Object, IPeer):
     """
@@ -46,6 +47,8 @@ class AbstractPeer(Object, IPeer):
         self.__peerToPeerNetwork.addPeer(self.__type, self)
         self.__peerToPeerProtocol = self.__peerToPeerNetwork.getPeerToPeerProtocol(self.__type)
         self.__neighbors = {}
+        self.__peerToPeerMessageDispatcher = PeerToPeerMessageDispatcher(self)
+        self.__peerToPeerProtocol.configurePeer(self)
     
     @public    
     def getId(self):
@@ -105,7 +108,7 @@ class AbstractPeer(Object, IPeer):
     
     @public
     def receive(self, peerToPeerMessage):
-        print peerToPeerMessage.getHandle()
+        return self.__peerToPeerMessageDispatcher.handlePeerToPeerMessage(peerToPeerMessage)
     
     @public
     def send(self, peerToPeerMessage):
@@ -137,6 +140,18 @@ class AbstractPeer(Object, IPeer):
     def getNeighbor(self, peerId):
         return self.__neighbors[peerId]
     
+    @public
+    def getPeerToPeerProtocol(self):
+        return self.__peerToPeerProtocol
+    
+    @public
+    def configure(self, peerToPeerMessageHandlers):
+        numHandlers = 0
+        for handler in peerToPeerMessageHandlers:
+            self.__peerToPeerMessageDispatcher.registerPeerToPeerMessageHandler(handler)
+            numHandlers += 1
+        return numHandlers
+    
     id = property(getId, None, None, None)
 
     type = property(getType, None, None, None)
@@ -144,6 +159,8 @@ class AbstractPeer(Object, IPeer):
     node = property(getNode, setNode, None, None)
 
     peerToPeerNetwork = property(getPeerToPeerNetwork, None, None, None)
+
+    peerToPeerProtocol = property(getPeerToPeerProtocol, None, None, None)
         
     
         

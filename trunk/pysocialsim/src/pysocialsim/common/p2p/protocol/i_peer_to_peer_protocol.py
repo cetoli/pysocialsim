@@ -101,3 +101,6 @@ class IPeerToPeerProtocol(IPeerToPeerMessageCreator):
     
     def pong(self, peer, peerToPeerMessage):
         raise NotImplementedError()
+    
+    def configurePeer(self, peer):
+        raise NotImplementedError()

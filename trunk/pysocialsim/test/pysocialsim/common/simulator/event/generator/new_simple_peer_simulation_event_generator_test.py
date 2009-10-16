@@ -13,6 +13,7 @@ from pymockobject.events import ReturnValue
 from pysocialsim.common.simulator.scheduler import Scheduler
 from pysocialsim.common.simulator.event.generator.new_super_peer_simulation_event_generator import NewSuperPeerSimulationEventGenerator
 from pysocialsim.common.p2p.network.i_peer_to_peer_network import IPeerToPeerNetwork
+from pysocialsim.common.p2p.protocol.i_peer_to_peer_protocol import IPeerToPeerProtocol
 import pymockobject
 
 import unittest
@@ -26,7 +27,9 @@ class NewSuperPeerSimulationEventGeneratorTest(unittest.TestCase):
     
     def testGenerateSimulationEvents(self):
         simulation = pymockobject.create(ISimulation)
-        simulation.getPeerToPeerNetwork.will(ReturnValue(pymockobject.create(IPeerToPeerNetwork)))
+        network = pymockobject.create(IPeerToPeerNetwork)
+        network.getPeerToPeerProtocol.expects(IPeerToPeerNetwork.SIMPLE_PEER).will(ReturnValue(pymockobject.create(IPeerToPeerProtocol)))
+        simulation.getPeerToPeerNetwork.will(ReturnValue(network))
         simulator = pymockobject.create(ISimulator)
         scheduler = Scheduler(pymockobject.create(ISimulator))
         simulator.getScheduler.will(ReturnValue(scheduler))

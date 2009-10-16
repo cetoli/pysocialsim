@@ -9,7 +9,7 @@ Defines the module with the implementation of AbstractPeerToPeerMessage class.
 from pysocialsim.common.base.object import Object
 from pysocialsim.common.p2p.message.i_peer_to_peer_message import IPeerToPeerMessage
 from pysocialsim.common.base.decorators import public
-from copy import copy
+from copy import copy, deepcopy
 from pysocialsim.common.util.rotines import returns
 
 class AbstractPeertoPeerMessage(Object, IPeerToPeerMessage):
@@ -24,13 +24,22 @@ class AbstractPeertoPeerMessage(Object, IPeerToPeerMessage):
     def __init__(self):
         raise NotImplementedError()
 
-    def initialize(self, handle):
+    def initialize(self, type, handle):
         """
         Initializes peer-to-peer messages.
+        @param type: the type of message
+        @type type: int
         @param handle: the handle of peer-to-peer message
         @type handle: str
         """
+        self.__type = type
         self.__handle = handle
+        self.__sourceId = ""
+        self.__targetId = ""
+        self.__ttl = 0
+        self.__priority = 0
+        self.__hop = 0
+        self.__id = ""
         
 
     @public
@@ -76,7 +85,14 @@ class AbstractPeertoPeerMessage(Object, IPeerToPeerMessage):
     
     @public
     def clone(self):
-        return returns(copy(self), IPeerToPeerMessage)
+        msgClone = deepcopy(self)
+        msgClone.init(self.__id, self.__sourceId, self.__targetId, self.__ttl, self.__priority)
+        
+        return returns(msgClone, IPeerToPeerMessage)
+    
+    @public
+    def getType(self):
+        return self.__type
 
     handle = property(getHandle, None, None, None)
 
@@ -91,4 +107,6 @@ class AbstractPeertoPeerMessage(Object, IPeerToPeerMessage):
     priority = property(getPriority, None, None, None)
 
     hop = property(getHop, setHop, None, None)
+
+    type = property(getType, None, None, None)
     

@@ -89,6 +89,7 @@ class PeerToPeerMessageDispatcher(Object):
         pre_condition(peerToPeerMessage, lambda x: self.__peerToPeerMessageHandlers.has_key(x.getHandle()))
         
         handlerClone = self.__peerToPeerMessageHandlers[peerToPeerMessage.getHandle()].clone()
+        handlerClone.init(self.__peer)
         self.PeerToPeerMessageHandlingThread(handlerClone, peerToPeerMessage).start()
         return peerToPeerMessage
     

@@ -15,6 +15,7 @@ from pysocialsim.common.p2p.peer.super_peer import SuperPeer
 from pysocialsim.common.p2p.peer.peer_id_generator import PeerIdGenerator
 from pysocialsim.common.p2p.peer.simple_peer import SimplePeer
 from pysocialsim.common.p2p.peer.i_peer import IPeer
+from pymockobject.events import ReturnValue
 import pymockobject
 
 import unittest
@@ -75,21 +76,24 @@ class PeerToPeerNetworkTest(unittest.TestCase):
     def testAddPeerInPeerToPeerNetwork(self):
         simulation = pymockobject.create(ISimulation)
         network = PeerToPeerNetwork(simulation)
+        protocol = pymockobject.create(IPeerToPeerProtocol)
+        network.registerPeerToPeerProtocol(IPeerToPeerNetwork.SUPER_PEER, protocol)
+        network.registerPeerToPeerProtocol(IPeerToPeerNetwork.SIMPLE_PEER, protocol)
         
-        superPeer1 = SuperPeer(PeerIdGenerator.generatePeerId(IPeerToPeerNetwork.SUPER_PEER), pymockobject.create(IPeerToPeerNetwork))
+        superPeer1 = SuperPeer(PeerIdGenerator.generatePeerId(IPeerToPeerNetwork.SUPER_PEER), network)
         superPeer1.joined()
         
-        self.assertTrue(network.addPeer(IPeerToPeerNetwork.SUPER_PEER, superPeer1))
+        #self.assertTrue(network.addPeer(IPeerToPeerNetwork.SUPER_PEER, superPeer1))
         self.assertEquals(1, network.countPeers(IPeerToPeerNetwork.SUPER_PEER))
         self.assertTrue(superPeer1 in network.getPeers(IPeerToPeerNetwork.SUPER_PEER))
         self.assertTrue(not superPeer1 in network.getPeers(IPeerToPeerNetwork.SIMPLE_PEER))
         self.assertTrue(superPeer1 in network.getConnectedPeers(IPeerToPeerNetwork.SUPER_PEER))
         self.assertTrue(not superPeer1 in network.getDisconnectedPeers(IPeerToPeerNetwork.SUPER_PEER))
         
-        superPeer2 = SuperPeer(PeerIdGenerator.generatePeerId(IPeerToPeerNetwork.SUPER_PEER), pymockobject.create(IPeerToPeerNetwork))
+        superPeer2 = SuperPeer(PeerIdGenerator.generatePeerId(IPeerToPeerNetwork.SUPER_PEER), network)
         superPeer2.leaved()
         
-        self.assertTrue(network.addPeer(IPeerToPeerNetwork.SUPER_PEER, superPeer2))
+        #self.assertTrue(network.addPeer(IPeerToPeerNetwork.SUPER_PEER, superPeer2))
         self.assertEquals(2, network.countPeers(IPeerToPeerNetwork.SUPER_PEER))
         self.assertTrue(superPeer2 in network.getPeers(IPeerToPeerNetwork.SUPER_PEER))
         self.assertTrue(not superPeer2 in network.getPeers(IPeerToPeerNetwork.SIMPLE_PEER))
@@ -104,20 +108,20 @@ class PeerToPeerNetworkTest(unittest.TestCase):
         self.assertTrue(not superPeer1 in network.getConnectedPeers(IPeerToPeerNetwork.SUPER_PEER))
         self.assertTrue(superPeer1 in network.getDisconnectedPeers(IPeerToPeerNetwork.SUPER_PEER))
         
-        simplePeer1 = SimplePeer(PeerIdGenerator.generatePeerId(IPeerToPeerNetwork.SIMPLE_PEER), pymockobject.create(IPeerToPeerNetwork))
+        simplePeer1 = SimplePeer(PeerIdGenerator.generatePeerId(IPeerToPeerNetwork.SIMPLE_PEER), network)
         simplePeer1.joined()
         
-        self.assertTrue(network.addPeer(IPeerToPeerNetwork.SIMPLE_PEER, simplePeer1))
+        #self.assertTrue(network.addPeer(IPeerToPeerNetwork.SIMPLE_PEER, simplePeer1))
         self.assertEquals(1, network.countPeers(IPeerToPeerNetwork.SIMPLE_PEER))
         self.assertTrue(simplePeer1 in network.getPeers(IPeerToPeerNetwork.SIMPLE_PEER))
         self.assertTrue(not simplePeer1 in network.getPeers(IPeerToPeerNetwork.SUPER_PEER))
         self.assertTrue(simplePeer1 in network.getConnectedPeers(IPeerToPeerNetwork.SIMPLE_PEER))
         self.assertTrue(not simplePeer1 in network.getDisconnectedPeers(IPeerToPeerNetwork.SIMPLE_PEER))
         
-        simplePeer2 = SimplePeer(PeerIdGenerator.generatePeerId(IPeerToPeerNetwork.SIMPLE_PEER), pymockobject.create(IPeerToPeerNetwork))
+        simplePeer2 = SimplePeer(PeerIdGenerator.generatePeerId(IPeerToPeerNetwork.SIMPLE_PEER), network)
         simplePeer2.joined()
         
-        self.assertTrue(network.addPeer(IPeerToPeerNetwork.SIMPLE_PEER, simplePeer2))
+        #self.assertTrue(network.addPeer(IPeerToPeerNetwork.SIMPLE_PEER, simplePeer2))
         self.assertEquals(2, network.countPeers(IPeerToPeerNetwork.SIMPLE_PEER))
         self.assertTrue(simplePeer2 in network.getPeers(IPeerToPeerNetwork.SIMPLE_PEER))
         self.assertTrue(not simplePeer2 in network.getPeers(IPeerToPeerNetwork.SUPER_PEER))

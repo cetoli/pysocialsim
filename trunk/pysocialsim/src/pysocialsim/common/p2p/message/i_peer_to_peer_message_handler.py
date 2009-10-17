@@ -58,4 +58,9 @@ class IPeerToPeerMessageHandler(object):
         @rtype: IPeerToPeerMessageHandler
         """
         raise NotImplementedError()
-        
+    
+    def init(self, peer):
+        """
+        Initializes the copy of object.
+        """
+        raise NotImplementedError()

@@ -15,6 +15,8 @@ from random import randint
 from pysocialsim.common.p2p.network.i_peer_to_peer_network import IPeerToPeerNetwork
 from sets import ImmutableSet
 from pysocialsim.common.p2p.message.i_peer_to_peer_message import IPeerToPeerMessage
+from pysocialsim.common.p2p.message.abstract_peer_to_peer_message_handler import AbstractPeerToPeerMessageHandler
+from pysocialsim.common.p2p.protocol.i_peer_to_peer_protocol import IPeerToPeerProtocol
 
 class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
     """
@@ -31,6 +33,7 @@ class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
     def initialize(self):
         AbstractPeerToPeerProtocol.initialize(self)
         self.__peerToPeerMessageHandlers = []
+        self.__peerToPeerMessageHandlers.append(self.PingHandler())
 
     @public
     def join(self, peer):
@@ -173,4 +176,11 @@ class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
         
         peer.configure(self.__peerToPeerMessageHandlers)
 
-    
+        
+    class PingHandler(AbstractPeerToPeerMessageHandler):
+        
+        def __init__(self):
+            AbstractPeerToPeerMessageHandler.initialize(self, IPeerToPeerProtocol.PING)
+        
+        def execute(self):
+            pass

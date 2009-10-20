@@ -17,6 +17,7 @@ from sets import ImmutableSet
 from pysocialsim.common.p2p.message.i_peer_to_peer_message import IPeerToPeerMessage
 from pysocialsim.common.p2p.message.abstract_peer_to_peer_message_handler import AbstractPeerToPeerMessageHandler
 from pysocialsim.common.p2p.protocol.i_peer_to_peer_protocol import IPeerToPeerProtocol
+from pysocialsim.common.p2p.message.peer_to_peer_message_id_generator import PeerToPeerMessageIdGenerator
 
 class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
     """
@@ -33,7 +34,8 @@ class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
     def initialize(self):
         AbstractPeerToPeerProtocol.initialize(self)
         self.__peerToPeerMessageHandlers = []
-        self.__peerToPeerMessageHandlers.append(self.PingHandler())
+        self.__peerToPeerMessageHandlers.append(self.PingPeerToPeerMessageHandler())
+        self.__peerToPeerMessageHandlers.append(self.PongPeerToPeerMessageHandler())
 
     @public
     def join(self, peer):
@@ -177,10 +179,73 @@ class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
         peer.configure(self.__peerToPeerMessageHandlers)
 
         
-    class PingHandler(AbstractPeerToPeerMessageHandler):
+    class PingPeerToPeerMessageHandler(AbstractPeerToPeerMessageHandler):
         
         def __init__(self):
             AbstractPeerToPeerMessageHandler.initialize(self, IPeerToPeerProtocol.PING)
         
         def execute(self):
-            pass
+            message = self.getPeerToPeerMessage()
+            
+            peer = self.getPeer()
+            
+            protocol = peer.getPeerToPeerProtocol()
+            
+            pongMessage = protocol.createPeerToPeerMessage(IPeerToPeerProtocol.PONG)
+            
+            id = PeerToPeerMessageIdGenerator.generatePeerToPeerMessageId(peer)
+            sourceId = peer.getId()
+            targetId = message.getSourceId()
+            ttl = message.getHop()
+            priority = message.getPriority()
+            
+            pongMessage.init(id, sourceId, targetId, ttl, priority)
+            for peerId in message.getPeerIds():
+                pongMessage.registerPeerId(peerId)
+            
+            peer.send(pongMessage)
+            
+            if message.getHop() + 1 == message.getTTL():
+                return
+            
+            if message.countPeerIds() == peer.countNeighbors():
+                return
+            
+            if message.getHop() < message.getTTL():
+                
+                for neighbor in peer.getNeighbors():
+                    if message.hasPeerId(neighbor.getId()):
+                        continue
+
+                    msgClone = message.clone()
+                    msgClone.init(message.getId(), peer.getId(), neighbor.getId(), message.getTTL(), message.getPriority())
+                    msgClone.setHop(message.getHop() + 1)
+                    msgClone.registerPeerId(peer.getId())
+                    neighbor.dispatchData(msgClone)
+                    
+            
+    class PongPeerToPeerMessageHandler(AbstractPeerToPeerMessageHandler):
+        
+        def __init__(self):
+            AbstractPeerToPeerMessageHandler.initialize(self, IPeerToPeerProtocol.PONG)
+            
+        def execute(self):
+            message = self.getPeerToPeerMessage()
+            peer = self.getPeer()
+            
+            if peer.getId() == message.getFirst():
+                print "PONG CHEGOU", message.getPeerIds()
+            else:
+                message.unregisterPeerId(peer.getId())
+                peerId = message.getLast()
+                
+                if not peer.hasNeighbor(peerId):
+                    return
+                
+                cloneMsg = message.clone()
+                
+                cloneMsg.setHop(message.getHop() + 1)
+                cloneMsg.init(message.getId(), peer.getId(), peerId, message.getTTL(), message.getPriority())
+                
+                neighbor = peer.getNeighbor(peerId)
+                neighbor.dispatchData(cloneMsg)                

@@ -24,6 +24,7 @@ class AbstractPeerToPeerMessageHandler(Object, IPeerToPeerMessageHandler):
 
     def initialize(self, handle):
         self.__handle = handle
+        self.__peerToPeerProtocol = None
         self.__peerToPeerMessage = None
         self.__peer = None
     
@@ -43,6 +44,7 @@ class AbstractPeerToPeerMessageHandler(Object, IPeerToPeerMessageHandler):
     def handlePeerToPeerMessage(self, peerToPeerMessage):
         self.__peerToPeerMessage = peerToPeerMessage
         self.execute()
+        return peerToPeerMessage
         
     def execute(self):
         raise NotImplementedError()
@@ -62,3 +64,4 @@ class AbstractPeerToPeerMessageHandler(Object, IPeerToPeerMessageHandler):
     peerToPeerMessage = property(getPeerToPeerMessage, None, None, None)
 
     peer = property(getPeer, None, None, None)
+

@@ -10,8 +10,10 @@ from pysocialsim.common.base.object import Object
 from pysocialsim.common.base.decorators import public
 from pysocialsim.common.util.rotines import requires, pre_condition
 from pysocialsim.common.p2p.message.i_peer_to_peer_message_handler import IPeerToPeerMessageHandler
-from threading import Thread
+from threading import Thread, BoundedSemaphore
 from pysocialsim.common.p2p.message.i_peer_to_peer_message import IPeerToPeerMessage
+from random import randint
+import time
 
 class PeerToPeerMessageDispatcher(Object):
     """
@@ -88,9 +90,20 @@ class PeerToPeerMessageDispatcher(Object):
         requires(peerToPeerMessage, IPeerToPeerMessage)
         pre_condition(peerToPeerMessage, lambda x: self.__peerToPeerMessageHandlers.has_key(x.getHandle()))
         
-        handlerClone = self.__peerToPeerMessageHandlers[peerToPeerMessage.getHandle()].clone()
-        handlerClone.init(self.__peer)
-        self.PeerToPeerMessageHandlingThread(handlerClone, peerToPeerMessage).start()
+        try:
+            pool = BoundedSemaphore(1)
+            pool.acquire()
+            handlerClone = self.__peerToPeerMessageHandlers[peerToPeerMessage.getHandle()].clone()
+            handlerClone.init(self.__peer)
+            threadHandling = self.PeerToPeerMessageHandlingThread(handlerClone, peerToPeerMessage)
+            threadHandling.start()
+            threadHandling.join()
+            pool.release()
+        except:
+            time.sleep(1)
+            print 333333333333333333333333333 
+            self.handlePeerToPeerMessage(peerToPeerMessage)
+               
         return peerToPeerMessage
     
     class PeerToPeerMessageHandlingThread(Thread):

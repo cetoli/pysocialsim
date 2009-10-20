@@ -101,8 +101,9 @@ class AbstractPeer(Object, IPeer):
         if len(self.__neighbors) > 0:
             for n in self.__neighbors.values():
                 message = self.__peerToPeerProtocol.createPeerToPeerMessage(IPeerToPeerProtocol.PING)
+                message.registerPeerId(self.__id)
                 messageId = PeerToPeerMessageIdGenerator.generatePeerToPeerMessageId(self)           
-                message.init(messageId, self.__id, n.getId(), self.__peerToPeerNetwork.countPeers(IPeerToPeerNetwork.SUPER_PEER), simulation.getCurrentSimulationTime())
+                message.init(messageId, self.__id, n.getId(), len(self.__peerToPeerNetwork.getConnectedPeers(IPeerToPeerNetwork.SUPER_PEER)) - 1, simulation.getCurrentSimulationTime())
                 self.send(message)
         return aux
     
@@ -151,6 +152,10 @@ class AbstractPeer(Object, IPeer):
             self.__peerToPeerMessageDispatcher.registerPeerToPeerMessageHandler(handler)
             numHandlers += 1
         return numHandlers
+    
+    @public
+    def getNeighbors(self):
+        return self.__neighbors.values()
     
     id = property(getId, None, None, None)
 

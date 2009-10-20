@@ -118,7 +118,7 @@ class AbstractPeerToPeerNetwork(Object, IPeerToPeerNetwork):
                 peers.append(peer)
                 
         sem.release()
-        return peers.__iter__()
+        return peers
 
     @public
     def getDisconnectedPeers(self, peerType):

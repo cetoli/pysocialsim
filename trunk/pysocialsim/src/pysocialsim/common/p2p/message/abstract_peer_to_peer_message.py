@@ -10,7 +10,7 @@ from pysocialsim.common.base.object import Object
 from pysocialsim.common.p2p.message.i_peer_to_peer_message import IPeerToPeerMessage
 from pysocialsim.common.base.decorators import public
 from copy import deepcopy
-from pysocialsim.common.util.rotines import returns
+from pysocialsim.common.util.rotines import returns, requires, pre_condition
 
 class AbstractPeertoPeerMessage(Object, IPeerToPeerMessage):
     """
@@ -40,6 +40,7 @@ class AbstractPeertoPeerMessage(Object, IPeerToPeerMessage):
         self.__priority = 0
         self.__hop = 0
         self.__id = ""
+        self.__peerIds = []
         
 
     @public
@@ -87,12 +88,81 @@ class AbstractPeertoPeerMessage(Object, IPeerToPeerMessage):
     def clone(self):
         msgClone = deepcopy(self)
         msgClone.init(self.__id, self.__sourceId, self.__targetId, self.__ttl, self.__priority)
-        
+        msgClone.setHop(self.__hop)
+        for peerId in self.__peerIds:
+            msgClone.registerPeerId(peerId)
         return returns(msgClone, IPeerToPeerMessage)
     
     @public
     def getType(self):
         return self.__type
+    
+    @public
+    def registerPeerId(self, peerId):
+        requires(peerId, str)
+        
+        if peerId in self.__peerIds:
+            return False
+        
+        self.__peerIds.append(peerId)
+        return peerId in self.__peerIds
+
+    @public
+    def unregisterPeerId(self, peerId):
+        requires(peerId, str)
+        if not peerId in self.__peerIds:
+            return False
+        self.__peerIds.remove(peerId)
+        return not peerId in self.__peerIds
+
+    @public
+    def countPeerIds(self):
+        return returns(len(self.__peerIds), int)
+
+    @public
+    def hasPeerId(self, peerId):
+        requires(peerId, str)
+        return peerId in self.__peerIds
+
+    @public
+    def getPeerIds(self):
+        return self.__peerIds
+    
+    @public
+    def getFirst(self):
+        if len(self.__peerIds) == 0:
+            return None
+        return self.__peerIds[0]
+    
+    @public
+    def getLast(self):
+        if len(self.__peerIds) == 0:
+            return None
+        return self.__peerIds[len(self.__peerIds) - 1]
+    
+    @public
+    def registerParameter(self, name, value):
+        raise NotImplementedError()
+    
+    @public
+    def getParameter(self, name):
+        raise NotImplementedError()
+    
+    @public
+    def unregisterParameter(self, name):
+        raise NotImplementedError()
+    
+    @public
+    def countParameters(self):
+        raise NotImplementedError()
+    
+    @public
+    def getParameterNames(self):
+        raise NotImplementedError()
+    
+    @public
+    def getParameterValues(self):
+        raise NotImplementedError()
 
     handle = property(getHandle, None, None, None)
 
@@ -108,5 +178,4 @@ class AbstractPeertoPeerMessage(Object, IPeerToPeerMessage):
 
     hop = property(getHop, setHop, None, None)
 
-    type = property(getType, None, None, None)
-    
+    type = property(getType, None, None, None)    

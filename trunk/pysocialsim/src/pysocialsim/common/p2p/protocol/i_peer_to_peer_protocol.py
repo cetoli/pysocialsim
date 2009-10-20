@@ -11,6 +11,7 @@ from pysocialsim.common.p2p.message.i_peer_to_peer_message_creator import IPeerT
 class IPeerToPeerProtocol(IPeerToPeerMessageCreator):
     
     PING = "PING"
+    PONG = "PONG"
     
     """
     Defines common operation for peer-to-peer protocols.

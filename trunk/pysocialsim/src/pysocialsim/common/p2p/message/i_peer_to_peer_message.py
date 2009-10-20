@@ -112,3 +112,42 @@ class IPeerToPeerMessage(object):
         @rtype: int
         """
         raise NotImplementedError()
+    
+    def registerPeerId(self, peerId):
+        raise NotImplementedError()
+    
+    def unregisterPeerId(self, peerId):
+        raise NotImplementedError()
+    
+    def countPeerIds(self):
+        raise NotImplementedError()
+    
+    def hasPeerId(self, peerId):
+        raise NotImplementedError()
+    
+    def getPeerIds(self):
+        raise NotImplementedError()
+    
+    def getFirst(self):
+        raise NotImplementedError()
+    
+    def getLast(self):
+        raise NotImplemented()
+    
+    def registerParameter(self, name, value):
+        raise NotImplementedError()
+    
+    def getParameter(self, name):
+        raise NotImplementedError()
+    
+    def unregisterParameter(self, name):
+        raise NotImplementedError()
+    
+    def countParameters(self):
+        raise NotImplementedError()
+    
+    def getParameterNames(self):
+        raise NotImplementedError()
+    
+    def getParameterValues(self):
+        raise NotImplementedError()

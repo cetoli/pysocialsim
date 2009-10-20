@@ -34,6 +34,7 @@ class AbstractPeerToPeerProtocol(Object, IPeerToPeerProtocol):
         self.__peerToPeerTopology = None
         self.__peerToPeerMessageCreator = PeerToPeerMessageCreator()
         self.__peerToPeerMessageCreator.registerPeerToPeerMessage(self.PingPeerToPeerMessage())
+        self.__peerToPeerMessageCreator.registerPeerToPeerMessage(self.PongPeerToPeerMessage())
         
     def getPeerToPeerMessageCreator(self):
         return returns(self.__peerToPeerMessageCreator, IPeerToPeerMessageCreator)
@@ -87,3 +88,8 @@ class AbstractPeerToPeerProtocol(Object, IPeerToPeerProtocol):
         
         def __init__(self):
             AbstractPeertoPeerMessage.initialize(self, IPeerToPeerMessage.ADVERTISEMENT, IPeerToPeerProtocol.PING)
+    
+    class PongPeerToPeerMessage(AbstractPeertoPeerMessage):
+        
+        def __init__(self):
+            AbstractPeertoPeerMessage.initialize(self, IPeerToPeerMessage.ADVERTISEMENT, IPeerToPeerProtocol.PONG)

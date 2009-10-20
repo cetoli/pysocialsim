@@ -85,3 +85,6 @@ class IPeer(object):
     
     def configure(self, peerToPeerMessageHandlers):
         raise NotImplementedError()
+    
+    def getNeighbors(self):
+        raise NotImplementedError()

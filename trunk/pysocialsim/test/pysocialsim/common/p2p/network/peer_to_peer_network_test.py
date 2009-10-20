@@ -31,8 +31,8 @@ class PeerToPeerNetworkTest(unittest.TestCase):
         self.assertEquals(simulation, network.getSimulation())
         self.assertEquals(0, network.getConnectionsBetweenSuperPeers())
         
-        self.assertTrue(network.getConnectedPeers(IPeerToPeerNetwork.SUPER_PEER))
-        self.assertTrue(network.getConnectedPeers(IPeerToPeerNetwork.SIMPLE_PEER))
+        self.assertFalse(network.getConnectedPeers(IPeerToPeerNetwork.SUPER_PEER))
+        self.assertFalse(network.getConnectedPeers(IPeerToPeerNetwork.SIMPLE_PEER))
         
         self.assertTrue(network.getDisconnectedPeers(IPeerToPeerNetwork.SUPER_PEER))
         self.assertTrue(network.getDisconnectedPeers(IPeerToPeerNetwork.SIMPLE_PEER))

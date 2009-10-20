@@ -41,6 +41,7 @@ class AbstractPeertoPeerMessage(Object, IPeerToPeerMessage):
         self.__hop = 0
         self.__id = ""
         self.__peerIds = []
+        self.__parameters = {}
         
 
     @public
@@ -83,6 +84,7 @@ class AbstractPeertoPeerMessage(Object, IPeerToPeerMessage):
         self.__ttl = ttl
         self.__priority = priority
         self.__hop = 0
+        
     
     @public
     def clone(self):
@@ -91,6 +93,8 @@ class AbstractPeertoPeerMessage(Object, IPeerToPeerMessage):
         msgClone.setHop(self.__hop)
         for peerId in self.__peerIds:
             msgClone.registerPeerId(peerId)
+        for name in self.__parameters.keys():
+            msgClone.registerParameter(name, self.__parameters[name])
         return returns(msgClone, IPeerToPeerMessage)
     
     @public
@@ -142,27 +146,27 @@ class AbstractPeertoPeerMessage(Object, IPeerToPeerMessage):
     
     @public
     def registerParameter(self, name, value):
-        raise NotImplementedError()
+        self.__parameters[name] = value
     
     @public
     def getParameter(self, name):
-        raise NotImplementedError()
+        return self.__parameters[name]
     
     @public
     def unregisterParameter(self, name):
-        raise NotImplementedError()
+        del self.__parameters[name]
     
     @public
     def countParameters(self):
-        raise NotImplementedError()
+        return len(self.__parameters)
     
     @public
     def getParameterNames(self):
-        raise NotImplementedError()
+        return self.__parameters.keys()
     
     @public
     def getParameterValues(self):
-        raise NotImplementedError()
+        return self.__parameters.values()
 
     handle = property(getHandle, None, None, None)
 

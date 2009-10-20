@@ -35,6 +35,8 @@ class AbstractPeerToPeerNetwork(Object, IPeerToPeerNetwork):
         self.__peers = {IPeerToPeerNetwork.SUPER_PEER: {}, IPeerToPeerNetwork.SIMPLE_PEER: {}}
         self.__connectionsBetweenSuperPeers = 0
         self.__peerToPeerProtocols = {}
+        self.__connectionsBetweenSuperPeerAndSimplePeers = 0
+        self.__connectionsBetweenSimplePeerAndSuperPeers = 0
     
     @public
     def getSimulation(self):
@@ -170,9 +172,29 @@ class AbstractPeerToPeerNetwork(Object, IPeerToPeerNetwork):
         
         return self.__peers[peer.getType()].has_key(peer.getId())
     
+    @public
+    def getConnectionsBetweenSuperPeerAndSimplePeers(self):
+        return self.__connectionsBetweenSuperPeerAndSimplePeers
+
+    @public
+    def getConnectionsBetweenSimplePeerAndSuperPeers(self):
+        return self.__connectionsBetweenSimplePeerAndSuperPeers
+
+    @public
+    def setConnectionsBetweenSuperPeerAndSimplePeers(self, value):
+        self.__connectionsBetweenSuperPeerAndSimplePeers = value
+
+    @public
+    def setConnectionsBetweenSimplePeerAndSuperPeers(self, value):
+        self.__connectionsBetweenSimplePeerAndSuperPeers = value
+    
     simulation = property(getSimulation, setSimulation, None, None)
 
     connectionsBetweenSuperPeers = property(getConnectionsBetweenSuperPeers, setConnectionsBetweenSuperPeers, None, None)
+
+    connectionsBetweenSuperPeerAndSimplePeers = property(getConnectionsBetweenSuperPeerAndSimplePeers, setConnectionsBetweenSuperPeerAndSimplePeers, None, None)
+
+    connectionsBetweenSimplePeerAndSuperPeers = property(getConnectionsBetweenSimplePeerAndSuperPeers, setConnectionsBetweenSimplePeerAndSuperPeers, None, None)
 
     
 

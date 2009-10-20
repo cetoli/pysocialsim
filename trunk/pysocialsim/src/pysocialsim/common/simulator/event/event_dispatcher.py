@@ -71,6 +71,7 @@ class EventDispatcher(Object):
             self.EventHandlingThread(self, self.__eventHandlers[simulationEvent.getHandle()], simulationEvent).start()
         except:
             time.sleep(1)
+            print 88888888888888888888888888888888888888888888888888
             self.handleSimulationEvent(simulationEvent)
         return returns(simulationEvent, ISimulationEvent)
     

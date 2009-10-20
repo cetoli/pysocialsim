@@ -192,6 +192,8 @@ class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
             protocol = peer.getPeerToPeerProtocol()
             
             pongMessage = protocol.createPeerToPeerMessage(IPeerToPeerProtocol.PONG)
+            pongMessage.registerParameter("backTrace", [peer.getId()])
+            
             
             id = PeerToPeerMessageIdGenerator.generatePeerToPeerMessageId(peer)
             sourceId = peer.getId()
@@ -234,7 +236,8 @@ class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
             peer = self.getPeer()
             
             if peer.getId() == message.getFirst():
-                print "PONG CHEGOU", message.getPeerIds()
+                network = peer.getPeerToPeerNetwork()
+                print "PONG CHEGOU", message.getParameter("backTrace")
             else:
                 message.unregisterPeerId(peer.getId())
                 peerId = message.getLast()
@@ -243,6 +246,7 @@ class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
                     return
                 
                 cloneMsg = message.clone()
+                cloneMsg.getParameter("backTrace").append(peer.getId())
                 
                 cloneMsg.setHop(message.getHop() + 1)
                 cloneMsg.init(message.getId(), peer.getId(), peerId, message.getTTL(), message.getPriority())

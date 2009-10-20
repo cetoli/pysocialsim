@@ -178,4 +178,16 @@ class IPeerToPeerNetwork(object):
     def hasPeer(self, peer):
         raise NotImplementedError()
     
+    def setConnectionsBetweenSuperPeerAndSimplePeers(self, superPeerAndSimplePeers):
+        raise NotImplementedError()
+    
+    def getConnectionsBetweenSuperPeerAndSimplePeers(self):
+        raise NotImplementedError()
+    
+    def setConnectionsBetweenSimplePeerAndSuperPeers(self, simplePeerAndSuperPeers):
+        raise NotImplementedError()
+    
+    def getConnectionsBetweenSimplePeerAndSuperPeers(self):
+        raise NotImplementedError()
+    
     

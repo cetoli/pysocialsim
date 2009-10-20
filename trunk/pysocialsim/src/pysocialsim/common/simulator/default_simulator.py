@@ -111,7 +111,9 @@ class DefaultSimulator(Object, ISimulator):
             simulation = self.__simulator.getSimulation()
             while simulation.countSimulationEvents(self.__handle) > 0:
                 event = simulation.getSimulationEvent(self.__handle)
-                if simulation.getCurrentSimulationTime() == event.getPriority():
+                if event.getHandle() == "END_SIMULATION" and simulation.getCurrentSimulationTime() == event.getPriority():
+                    self.__simulator.handleSimulationEvent(simulation.unregisterSimulationEvent(self.__handle))
+                if simulation.getCurrentSimulationTime() == event.getPriority() or simulation.getCurrentSimulationTime() > event.getPriority():
                     self.__simulator.handleSimulationEvent(simulation.unregisterSimulationEvent(self.__handle))
         
     class ExitSimulationEvent(AbstractSimulationEvent):

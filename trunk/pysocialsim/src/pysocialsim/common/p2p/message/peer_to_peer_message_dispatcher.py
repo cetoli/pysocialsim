@@ -114,6 +114,7 @@ class PeerToPeerMessageDispatcher(Object):
             return None
         msg = self.__queue.get()
         sem.release()
+        self.__queue.task_done()
         return msg
     
     @public

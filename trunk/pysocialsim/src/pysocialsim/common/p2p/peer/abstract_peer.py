@@ -95,21 +95,24 @@ class AbstractPeer(Object, IPeer):
     @public
     def join(self):
         aux = self.__peerToPeerProtocol.join(self)
-        topology = self.__peerToPeerProtocol.getPeerToPeerTopology()
-        self.setNode(topology.getNode(self.__id))
-        simulation = self.__peerToPeerNetwork.getSimulation()
-        if len(self.__neighbors) > 0:
-            for n in self.__neighbors.values():
-                message = self.__peerToPeerProtocol.createPeerToPeerMessage(IPeerToPeerProtocol.PING)
-                message.registerPeerId(self.__id)
-                messageId = PeerToPeerMessageIdGenerator.generatePeerToPeerMessageId(self)           
-                message.init(messageId, self.__id, n.getId(), len(self.__peerToPeerNetwork.getConnectedPeers(IPeerToPeerNetwork.SUPER_PEER)) - 1, simulation.getCurrentSimulationTime())
-                self.OperationThread(lambda: self.send(message)).start()
+        if aux:
+            topology = self.__peerToPeerProtocol.getPeerToPeerTopology()
+            self.setNode(topology.getNode(self.__id))
+            simulation = self.__peerToPeerNetwork.getSimulation()
+            self.joined()
+            self.__peerToPeerMessageDispatcher.on()
+            if len(self.__neighbors) > 0:
+                for n in self.__neighbors.values():
+                    message = self.__peerToPeerProtocol.createPeerToPeerMessage(IPeerToPeerProtocol.PING)
+                    message.registerPeerId(self.__id)
+                    messageId = PeerToPeerMessageIdGenerator.generatePeerToPeerMessageId(self)           
+                    message.init(messageId, self.__id, n.getId(), len(self.__peerToPeerNetwork.getConnectedPeers(IPeerToPeerNetwork.SUPER_PEER)) - 1, simulation.getCurrentSimulationTime())
+                    self.send(message)
         return aux
     
     @public
     def receive(self, peerToPeerMessage):
-        return self.__peerToPeerMessageDispatcher.handlePeerToPeerMessage(peerToPeerMessage)
+        return self.__peerToPeerMessageDispatcher.registerPeerToPeerMessage(peerToPeerMessage)
     
     @public
     def send(self, peerToPeerMessage):

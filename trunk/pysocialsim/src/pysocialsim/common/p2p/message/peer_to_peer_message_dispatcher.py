@@ -10,10 +10,9 @@ from pysocialsim.common.base.object import Object
 from pysocialsim.common.base.decorators import public
 from pysocialsim.common.util.rotines import requires, pre_condition
 from pysocialsim.common.p2p.message.i_peer_to_peer_message_handler import IPeerToPeerMessageHandler
-from threading import Thread, BoundedSemaphore
 from pysocialsim.common.p2p.message.i_peer_to_peer_message import IPeerToPeerMessage
-from random import randint
-import time
+from Queue import Queue
+from threading import Thread, Semaphore
 
 class PeerToPeerMessageDispatcher(Object):
     """
@@ -35,6 +34,11 @@ class PeerToPeerMessageDispatcher(Object):
         """
         self.__peer = peer
         self.__peerToPeerMessageHandlers = {}
+        self.__queue = Queue()
+        self.__on = False
+        self.__thread = None
+        self.__thread = self.PeerToPeerMessageHandlingThread(self)
+        
     
     @public    
     def registerPeerToPeerMessageHandler(self, peerToPeerMessageHandler):
@@ -90,30 +94,50 @@ class PeerToPeerMessageDispatcher(Object):
         requires(peerToPeerMessage, IPeerToPeerMessage)
         pre_condition(peerToPeerMessage, lambda x: self.__peerToPeerMessageHandlers.has_key(x.getHandle()))
         
-        try:
-            pool = BoundedSemaphore(1)
-            pool.acquire()
-            handlerClone = self.__peerToPeerMessageHandlers[peerToPeerMessage.getHandle()].clone()
-            handlerClone.init(self.__peer)
-            threadHandling = self.PeerToPeerMessageHandlingThread(handlerClone, peerToPeerMessage)
-            threadHandling.start()
-            threadHandling.join()
-            pool.release()
-        except:
-            time.sleep(1)
-            print 333333333333333333333333333 
-            self.handlePeerToPeerMessage(peerToPeerMessage)
+        handlerClone = self.__peerToPeerMessageHandlers[peerToPeerMessage.getHandle()].clone()
+        handlerClone.init(self.__peer)
+        handlerClone.handlePeerToPeerMessage(peerToPeerMessage)
                
         return peerToPeerMessage
     
+    @public
+    def registerPeerToPeerMessage(self, peerToPeerMessage):
+        self.__queue.put(peerToPeerMessage)
+            
+        
+    @public    
+    def unregisterPeerToPeerMessage(self):
+        sem = Semaphore()
+        sem.acquire()
+        if self.__queue.empty():
+            sem.release()
+            return None
+        msg = self.__queue.get()
+        sem.release()
+        return msg
+    
+    @public
+    def countPeerToPeerMessages(self):
+        return self.__queue._qsize()
+    
+    @public
+    def on(self):
+        self.__thread.start()
+        
+    @public
+    def off(self):
+        self.__off = False
+    
     class PeerToPeerMessageHandlingThread(Thread):
         
-        def __init__(self, handler, message):
+        def __init__(self, dispatcher):
             Thread.__init__(self)
-            self.__handler = handler
-            self.__message = message
+            self.__dispatcher = dispatcher
             
         def run(self):
-            self.__handler.handlePeerToPeerMessage(self.__message)
-    
-    
+            while True:
+                msg = self.__dispatcher.unregisterPeerToPeerMessage()
+                if not msg:
+                    continue
+                
+                self.__dispatcher.handlePeerToPeerMessage(msg)

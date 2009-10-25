@@ -67,12 +67,9 @@ class EventDispatcher(Object):
         
         if not self.__eventHandlers.has_key(simulationEvent.getHandle()):
             return returns(None, NoneType)
-        try:
-            self.EventHandlingThread(self, self.__eventHandlers[simulationEvent.getHandle()], simulationEvent).start()
-        except:
-            time.sleep(1)
-            print 88888888888888888888888888888888888888888888888888
-            self.handleSimulationEvent(simulationEvent)
+        
+        print simulationEvent.getHandle()
+        self.EventHandlingThread(self, self.__eventHandlers[simulationEvent.getHandle()], simulationEvent).start()
         return returns(simulationEvent, ISimulationEvent)
     
     @public

@@ -129,6 +129,7 @@ class AbstractSimulation(Object, ISimulation):
         semaphore = Semaphore()
         semaphore.acquire()
         self.__currentSimulationTime = currentSimulationTime
+        self.__simulator.notifyEventHandlingThreads()
         semaphore.release()
         return returns(currentSimulationTime, int)
     
@@ -203,7 +204,11 @@ class AbstractSimulation(Object, ISimulation):
             self.__simulation = simulation
             
         def run(self):
+            frame = self.__simulation.getSimulationTime() / 30
             for i in range(1, self.__simulation.getSimulationTime() + 1):
                 print i
                 self.__simulation.setCurrentSimulationTime(i)
+                if i % frame == 0:
+                    time.sleep(300)
+                
                 time.sleep(0.06)

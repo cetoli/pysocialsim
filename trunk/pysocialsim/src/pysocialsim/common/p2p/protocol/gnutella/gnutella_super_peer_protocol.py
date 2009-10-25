@@ -60,6 +60,7 @@ class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
         else:
             topology.addNode(peer.getId())
             network = topology.getPeerToPeerNetwork()
+            network.getPeer(IPeerToPeerNetwork.SUPER_PEER, peer.getId()).joined()
             network.getPeer(IPeerToPeerNetwork.SUPER_PEER, peer.getId()).setNode(topology.getNode(peer.getId()))
             topology.getNode(peer.getId()).setPeer(peer)
             aux = False
@@ -79,6 +80,7 @@ class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
                         del peers[ix]
                         if len(peers) == 0:
                             break
+                aux = True
                 
             semaphore.release()
             return aux

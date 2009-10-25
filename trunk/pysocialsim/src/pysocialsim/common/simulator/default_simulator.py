@@ -76,7 +76,12 @@ class DefaultSimulator(Object, ISimulator):
             eventHandlingThread = self.EventHandlingThread(self, handler.getHandle())
             self.__eventHandlingThreads[handler.getHandle()] = eventHandlingThread
             eventHandlingThread.start()
-
+            
+    @public
+    def notifyEventHandlingThreads(self):
+        for thread in self.__eventHandlingThreads.values():
+            thread.setCurrentSimulationTime(self.__simulation.getCurrentSimulationTime())
+    
     @public
     def stop(self):
         self.__simulation.stop()
@@ -106,14 +111,16 @@ class DefaultSimulator(Object, ISimulator):
             Thread.__init__(self)
             self.__simulator = simulator
             self.__handle = handle
+            self.__currentSimulationTime = 0
+            
+        def setCurrentSimulationTime(self, currentSimulationTime):
+            self.__currentSimulationTime = currentSimulationTime
         
         def run(self):
             simulation = self.__simulator.getSimulation()
             while simulation.countSimulationEvents(self.__handle) > 0:
                 event = simulation.getSimulationEvent(self.__handle)
-                if event.getHandle() == "END_SIMULATION" and simulation.getCurrentSimulationTime() == event.getPriority():
-                    self.__simulator.handleSimulationEvent(simulation.unregisterSimulationEvent(self.__handle))
-                if simulation.getCurrentSimulationTime() == event.getPriority() or simulation.getCurrentSimulationTime() > event.getPriority():
+                if self.__currentSimulationTime >= event.getPriority():
                     self.__simulator.handleSimulationEvent(simulation.unregisterSimulationEvent(self.__handle))
         
     class ExitSimulationEvent(AbstractSimulationEvent):

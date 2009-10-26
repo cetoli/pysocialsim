@@ -39,6 +39,7 @@ class AbstractPeerToPeerProtocol(Object, IPeerToPeerProtocol):
         self.__peerToPeerMessageCreator = PeerToPeerMessageCreator()
         self.__peerToPeerMessageCreator.registerPeerToPeerMessage(self.PingPeerToPeerMessage())
         self.__peerToPeerMessageCreator.registerPeerToPeerMessage(self.PongPeerToPeerMessage())
+        self.__peerToPeerMessageCreator.registerPeerToPeerMessage(self.RoutePeerToPeerMessage())
     
     @public
     def getPingHops(self):
@@ -57,20 +58,24 @@ class AbstractPeerToPeerProtocol(Object, IPeerToPeerProtocol):
         return self.__pushHops
 
     @public
-    def setPingHops(self, value):
-        self.__pingHops = value
+    def setPingHops(self, pingHops):
+        self.__pingHops = pingHops
+        return self.__pingHops
 
     @public
-    def setPongHops(self, value):
-        self.__pongHops = value
+    def setPongHops(self, pongHops):
+        self.__pongHops = pongHops
+        return self.__pongHops
 
     @public
-    def setPullHops(self, value):
-        self.__pullHops = value
+    def setPullHops(self, pullHops):
+        self.__pullHops = pullHops
+        return self.__pullHops
 
     @public
-    def setPushHops(self, value):
-        self.__pushHops = value
+    def setPushHops(self, pushHops):
+        self.__pushHops = pushHops
+        return self.__pushHops
         
     def getPeerToPeerMessageCreator(self):
         return returns(self.__peerToPeerMessageCreator, IPeerToPeerMessageCreator)
@@ -129,6 +134,11 @@ class AbstractPeerToPeerProtocol(Object, IPeerToPeerProtocol):
         
         def __init__(self):
             AbstractPeertoPeerMessage.initialize(self, IPeerToPeerMessage.ADVERTISEMENT, IPeerToPeerProtocol.PONG)
+    
+    class RoutePeerToPeerMessage(AbstractPeertoPeerMessage):
+        
+        def __init__(self):
+            AbstractPeertoPeerMessage.initialize(self, IPeerToPeerMessage.QUERY, IPeerToPeerProtocol.ROUTE)
     
     pingHops = property(getPingHops, setPingHops, None, None)
 

@@ -12,6 +12,8 @@ class IPeerToPeerProtocol(IPeerToPeerMessageCreator):
     
     PING = "PING"
     PONG = "PONG"
+    PUSH = "PUSH"
+    ROUTE = "ROUTE"
     
     """
     Defines common operation for peer-to-peer protocols.

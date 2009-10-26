@@ -55,6 +55,7 @@ class AbstractNeighbor(Object, INeighbor):
         
         if not route in self.__routes[route.getPeerId()]:
             self.__routes[route.getPeerId()].append(route)
+            print 22222222222222222222222222222222222
                     
         return returns(self.__routes.has_key(route.getPeerId()), bool)
 
@@ -63,12 +64,16 @@ class AbstractNeighbor(Object, INeighbor):
         return INeighbor.unregisterRoute(self, peerId)
 
     @public
-    def countRoutes(self):
-        return INeighbor.countRoutes(self)
+    def countRoutes(self, peerId):
+        return len(self.__routes[peerId])
 
     @public
-    def getRoutes(self):
-        return INeighbor.getRoutes(self)
+    def getRoutes(self, peerId):
+        return self.__routes[peerId]
+    
+    @public
+    def hasRoutes(self, peerId):
+        return len(self.__routes[peerId]) > 0
 
 
     

@@ -13,6 +13,15 @@ from pymockobject.events import ReturnValue
 from pysocialsim.common.p2p.network.i_peer_to_peer_network import IPeerToPeerNetwork
 from pysocialsim.common.error.invalid_value_error import InvalidValueError
 from pysocialsim.common.p2p.protocol.i_peer_to_peer_protocol import IPeerToPeerProtocol
+from pysocialsim.common.p2p.network.peer_to_peer_network import PeerToPeerNetwork
+from pysocialsim.common.simulator.simulation.i_simulation import ISimulation
+from pysocialsim.common.p2p.topology.peer_to_peer_topology import PeerToPeerTopology
+from pysocialsim.common.p2p.peer.super_peer import SuperPeer
+from pysocialsim.common.p2p.peer.route import Route
+from pysocialsim.common.p2p.message.abstract_peer_to_peer_message import AbstractPeertoPeerMessage
+from pysocialsim.common.p2p.message.i_peer_to_peer_message import IPeerToPeerMessage
+from pysocialsim.common.p2p.message.peer_to_peer_message_id_generator import PeerToPeerMessageIdGenerator
+import time
 import pymockobject
 
 import unittest
@@ -57,6 +66,7 @@ class GnutellaSuperPeerProtocolTest(unittest.TestCase):
         peer4.getId.will(ReturnValue("4"))
         self.assertTrue(topology.addNode("4"))
         peer4.getNode.will(ReturnValue(topology.getNode("4")))
+        peer4.countNeighbors.will(ReturnValue(1))
         topology.getNode("4").setPeer(peer4)
         network.getPeer.expects(IPeerToPeerNetwork.SUPER_PEER, "4").will(ReturnValue(peer4))
         
@@ -64,6 +74,7 @@ class GnutellaSuperPeerProtocolTest(unittest.TestCase):
         peer5.getId.will(ReturnValue("5"))
         self.assertTrue(topology.addNode("5"))
         peer5.getNode.will(ReturnValue(topology.getNode("5")))
+        peer5.countNeighbors.will(ReturnValue(1))
         topology.getNode("5").setPeer(peer5)
         network.getPeer.expects(IPeerToPeerNetwork.SUPER_PEER, "5").will(ReturnValue(peer5))
         
@@ -72,6 +83,7 @@ class GnutellaSuperPeerProtocolTest(unittest.TestCase):
         self.assertTrue(topology.addNode("6"))
         topology.getNode("6").setPeer(peer6)
         peer6.getNode.will(ReturnValue(topology.getNode("6")))
+        peer6.countNeighbors.will(ReturnValue(1))
         network.getPeer.expects(IPeerToPeerNetwork.SUPER_PEER, "6").will(ReturnValue(peer6))
         
         self.assertEquals(4, topology.countNodes())
@@ -81,7 +93,7 @@ class GnutellaSuperPeerProtocolTest(unittest.TestCase):
         network.getConnectionsBetweenSuperPeers.will(ReturnValue(10))
         
         self.assertTrue(protocol.join(peer3))
-        self.assertEquals(3, topology.countEdges("3"))
+        self.assertTrue(topology.countEdges("3") > 0)
         
         self.assertRaises(TypeError, protocol.join, 1)
         self.assertRaises(TypeError, protocol.join, "1")
@@ -91,11 +103,70 @@ class GnutellaSuperPeerProtocolTest(unittest.TestCase):
         
         self.assertRaises(InvalidValueError, protocol.join, None)
         
+    def testSendPeerToPeerMessage(self):
+        network = PeerToPeerNetwork(pymockobject.create(ISimulation))
+        network.setConnectionsBetweenSuperPeers(6)
+        protocol = GnutellaSuperPeerProtocol()
+        
+        self.assertEquals(6, protocol.setPingHops(6))
+        self.assertEquals(6, protocol.setPongHops(6))
+        self.assertEquals(6, protocol.setPushHops(6))
+        
+        topology = PeerToPeerTopology()
+        self.assertEquals(network, topology.setPeerToPeerNetwork(network))
+        self.assertEquals(topology, protocol.setPeerToPeerTopology(topology))
+        self.assertTrue(network.registerPeerToPeerProtocol(IPeerToPeerNetwork.SUPER_PEER, protocol))
+        
+        self.assertTrue(topology.addNode("1"))
+        superPeer1 = SuperPeer("1", network)
+        superPeer1.setNode(topology.getNode("1"))
+        
+        self.assertTrue(topology.addNode("2"))
+        superPeer2 = SuperPeer("2", network)
+        superPeer2.setNode(topology.getNode("2"))
+        
+        self.assertTrue(topology.addNode("3"))
+        superPeer3 = SuperPeer("3", network)
+        superPeer3.setNode(topology.getNode("3"))
+        
+        self.assertTrue(topology.addEdge("1", "2"))
+        self.assertTrue(topology.addEdge("2", "1"))
+        
+        self.assertTrue(topology.addEdge("2", "3"))
+        self.assertTrue(topology.addEdge("3", "2"))
+        
+        self.assertTrue(superPeer1.hasNeighbor("2"))
+        self.assertTrue(superPeer2.hasNeighbor("1"))
+        self.assertTrue(superPeer3.hasNeighbor("2"))
+        self.assertTrue(superPeer2.hasNeighbor("3"))
+        
+        route = Route("3", ["3", "2"], 2, 0)
+        
+        self.assertEquals("2", superPeer1.getNeighbor("2").getId())
+        neighbor = superPeer1.getNeighbor("2")
+        self.assertTrue(neighbor.registerRoute(route))
+        self.assertEquals(1, neighbor.countRoutes("3"))
+        
+        message = self.PeerToPeerMessageForTest(IPeerToPeerMessage.SERVICE, IPeerToPeerProtocol.PUSH)
+        message.init(PeerToPeerMessageIdGenerator.generatePeerToPeerMessageId(superPeer1), superPeer1.getId(), superPeer3.getId(), protocol.getPushHops(), 1)
+        
+        
+        routeMessage = superPeer1.send(message)
+        self.assertEquals(IPeerToPeerProtocol.ROUTE, routeMessage.getHandle())
+        dispatcher = superPeer2.getPeerToPeerMessageDispatcher()
+        self.assertEquals(1, dispatcher.countPeerToPeerMessages(IPeerToPeerProtocol.ROUTE))
+        superPeer2.joined()
+        dispatcher.on()
+        time.sleep(0.06)
+        dispatcher = superPeer3.getPeerToPeerMessageDispatcher()
+        self.assertEquals(1, dispatcher.countPeerToPeerMessages(IPeerToPeerProtocol.ROUTE))
+        superPeer3.joined()
+        dispatcher.on()
+    
     def testLeaveuperPeerInGnutellaNetwork(self):
         protocol = GnutellaSuperPeerProtocol()
         topology = self.TopologyForTest()
         network = pymockobject.create(IPeerToPeerNetwork)
-        
         
         self.assertEquals(topology, protocol.setPeerToPeerTopology(topology))
         self.assertEquals(network, topology.setPeerToPeerNetwork(network))
@@ -124,22 +195,24 @@ class GnutellaSuperPeerProtocolTest(unittest.TestCase):
         peer4.getId.will(ReturnValue("4"))
         self.assertTrue(topology.addNode("4"))
         peer4.getNode.will(ReturnValue(topology.getNode("4")))
+        peer4.countNeighbors.will(ReturnValue(1))
         topology.getNode("4").setPeer(peer4)
-        
         network.getPeer.expects(IPeerToPeerNetwork.SUPER_PEER, "4").will(ReturnValue(peer4))
         
         peer5 = pymockobject.create(IPeer)
         peer5.getId.will(ReturnValue("5"))
         self.assertTrue(topology.addNode("5"))
         peer5.getNode.will(ReturnValue(topology.getNode("5")))
+        peer5.countNeighbors.will(ReturnValue(1))
         topology.getNode("5").setPeer(peer5)
         network.getPeer.expects(IPeerToPeerNetwork.SUPER_PEER, "5").will(ReturnValue(peer5))
         
         peer6 = pymockobject.create(IPeer)
         peer6.getId.will(ReturnValue("6"))
         self.assertTrue(topology.addNode("6"))
-        peer6.getNode.will(ReturnValue(topology.getNode("6")))
         topology.getNode("6").setPeer(peer6)
+        peer6.getNode.will(ReturnValue(topology.getNode("6")))
+        peer6.countNeighbors.will(ReturnValue(1))
         network.getPeer.expects(IPeerToPeerNetwork.SUPER_PEER, "6").will(ReturnValue(peer6))
         
         self.assertEquals(4, topology.countNodes())
@@ -149,7 +222,7 @@ class GnutellaSuperPeerProtocolTest(unittest.TestCase):
         network.getConnectionsBetweenSuperPeers.will(ReturnValue(10))
         
         self.assertTrue(protocol.join(peer3))
-        self.assertEquals(3, topology.countEdges("3"))
+        self.assertTrue(topology.countEdges("3") > 0)
         
         peer7 = pymockobject.create(IPeer)
         peer7.isJoined.will(ReturnValue(False))
@@ -183,4 +256,9 @@ class GnutellaSuperPeerProtocolTest(unittest.TestCase):
         
         def __init__(self):
             AbstractPeerToPeerTopology.initialize(self)
+            
+    class PeerToPeerMessageForTest(AbstractPeertoPeerMessage):
+        
+        def __init__(self, type, handle):
+            AbstractPeertoPeerMessage.initialize(self, type, handle)
             

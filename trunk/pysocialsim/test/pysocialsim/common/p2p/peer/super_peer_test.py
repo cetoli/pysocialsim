@@ -90,4 +90,4 @@ class SuperPeerTest(unittest.TestCase):
         id = PeerIdGenerator.generatePeerId(IPeerToPeerNetwork.SUPER_PEER)
         superPeer3 = SuperPeer(id, peerToPeerNetwork)
         
-        self.assertTrue(superPeer3.join())
+        self.assertFalse(superPeer3.join())

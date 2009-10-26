@@ -53,11 +53,11 @@ class INeighbor(object):
     def unregisterRoute(self, peerId):
         raise NotImplementedError()
     
-    def countRoutes(self):
+    def countRoutes(self, peerId):
         raise NotImplementedError()
     
     def getRoutes(self):
         raise NotImplementedError()
     
-    def hasRoute(self, peerId):
+    def hasRoutes(self, peerId):
         raise NotImplementedError()

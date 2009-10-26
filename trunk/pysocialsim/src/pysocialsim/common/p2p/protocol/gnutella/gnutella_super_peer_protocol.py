@@ -37,6 +37,7 @@ class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
         self.__peerToPeerMessageHandlers = []
         self.__peerToPeerMessageHandlers.append(self.PingPeerToPeerMessageHandler())
         self.__peerToPeerMessageHandlers.append(self.PongPeerToPeerMessageHandler())
+        self.__peerToPeerMessageHandlers.append(self.RoutePeerToPeerMessageHandler())
 
     @public
     def join(self, peer):
@@ -67,21 +68,22 @@ class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
             aux = False
             if topology.countNodes() > 0:
                 network = topology.getPeerToPeerNetwork()
-                peers = [n for n in network.getConnectedPeers(IPeerToPeerNetwork.SUPER_PEER) if n.getId() <> peer.getId() and peer.countNeighbors() < network.getConnectionsBetweenSuperPeers()]
-                for i in range(network.getConnectionsBetweenSuperPeers()):
-                    ix = randint(0, len(peers) - 1)
-                    neighbor = peers[ix]
-                    
-                    node = neighbor.getNode()
-                    if node.countEdges() < network.getConnectionsBetweenSuperPeers():
-                        topology.addEdge(peer.getId(), neighbor.getId())
-                        topology.addEdge(neighbor.getId(), peer.getId())
-                        network.getPeer(IPeerToPeerNetwork.SUPER_PEER, peer.getId()).joined()
-                        aux = network.getPeer(IPeerToPeerNetwork.SUPER_PEER, peer.getId()).isJoined()
-                        del peers[ix]
-                        if len(peers) == 0:
-                            break
-                aux = True
+                peers = [n for n in network.getConnectedPeers(IPeerToPeerNetwork.SUPER_PEER) if (n.getId() <> peer.getId()) and (n.countNeighbors() < network.getConnectionsBetweenSuperPeers())]
+                if len(peers) > 0:
+                    for i in range(randint(1, network.getConnectionsBetweenSuperPeers())):
+                        ix = randint(0, len(peers) - 1)
+                        neighbor = peers[ix]
+                        
+                        node = neighbor.getNode()
+                        if node.countEdges() < network.getConnectionsBetweenSuperPeers():
+                            topology.addEdge(peer.getId(), neighbor.getId())
+                            topology.addEdge(neighbor.getId(), peer.getId())
+                            network.getPeer(IPeerToPeerNetwork.SUPER_PEER, peer.getId()).joined()
+                            aux = network.getPeer(IPeerToPeerNetwork.SUPER_PEER, peer.getId()).isJoined()
+                            del peers[ix]
+                            if len(peers) == 0:
+                                break
+                    aux = True
                 
             semaphore.release()
             return aux
@@ -117,20 +119,59 @@ class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
     @public
     def send(self, peer, peerToPeerMessage):
         if not peer.hasNeighbor(peerToPeerMessage.getTargetId()):
-            return None
+            return self.route(peer, peerToPeerMessage)
+        
         neighbor = peer.getNeighbor(peerToPeerMessage.getTargetId())
         return neighbor.dispatchData(peerToPeerMessage)
+        
+        
     
     @public
     def route(self, peer, peerToPeerMessage):
         semaphore = Semaphore()
         semaphore.acquire()
-        
+        message = None
         requires(peerToPeerMessage, IPeerToPeerMessage)
         pre_condition(peerToPeerMessage, lambda x: x <> None)
-        
+        if peerToPeerMessage.getHandle() == IPeerToPeerProtocol.ROUTE:
+            peerToPeerMessage.unregisterPeerId(peer.getId())
+            peerId = peerToPeerMessage.getLast()
+            if peer.hasNeighbor(peerId):
+                message = peerToPeerMessage.clone()
+                message.getParameter("backTrace").append(peer.getId())
+                
+                message.setHop(message.getHop() + 1)
+                message.init(message.getId(), peer.getId(), peerId, message.getTTL(), message.getPriority())
+                peer.send(message)
+            else:
+                print "PRECISAMOS DE OUTRO JIMMY"
+        else:
+            neighbors = peer.getNeighbors()
+            routes = []
+            
+            for neighbor in neighbors:
+                if neighbor.hasRoutes(peerToPeerMessage.getTargetId()):
+                    rts = neighbor.getRoutes(peerToPeerMessage.getTargetId())
+                    rt = rts[0]
+                    for route in rts:
+                        if route.getCost() < rt.getCost():
+                            rt = route
+                    routes.append(rt)
+                    
+            route = routes[randint(0, len(routes) - 1)]
+            trace = route.getTrace()
+            neighbor = peer.getNeighbor(trace[len(trace) - 1])
+            message = self.createPeerToPeerMessage(IPeerToPeerProtocol.ROUTE)
+            message.init(peerToPeerMessage.getId(), peer.getId(), neighbor.getId(), route.getCost(), peerToPeerMessage.getPriority())
+            message.registerParameter("peerToPeerMessage", peerToPeerMessage)
+            trace.remove(trace[len(trace) - 1])
+            for id in trace:
+                message.registerPeerId(id)
+            message.registerParameter("backTrace", [peer.getId()])
+            neighbor.dispatchData(message)
         semaphore.release()
-        return True
+        
+        return message
     
     @public
     def push(self, peer, peerToPeerMessage):
@@ -139,6 +180,8 @@ class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
         
         requires(peerToPeerMessage, IPeerToPeerMessage)
         pre_condition(peerToPeerMessage, lambda x: x <> None)
+        
+        
         
         semaphore.release()
         return peerToPeerMessage
@@ -262,3 +305,17 @@ class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
                 
                 neighbor = peer.getNeighbor(peerId)
                 neighbor.dispatchData(cloneMsg)                
+    
+    class RoutePeerToPeerMessageHandler(AbstractPeerToPeerMessageHandler):
+        
+        def __init__(self):
+            AbstractPeerToPeerMessageHandler.initialize(self, IPeerToPeerProtocol.ROUTE)
+            
+        def execute(self):
+            message = self.getPeerToPeerMessage()
+            peer = self.getPeer()
+            
+            if peer.getId() == message.getFirst():
+                print "ROUTED"
+            else:
+                peer.route(message)

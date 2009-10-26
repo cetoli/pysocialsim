@@ -89,6 +89,7 @@ class AbstractPeer(Object, IPeer):
         sem = Semaphore()
         sem.acquire()
         self.__node = node
+        self.__node.setPeer(self)
         sem.release()
         return self.__node
     
@@ -118,6 +119,10 @@ class AbstractPeer(Object, IPeer):
     @public
     def send(self, peerToPeerMessage):
         return self.__peerToPeerProtocol.send(self, peerToPeerMessage)  
+    
+    @public
+    def route(self, peerToPeerMessage):
+        return self.__peerToPeerProtocol.route(self, peerToPeerMessage)
     
     @public
     def getPeerToPeerNetwork(self):
@@ -160,6 +165,10 @@ class AbstractPeer(Object, IPeer):
     @public
     def getNeighbors(self):
         return self.__neighbors.values()
+    
+    @public
+    def getPeerToPeerMessageDispatcher(self):
+        return self.__peerToPeerMessageDispatcher
     
     id = property(getId, None, None, None)
 

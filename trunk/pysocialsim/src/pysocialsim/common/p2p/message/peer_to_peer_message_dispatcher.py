@@ -120,8 +120,8 @@ class PeerToPeerMessageDispatcher(Object):
         return msg
     
     @public
-    def countPeerToPeerMessages(self):
-        return self.__queue._qsize()
+    def countPeerToPeerMessages(self, handle):
+        return self.__queues[handle]._qsize()
     
     @public
     def getPeerToPeerMessageHandles(self):

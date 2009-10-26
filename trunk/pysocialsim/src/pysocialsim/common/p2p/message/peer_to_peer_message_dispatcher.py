@@ -13,7 +13,6 @@ from pysocialsim.common.p2p.message.i_peer_to_peer_message_handler import IPeerT
 from pysocialsim.common.p2p.message.i_peer_to_peer_message import IPeerToPeerMessage
 from Queue import Queue
 from threading import Thread, Semaphore
-import time
 
 class PeerToPeerMessageDispatcher(Object):
     """
@@ -74,6 +73,7 @@ class PeerToPeerMessageDispatcher(Object):
             return False
         
         del self.__peerToPeerMessageHandlers[handle]
+        del self.__queues[handle]
         return not self.__peerToPeerMessageHandlers.has_key(handle)
     
     @public

@@ -204,11 +204,13 @@ class AbstractSimulation(Object, ISimulation):
             self.__simulation = simulation
             
         def run(self):
-            frame = self.__simulation.getSimulationTime() / 30
-            for i in range(1, self.__simulation.getSimulationTime() + 1):
-                print i
-                self.__simulation.setCurrentSimulationTime(i)
-                if i % frame == 0:
-                    time.sleep(300)
-                
-                time.sleep(0.06)
+            if self.__simulation.getSimulationTime() > 0:
+                #frame = self.__simulation.getSimulationTime() / 30
+                for i in range(1, self.__simulation.getSimulationTime() + 1):
+                    print i
+                    self.__simulation.setCurrentSimulationTime(i)
+#                    
+#                    if frame > 0 and i % frame == 0:
+#                        time.sleep(600)
+                    
+                    time.sleep(0.06)

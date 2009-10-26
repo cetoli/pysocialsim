@@ -105,3 +105,27 @@ class IPeerToPeerProtocol(IPeerToPeerMessageCreator):
     
     def configurePeer(self, peer):
         raise NotImplementedError()
+    
+    def setPingHops(self, pingHops):
+        raise NotImplementedError()
+    
+    def getPingHops(self):
+        raise NotImplementedError()
+    
+    def setPongHops(self, pongHops):
+        raise NotImplementedError()
+    
+    def getPongHops(self):
+        raise NotImplementedError()
+    
+    def setPullHops(self, pullHops):
+        raise NotImplementedError()
+    
+    def getPullHops(self):
+        raise NotImplementedError()
+    
+    def setPushHops(self, pushHops):
+        raise NotImplementedError()
+    
+    def getPushHops(self):
+        raise NotImplementedError()

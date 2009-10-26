@@ -9,6 +9,8 @@ Defines the module with the implementation of AbstractNeighbor class.
 from pysocialsim.common.base.object import Object
 from pysocialsim.common.p2p.peer.i_neighbor import INeighbor
 from pysocialsim.common.base.decorators import public
+from pysocialsim.common.util.rotines import requires, pre_condition, returns
+from pysocialsim.common.p2p.peer.i_route import IRoute
 
 class AbstractNeighbor(Object, INeighbor):
     """
@@ -25,6 +27,7 @@ class AbstractNeighbor(Object, INeighbor):
     def initialize(self, peer, edge):
         self.__peer = peer
         self.__edge = edge
+        self.__routes = {}
 
     @public
     def getId(self):
@@ -41,6 +44,32 @@ class AbstractNeighbor(Object, INeighbor):
     @public
     def dispatchData(self, data):
         return self.__edge.dispatchData(data)
+    
+    @public
+    def registerRoute(self, route):
+        requires(route, IRoute)
+        pre_condition(route, lambda x: x <> None)
+        
+        if not self.__routes.has_key(route.getPeerId()):
+            self.__routes[route.getPeerId()] = []
+        
+        if not route in self.__routes[route.getPeerId()]:
+            self.__routes[route.getPeerId()].append(route)
+                    
+        return returns(self.__routes.has_key(route.getPeerId()), bool)
+
+    @public
+    def unregisterRoute(self, peerId):
+        return INeighbor.unregisterRoute(self, peerId)
+
+    @public
+    def countRoutes(self):
+        return INeighbor.countRoutes(self)
+
+    @public
+    def getRoutes(self):
+        return INeighbor.getRoutes(self)
+
 
     
     

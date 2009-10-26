@@ -19,6 +19,7 @@ from pysocialsim.common.simulator.event.abstract_simulation_event_generator impo
 from pysocialsim.common.base.decorators import public
 from pysocialsim.common.error.unregister_simulation_event_error import UnregisterSimulationEventError
 from random import randint
+from pysocialsim.common.simulator.i_simulator import ISimulator
 import pymockobject
 
 import unittest
@@ -239,6 +240,7 @@ class AbstractSimulationTest(unittest.TestCase):
         
     def testSetAndGetCurrentSimulationTime(self):
         simulation = self.SimulationForTest()
+        simulation.setSimulator(pymockobject.create(ISimulator))
         self.assertEquals(1500, simulation.setCurrentSimulationTime(1500))
         self.assertEquals(1500, simulation.getCurrentSimulationTime())
         

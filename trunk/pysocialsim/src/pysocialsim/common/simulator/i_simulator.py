@@ -104,3 +104,6 @@ class ISimulator(object):
         @rtype: Scheduler
         """
         raise NotImplementedError()
+    
+    def notifyEventHandlingThreads(self):
+        raise NotImplementedError()

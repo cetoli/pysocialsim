@@ -9,6 +9,7 @@ Defines the module with the implementation of AbstractRoute class.
 from pysocialsim.common.base.object import Object
 from pysocialsim.common.p2p.peer.i_route import IRoute
 from pysocialsim.common.base.decorators import public
+from pysocialsim.common.util.rotines import requires
 
 class AbstractRoute(Object, IRoute):
     """
@@ -76,7 +77,11 @@ class AbstractRoute(Object, IRoute):
                 del self.__tags[tag]
             
         return incidence
-
+    
+    @public
+    def getHops(self):
+        return len(self.__trace)
+    
     @public
     def countTags(self):
         return len(self.__tags)
@@ -85,8 +90,20 @@ class AbstractRoute(Object, IRoute):
     def getTagIncidence(self, tag):
         return self.__tags[tag]
 
-
-
+    def __eq__(self, other):
+        requires(other, IRoute)
+        rtrn = self.__peerId == other.getPeerId() and self.__cost == other.getCost() and self.__freshness == other.getFreshness()
+        aux = True
+        if self.getHops() == other.getHops():
+            trace = other.getTrace()
+            for i in range(len(trace)):
+                if not self.__trace[i] == trace[i]:
+                    aux = False
+                    break
+        else:
+            aux = False
+        return rtrn == aux
+        
     peerId = property(getPeerId, None, None, None)
 
     trace = property(getTrace, setTrace, None, None)

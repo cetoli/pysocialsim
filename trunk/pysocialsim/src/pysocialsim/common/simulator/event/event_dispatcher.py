@@ -14,7 +14,6 @@ from types import NoneType
 from pysocialsim.common.simulator.event.i_simulation_event_handler import ISimulationEventHandler
 from threading import Thread
 from pysocialsim.common.simulator.i_simulator import ISimulator
-import time
 import logging
 
 class EventDispatcher(Object):
@@ -44,6 +43,7 @@ class EventDispatcher(Object):
         """
         self.__eventHandlers = {}
         self.__simulator = simulator
+        self.__threads = {}
     
     @public
     def getSimulator(self):
@@ -69,7 +69,12 @@ class EventDispatcher(Object):
             return returns(None, NoneType)
         
         print simulationEvent.getHandle()
-        self.EventHandlingThread(self, self.__eventHandlers[simulationEvent.getHandle()], simulationEvent).start()
+        #self.EventHandlingThread(self, self.__eventHandlers[simulationEvent.getHandle()], simulationEvent).start()
+        handler = self.__eventHandlers[simulationEvent.getHandle()]
+        handlerClone = handler.clone()
+        handlerClone.init(self.getSimulator().getSimulation())
+        handlerClone.handleSimulationEvent(simulationEvent)
+        
         return returns(simulationEvent, ISimulationEvent)
     
     @public

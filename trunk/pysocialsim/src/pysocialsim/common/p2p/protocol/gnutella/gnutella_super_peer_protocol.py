@@ -18,6 +18,7 @@ from pysocialsim.common.p2p.message.i_peer_to_peer_message import IPeerToPeerMes
 from pysocialsim.common.p2p.message.abstract_peer_to_peer_message_handler import AbstractPeerToPeerMessageHandler
 from pysocialsim.common.p2p.protocol.i_peer_to_peer_protocol import IPeerToPeerProtocol
 from pysocialsim.common.p2p.message.peer_to_peer_message_id_generator import PeerToPeerMessageIdGenerator
+from pysocialsim.common.p2p.peer.route import Route
 
 class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
     """
@@ -66,7 +67,7 @@ class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
             aux = False
             if topology.countNodes() > 0:
                 network = topology.getPeerToPeerNetwork()
-                peers = [n for n in network.getConnectedPeers(IPeerToPeerNetwork.SUPER_PEER) if n.getId() <> peer.getId()]
+                peers = [n for n in network.getConnectedPeers(IPeerToPeerNetwork.SUPER_PEER) if n.getId() <> peer.getId() and peer.countNeighbors() < network.getConnectionsBetweenSuperPeers()]
                 for i in range(network.getConnectionsBetweenSuperPeers()):
                     ix = randint(0, len(peers) - 1)
                     neighbor = peers[ix]
@@ -238,8 +239,14 @@ class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
             peer = self.getPeer()
             
             if peer.getId() == message.getFirst():
-                network = peer.getPeerToPeerNetwork()
-                print "PONG CHEGOU", message.getParameter("backTrace")
+                backTrace = message.getParameter("backTrace")
+                peerId = backTrace[0]
+                route = Route(peerId, backTrace, len(backTrace), 0)
+                lastPeerId = backTrace[len(backTrace) - 1]
+                if not peer.hasNeighbor(lastPeerId) or peerId == lastPeerId:
+                    return
+                neighbor = peer.getNeighbor(lastPeerId)
+                neighbor.registerRoute(route)
             else:
                 message.unregisterPeerId(peer.getId())
                 peerId = message.getLast()

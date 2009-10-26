@@ -44,4 +44,20 @@ class INeighbor(object):
         raise NotImplementedError()
     
     def dispatchData(self, data):
-        pass
+        raise NotImplementedError()
+    
+    
+    def registerRoute(self, route):
+        raise NotImplementedError()
+    
+    def unregisterRoute(self, peerId):
+        raise NotImplementedError()
+    
+    def countRoutes(self):
+        raise NotImplementedError()
+    
+    def getRoutes(self):
+        raise NotImplementedError()
+    
+    def hasRoute(self, peerId):
+        raise NotImplementedError()

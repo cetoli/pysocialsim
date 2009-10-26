@@ -106,7 +106,8 @@ class AbstractPeer(Object, IPeer):
                     message = self.__peerToPeerProtocol.createPeerToPeerMessage(IPeerToPeerProtocol.PING)
                     message.registerPeerId(self.__id)
                     messageId = PeerToPeerMessageIdGenerator.generatePeerToPeerMessageId(self)           
-                    message.init(messageId, self.__id, n.getId(), len(self.__peerToPeerNetwork.getConnectedPeers(IPeerToPeerNetwork.SUPER_PEER)) - 1, simulation.getCurrentSimulationTime())
+                    #message.init(messageId, self.__id, n.getId(), len(self.__peerToPeerNetwork.getConnectedPeers(IPeerToPeerNetwork.SUPER_PEER)) - 1, simulation.getCurrentSimulationTime())
+                    message.init(messageId, self.__id, n.getId(), self.__peerToPeerProtocol.getPingHops(), simulation.getCurrentSimulationTime())
                     self.send(message)
         return aux
     

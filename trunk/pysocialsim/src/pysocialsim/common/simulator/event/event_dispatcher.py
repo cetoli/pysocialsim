@@ -135,43 +135,43 @@ class EventDispatcher(Object):
     @type: ISimulator
     """
     
-    class EventHandlingThread(Thread):
-        """
-        Inner class to make parallel the handling of simulation events.
-        @author: Fabricio
-        @organization: Federal University of Rio de Janeiro
-        @contact: fbarros@gmail.com 
-        @since: 23/08/2009
-        """
-        
-        def __init__(self, eventDispatcher, simulationEventHandler, simulationEvent):
-            """
-            Thread constructor.
-            @param eventDispatcher: an EventDispatcher
-            @type eventDispatcher: EventDispatcher 
-            @param simulationEventHandler: an ISimulationEventHandler
-            @type simulationEventHandler: ISimulationEventHandler
-            @param simulationEvent: an ISimulationEvent
-            @type simulationEvent: ISimulationEvent
-            """
-            Thread.__init__(self)
-            requires(simulationEventHandler, ISimulationEventHandler)
-            requires(simulationEvent, ISimulationEvent)
-            
-            simulator = eventDispatcher.getSimulator()
-            
-            self.__simulationEventHandler = simulationEventHandler.clone()
-            self.__simulationEventHandler.init(simulator.getSimulation())
-            self.__simulationEvent = simulationEvent
-            logging.basicConfig(format='%(asctime)s %(event)s %(message)s', filename='myapp.log', filemode='w')
-        
-        def run(self):
-            self.__simulationEventHandler.handleSimulationEvent(self.__simulationEvent)
-            self.__simulationEvent.handled()
-            #logging.warning(str(self.__simulationEvent.getPeerId())+" "+str(self.__simulationEvent.getPriority()), extra={"event" : self.__simulationEvent.getHandle()})
-            line = self.__simulationEvent.getPriority(), self.__simulationEvent.getHandle(), self.__simulationEvent.getPeerId()
-            
-            self.__dispatcherLogFile = open("simulation.log", "a")
-            self.__dispatcherLogFile.write(str(line)+"\n")
-            self.__dispatcherLogFile.close()
+#    class EventHandlingThread(Thread):
+#        """
+#        Inner class to make parallel the handling of simulation events.
+#        @author: Fabricio
+#        @organization: Federal University of Rio de Janeiro
+#        @contact: fbarros@gmail.com 
+#        @since: 23/08/2009
+#        """
+#        
+#        def __init__(self, eventDispatcher, simulationEventHandler, simulationEvent):
+#            """
+#            Thread constructor.
+#            @param eventDispatcher: an EventDispatcher
+#            @type eventDispatcher: EventDispatcher 
+#            @param simulationEventHandler: an ISimulationEventHandler
+#            @type simulationEventHandler: ISimulationEventHandler
+#            @param simulationEvent: an ISimulationEvent
+#            @type simulationEvent: ISimulationEvent
+#            """
+#            Thread.__init__(self)
+#            requires(simulationEventHandler, ISimulationEventHandler)
+#            requires(simulationEvent, ISimulationEvent)
+#            
+#            simulator = eventDispatcher.getSimulator()
+#            
+#            self.__simulationEventHandler = simulationEventHandler.clone()
+#            self.__simulationEventHandler.init(simulator.getSimulation())
+#            self.__simulationEvent = simulationEvent
+#            logging.basicConfig(format='%(asctime)s %(event)s %(message)s', filename='myapp.log', filemode='w')
+#        
+#        def run(self):
+#            self.__simulationEventHandler.handleSimulationEvent(self.__simulationEvent)
+#            self.__simulationEvent.handled()
+#            #logging.warning(str(self.__simulationEvent.getPeerId())+" "+str(self.__simulationEvent.getPriority()), extra={"event" : self.__simulationEvent.getHandle()})
+#            line = self.__simulationEvent.getPriority(), self.__simulationEvent.getHandle(), self.__simulationEvent.getPeerId()
+#            
+#            self.__dispatcherLogFile = open("simulation.log", "a")
+#            self.__dispatcherLogFile.write(str(line)+"\n")
+#            self.__dispatcherLogFile.close()
             

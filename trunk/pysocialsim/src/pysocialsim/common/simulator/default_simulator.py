@@ -109,6 +109,8 @@ class DefaultSimulator(Object, ISimulator):
             @rtype: NoneType
             """
             Thread.__init__(self)
+            requires(simulator, ISimulator)
+            requires(handle, str)
             self.__simulator = simulator
             self.__handle = handle
             self.__currentSimulationTime = 0
@@ -123,13 +125,4 @@ class DefaultSimulator(Object, ISimulator):
                 if self.__currentSimulationTime >= event.getPriority():
                     self.__simulator.handleSimulationEvent(simulation.unregisterSimulationEvent(self.__handle))
         
-    class ExitSimulationEvent(AbstractSimulationEvent):
-        
-        def __init__(self):
-            self.__handle = "EXIT"
-        
-        @public
-        def getHandle(self):
-            return self.__handle
-
     simulation = property(getSimulation, setSimulation, None, None)

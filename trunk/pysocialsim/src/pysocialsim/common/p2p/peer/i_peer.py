@@ -94,3 +94,6 @@ class IPeer(object):
     
     def route(self, peerToPeerMessage):
         raise NotImplementedError()
+    
+    def leave(self):
+        raise NotImplementedError()

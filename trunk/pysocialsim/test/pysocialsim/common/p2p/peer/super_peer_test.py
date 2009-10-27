@@ -91,3 +91,6 @@ class SuperPeerTest(unittest.TestCase):
         superPeer3 = SuperPeer(id, peerToPeerNetwork)
         
         self.assertFalse(superPeer3.join())
+        
+        superPeer1.leave()
+        superPeer2.leave()

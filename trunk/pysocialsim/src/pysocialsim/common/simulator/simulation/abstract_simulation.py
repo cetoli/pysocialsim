@@ -150,8 +150,7 @@ class AbstractSimulation(Object, ISimulation):
     
     @public
     def stop(self):
-        for queue in self.__queues.values():
-            queue.clear()
+        self.__simulationTime = 0
     
     @public
     def countSimulationEventQueues(self):
@@ -203,13 +202,16 @@ class AbstractSimulation(Object, ISimulation):
             Thread.__init__(self)
             self.__simulation = simulation
             
+            
         def run(self):
             if self.__simulation.getSimulationTime() > 0:
                 #frame = self.__simulation.getSimulationTime() / 30
                 for i in range(1, self.__simulation.getSimulationTime() + 1):
                     print i
                     self.__simulation.setCurrentSimulationTime(i)
-#                    
+#                   
+                    if self.__simulation.getSimulationTime() == 0:
+                        return 
 #                    if frame > 0 and i % frame == 0:
 #                        time.sleep(600)
                     

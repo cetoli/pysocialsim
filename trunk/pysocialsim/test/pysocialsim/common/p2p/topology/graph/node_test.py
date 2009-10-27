@@ -226,10 +226,12 @@ class NodeTest(unittest.TestCase):
         self.assertTrue(node1.removeEdge(edge1))
         self.assertEquals(0, node1.countEdges())
         self.assertRaises(InvalidValueError, node1.getEdge, "15")
+        self.assertFalse(node1.removeEdge(edge1))
         
         self.assertTrue(node2.removeEdge(edge2))
         self.assertEquals(0, node2.countEdges())
         self.assertRaises(InvalidValueError, node2.getEdge, "12")
+        self.assertFalse(node2.removeEdge(edge2))
         
         self.assertRaises(TypeError, node1.removeEdge, 1)
         self.assertRaises(TypeError, node1.removeEdge, 0.65)

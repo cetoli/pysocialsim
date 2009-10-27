@@ -103,6 +103,9 @@ class PeerToPeerMessageHandlerTest(unittest.TestCase):
         message.getHandle.will(ReturnValue("TEST2"))
         
         self.assertEquals(message, dispatcher.handlePeerToPeerMessage(message))
+    
+    def testOnOff(self):
+        dispatcher = PeerToPeerMessageDispatcher(pymockobject.create(IPeer))
         
         
         

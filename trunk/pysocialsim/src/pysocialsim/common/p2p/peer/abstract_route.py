@@ -102,7 +102,7 @@ class AbstractRoute(Object, IRoute):
                     break
         else:
             aux = False
-        return rtrn == aux
+        return rtrn and aux
         
     peerId = property(getPeerId, None, None, None)
 

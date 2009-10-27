@@ -7,7 +7,7 @@ Defines the module with the implementation of NewSuperPeerSimulationEventHandler
 @since: 12/09/2009
 """
 from pysocialsim.common.simulator.event.abstract_simulation_event_handler import AbstractSimulationEventHandler
-from pysocialsim.common.p2p.peer.super_peer import SuperPeer
+from pysocialsim.common.p2p.network.i_peer_to_peer_network import IPeerToPeerNetwork
 
 class NewSuperPeerSimulationEventHandler(AbstractSimulationEventHandler):
     """
@@ -23,7 +23,8 @@ class NewSuperPeerSimulationEventHandler(AbstractSimulationEventHandler):
     
     def execute(self):
         simulation = self.getSimulation()
-        superPeer = SuperPeer(self.getSimulationEvent().getPeerId(), simulation.getPeerToPeerNetwork())
+        network = simulation.getPeerToPeerNetwork()
+        superPeer = network.getPeer(IPeerToPeerNetwork.SUPER_PEER, self.getSimulationEvent().getPeerId())
         superPeer.join()
         
         return AbstractSimulationEventHandler.execute(self)

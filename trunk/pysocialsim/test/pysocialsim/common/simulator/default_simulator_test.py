@@ -155,4 +155,37 @@ class DefaultSimulatorTest(unittest.TestCase):
         time.sleep(1)
         simulation.countSimulationEvents.will(ReturnValue(0))
         simulator.stop()
+    
+    def testNotifyEventHandlingThreads(self):
+        simulator = DefaultSimulator()
+
+        handler1 = pymockobject.create(ISimulationEventHandler)
+        handler1.getHandle.will(ReturnValue("CONNECT"))
+        self.assertTrue(simulator.registerSimulationEventHandler(handler1))
+        self.assertEquals(1, simulator.countSimulationEventHandlers())
+        self.assertTrue(simulator.getSimulationEventHandlers())
         
+        handler2 = pymockobject.create(ISimulationEventHandler)
+        handler2.getHandle.will(ReturnValue("DISCONNECT"))
+        self.assertTrue(simulator.registerSimulationEventHandler(handler2))
+        self.assertEquals(2, simulator.countSimulationEventHandlers())
+        self.assertTrue(simulator.getSimulationEventHandlers())
+        
+        handler3 = pymockobject.create(ISimulationEventHandler)
+        handler3.getHandle.will(ReturnValue("ADVERTISE"))
+        self.assertTrue(simulator.registerSimulationEventHandler(handler3))
+        self.assertEquals(3, simulator.countSimulationEventHandlers())
+        self.assertTrue(simulator.getSimulationEventHandlers())
+        
+        simulation = pymockobject.create(ISimulation)
+        simulation.getCurrentSimulationTime.will(ReturnValue(12))
+        simulation.getSimulationTime.will(ReturnValue(2000))
+        simulation.countSimulationEvents.will(ReturnValue(3))
+        simulation.getSimulationEvent.will(ReturnValue(pymockobject.create(ISimulationEvent)))
+        self.assertEquals(simulation, simulator.setSimulation(simulation))
+        
+        simulator.start()
+        simulator.notifyEventHandlingThreads()
+        time.sleep(1)
+        simulation.countSimulationEvents.will(ReturnValue(0))
+        simulator.stop()

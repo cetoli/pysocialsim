@@ -13,6 +13,7 @@ from pysocialsim.common.p2p.message.i_peer_to_peer_message_handler import IPeerT
 from pysocialsim.common.p2p.message.i_peer_to_peer_message import IPeerToPeerMessage
 from Queue import Queue
 from threading import Thread, Semaphore
+from pysocialsim.common.p2p.message.abstract_peer_to_peer_message import AbstractPeertoPeerMessage
 
 class PeerToPeerMessageDispatcher(Object):
     """
@@ -34,9 +35,7 @@ class PeerToPeerMessageDispatcher(Object):
         """
         self.__peer = peer
         self.__peerToPeerMessageHandlers = {}
-        self.__queues = {}
-        self.__on = False
-        self.__thread = None
+        self.__queues = {"EXIT": Queue()}
         self.__thread = self.PeerToPeerMessageHandlingThread(self)
         
     
@@ -125,7 +124,7 @@ class PeerToPeerMessageDispatcher(Object):
     
     @public
     def getPeerToPeerMessageHandles(self):
-        return self.__peerToPeerMessageHandlers.keys()
+        return self.__queues.keys()
     
     @public
     def on(self):
@@ -133,7 +132,7 @@ class PeerToPeerMessageDispatcher(Object):
         
     @public
     def off(self):
-        self.__off = False
+        self.registerPeerToPeerMessage(self.ExitPeerToPeerMessage())
     
     class PeerToPeerMessageHandlingThread(Thread):
         
@@ -142,11 +141,21 @@ class PeerToPeerMessageDispatcher(Object):
             self.__dispatcher = dispatcher
             
         def run(self):
-            while True:
+            on = True
+            while on:
                 for handle in self.__dispatcher.getPeerToPeerMessageHandles():
                     msg = self.__dispatcher.unregisterPeerToPeerMessage(handle)
+                    
                     if not msg:
                         continue
                     
+                    if msg.getHandle() == "EXIT":
+                        on = False
+                        break
+                    
                     self.__dispatcher.handlePeerToPeerMessage(msg)
                 
+    class ExitPeerToPeerMessage(AbstractPeertoPeerMessage):
+        
+        def __init__(self):
+            AbstractPeertoPeerMessage.initialize(self, IPeerToPeerMessage.SYSTEM, "EXIT")

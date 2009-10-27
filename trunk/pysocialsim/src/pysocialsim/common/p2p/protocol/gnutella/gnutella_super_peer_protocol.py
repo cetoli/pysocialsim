@@ -133,6 +133,7 @@ class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
         message = None
         requires(peerToPeerMessage, IPeerToPeerMessage)
         pre_condition(peerToPeerMessage, lambda x: x <> None)
+        
         if peerToPeerMessage.getHandle() == IPeerToPeerProtocol.ROUTE:
             peerToPeerMessage.unregisterPeerId(peer.getId())
             peerId = peerToPeerMessage.getLast()
@@ -144,11 +145,11 @@ class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
                 message.init(message.getId(), peer.getId(), peerId, message.getTTL(), message.getPriority())
                 peer.send(message)
             else:
-                print "PRECISAMOS DE OUTRO JIMMY"
+                raise StandardError("OLHA AQUI, DEU ERRO")
         else:
             neighbors = peer.getNeighbors()
             routes = []
-            
+            print peer.getId()
             for neighbor in neighbors:
                 if neighbor.hasRoutes(peerToPeerMessage.getTargetId()):
                     rts = neighbor.getRoutes(peerToPeerMessage.getTargetId())
@@ -316,6 +317,6 @@ class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
             peer = self.getPeer()
             
             if peer.getId() == message.getFirst():
-                print "ROUTED"
+                print "ROUTED", peer.getId(), message.getHandle()
             else:
                 peer.route(message)

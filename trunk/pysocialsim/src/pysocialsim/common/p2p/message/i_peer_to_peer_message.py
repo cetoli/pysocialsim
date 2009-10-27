@@ -12,6 +12,7 @@ class IPeerToPeerMessage(object):
     ADVERTISEMENT = 0
     QUERY = 1
     SERVICE = 2
+    SYSTEM = 3
     
     def __init__(self):
         raise NotImplementedError()

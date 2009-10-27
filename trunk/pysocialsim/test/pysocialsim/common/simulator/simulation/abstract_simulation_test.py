@@ -20,6 +20,7 @@ from pysocialsim.common.base.decorators import public
 from pysocialsim.common.error.unregister_simulation_event_error import UnregisterSimulationEventError
 from random import randint
 from pysocialsim.common.simulator.i_simulator import ISimulator
+import time
 import pymockobject
 
 import unittest
@@ -28,6 +29,15 @@ class AbstractSimulationTest(unittest.TestCase):
     
     def testTryCreateAbstractClassInstance(self):
         self.assertRaises(NotImplementedError, AbstractSimulation)
+        
+    def testInitializeSimulation(self):
+        simulation  = self.SimulationForTest()
+        
+        self.assertFalse(simulation.getPeerToPeerNetwork())
+        self.assertEquals(0, simulation.getCurrentSimulationTime())
+        self.assertEquals(0, simulation.getSimulationTime())
+        self.assertFalse(simulation.getSimulator())
+        
     
     def testExecute(self):
         simulator = DefaultSimulator()
@@ -321,7 +331,17 @@ class AbstractSimulationTest(unittest.TestCase):
         self.assertRaises(TypeError, simulation.removeSimulationEventGenerator, False)
         
         self.assertRaises(InvalidValueError, simulation.registerSimulationEvent, None)
-    
+        
+    def testExecuteSimulation(self):
+        simulation = self.SimulationForTest()
+        self.assertEquals(100000, simulation.setSimulationTime(100000))
+        simulation.setSimulator(pymockobject.create(ISimulator))
+        simulation.execute() 
+     
+        time.sleep(1)
+        
+        simulation.stop()  
+        self.assertEquals(0, simulation.getSimulationTime())
     
     
     class SimulationEventForTest(AbstractSimulationEvent):

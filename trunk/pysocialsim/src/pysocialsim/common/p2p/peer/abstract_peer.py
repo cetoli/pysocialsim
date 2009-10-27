@@ -14,8 +14,10 @@ from pysocialsim.common.p2p.topology.graph.i_node import INode
 from threading import Semaphore, Thread
 from pysocialsim.common.p2p.protocol.i_peer_to_peer_protocol import IPeerToPeerProtocol
 from pysocialsim.common.p2p.message.peer_to_peer_message_id_generator import PeerToPeerMessageIdGenerator
-from pysocialsim.common.p2p.network.i_peer_to_peer_network import IPeerToPeerNetwork
 from pysocialsim.common.p2p.message.peer_to_peer_message_dispatcher import PeerToPeerMessageDispatcher
+from pysocialsim.common.p2p.network.i_peer_to_peer_network import IPeerToPeerNetwork
+from pysocialsim.common.p2p.message.i_peer_to_peer_message import IPeerToPeerMessage
+from pysocialsim.common.p2p.peer.i_neighbor import INeighbor
 
 class AbstractPeer(Object, IPeer):
     """
@@ -39,6 +41,10 @@ class AbstractPeer(Object, IPeer):
         @param peerToPeerNetwork: the peer-to-peer network
         @type peerToPeerNetwork: IPeerToPeerNetwork 
         """
+        requires(type, int)
+        requires(id, str)
+        requires(peerToPeerNetwork, IPeerToPeerNetwork)
+        
         self.__id = id
         self.__type = type
         self.__connected = False
@@ -91,7 +97,7 @@ class AbstractPeer(Object, IPeer):
         self.__node = node
         self.__node.setPeer(self)
         sem.release()
-        return self.__node
+        return returns(self.__node, INode)
     
     @public
     def join(self):
@@ -110,49 +116,54 @@ class AbstractPeer(Object, IPeer):
                     #message.init(messageId, self.__id, n.getId(), len(self.__peerToPeerNetwork.getConnectedPeers(IPeerToPeerNetwork.SUPER_PEER)) - 1, simulation.getCurrentSimulationTime())
                     message.init(messageId, self.__id, n.getId(), self.__peerToPeerProtocol.getPingHops(), simulation.getCurrentSimulationTime())
                     self.send(message)
-        return aux
+        print aux, 11111111111111111111111111111111111111111
+        return returns(aux, bool)
+    
+    @public
+    def leave(self):
+        self.__peerToPeerMessageDispatcher.off()
     
     @public
     def receive(self, peerToPeerMessage):
-        return self.__peerToPeerMessageDispatcher.registerPeerToPeerMessage(peerToPeerMessage)
+        return returns(self.__peerToPeerMessageDispatcher.registerPeerToPeerMessage(peerToPeerMessage), IPeerToPeerMessage)
     
     @public
     def send(self, peerToPeerMessage):
-        return self.__peerToPeerProtocol.send(self, peerToPeerMessage)  
+        return returns(self.__peerToPeerProtocol.send(self, peerToPeerMessage), IPeerToPeerMessage)  
     
     @public
     def route(self, peerToPeerMessage):
-        return self.__peerToPeerProtocol.route(self, peerToPeerMessage)
+        return returns(self.__peerToPeerProtocol.route(self, peerToPeerMessage), IPeerToPeerMessage)
     
     @public
     def getPeerToPeerNetwork(self):
-        return self.__peerToPeerNetwork
+        return returns(self.__peerToPeerNetwork, IPeerToPeerNetwork)
     
     def __eq__(self, other):
         requires(other, IPeer)
         pre_condition(other, lambda x: x <> None)
-        return self.__id == other.getId()
+        return returns(self.__id == other.getId(), bool)
     
     @public
     def addNeighbor(self, neighbor):
         self.__neighbors[neighbor.getId()] = neighbor
-        return self.__neighbors.has_key(neighbor.getId())
+        return returns(self.__neighbors.has_key(neighbor.getId()), bool)
     
     @public
     def countNeighbors(self):
-        return len(self.__neighbors)
+        return returns(len(self.__neighbors), int)
     
     @public
     def hasNeighbor(self, peerId):
-        return self.__neighbors.has_key(peerId)
+        return returns(self.__neighbors.has_key(peerId), bool)
     
     @public
     def getNeighbor(self, peerId):
-        return self.__neighbors[peerId]
+        return returns(self.__neighbors[peerId], INeighbor)
     
     @public
     def getPeerToPeerProtocol(self):
-        return self.__peerToPeerProtocol
+        return returns(self.__peerToPeerProtocol, IPeerToPeerProtocol)
     
     @public
     def configure(self, peerToPeerMessageHandlers):
@@ -160,7 +171,7 @@ class AbstractPeer(Object, IPeer):
         for handler in peerToPeerMessageHandlers:
             self.__peerToPeerMessageDispatcher.registerPeerToPeerMessageHandler(handler)
             numHandlers += 1
-        return numHandlers
+        return returns(numHandlers, int)
     
     @public
     def getNeighbors(self):

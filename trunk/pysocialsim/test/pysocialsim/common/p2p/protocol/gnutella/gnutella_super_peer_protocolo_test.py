@@ -103,7 +103,7 @@ class GnutellaSuperPeerProtocolTest(unittest.TestCase):
         
         self.assertRaises(InvalidValueError, protocol.join, None)
         
-    def testSendPeerToPeerMessage(self):
+    def testSendPeerToPeerMessageWithThreeHops(self):
         network = PeerToPeerNetwork(pymockobject.create(ISimulation))
         network.setConnectionsBetweenSuperPeers(6)
         protocol = GnutellaSuperPeerProtocol()
@@ -150,6 +150,78 @@ class GnutellaSuperPeerProtocolTest(unittest.TestCase):
         message = self.PeerToPeerMessageForTest(IPeerToPeerMessage.SERVICE, IPeerToPeerProtocol.PUSH)
         message.init(PeerToPeerMessageIdGenerator.generatePeerToPeerMessageId(superPeer1), superPeer1.getId(), superPeer3.getId(), protocol.getPushHops(), 1)
         
+        routeMessage = superPeer1.send(message)
+        self.assertEquals(IPeerToPeerProtocol.ROUTE, routeMessage.getHandle())
+        dispatcher = superPeer2.getPeerToPeerMessageDispatcher()
+        self.assertEquals(1, dispatcher.countPeerToPeerMessages(IPeerToPeerProtocol.ROUTE))
+        superPeer2.joined()
+        dispatcher.on()
+        
+        time.sleep(1)
+        dispatcher.off()
+        
+        dispatcher = superPeer3.getPeerToPeerMessageDispatcher()
+        self.assertEquals(1, dispatcher.countPeerToPeerMessages(IPeerToPeerProtocol.ROUTE))
+        superPeer3.joined()
+        dispatcher.on()
+        time.sleep(1)
+        dispatcher.off()
+    
+    def testSendPeerToPeerMessageWithFourHops(self):
+        network = PeerToPeerNetwork(pymockobject.create(ISimulation))
+        network.setConnectionsBetweenSuperPeers(6)
+        protocol = GnutellaSuperPeerProtocol()
+        
+        self.assertEquals(6, protocol.setPingHops(6))
+        self.assertEquals(6, protocol.setPongHops(6))
+        self.assertEquals(6, protocol.setPushHops(6))
+        
+        topology = PeerToPeerTopology()
+        self.assertEquals(network, topology.setPeerToPeerNetwork(network))
+        self.assertEquals(topology, protocol.setPeerToPeerTopology(topology))
+        self.assertTrue(network.registerPeerToPeerProtocol(IPeerToPeerNetwork.SUPER_PEER, protocol))
+        
+        self.assertTrue(topology.addNode("1"))
+        superPeer1 = SuperPeer("1", network)
+        superPeer1.setNode(topology.getNode("1"))
+        
+        self.assertTrue(topology.addNode("2"))
+        superPeer2 = SuperPeer("2", network)
+        superPeer2.setNode(topology.getNode("2"))
+        
+        self.assertTrue(topology.addNode("3"))
+        superPeer3 = SuperPeer("3", network)
+        superPeer3.setNode(topology.getNode("3"))
+        
+        self.assertTrue(topology.addNode("4"))
+        superPeer4 = SuperPeer("4", network)
+        superPeer4.setNode(topology.getNode("4"))
+        
+        self.assertTrue(topology.addEdge("1", "2"))
+        self.assertTrue(topology.addEdge("2", "1"))
+        
+        self.assertTrue(topology.addEdge("2", "3"))
+        self.assertTrue(topology.addEdge("3", "2"))
+        
+        self.assertTrue(topology.addEdge("3", "4"))
+        self.assertTrue(topology.addEdge("4", "3"))
+        
+        self.assertTrue(superPeer1.hasNeighbor("2"))
+        self.assertTrue(superPeer2.hasNeighbor("1"))
+        self.assertTrue(superPeer3.hasNeighbor("2"))
+        self.assertTrue(superPeer2.hasNeighbor("3"))
+        self.assertTrue(superPeer3.hasNeighbor("4"))
+        self.assertTrue(superPeer4.hasNeighbor("3"))
+        
+        route = Route("4", ["4", "3", "2"], 3, 0)
+        
+        self.assertEquals("2", superPeer1.getNeighbor("2").getId())
+        neighbor = superPeer1.getNeighbor("2")
+        self.assertTrue(neighbor.registerRoute(route))
+        self.assertEquals(1, neighbor.countRoutes("4"))
+        
+        message = self.PeerToPeerMessageForTest(IPeerToPeerMessage.SERVICE, IPeerToPeerProtocol.PUSH)
+        message.init(PeerToPeerMessageIdGenerator.generatePeerToPeerMessageId(superPeer1), superPeer1.getId(), superPeer4.getId(), protocol.getPushHops(), 1)
         
         routeMessage = superPeer1.send(message)
         self.assertEquals(IPeerToPeerProtocol.ROUTE, routeMessage.getHandle())
@@ -157,12 +229,111 @@ class GnutellaSuperPeerProtocolTest(unittest.TestCase):
         self.assertEquals(1, dispatcher.countPeerToPeerMessages(IPeerToPeerProtocol.ROUTE))
         superPeer2.joined()
         dispatcher.on()
-        time.sleep(0.06)
+        
+        time.sleep(1)
+        dispatcher.off()
+        
         dispatcher = superPeer3.getPeerToPeerMessageDispatcher()
         self.assertEquals(1, dispatcher.countPeerToPeerMessages(IPeerToPeerProtocol.ROUTE))
         superPeer3.joined()
         dispatcher.on()
-    
+        
+        time.sleep(1)
+        dispatcher.off()
+        
+        dispatcher = superPeer4.getPeerToPeerMessageDispatcher()
+        self.assertEquals(1, dispatcher.countPeerToPeerMessages(IPeerToPeerProtocol.ROUTE))
+        superPeer4.joined()
+        dispatcher.on()
+        time.sleep(1)
+        dispatcher.off()
+        
+    def testSendPeerToPeerMessageWithTwoRoutes(self):
+        network = PeerToPeerNetwork(pymockobject.create(ISimulation))
+        network.setConnectionsBetweenSuperPeers(6)
+        protocol = GnutellaSuperPeerProtocol()
+        
+        self.assertEquals(6, protocol.setPingHops(6))
+        self.assertEquals(6, protocol.setPongHops(6))
+        self.assertEquals(6, protocol.setPushHops(6))
+        
+        topology = PeerToPeerTopology()
+        self.assertEquals(network, topology.setPeerToPeerNetwork(network))
+        self.assertEquals(topology, protocol.setPeerToPeerTopology(topology))
+        self.assertTrue(network.registerPeerToPeerProtocol(IPeerToPeerNetwork.SUPER_PEER, protocol))
+        
+        self.assertTrue(topology.addNode("1"))
+        superPeer1 = SuperPeer("1", network)
+        superPeer1.setNode(topology.getNode("1"))
+        
+        self.assertTrue(topology.addNode("2"))
+        superPeer2 = SuperPeer("2", network)
+        superPeer2.setNode(topology.getNode("2"))
+        
+        self.assertTrue(topology.addNode("3"))
+        superPeer3 = SuperPeer("3", network)
+        superPeer3.setNode(topology.getNode("3"))
+        
+        self.assertTrue(topology.addNode("4"))
+        superPeer4 = SuperPeer("4", network)
+        superPeer4.setNode(topology.getNode("4"))
+        
+        self.assertTrue(topology.addEdge("1", "2"))
+        self.assertTrue(topology.addEdge("2", "1"))
+        
+        self.assertTrue(topology.addEdge("2", "3"))
+        self.assertTrue(topology.addEdge("3", "2"))
+        
+        self.assertTrue(topology.addEdge("2", "4"))
+        self.assertTrue(topology.addEdge("4", "2"))
+        
+        self.assertTrue(topology.addEdge("3", "4"))
+        self.assertTrue(topology.addEdge("4", "3"))
+        
+        self.assertTrue(superPeer1.hasNeighbor("2"))
+        self.assertTrue(superPeer2.hasNeighbor("1"))
+        self.assertTrue(superPeer3.hasNeighbor("2"))
+        self.assertTrue(superPeer2.hasNeighbor("3"))
+        self.assertTrue(superPeer3.hasNeighbor("4"))
+        self.assertTrue(superPeer4.hasNeighbor("3"))
+        
+        route = Route("4", ["4", "3", "2"], 3, 0)
+        
+        self.assertEquals("2", superPeer1.getNeighbor("2").getId())
+        neighbor = superPeer1.getNeighbor("2")
+        self.assertTrue(neighbor.registerRoute(route))
+        self.assertEquals(1, neighbor.countRoutes("4"))
+        
+        route = Route("4", ["4", "2"], 2, 0)
+        
+        self.assertEquals("2", superPeer1.getNeighbor("2").getId())
+        neighbor = superPeer1.getNeighbor("2")
+        self.assertTrue(neighbor.registerRoute(route))
+        self.assertEquals(2, neighbor.countRoutes("4"))
+        
+        message = self.PeerToPeerMessageForTest(IPeerToPeerMessage.SERVICE, IPeerToPeerProtocol.PUSH)
+        message.init(PeerToPeerMessageIdGenerator.generatePeerToPeerMessageId(superPeer1), superPeer1.getId(), superPeer4.getId(), protocol.getPushHops(), 1)
+        
+        routeMessage = superPeer1.send(message)
+        self.assertEquals(IPeerToPeerProtocol.ROUTE, routeMessage.getHandle())
+        dispatcher = superPeer2.getPeerToPeerMessageDispatcher()
+        self.assertEquals(1, dispatcher.countPeerToPeerMessages(IPeerToPeerProtocol.ROUTE))
+        superPeer2.joined()
+        dispatcher.on()
+        
+        time.sleep(1)
+        
+        dispatcher.off()
+        
+        dispatcher = superPeer4.getPeerToPeerMessageDispatcher()
+        self.assertEquals(1, dispatcher.countPeerToPeerMessages(IPeerToPeerProtocol.ROUTE))
+        superPeer4.joined()
+        dispatcher.on()
+        
+        time.sleep(1)
+        
+        dispatcher.off()
+        
     def testLeaveuperPeerInGnutellaNetwork(self):
         protocol = GnutellaSuperPeerProtocol()
         topology = self.TopologyForTest()

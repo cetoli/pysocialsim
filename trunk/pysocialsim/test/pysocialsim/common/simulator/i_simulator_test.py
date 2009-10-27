@@ -34,6 +34,9 @@ class ISimulatorTest(unittest.TestCase):
     def testTryInvokeGetSimulationEventHandlers(self):
         self.assertRaises(NotImplementedError, self.SimulatorForTest().getSimulationEventHandlers)
         
+    def testTryInvokeNotifyEventHandlingThreads(self):
+        self.assertRaises(NotImplementedError, self.SimulatorForTest().notifyEventHandlingThreads)    
+        
     def testTryInvokeStart(self):
         self.assertRaises(NotImplementedError, self.SimulatorForTest().start)
         

@@ -11,6 +11,8 @@ from pysocialsim.common.p2p.peer.i_neighbor import INeighbor
 from pysocialsim.common.base.decorators import public
 from pysocialsim.common.util.rotines import requires, pre_condition, returns
 from pysocialsim.common.p2p.peer.i_route import IRoute
+from pysocialsim.common.p2p.peer.i_peer import IPeer
+from pysocialsim.common.p2p.topology.graph.i_edge import IEdge
 
 class AbstractNeighbor(Object, INeighbor):
     """
@@ -25,21 +27,23 @@ class AbstractNeighbor(Object, INeighbor):
         raise NotImplementedError()
     
     def initialize(self, peer, edge):
+        requires(peer, IPeer)
+        requires(edge, IEdge)
         self.__peer = peer
         self.__edge = edge
         self.__routes = {}
 
     @public
     def getId(self):
-        return self.__edge.getTargetNode().getId()
+        return returns(self.__edge.getTargetNode().getId(), str)
 
     @public
     def getEdge(self):
-        return self.__edge
+        return returns(self.__edge, IEdge)
 
     @public
     def getPeer(self):
-        return self.__peer
+        return returns(self.__peer, IPeer)
 
     @public
     def dispatchData(self, data):
@@ -65,15 +69,21 @@ class AbstractNeighbor(Object, INeighbor):
 
     @public
     def countRoutes(self, peerId):
-        return len(self.__routes[peerId])
+        if not self.__routes.has_key(peerId):
+            return 0
+        return returns(len(self.__routes[peerId]), int)
 
     @public
     def getRoutes(self, peerId):
+        if not self.__routes.has_key(peerId):
+            return []
         return self.__routes[peerId]
     
     @public
     def hasRoutes(self, peerId):
-        return len(self.__routes[peerId]) > 0
+        if not self.__routes.has_key(peerId):
+            return False
+        return returns(len(self.__routes[peerId]) > 0, bool)
 
 
     

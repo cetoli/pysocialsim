@@ -8,6 +8,7 @@ Defines the module with the implementation of SimplePeer class.
 """
 from pysocialsim.common.p2p.peer.abstract_peer import AbstractPeer
 from pysocialsim.common.p2p.network.i_peer_to_peer_network import IPeerToPeerNetwork
+from pysocialsim.common.base.decorators import public
 
 class SimplePeer(AbstractPeer):
     """
@@ -20,4 +21,9 @@ class SimplePeer(AbstractPeer):
 
     def __init__(self, id, peerToPeerNetwork):
         AbstractPeer.initialize(self, IPeerToPeerNetwork.SIMPLE_PEER, id, peerToPeerNetwork)
+    
+    @public
+    def join(self):
+        return AbstractPeer.join(self)
+
         

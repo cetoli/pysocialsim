@@ -59,7 +59,7 @@ class AbstractNeighbor(Object, INeighbor):
         
         if not route in self.__routes[route.getPeerId()]:
             self.__routes[route.getPeerId()].append(route)
-            print 22222222222222222222222222222222222
+            #print 22222222222222222222222222222222222
                     
         return returns(self.__routes.has_key(route.getPeerId()), bool)
 

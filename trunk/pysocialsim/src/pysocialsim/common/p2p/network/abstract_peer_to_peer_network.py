@@ -195,10 +195,3 @@ class AbstractPeerToPeerNetwork(Object, IPeerToPeerNetwork):
     connectionsBetweenSuperPeerAndSimplePeers = property(getConnectionsBetweenSuperPeerAndSimplePeers, setConnectionsBetweenSuperPeerAndSimplePeers, None, None)
 
     connectionsBetweenSimplePeerAndSuperPeers = property(getConnectionsBetweenSimplePeerAndSuperPeers, setConnectionsBetweenSimplePeerAndSuperPeers, None, None)
-
-    
-
-
-    
-
-        

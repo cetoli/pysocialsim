@@ -11,7 +11,7 @@ from pysocialsim.common.p2p.peer.i_peer import IPeer
 from pysocialsim.common.base.decorators import public
 from pysocialsim.common.util.rotines import returns, requires, pre_condition
 from pysocialsim.common.p2p.topology.graph.i_node import INode
-from threading import Semaphore, Thread
+from threading import Semaphore
 from pysocialsim.common.p2p.protocol.i_peer_to_peer_protocol import IPeerToPeerProtocol
 from pysocialsim.common.p2p.message.peer_to_peer_message_id_generator import PeerToPeerMessageIdGenerator
 from pysocialsim.common.p2p.message.peer_to_peer_message_dispatcher import PeerToPeerMessageDispatcher
@@ -113,10 +113,9 @@ class AbstractPeer(Object, IPeer):
                     message = self.__peerToPeerProtocol.createPeerToPeerMessage(IPeerToPeerProtocol.PING)
                     message.registerPeerId(self.__id)
                     messageId = PeerToPeerMessageIdGenerator.generatePeerToPeerMessageId(self)           
-                    #message.init(messageId, self.__id, n.getId(), len(self.__peerToPeerNetwork.getConnectedPeers(IPeerToPeerNetwork.SUPER_PEER)) - 1, simulation.getCurrentSimulationTime())
                     message.init(messageId, self.__id, n.getId(), self.__peerToPeerProtocol.getPingHops(), simulation.getCurrentSimulationTime())
                     self.send(message)
-        print aux, 11111111111111111111111111111111111111111
+        
         return returns(aux, bool)
     
     @public
@@ -190,12 +189,3 @@ class AbstractPeer(Object, IPeer):
     peerToPeerNetwork = property(getPeerToPeerNetwork, None, None, None)
 
     peerToPeerProtocol = property(getPeerToPeerProtocol, None, None, None)
-        
-    class OperationThread(Thread):
-        
-        def __init__(self, closure):
-            Thread.__init__(self)
-            self.__closure = closure
-            
-        def run(self):
-            self.__closure()

@@ -21,6 +21,7 @@ from pysocialsim.common.p2p.peer.route import Route
 from pysocialsim.common.p2p.message.abstract_peer_to_peer_message import AbstractPeertoPeerMessage
 from pysocialsim.common.p2p.message.i_peer_to_peer_message import IPeerToPeerMessage
 from pysocialsim.common.p2p.message.peer_to_peer_message_id_generator import PeerToPeerMessageIdGenerator
+from pysocialsim.common.p2p.message.i_peer_to_peer_message_handler import IPeerToPeerMessageHandler
 import time
 import pymockobject
 
@@ -153,6 +154,10 @@ class GnutellaSuperPeerProtocolTest(unittest.TestCase):
         routeMessage = superPeer1.send(message)
         self.assertEquals(IPeerToPeerProtocol.ROUTE, routeMessage.getHandle())
         dispatcher = superPeer2.getPeerToPeerMessageDispatcher()
+        handler = pymockobject.create(IPeerToPeerMessageHandler)
+        handler.getHandle.will(ReturnValue("PUSH"))
+        handler.clone.will(ReturnValue(handler))
+        dispatcher.registerPeerToPeerMessageHandler(handler)
         self.assertEquals(1, dispatcher.countPeerToPeerMessages(IPeerToPeerProtocol.ROUTE))
         superPeer2.joined()
         dispatcher.on()
@@ -161,6 +166,10 @@ class GnutellaSuperPeerProtocolTest(unittest.TestCase):
         dispatcher.off()
         
         dispatcher = superPeer3.getPeerToPeerMessageDispatcher()
+        handler = pymockobject.create(IPeerToPeerMessageHandler)
+        handler.getHandle.will(ReturnValue("PUSH"))
+        handler.clone.will(ReturnValue(handler))
+        dispatcher.registerPeerToPeerMessageHandler(handler)
         self.assertEquals(1, dispatcher.countPeerToPeerMessages(IPeerToPeerProtocol.ROUTE))
         superPeer3.joined()
         dispatcher.on()
@@ -226,6 +235,10 @@ class GnutellaSuperPeerProtocolTest(unittest.TestCase):
         routeMessage = superPeer1.send(message)
         self.assertEquals(IPeerToPeerProtocol.ROUTE, routeMessage.getHandle())
         dispatcher = superPeer2.getPeerToPeerMessageDispatcher()
+        handler = pymockobject.create(IPeerToPeerMessageHandler)
+        handler.getHandle.will(ReturnValue("PUSH"))
+        handler.clone.will(ReturnValue(handler))
+        dispatcher.registerPeerToPeerMessageHandler(handler)
         self.assertEquals(1, dispatcher.countPeerToPeerMessages(IPeerToPeerProtocol.ROUTE))
         superPeer2.joined()
         dispatcher.on()
@@ -234,6 +247,10 @@ class GnutellaSuperPeerProtocolTest(unittest.TestCase):
         dispatcher.off()
         
         dispatcher = superPeer3.getPeerToPeerMessageDispatcher()
+        handler = pymockobject.create(IPeerToPeerMessageHandler)
+        handler.getHandle.will(ReturnValue("PUSH"))
+        handler.clone.will(ReturnValue(handler))
+        dispatcher.registerPeerToPeerMessageHandler(handler)
         self.assertEquals(1, dispatcher.countPeerToPeerMessages(IPeerToPeerProtocol.ROUTE))
         superPeer3.joined()
         dispatcher.on()
@@ -242,16 +259,23 @@ class GnutellaSuperPeerProtocolTest(unittest.TestCase):
         dispatcher.off()
         
         dispatcher = superPeer4.getPeerToPeerMessageDispatcher()
+        handler = pymockobject.create(IPeerToPeerMessageHandler)
+        handler.getHandle.will(ReturnValue("PUSH"))
+        handler.clone.will(ReturnValue(handler))
+        dispatcher.registerPeerToPeerMessageHandler(handler)
         self.assertEquals(1, dispatcher.countPeerToPeerMessages(IPeerToPeerProtocol.ROUTE))
         superPeer4.joined()
         dispatcher.on()
+        
         time.sleep(1)
+        
         dispatcher.off()
         
     def testSendPeerToPeerMessageWithTwoRoutes(self):
         network = PeerToPeerNetwork(pymockobject.create(ISimulation))
         network.setConnectionsBetweenSuperPeers(6)
         protocol = GnutellaSuperPeerProtocol()
+        
         
         self.assertEquals(6, protocol.setPingHops(6))
         self.assertEquals(6, protocol.setPongHops(6))
@@ -317,6 +341,10 @@ class GnutellaSuperPeerProtocolTest(unittest.TestCase):
         routeMessage = superPeer1.send(message)
         self.assertEquals(IPeerToPeerProtocol.ROUTE, routeMessage.getHandle())
         dispatcher = superPeer2.getPeerToPeerMessageDispatcher()
+        handler = pymockobject.create(IPeerToPeerMessageHandler)
+        handler.getHandle.will(ReturnValue("PUSH"))
+        handler.clone.will(ReturnValue(handler))
+        dispatcher.registerPeerToPeerMessageHandler(handler)
         self.assertEquals(1, dispatcher.countPeerToPeerMessages(IPeerToPeerProtocol.ROUTE))
         superPeer2.joined()
         dispatcher.on()
@@ -326,6 +354,10 @@ class GnutellaSuperPeerProtocolTest(unittest.TestCase):
         dispatcher.off()
         
         dispatcher = superPeer4.getPeerToPeerMessageDispatcher()
+        handler = pymockobject.create(IPeerToPeerMessageHandler)
+        handler.getHandle.will(ReturnValue("PUSH"))
+        handler.clone.will(ReturnValue(handler))
+        dispatcher.registerPeerToPeerMessageHandler(handler)
         self.assertEquals(1, dispatcher.countPeerToPeerMessages(IPeerToPeerProtocol.ROUTE))
         superPeer4.joined()
         dispatcher.on()

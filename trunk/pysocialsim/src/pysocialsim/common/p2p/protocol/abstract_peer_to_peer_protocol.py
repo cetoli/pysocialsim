@@ -15,6 +15,7 @@ from pysocialsim.common.p2p.message.abstract_peer_to_peer_message import Abstrac
 from pysocialsim.common.p2p.message.peer_to_peer_message_creator import PeerToPeerMessageCreator
 from pysocialsim.common.p2p.message.i_peer_to_peer_message_creator import IPeerToPeerMessageCreator
 from pysocialsim.common.p2p.message.i_peer_to_peer_message import IPeerToPeerMessage
+from pysocialsim.common.p2p.peer.i_peer import IPeer
 
 class AbstractPeerToPeerProtocol(Object, IPeerToPeerProtocol):
     """
@@ -119,11 +120,21 @@ class AbstractPeerToPeerProtocol(Object, IPeerToPeerProtocol):
     
     @public
     def send(self, peer, peerToPeerMessage):
-        raise NotImplementedError()
+        if not peer.hasNeighbor(peerToPeerMessage.getTargetId()):
+            return self.route(peer, peerToPeerMessage)
+        
+        neighbor = peer.getNeighbor(peerToPeerMessage.getTargetId())
+        return neighbor.dispatchData(peerToPeerMessage)
     
     @public
     def receive(self, peer, peerToPeerMessage):
-        raise NotImplementedError()
+        requires(peer, IPeer)
+        requires(peerToPeerMessage, IPeerToPeerMessage)
+        
+        pre_condition(peer, lambda x: x <> None)
+        pre_condition(peerToPeerMessage, lambda x: x <> None)
+       
+        return peer.receive(peerToPeerMessage)
     
     class PingPeerToPeerMessage(AbstractPeertoPeerMessage):
         

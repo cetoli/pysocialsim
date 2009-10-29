@@ -23,6 +23,7 @@ from pysocialsim.common.p2p.network.i_peer_to_peer_network import IPeerToPeerNet
 from pysocialsim.common.p2p.protocol.gnutella.gnutella_super_peer_protocol import GnutellaSuperPeerProtocol
 from pysocialsim.common.p2p.topology.peer_to_peer_topology import PeerToPeerTopology
 from pysocialsim.common.p2p.protocol.i_peer_to_peer_protocol import IPeerToPeerProtocol
+from pysocialsim.common.p2p.protocol.gnutella.gnutella_simple_peer_protocol import GnutellaSimplePeerProtocol
 import pymockobject
 
 class SimulationSpike(AbstractSimulation):
@@ -39,17 +40,29 @@ simulator.registerSimulationEventHandler(EndSimulationEventHandler())
 simulation = SimulationSpike()
 network = PeerToPeerNetwork(simulation)
 network.setConnectionsBetweenSuperPeers(6)
+network.setConnectionsBetweenSuperPeerAndSimplePeers(30)
+network.setConnectionsBetweenSimplePeerAndSuperPeers(3)
+
 protocol = GnutellaSuperPeerProtocol()
 protocol.setPingHops(6)
 protocol.setPongHops(6)
+
 topology = PeerToPeerTopology()
 topology.setPeerToPeerNetwork(network)
+
 protocol.setPeerToPeerTopology(topology)
 network.registerPeerToPeerProtocol(IPeerToPeerNetwork.SUPER_PEER, protocol)
-network.registerPeerToPeerProtocol(IPeerToPeerNetwork.SIMPLE_PEER, pymockobject.create(IPeerToPeerProtocol))
+
+protocol = GnutellaSimplePeerProtocol()
+protocol.setPingHops(6)
+protocol.setPongHops(6)
+protocol.setPeerToPeerTopology(topology)
+network.registerPeerToPeerProtocol(IPeerToPeerNetwork.SIMPLE_PEER, protocol)
+
 simulation.setPeerToPeerNetwork(network)
 simulator.setSimulation(simulation)
 simulation.setSimulationTime(86400)
+
 simulation.addSimulationEventGenerator(BeginSimulationEventGenerator())
 simulation.addSimulationEventGenerator(NewSuperPeerSimulationEventGenerator(5.5, 500, 859))
 simulation.addSimulationEventGenerator(NewSimplePeerSimulationEventGenerator(5.5, 900, 96))

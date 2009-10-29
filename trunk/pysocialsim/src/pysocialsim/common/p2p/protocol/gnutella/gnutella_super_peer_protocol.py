@@ -116,16 +116,8 @@ class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
         semaphore.release()
         return True
     
-    @public
-    def send(self, peer, peerToPeerMessage):
-        if not peer.hasNeighbor(peerToPeerMessage.getTargetId()):
-            return self.route(peer, peerToPeerMessage)
-        
-        neighbor = peer.getNeighbor(peerToPeerMessage.getTargetId())
-        return neighbor.dispatchData(peerToPeerMessage)
-        
-        
     
+        
     @public
     def route(self, peer, peerToPeerMessage):
         semaphore = Semaphore()
@@ -208,15 +200,7 @@ class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
     def pong(self, peer, peerToPeerMessage):
         raise NotImplementedError()
     
-    @public
-    def receive(self, peer, peerToPeerMessage):
-        requires(peer, IPeer)
-        requires(peerToPeerMessage, IPeerToPeerMessage)
-        
-        pre_condition(peer, lambda x: x <> None)
-        pre_condition(peerToPeerMessage, lambda x: x <> None)
-        
-        peer.receive(peerToPeerMessage)
+    
         
     @public
     def configurePeer(self, peer):
@@ -317,6 +301,8 @@ class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
             peer = self.getPeer()
             
             if peer.getId() == message.getFirst():
-                print "ROUTED", peer.getId(), message.getHandle()
+                peerToPeerMessage = message.getParameter("peerToPeerMessage")
+                dispatcher = peer.getPeerToPeerMessageDispatcher()
+                dispatcher.registerPeerToPeerMessage(peerToPeerMessage)
             else:
                 peer.route(message)

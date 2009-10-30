@@ -9,6 +9,7 @@ Defines the module with the unit test of IPeerToPeerNetwork interface.
 from pysocialsim.common.p2p.network.i_peer_to_peer_network import IPeerToPeerNetwork
 from pysocialsim.common.simulator.simulation.i_simulation import ISimulation
 from pysocialsim.common.p2p.peer.i_peer import IPeer
+from pysocialsim.common.p2p.protocol.i_peer_to_peer_protocol import IPeerToPeerProtocol
 import pymockobject
 
 import unittest
@@ -52,7 +53,35 @@ class IPeerToPeerNetworkTest(unittest.TestCase):
         self.assertRaises(NotImplementedError, self.PeerToPeerNetworkForTest().getDisconnectedPeers, IPeerToPeerNetwork.SIMPLE_PEER)
         self.assertRaises(NotImplementedError, self.PeerToPeerNetworkForTest().getDisconnectedPeers, IPeerToPeerNetwork.SUPER_PEER)
         
+    def testTryGetConnectionsBetweenSuperPeers(self):
+        self.assertRaises(NotImplementedError, self.PeerToPeerNetworkForTest().getConnectionsBetweenSuperPeers)
+        
+    def testTryRegisterPeerToPeerProtocol(self):
+        self.assertRaises(NotImplementedError, self.PeerToPeerNetworkForTest().registerPeerToPeerProtocol, IPeerToPeerNetwork.SUPER_PEER, pymockobject.create(IPeerToPeerProtocol))
+        self.assertRaises(NotImplementedError, self.PeerToPeerNetworkForTest().registerPeerToPeerProtocol, IPeerToPeerNetwork.SIMPLE_PEER, pymockobject.create(IPeerToPeerProtocol))
+        
+    def testTryUnregisterPeerToPeerProtocol(self):
+        self.assertRaises(NotImplementedError, self.PeerToPeerNetworkForTest().unregisterPeerToPeerProtocol, IPeerToPeerNetwork.SUPER_PEER)
+        self.assertRaises(NotImplementedError, self.PeerToPeerNetworkForTest().unregisterPeerToPeerProtocol, IPeerToPeerNetwork.SIMPLE_PEER)
     
+    def testTryGetPeerToPeerProtocol(self):
+        self.assertRaises(NotImplementedError, self.PeerToPeerNetworkForTest().getPeerToPeerProtocol, IPeerToPeerNetwork.SUPER_PEER)
+        self.assertRaises(NotImplementedError, self.PeerToPeerNetworkForTest().getPeerToPeerProtocol, IPeerToPeerNetwork.SIMPLE_PEER)
+    
+    def testTryHasPeer(self):
+        self.assertRaises(NotImplementedError, self.PeerToPeerNetworkForTest().hasPeer, pymockobject.create(IPeer))
+        
+    def testTrySetConnectionsBetweenSuperPeerAndSimplePeers(self):
+        self.assertRaises(NotImplementedError, self.PeerToPeerNetworkForTest().setConnectionsBetweenSuperPeerAndSimplePeers, 10)
+        
+    def testTryGetConnectionsBetweenSuperPeerAndSimplePeers(self):
+        self.assertRaises(NotImplementedError, self.PeerToPeerNetworkForTest().getConnectionsBetweenSuperPeerAndSimplePeers)
+    
+    def testTrySetConnectionsBetweenSimplePeerAndSuperPeers(self):
+        self.assertRaises(NotImplementedError, self.PeerToPeerNetworkForTest().setConnectionsBetweenSimplePeerAndSuperPeers, 10)
+    
+    def testTryGetConnectionsBetweenSimplePeerAndSuperPeers(self):
+        self.assertRaises(NotImplementedError, self.PeerToPeerNetworkForTest().getConnectionsBetweenSimplePeerAndSuperPeers)
     
     class PeerToPeerNetworkForTest(IPeerToPeerNetwork):
         

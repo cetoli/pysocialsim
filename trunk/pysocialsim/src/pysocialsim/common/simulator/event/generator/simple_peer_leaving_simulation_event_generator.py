@@ -11,6 +11,7 @@ from pysocialsim.common.base.decorators import public
 from pysocialsim.common.util.rotines import requires, pre_condition
 from pysocialsim.common.p2p.network.i_peer_to_peer_network import IPeerToPeerNetwork
 from random import uniform
+from pysocialsim.common.simulator.event.generator.simple_peer_leaving_simulation_event import SimplePeerLeavingSimulationEvent
 import math
 
 class SimplePeerLeavingSimulationEventGenerator(AbstractSimulationEventGenerator):
@@ -51,5 +52,7 @@ class SimplePeerLeavingSimulationEventGenerator(AbstractSimulationEventGenerator
             lastTime = scheduler.getTimeForPeer(IPeerToPeerNetwork.SIMPLE_PEER, peer.getId())
             time = (self.__scale*pow((-math.log(uniform(0,1))), 1/self.__shape)) * 3600
             scheduler.registerTimeForPeer(IPeerToPeerNetwork.SIMPLE_PEER, peer.getId(), int((lastTime + time)))
+            event = SimplePeerLeavingSimulationEvent(peer.getId(), scheduler.getTimeForPeer(IPeerToPeerNetwork.SIMPLE_PEER, peer.getId()))
+            simulation.registerSimulationEvent(event)
             generatedEvents += 1
         return generatedEvents      

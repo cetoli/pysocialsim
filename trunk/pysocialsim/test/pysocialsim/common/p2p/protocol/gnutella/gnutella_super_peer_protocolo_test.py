@@ -242,6 +242,8 @@ class GnutellaSuperPeerProtocolTest(unittest.TestCase):
         self.assertEquals(1, dispatcher.countPeerToPeerMessages(IPeerToPeerProtocol.ROUTE))
         superPeer2.joined()
         dispatcher.on()
+
+        time.sleep(0.1)
         
         time.sleep(1)
         dispatcher.off()
@@ -253,6 +255,31 @@ class GnutellaSuperPeerProtocolTest(unittest.TestCase):
         dispatcher.registerPeerToPeerMessageHandler(handler)
         self.assertEquals(1, dispatcher.countPeerToPeerMessages(IPeerToPeerProtocol.ROUTE))
         superPeer3.joined()
+        dispatcher.on()
+        
+        self.assertTrue(topology.addNode("4"))
+        superPeer4 = SuperPeer("4", network)
+        superPeer4.setNode(topology.getNode("4"))
+        
+        self.assertTrue(topology.addEdge("3", "4"))
+        self.assertTrue(topology.addEdge("4", "3"))
+        
+        route = Route("4", ["4", "3", "2"], 3, 0)
+        
+        self.assertEquals("2", superPeer1.getNeighbor("2").getId())
+        neighbor = superPeer1.getNeighbor("2")
+        self.assertTrue(neighbor.registerRoute(route))
+        self.assertEquals(1, neighbor.countRoutes("4"))
+        
+        message = self.PeerToPeerMessageForTest(IPeerToPeerMessage.SERVICE, IPeerToPeerProtocol.PUSH)
+        message.init(PeerToPeerMessageIdGenerator.generatePeerToPeerMessageId(superPeer1), superPeer1.getId(), superPeer4.getId(), protocol.getPushHops(), 1)
+        
+        superPeer1.send(message)
+        
+        time.sleep(0.1)
+        dispatcher = superPeer4.getPeerToPeerMessageDispatcher()
+        self.assertEquals(1, dispatcher.countPeerToPeerMessages(IPeerToPeerProtocol.ROUTE))
+        superPeer4.joined()
         dispatcher.on()
         
         time.sleep(1)

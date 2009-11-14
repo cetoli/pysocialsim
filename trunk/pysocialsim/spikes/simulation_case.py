@@ -22,8 +22,10 @@ from pysocialsim.common.p2p.network.peer_to_peer_network import PeerToPeerNetwor
 from pysocialsim.common.p2p.network.i_peer_to_peer_network import IPeerToPeerNetwork
 from pysocialsim.common.p2p.protocol.gnutella.gnutella_super_peer_protocol import GnutellaSuperPeerProtocol
 from pysocialsim.common.p2p.topology.peer_to_peer_topology import PeerToPeerTopology
-from pysocialsim.common.p2p.protocol.i_peer_to_peer_protocol import IPeerToPeerProtocol
 from pysocialsim.common.p2p.protocol.gnutella.gnutella_simple_peer_protocol import GnutellaSimplePeerProtocol
+from pysocialsim.common.simulator.event.handler.simple_peer_leaving_simulation_event_handler import SimplePeerLeavingSimulationEventHandler
+from pysocialsim.common.simulator.event.handler.simple_peer_interest_simulation_event_handler import SimplePeerInterestSimulationEventHandler
+from pysocialsim.common.simulator.event.generator.simple_peer_interest_simulation_event_generator import SimplePeerInterestSimulationEventGenerator
 from pysocialsim.common.simulator.event.handler.simple_peer_leaving_simulation_event_handler import SimplePeerLeavingSimulationEventHandler
 import pymockobject
 
@@ -37,6 +39,8 @@ simulator = DefaultSimulator()
 simulator.registerSimulationEventHandler(BeginSimulationEventHandler())
 simulator.registerSimulationEventHandler(NewSuperPeerSimulationEventHandler())
 simulator.registerSimulationEventHandler(NewSimplePeerSimulationEventHandler())
+simulator.registerSimulationEventHandler(SimplePeerInterestSimulationEventHandler())
+simulator.registerSimulationEventHandler(SimplePeerLeavingSimulationEventHandler())
 simulator.registerSimulationEventHandler(SimplePeerLeavingSimulationEventHandler())
 simulator.registerSimulationEventHandler(EndSimulationEventHandler())
 simulation = SimulationSpike()
@@ -68,7 +72,9 @@ simulation.setSimulationTime(86400)
 simulation.addSimulationEventGenerator(BeginSimulationEventGenerator())
 simulation.addSimulationEventGenerator(NewSuperPeerSimulationEventGenerator(5.5, 7200, 60))
 simulation.addSimulationEventGenerator(NewSimplePeerSimulationEventGenerator(5.5, 3600, 120))
-simulation.addSimulationEventGenerator(SimplePeerLeavingSimulationEventGenerator(3.9867, 13.7007, 120))
+simulation.addSimulationEventGenerator(SimplePeerInterestSimulationEventGenerator(1.8, 450.0))
+simulation.addSimulationEventGenerator(SimplePeerInterestSimulationEventGenerator(1.8, 450.0))
+simulation.addSimulationEventGenerator(SimplePeerLeavingSimulationEventGenerator(1.5618, 6.0013, 120))
 simulation.addSimulationEventGenerator(SimplePeerJoiningSimulationEventGenerator(1.8, 3600.0, 96))
 simulation.addSimulationEventGenerator(EndSimulationEventGenerator())
 #simulation.configure()

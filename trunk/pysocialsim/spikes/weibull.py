@@ -1,8 +1,8 @@
 from random import uniform
 import math
 
-lambd = 13.7007
-k = 3.9867
+lambd = 6.0013
+k = 1.5618
 x0 = 0
 
 s0_1 = 0

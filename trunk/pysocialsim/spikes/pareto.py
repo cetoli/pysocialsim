@@ -2,7 +2,7 @@ from random import random, paretovariate, weibullvariate, uniform
 
 alpha = 1.8
 beta = 2
-k = 3600
+k = 450
 s0_1 = 0
 s1_2 = 0
 s2_3 = 0

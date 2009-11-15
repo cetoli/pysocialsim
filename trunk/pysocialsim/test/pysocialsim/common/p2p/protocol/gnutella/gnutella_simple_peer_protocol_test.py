@@ -130,13 +130,13 @@ class GnutellaSimplePeerProtocolTest(unittest.TestCase):
         
         superPeer = SuperPeer("1", network)
         
-        time.sleep(0.5)
+        time.sleep(1)
         
         self.assertTrue(superPeer.join())
         
         simplePeer1 = SimplePeer("a", network)
         
-        time.sleep(0.5)
+        time.sleep(1)
         self.assertTrue(simplePeer1.join())
         
         self.assertEquals(1, superPeer.countChildren())
@@ -144,10 +144,10 @@ class GnutellaSimplePeerProtocolTest(unittest.TestCase):
         
         simplePeer2 = SimplePeer("b", network)
         
-        time.sleep(0.5)
+        time.sleep(1)
         self.assertTrue(simplePeer2.join())
         
-        time.sleep(0.5)
+        time.sleep(1)
         
         self.assertEquals(2, superPeer.countChildren())
         self.assertTrue(superPeer.getNeighbor("b"))
@@ -210,13 +210,13 @@ class GnutellaSimplePeerProtocolTest(unittest.TestCase):
         
         superPeer = SuperPeer("1", network)
         
-        time.sleep(0.5)
+        time.sleep(1)
         
         self.assertTrue(superPeer.join())
         
         simplePeer1 = SimplePeer("a", network)
         
-        time.sleep(0.5)
+        time.sleep(1)
         self.assertTrue(simplePeer1.join())
         
         self.assertEquals(1, superPeer.countChildren())
@@ -224,10 +224,10 @@ class GnutellaSimplePeerProtocolTest(unittest.TestCase):
         
         simplePeer2 = SimplePeer("b", network)
         
-        time.sleep(0.5)
+        time.sleep(1)
         self.assertTrue(simplePeer2.join())
         
-        time.sleep(0.5)
+        time.sleep(1)
         
         self.assertEquals(2, superPeer.countChildren())
         self.assertTrue(superPeer.getNeighbor("b"))

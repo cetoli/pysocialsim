@@ -43,4 +43,4 @@ class NewSimplePeerSimulationEventGeneratorTest(unittest.TestCase):
         
         generator = NewSimplePeerSimulationEventGenerator(5.5, 900, 1000)
         self.assertEquals(simulation, generator.setSimulation(simulation))
-        self.assertEquals(601, generator.generateSimulationEvents())
+        self.assertEquals(500, generator.generateSimulationEvents())

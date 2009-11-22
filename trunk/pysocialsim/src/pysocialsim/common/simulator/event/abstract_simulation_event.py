@@ -44,6 +44,7 @@ class AbstractSimulationEvent(ISimulationEvent, Object):
         self.__peerId = peerId
         self.__priority = priority
         self.__isHanlded = False
+        self.__parameters = {}
     
     @public
     def getHandle(self):
@@ -64,6 +65,14 @@ class AbstractSimulationEvent(ISimulationEvent, Object):
     @public
     def isHandled(self):
         return self.__isHanlded
+    
+    @public
+    def registerParameter(self, name, value):
+        self.__parameters[name] = value
+    
+    @public
+    def getParameter(self, name):
+        return self.__parameters[name]
     
     def __eq__(self, other):
         if not other:

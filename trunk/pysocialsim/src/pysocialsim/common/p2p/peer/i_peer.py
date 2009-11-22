@@ -100,3 +100,6 @@ class IPeer(object):
     
     def leave(self):
         raise NotImplementedError()
+    
+    def getContextManager(self):
+        raise NotImplementedError()

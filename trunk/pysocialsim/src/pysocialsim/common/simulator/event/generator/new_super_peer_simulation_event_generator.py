@@ -62,10 +62,10 @@ class NewSuperPeerSimulationEventGenerator(AbstractSimulationEventGenerator):
         aux = 1
         event = NewSuperPeerSimulationEvent(superPeer.getId(), priority)
         simulation.registerSimulationEvent(event)
-        for i in range(1, int(self.__average * 2)):
+        for i in range(1, int(self.__average * 2) + 1):
             distPoisson = (pow(self.__average, i) / factorial(i)) * pow(math.e, -self.__average)
             times = round((simulation.getSimulationTime() / self.__time) * distPoisson)
-            for x in range(1, int(times) + 1):
+            for x in range(1, int(times)):
                 priority += self.__time
                 for j in range(i):
                     aux += 1

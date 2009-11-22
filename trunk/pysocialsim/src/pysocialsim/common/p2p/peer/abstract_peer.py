@@ -18,6 +18,7 @@ from pysocialsim.common.p2p.message.peer_to_peer_message_dispatcher import PeerT
 from pysocialsim.common.p2p.network.i_peer_to_peer_network import IPeerToPeerNetwork
 from pysocialsim.common.p2p.message.i_peer_to_peer_message import IPeerToPeerMessage
 from pysocialsim.common.p2p.peer.i_neighbor import INeighbor
+from pysocialsim.common.p2p.peer.context.context_manager import ContextManager
 
 class AbstractPeer(Object, IPeer):
     """
@@ -55,6 +56,7 @@ class AbstractPeer(Object, IPeer):
         self.__neighbors = {}
         self.__peerToPeerMessageDispatcher = PeerToPeerMessageDispatcher(self)
         self.__peerToPeerProtocol.configurePeer(self)
+        self.__contextManager = ContextManager(self)
     
     @public    
     def getId(self):
@@ -188,6 +190,10 @@ class AbstractPeer(Object, IPeer):
     def getPeerToPeerMessageDispatcher(self):
         return self.__peerToPeerMessageDispatcher
     
+    @public
+    def getContextManager(self):
+        return self.__contextManager
+    
     id = property(getId, None, None, None)
 
     type = property(getType, None, None, None)
@@ -197,3 +203,5 @@ class AbstractPeer(Object, IPeer):
     peerToPeerNetwork = property(getPeerToPeerNetwork, None, None, None)
 
     peerToPeerProtocol = property(getPeerToPeerProtocol, None, None, None)
+    
+    contextManager = property(getContextManager, None, None, None)

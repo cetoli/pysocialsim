@@ -16,10 +16,15 @@ class AbstractContext(Object, IContext):
     def __init__(self):
         raise NotImplementedError()
 
-    def initialize(self, type, id):
+    def initialize(self, type, id, peer):
         self.__type = type
         self.__id = id
         self.__tags = []
+        self.__peer = peer
+    
+    @public
+    def getPeer(self):
+        return self.__peer
         
     @public
     def getType(self):
@@ -57,5 +62,7 @@ class AbstractContext(Object, IContext):
     id = property(getId, None, None, None)
 
     tags = property(getTags, None, None, None)
+
+    peer = property(getPeer, None, None, None)
         
     

@@ -59,3 +59,9 @@ class ISimulationEvent(object):
         @rtype: bool
         """
         raise NotImplementedError()
+    
+    def registerParameter(self, name, value):
+        raise NotImplementedError()
+    
+    def getParameter(self, name):
+        raise NotImplementedError()

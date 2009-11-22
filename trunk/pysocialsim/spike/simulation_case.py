@@ -27,6 +27,8 @@ from pysocialsim.common.simulator.event.handler.simple_peer_leaving_simulation_e
 from pysocialsim.common.simulator.event.handler.simple_peer_interest_simulation_event_handler import SimplePeerInterestSimulationEventHandler
 from pysocialsim.common.simulator.event.generator.simple_peer_interest_simulation_event_generator import SimplePeerInterestSimulationEventGenerator
 from pysocialsim.common.simulator.event.handler.simple_peer_leaving_simulation_event_handler import SimplePeerLeavingSimulationEventHandler
+from pysocialsim.common.simulator.event.handler.start_opportunity_simulation_event_handler import StartOpportunitySimulationEventHandler
+from pysocialsim.common.simulator.event.generator.start_opportunity_simulation_event_generator import StartOpportunitySimulationventGenerator
 import pymockobject
 
 class SimulationSpike(AbstractSimulation):
@@ -39,6 +41,7 @@ simulator = DefaultSimulator()
 simulator.registerSimulationEventHandler(BeginSimulationEventHandler())
 simulator.registerSimulationEventHandler(NewSuperPeerSimulationEventHandler())
 simulator.registerSimulationEventHandler(NewSimplePeerSimulationEventHandler())
+simulator.registerSimulationEventHandler(StartOpportunitySimulationEventHandler())
 simulator.registerSimulationEventHandler(SimplePeerInterestSimulationEventHandler())
 simulator.registerSimulationEventHandler(SimplePeerLeavingSimulationEventHandler())
 simulator.registerSimulationEventHandler(SimplePeerLeavingSimulationEventHandler())
@@ -70,12 +73,14 @@ simulator.setSimulation(simulation)
 simulation.setSimulationTime(86400)
 
 simulation.addSimulationEventGenerator(BeginSimulationEventGenerator())
-simulation.addSimulationEventGenerator(NewSuperPeerSimulationEventGenerator(5.5, 7200, 60))
-simulation.addSimulationEventGenerator(NewSimplePeerSimulationEventGenerator(5.5, 3600, 120))
-simulation.addSimulationEventGenerator(SimplePeerInterestSimulationEventGenerator(1.8, 450.0))
-simulation.addSimulationEventGenerator(SimplePeerInterestSimulationEventGenerator(1.8, 450.0))
+simulation.addSimulationEventGenerator(NewSuperPeerSimulationEventGenerator(5.5, 1000, 60))
+simulation.addSimulationEventGenerator(NewSimplePeerSimulationEventGenerator(5.5, 500, 120))
+#simulation.addSimulationEventGenerator(SimplePeerInterestSimulationEventGenerator(1.8, 450.0))
+#simulation.addSimulationEventGenerator(SimplePeerInterestSimulationEventGenerator(1.8, 450.0))
 simulation.addSimulationEventGenerator(SimplePeerLeavingSimulationEventGenerator(1.5618, 6.0013, 120))
+simulation.addSimulationEventGenerator(StartOpportunitySimulationventGenerator(1.0, 600, 120))
 simulation.addSimulationEventGenerator(SimplePeerJoiningSimulationEventGenerator(1.8, 3600.0, 96))
+
 simulation.addSimulationEventGenerator(EndSimulationEventGenerator())
 #simulation.configure()
 simulator.start()

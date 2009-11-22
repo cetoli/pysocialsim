@@ -26,10 +26,10 @@ class NewSimplePeerSimulationEventGenerator(AbstractSimulationEventGenerator):
     @since: 12/09/2009
     """
 
-    def __init__(self, average, time, superPeers):
-        self.initialize(average, time, superPeers)
+    def __init__(self, average, time, peers):
+        self.initialize(average, time, peers)
 
-    def initialize(self, average, time, superPeers):
+    def initialize(self, average, time, peers):
         """
         Initializes the simulation event generator.
         @param average: the average of new super peers appearance.
@@ -44,15 +44,15 @@ class NewSimplePeerSimulationEventGenerator(AbstractSimulationEventGenerator):
         
         requires(average, float)
         requires(time, int)
-        requires(superPeers, int)
+        requires(peers, int)
         
         pre_condition(average, lambda x: x > 0)
         pre_condition(time, lambda x: x > 0)
-        pre_condition(superPeers, lambda x: x > 0)
+        pre_condition(peers, lambda x: x > 0)
         
         self.__average = average
         self.__time = time
-        self.__superPeers = superPeers
+        self.__peers = peers
     
     @public    
     def generateSimulationEvents(self):
@@ -62,10 +62,10 @@ class NewSimplePeerSimulationEventGenerator(AbstractSimulationEventGenerator):
         generatedEvents = 0
         priority = 0
         peer = 0
-        for i in range(1, int(self.__average * 2)):
+        for i in range(1, int(self.__average * 2) + 1):
             distPoisson = (pow(self.__average, i) / factorial(i)) * pow(math.e, -self.__average)
             times = round((simulation.getSimulationTime() / self.__time) * distPoisson)
-            for x in range(1, int(times) + 1):
+            for x in range(1, int(times)):
                 priority += self.__time
                 for j in range(i):
                     peer += 1
@@ -74,7 +74,7 @@ class NewSimplePeerSimulationEventGenerator(AbstractSimulationEventGenerator):
                     simulation.registerSimulationEvent(event)
                     generatedEvents += 1
                     scheduler.registerTimeForPeer(IPeerToPeerNetwork.SIMPLE_PEER, simplePeer.getId(), priority)
-                    if self.__superPeers == peer:
+                    if self.__peers == peer:
                         return generatedEvents
         
         return generatedEvents

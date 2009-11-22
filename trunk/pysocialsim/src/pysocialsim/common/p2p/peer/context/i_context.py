@@ -10,6 +10,7 @@ Defines the module with the specification of IContext interface.
 class IContext(object):
     
     INTEREST = "INTEREST"
+    OPPORTUNITY = "OPPORTUNITY"
     
 
     def __init__(self):

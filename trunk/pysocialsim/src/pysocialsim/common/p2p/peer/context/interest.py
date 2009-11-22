@@ -11,6 +11,6 @@ from pysocialsim.common.p2p.peer.context.i_context import IContext
 
 class Interest(AbstractContext):
 
-    def __init__(self, id):
-        AbstractContext.initialize(self, IContext.INTEREST, id)
+    def __init__(self, id, peer):
+        AbstractContext.initialize(self, IContext.INTEREST, id, peer)
         

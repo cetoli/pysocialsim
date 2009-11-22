@@ -49,6 +49,6 @@ class SimplePeerJoiningSimulationEventGenerator(AbstractSimulationEventGenerator
         for peer in network.getPeers(IPeerToPeerNetwork.SIMPLE_PEER):
             lastTime = scheduler.getTimeForPeer(IPeerToPeerNetwork.SIMPLE_PEER, peer.getId())
             time = self.__minimum/pow(uniform(0,1), 1/self.__alpha)
-            scheduler.registerTimeForPeer(IPeerToPeerNetwork.SIMPLE_PEER, peer.getId(), int(time))
+            scheduler.registerTimeForPeer(IPeerToPeerNetwork.SIMPLE_PEER, peer.getId(), int(time + lastTime))
             generatedEvents += 1
         return generatedEvents      

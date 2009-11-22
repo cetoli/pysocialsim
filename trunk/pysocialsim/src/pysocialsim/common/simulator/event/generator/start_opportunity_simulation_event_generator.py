@@ -44,6 +44,7 @@ class StartOpportunitySimulationventGenerator(AbstractSimulationEventGenerator):
         simulator = simulation.getSimulator()
         scheduler = simulator.getScheduler()
         generatedEvents = 0
+        peerCounter = 0
         network = simulation.getPeerToPeerNetwork()
         for peer in network.getPeers(IPeerToPeerNetwork.SIMPLE_PEER):
             lastTime = scheduler.unregisterTimeForPeer(IPeerToPeerNetwork.SIMPLE_PEER, peer.getId())
@@ -56,11 +57,15 @@ class StartOpportunitySimulationventGenerator(AbstractSimulationEventGenerator):
                     for j in range(i):
                         event = StartOpportunitySimulationEvent(peer.getId(), priority)
                         
-                        opportunity = Opportunity(ContextIdGenerator.generateContextId(IContext.OPPORTUNITY, peer), peer)
+                        id = ContextIdGenerator.generateContextId(IContext.OPPORTUNITY, peer)
+                        
+                        opportunity = Opportunity(id, peer)
                         opportunity.setStartTime(priority)
                         
                         contextManager = peer.getContextManager()
                         contextManager.registerContext(IContext.OPPORTUNITY, opportunity)
+                        
+                        event.registerParameter("opportunityId", id)
                         
                         simulation.registerSimulationEvent(event)
                         
@@ -68,6 +73,9 @@ class StartOpportunitySimulationventGenerator(AbstractSimulationEventGenerator):
                     priority += self.__time
                 if not (priority > nextLastTime and priority <= lastTime):
                     break
+            peerCounter += 1
+            if peerCounter > self.__superPeers:
+                break
                 
             scheduler.registerTimeForPeer(IPeerToPeerNetwork.SIMPLE_PEER, peer.getId(), nextLastTime)
             scheduler.registerTimeForPeer(IPeerToPeerNetwork.SIMPLE_PEER, peer.getId(), lastTime)

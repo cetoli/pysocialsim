@@ -6,7 +6,7 @@ from pysocialsim.common.base.decorators import public
 class Opportunity(AbstractContext, IOpportunity):
     
     def __init__(self, id, peer):
-        self.initialize(self, id, peer)
+        self.initialize(id, peer)
     
     def initialize(self, id, peer):
         AbstractContext.initialize(self, IContext.OPPORTUNITY, id, peer)

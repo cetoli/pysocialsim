@@ -34,3 +34,15 @@ class ContextManager(Object):
         if self.__contexts.has_key(type):
             aux = self.__contexts[type].itervalues()
         return aux
+    
+    @public
+    def getContext(self, type, contextId):
+        if not self.__contexts.has_key(type):
+            return None
+        
+        contextByType = self.__contexts[type]
+        
+        if not contextByType.has_key(contextId):
+            return None
+        
+        return contextByType[contextId]

@@ -119,8 +119,6 @@ class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
         peer.leaved()
         semaphore.release()
         return True
-    
-    
         
     @public
     def route(self, peer, peerToPeerMessage):
@@ -170,19 +168,6 @@ class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
         return message
     
     @public
-    def push(self, peer, peerToPeerMessage):
-        semaphore = Semaphore()
-        semaphore.acquire()
-        
-        requires(peerToPeerMessage, IPeerToPeerMessage)
-        pre_condition(peerToPeerMessage, lambda x: x <> None)
-        
-        
-        
-        semaphore.release()
-        return peerToPeerMessage
-    
-    @public
     def ping(self, peer, peerToPeerMessage):
         semaphore = Semaphore()
         semaphore.acquire()
@@ -202,8 +187,6 @@ class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
     @public
     def pong(self, peer, peerToPeerMessage):
         raise NotImplementedError()
-    
-    
         
     @public
     def configurePeer(self, peer):

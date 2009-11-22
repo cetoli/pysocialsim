@@ -27,7 +27,7 @@ def implements(variable, *tupleOfTypes):
             try:
                 getattr(variable, opName)
             except AttributeError:
-                print opName
+                print opName, t
                 raise TypeError()
         
     return True

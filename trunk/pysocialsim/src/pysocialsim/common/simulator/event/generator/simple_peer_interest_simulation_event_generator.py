@@ -37,7 +37,6 @@ class SimplePeerInterestSimulationEventGenerator(AbstractSimulationEventGenerato
             
             if scheduler.countTimesForContext(IContext.INTEREST, peer.getId()) == 0:
                 peerTime = scheduler.getTimeForPeer(IPeerToPeerNetwork.SIMPLE_PEER, peer.getId())
-                print peer.getId(), int(peerTime + time)
                 scheduler.registerTimeForContext(IContext.INTEREST, peer.getId(), int(peerTime + time))
                 event = SimplePeerInterestSimulationEvent(peer.getId(), int(peerTime + time))
                 simulation.registerSimulationEvent(event)
@@ -45,7 +44,6 @@ class SimplePeerInterestSimulationEventGenerator(AbstractSimulationEventGenerato
                 continue
             
             lastTime = scheduler.getTimeForContext(IContext.INTEREST, peer.getId())
-            print peer.getId(), int(lastTime + time)
             event = SimplePeerInterestSimulationEvent(peer.getId(), int(lastTime + time))
             simulation.registerSimulationEvent(event)
             scheduler.registerTimeForContext(IContext.INTEREST, peer.getId(), int(lastTime + time))

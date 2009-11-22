@@ -68,7 +68,6 @@ class EventDispatcher(Object):
         if not self.__eventHandlers.has_key(simulationEvent.getHandle()):
             return returns(None, NoneType)
         
-        print simulationEvent.getHandle()
         #self.EventHandlingThread(self, self.__eventHandlers[simulationEvent.getHandle()], simulationEvent).start()
         handler = self.__eventHandlers[simulationEvent.getHandle()]
         handlerClone = handler.clone()

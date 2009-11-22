@@ -131,7 +131,6 @@ class AbstractPeerToPeerNetwork(Object, IPeerToPeerNetwork):
         
         for peer in self.__peers[peerType].values():
             if peer.isLeaved() == True:
-                print peer
                 peers.append(peer)
         
         return peers.__iter__()

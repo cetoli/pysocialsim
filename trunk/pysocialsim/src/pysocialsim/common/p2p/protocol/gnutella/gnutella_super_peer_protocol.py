@@ -140,13 +140,11 @@ class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
                 message.setHop(message.getHop() + 1)
                 message.init(message.getId(), peer.getId(), peerId, message.getTTL(), message.getPriority())
                 peer.send(message)
-                print "VEIO PARA CA"
             else:
                 raise StandardError("OLHA AQUI, DEU ERRO")
         else:
             neighbors = peer.getNeighbors() + peer.getChildren()
             routes = []
-            print peer.getId()
             for neighbor in neighbors:
                 if neighbor.hasRoutes(peerToPeerMessage.getTargetId()):
                     rts = neighbor.getRoutes(peerToPeerMessage.getTargetId())

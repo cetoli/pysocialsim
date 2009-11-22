@@ -125,7 +125,6 @@ class AbstractPeerToPeerProtocol(Object, IPeerToPeerProtocol):
             return peerToPeerMessage
         
         neighbor = peer.getNeighbor(peerToPeerMessage.getTargetId())
-        print "aaaaaaa"
         return neighbor.dispatchData(peerToPeerMessage)
     
     @public

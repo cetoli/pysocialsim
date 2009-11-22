@@ -73,7 +73,6 @@ class DefaultSimulator(Object, ISimulator):
         self.__simulation.execute()
         handlers = self.__eventDispatcher.getSimulationEventHandlers()
         for handler in handlers:
-            print handler.getHandle()
             eventHandlingThread = self.EventHandlingThread(self, handler.getHandle())
             self.__eventHandlingThreads[handler.getHandle()] = eventHandlingThread
             eventHandlingThread.start()

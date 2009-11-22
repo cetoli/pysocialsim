@@ -127,7 +127,6 @@ class AbstractPeer(Object, IPeer):
         return returns(aux, bool)
     @public
     def receive(self, peerToPeerMessage):
-        print self.__id, peerToPeerMessage.getPeerIds()
         return returns(self.__peerToPeerMessageDispatcher.registerPeerToPeerMessage(peerToPeerMessage), IPeerToPeerMessage)
     
     @public

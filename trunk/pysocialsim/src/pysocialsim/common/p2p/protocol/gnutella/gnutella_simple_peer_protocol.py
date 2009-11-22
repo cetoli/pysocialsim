@@ -55,7 +55,6 @@ class GnutellaSimplePeerProtocol(AbstractPeerToPeerProtocol):
         
         neighbors = peer.getNeighbors()
         routes = []
-        print peer.getId()
         for neighbor in neighbors:
             if neighbor.hasRoutes(peerToPeerMessage.getTargetId()):
                 rts = neighbor.getRoutes(peerToPeerMessage.getTargetId())
@@ -100,7 +99,6 @@ class GnutellaSimplePeerProtocol(AbstractPeerToPeerProtocol):
                     for i in range(randint(1, network.getConnectionsBetweenSimplePeerAndSuperPeers())):
                         ix = randint(0, len(peers) - 1)
                         superPeer = peers[ix]
-                        #print "HAHAHAHAHAHAHAHAHAHA"    
                         if superPeer.countChildren() < network.getConnectionsBetweenSuperPeerAndSimplePeers():
                             topology.addEdge(peer.getId(), superPeer.getId())
                             topology.addEdge(superPeer.getId(), peer.getId())  

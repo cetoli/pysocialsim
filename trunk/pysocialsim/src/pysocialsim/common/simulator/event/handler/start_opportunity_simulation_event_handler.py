@@ -23,7 +23,7 @@ class StartOpportunitySimulationEventHandler(AbstractSimulationEventHandler):
         
         tagMap = TagsMap.getMap()
         
-        issue = tagMap[tagMap.keys()[randint(0, len(tagMap.keys()))]]
+        issue = tagMap[tagMap.keys()[randint(0, len(tagMap.keys()) - 1)]]
         
         initial = randint(0, len(issue)/2)
         final = randint(len(issue)/2, len(issue))

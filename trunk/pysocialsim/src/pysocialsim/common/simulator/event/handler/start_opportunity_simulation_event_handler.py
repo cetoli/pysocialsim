@@ -32,5 +32,5 @@ class StartOpportunitySimulationEventHandler(AbstractSimulationEventHandler):
             opportunity.registerTag(tag)
             
         
-        
+        return AbstractSimulationEventHandler.execute(self)
         

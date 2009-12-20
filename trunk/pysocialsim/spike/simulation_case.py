@@ -24,8 +24,6 @@ from pysocialsim.common.p2p.protocol.gnutella.gnutella_super_peer_protocol impor
 from pysocialsim.common.p2p.topology.peer_to_peer_topology import PeerToPeerTopology
 from pysocialsim.common.p2p.protocol.gnutella.gnutella_simple_peer_protocol import GnutellaSimplePeerProtocol
 from pysocialsim.common.simulator.event.handler.simple_peer_leaving_simulation_event_handler import SimplePeerLeavingSimulationEventHandler
-from pysocialsim.common.simulator.event.handler.simple_peer_interest_simulation_event_handler import SimplePeerInterestSimulationEventHandler
-from pysocialsim.common.simulator.event.generator.simple_peer_interest_simulation_event_generator import SimplePeerInterestSimulationEventGenerator
 from pysocialsim.common.simulator.event.handler.simple_peer_leaving_simulation_event_handler import SimplePeerLeavingSimulationEventHandler
 from pysocialsim.common.simulator.event.handler.start_opportunity_simulation_event_handler import StartOpportunitySimulationEventHandler
 from pysocialsim.common.simulator.event.generator.start_opportunity_simulation_event_generator import StartOpportunitySimulationventGenerator
@@ -48,12 +46,12 @@ simulator.registerSimulationEventHandler(NewSimplePeerSimulationEventHandler())
 simulator.registerSimulationEventHandler(StartOpportunitySimulationEventHandler())
 simulator.registerSimulationEventHandler(EndOpportunitySimulationEventHandler())
 simulator.registerSimulationEventHandler(PushOpportunitySimulationEventHandler())
-simulator.registerSimulationEventHandler(SimplePeerInterestSimulationEventHandler())
 simulator.registerSimulationEventHandler(SimplePeerLeavingSimulationEventHandler())
 simulator.registerSimulationEventHandler(SimplePeerLeavingSimulationEventHandler())
 simulator.registerSimulationEventHandler(EndSimulationEventHandler())
 simulation = SimulationSpike()
 network = PeerToPeerNetwork(simulation)
+
 network.setConnectionsBetweenSuperPeers(6)
 network.setConnectionsBetweenSuperPeerAndSimplePeers(30)
 network.setConnectionsBetweenSimplePeerAndSuperPeers(3)
@@ -81,8 +79,6 @@ simulation.setSimulationTime(86400)
 simulation.addSimulationEventGenerator(BeginSimulationEventGenerator())
 simulation.addSimulationEventGenerator(NewSuperPeerSimulationEventGenerator(5.5, 1000, 60))
 simulation.addSimulationEventGenerator(NewSimplePeerSimulationEventGenerator(5.5, 500, 120))
-#simulation.addSimulationEventGenerator(SimplePeerInterestSimulationEventGenerator(1.8, 450.0))
-#simulation.addSimulationEventGenerator(SimplePeerInterestSimulationEventGenerator(1.8, 450.0))
 simulation.addSimulationEventGenerator(SimplePeerLeavingSimulationEventGenerator(1.5618, 6.0013, 120))
 simulation.addSimulationEventGenerator(StartOpportunitySimulationventGenerator(1.0, 600, 120))
 simulation.addSimulationEventGenerator(EndOpportunitySimulationEventGenerator(1.5618, 6.0013, 120))

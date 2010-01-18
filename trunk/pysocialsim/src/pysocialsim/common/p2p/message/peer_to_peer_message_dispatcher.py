@@ -159,4 +159,4 @@ class PeerToPeerMessageDispatcher(Object):
     class ExitPeerToPeerMessage(AbstractPeertoPeerMessage):
         
         def __init__(self):
-            AbstractPeertoPeerMessage.initialize(self, IPeerToPeerMessage.SYSTEM, "EXIT")
+            AbstractPeertoPeerMessage.initialize(self, IPeerToPeerMessage.SYSTEM, "EXIT", 0)

@@ -35,7 +35,6 @@ class NetworkAdapter(AbstractNodeDevice):
         
         data.setTime(data.getTime() + (streamSize / speed))
         
-
     @public
     def output(self, data):
         pre_condition(data, lambda x: x <> None)

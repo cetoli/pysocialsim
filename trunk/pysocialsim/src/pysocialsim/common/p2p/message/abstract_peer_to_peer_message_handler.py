@@ -44,10 +44,12 @@ class AbstractPeerToPeerMessageHandler(Object, IPeerToPeerMessageHandler):
     def handlePeerToPeerMessage(self, peerToPeerMessage):
         self.__peerToPeerMessage = peerToPeerMessage
         self.execute()
+        
         messagesLogFile = open("messages.log", "a")
-        line = str(peerToPeerMessage.getPriority()) + " " + peerToPeerMessage.getId() + " " + peerToPeerMessage.getHandle() + " " + peerToPeerMessage.getSourceId() + " " + peerToPeerMessage.getTargetId() + " " + str(peerToPeerMessage.getTime()) + " " + str(peerToPeerMessage.getSize())
+        line = str(peerToPeerMessage.getPriority()) + " " + peerToPeerMessage.getId() + " " + peerToPeerMessage.getHandle() + " " + peerToPeerMessage.getSourceId() + " " + peerToPeerMessage.getTargetId() + " " + str(peerToPeerMessage.getTime()) + " " + str(peerToPeerMessage.getSize()) + " " + str(int(peerToPeerMessage.getTime() + peerToPeerMessage.getPriority())) + " " + str(peerToPeerMessage.getHop() + 1)
         messagesLogFile.write(str(line)+"\n")
         messagesLogFile.close()
+        
         return peerToPeerMessage
         
     def execute(self):

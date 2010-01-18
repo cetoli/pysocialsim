@@ -24,7 +24,7 @@ class AbstractPeertoPeerMessage(Object, IPeerToPeerMessage):
     def __init__(self):
         raise NotImplementedError()
 
-    def initialize(self, type, handle):
+    def initialize(self, type, handle, size):
         """
         Initializes peer-to-peer messages.
         @param type: the type of message
@@ -42,6 +42,8 @@ class AbstractPeertoPeerMessage(Object, IPeerToPeerMessage):
         self.__id = ""
         self.__peerIds = []
         self.__parameters = {}
+        self.__size = size
+        self.__time = 0.0
         
 
     @public
@@ -77,19 +79,21 @@ class AbstractPeertoPeerMessage(Object, IPeerToPeerMessage):
         self.__hop = value
     
     @public    
-    def init(self, id, sourceId, targetId, ttl, priority):
+    def init(self, id, sourceId, targetId, ttl, priority, size, time):
         self.__id = id
         self.__sourceId = sourceId
         self.__targetId = targetId
         self.__ttl = ttl
         self.__priority = priority
         self.__hop = 0
+        self.__size = size
+        self.__time = time
         
     
     @public
     def clone(self):
         msgClone = copy(self)
-        msgClone.init(self.__id, self.__sourceId, self.__targetId, self.__ttl, self.__priority)
+        msgClone.init(self.__id, self.__sourceId, self.__targetId, self.__ttl, self.__priority, self.__size, self.__time)
         msgClone.setHop(self.__hop)
         for peerId in self.__peerIds:
             msgClone.registerPeerId(peerId)
@@ -167,6 +171,24 @@ class AbstractPeertoPeerMessage(Object, IPeerToPeerMessage):
     @public
     def getParameterValues(self):
         return self.__parameters.values()
+    
+    @public
+    def getSize(self):
+        return self.__size
+    
+    @public
+    def hasParameter(self, name):
+        return self.__parameters.has_key(name)
+    
+    @public
+    def getTime(self):
+        return self.__time
+
+    @public
+    def setTime(self, time):
+        self.__time = time
+        return self.__time
+
 
     handle = property(getHandle, None, None, None)
 
@@ -183,3 +205,6 @@ class AbstractPeertoPeerMessage(Object, IPeerToPeerMessage):
     hop = property(getHop, setHop, None, None)
 
     type = property(getType, None, None, None)    
+    size = property(getSize, None, None, None)
+
+    time = property(getTime, setTime, None, None)

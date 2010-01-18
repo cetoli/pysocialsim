@@ -55,6 +55,10 @@ network.setConnectionsBetweenSuperPeers(6)
 network.setConnectionsBetweenSuperPeerAndSimplePeers(30)
 network.setConnectionsBetweenSimplePeerAndSuperPeers(3)
 
+network.setLinkAvailability(50.0)
+
+network.setSuperPeerLink(1000000000)
+
 protocol = GnutellaSuperPeerProtocol()
 protocol.setPingHops(6)
 protocol.setPongHops(6)

@@ -37,6 +37,8 @@ class AbstractPeerToPeerNetwork(Object, IPeerToPeerNetwork):
         self.__peerToPeerProtocols = {}
         self.__connectionsBetweenSuperPeerAndSimplePeers = 0
         self.__connectionsBetweenSimplePeerAndSuperPeers = 0
+        self.__linkAvailability = 0
+        self.__superPeerLink = 0
     
     @public
     def getSimulation(self):
@@ -189,6 +191,28 @@ class AbstractPeerToPeerNetwork(Object, IPeerToPeerNetwork):
         self.__connectionsBetweenSimplePeerAndSuperPeers = value
         return self.__connectionsBetweenSimplePeerAndSuperPeers
     
+    @public
+    def getLinkAvailability(self):
+        return self.__availability
+
+    @public
+    def setLinkAvailability(self, availability):
+        requires(availability, float)
+        pre_condition(availability, lambda x: x > 0.0)
+        
+        self.__availability = availability
+        return self.__availability
+    
+    @public
+    def getSuperPeerLink(self):
+        return self.__superPeerLink
+
+    @public
+    def setSuperPeerLink(self, superPeerLink):
+        self.__superPeerLink = superPeerLink
+        return self.__superPeerLink
+    
+    
     simulation = property(getSimulation, setSimulation, None, None)
 
     connectionsBetweenSuperPeers = property(getConnectionsBetweenSuperPeers, setConnectionsBetweenSuperPeers, None, None)
@@ -196,3 +220,8 @@ class AbstractPeerToPeerNetwork(Object, IPeerToPeerNetwork):
     connectionsBetweenSuperPeerAndSimplePeers = property(getConnectionsBetweenSuperPeerAndSimplePeers, setConnectionsBetweenSuperPeerAndSimplePeers, None, None)
 
     connectionsBetweenSimplePeerAndSuperPeers = property(getConnectionsBetweenSimplePeerAndSuperPeers, setConnectionsBetweenSimplePeerAndSuperPeers, None, None)
+   
+    linkAvailability = property(getLinkAvailability, setLinkAvailability, None, None)
+
+    superPeerLink = property(getSuperPeerLink, setSuperPeerLink, None, None)
+

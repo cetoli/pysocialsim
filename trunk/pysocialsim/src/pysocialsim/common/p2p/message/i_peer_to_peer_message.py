@@ -152,3 +152,15 @@ class IPeerToPeerMessage(object):
     
     def getParameterValues(self):
         raise NotImplementedError()
+    
+    def hasParameter(self, name):
+        raise NotImplementedError()
+    
+    def getSize(self):
+        raise NotImplementedError()
+    
+    def setTime(self, time):
+        raise NotImplementedError()
+    
+    def getTime(self):
+        raise NotImplementedError()

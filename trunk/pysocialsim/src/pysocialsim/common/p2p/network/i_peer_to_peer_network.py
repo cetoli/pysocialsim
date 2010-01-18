@@ -190,4 +190,14 @@ class IPeerToPeerNetwork(object):
     def getConnectionsBetweenSimplePeerAndSuperPeers(self):
         raise NotImplementedError()
     
+    def setLinkAvailability(self, availability):
+        raise NotImplementedError()
     
+    def getLinkAvailability(self):
+        raise NotImplementedError()
+    
+    def setSuperPeerLink(self, superPeerLink):
+        raise NotImplementedError()
+    
+    def getSuperPeerLink(self):
+        raise NotImplementedError()

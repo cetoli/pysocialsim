@@ -218,7 +218,7 @@ class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
             ttl = message.getHop()
             priority = message.getPriority()
             
-            pongMessage.init(id, sourceId, targetId, ttl, priority)
+            pongMessage.init(id, sourceId, targetId, ttl, priority, pongMessage.getSize(), pongMessage.getTime())
             for peerId in message.getPeerIds():
                 pongMessage.registerPeerId(peerId)
             
@@ -240,7 +240,7 @@ class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
                     if message.hasPeerId(neighbor.getId()):
                         continue
                     msgClone = message.clone()
-                    msgClone.init(message.getId(), peer.getId(), neighbor.getId(), message.getTTL(), message.getPriority())
+                    msgClone.init(message.getId(), peer.getId(), neighbor.getId(), message.getTTL(), message.getPriority(), message.getSize(), message.getTime())
                     msgClone.setHop(message.getHop() + 1)
                     msgClone.registerPeerId(peer.getId())
                     neighbor.dispatchData(msgClone)
@@ -275,7 +275,7 @@ class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
                 cloneMsg.getParameter("backTrace").append(peer.getId())
                 
                 cloneMsg.setHop(message.getHop() + 1)
-                cloneMsg.init(message.getId(), peer.getId(), peerId, message.getTTL(), message.getPriority())
+                cloneMsg.init(message.getId(), peer.getId(), peerId, message.getTTL(), message.getPriority(), message.getSize(), message.getTime())
                 
                 neighbor = peer.getNeighbor(peerId)
                 neighbor.dispatchData(cloneMsg)                

@@ -166,7 +166,7 @@ class GnutellaSimplePeerProtocol(AbstractPeerToPeerProtocol):
             ttl = message.getHop()
             priority = message.getPriority()
             
-            pongMessage.init(id, sourceId, targetId, ttl, priority)
+            pongMessage.init(id, sourceId, targetId, ttl, priority, pongMessage.getSize(), pongMessage.getTime())
             for peerId in message.getPeerIds():
                 pongMessage.registerPeerId(peerId)
             

@@ -74,9 +74,12 @@ class StartOpportunitySimulationventGenerator(AbstractSimulationEventGenerator):
                 if not (priority > nextLastTime and priority <= lastTime):
                     break
             peerCounter += 1
+            
+            scheduler.registerTimeForPeer(IPeerToPeerNetwork.SIMPLE_PEER, peer.getId(), nextLastTime)
+            scheduler.registerTimeForPeer(IPeerToPeerNetwork.SIMPLE_PEER, peer.getId(), lastTime)
+            
             if peerCounter > self.__superPeers:
                 break
                 
-            scheduler.registerTimeForPeer(IPeerToPeerNetwork.SIMPLE_PEER, peer.getId(), nextLastTime)
-            scheduler.registerTimeForPeer(IPeerToPeerNetwork.SIMPLE_PEER, peer.getId(), lastTime)
+            
         return 0

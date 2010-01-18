@@ -51,6 +51,8 @@ class SimplePeerLeavingSimulationEventGenerator(AbstractSimulationEventGenerator
         for peer in network.getPeers(IPeerToPeerNetwork.SIMPLE_PEER):
             lastTime = scheduler.getTimeForPeer(IPeerToPeerNetwork.SIMPLE_PEER, peer.getId())
             time = (self.__scale*pow((-math.log(uniform(0,1))), 1/self.__shape)) * 3600
+            
+            print peer.getId(), int((lastTime + time))
             scheduler.registerTimeForPeer(IPeerToPeerNetwork.SIMPLE_PEER, peer.getId(), int((lastTime + time)))
             event = SimplePeerLeavingSimulationEvent(peer.getId(), scheduler.getTimeForPeer(IPeerToPeerNetwork.SIMPLE_PEER, peer.getId()))
             simulation.registerSimulationEvent(event)

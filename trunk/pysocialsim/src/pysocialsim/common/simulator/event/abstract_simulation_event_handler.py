@@ -13,6 +13,7 @@ from pysocialsim.common.util.rotines import requires, returns, pre_condition,\
     post_condition
 from pysocialsim.common.simulator.simulation.i_simulation import ISimulation
 from pysocialsim.common.simulator.event.i_simulation_event import ISimulationEvent
+from pysocialsim.common.p2p.network.i_peer_to_peer_network import IPeerToPeerNetwork
 
 class AbstractSimulationEventHandler(Object, ISimulationEventHandler):
     """
@@ -93,6 +94,14 @@ class AbstractSimulationEventHandler(Object, ISimulationEventHandler):
         @rtype: NoneType
         """
         self.__simulationEvent.handled()
+        network = self.__simulation.getPeerToPeerNetwork()
+        superPeers = len(network.getConnectedPeers(IPeerToPeerNetwork.SUPER_PEER))
+        simplePeers = len(network.getConnectedPeers(IPeerToPeerNetwork.SIMPLE_PEER))
+        eventsLogFile = open("simulation.log", "a")
+        line = str(self.__simulationEvent.getPriority()) + " " + self.__simulationEvent.getHandle() + " " + self.__simulationEvent.getPeerId() + " " + str(superPeers) + " " + str(simplePeers)
+        eventsLogFile.write(str(line)+"\n")
+        eventsLogFile.close()
+        
         return self.__simulationEvent
 
     def __eq__(self, other):

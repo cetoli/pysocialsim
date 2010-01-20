@@ -38,6 +38,7 @@ class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
         self.__peerToPeerMessageHandlers.append(self.PingPeerToPeerMessageHandler())
         self.__peerToPeerMessageHandlers.append(self.PongPeerToPeerMessageHandler())
         self.__peerToPeerMessageHandlers.append(self.RoutePeerToPeerMessageHandler())
+        self.__peerToPeerMessageHandlers.append(self.PushPeerToPeerMessageHandler())
 
     @public
     def join(self, peer):
@@ -136,7 +137,7 @@ class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
                 message.getParameter("backTrace").append(peer.getId())
                 
                 message.setHop(message.getHop() + 1)
-                message.init(message.getId(), peer.getId(), peerId, message.getTTL(), message.getPriority())
+                message.init(message.getId(), peer.getId(), peerId, message.getTTL(), message.getPriority(), message.getSize(), message.getTime())
                 peer.send(message)
             else:
                 raise StandardError("OLHA AQUI, DEU ERRO")
@@ -156,7 +157,7 @@ class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
             trace = route.getTrace()
             neighbor = peer.getNeighbor(trace[len(trace) - 1])
             message = self.createPeerToPeerMessage(IPeerToPeerProtocol.ROUTE)
-            message.init(peerToPeerMessage.getId(), peer.getId(), neighbor.getId(), route.getCost(), peerToPeerMessage.getPriority())
+            message.init(peerToPeerMessage.getId(), peer.getId(), neighbor.getId(), route.getCost(), peerToPeerMessage.getPriority(), peerToPeerMessage.getSize(), peerToPeerMessage.getTime())
             message.registerParameter("peerToPeerMessage", peerToPeerMessage)
             trace.remove(trace[len(trace) - 1])
             for id in trace:
@@ -295,3 +296,19 @@ class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
                 dispatcher.registerPeerToPeerMessage(peerToPeerMessage)
             else:
                 peer.route(message)
+                
+    class PushPeerToPeerMessageHandler(AbstractPeerToPeerMessageHandler):
+        
+        def __init__(self):
+            AbstractPeerToPeerMessageHandler.initialize(self, IPeerToPeerProtocol.PUSH)
+        
+        def execute(self):
+            message = self.getPeerToPeerMessage()
+            peer = self.getPeer()
+            
+            advertiseMessage = message.getParameter("peerToPeerMessage")
+            
+            dispatcher = peer.getPeerToPeerMessageDispatcher()
+            dispatcher.registerPeerToPeerMessage(advertiseMessage)
+            
+            

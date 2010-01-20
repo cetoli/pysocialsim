@@ -52,11 +52,15 @@ class AbstractNodeDevice(Object, INodeDevice):
     @public
     def setNode(self, node):
         self.__node = node
-
+        
+    @public
+    def setCapacity(self, capacity):
+        self.__capacity = capacity
+        return self.__capacity
         
     type = property(getType, None, None, None)
 
-    capacity = property(getCapacity, None, None, None)
+    capacity = property(getCapacity, setCapacity, None, None)
 
     inputSpeed = property(getInputSpeed, None, None, None)
 

@@ -31,10 +31,39 @@ class GnutellaSimplePeerProtocol(AbstractPeerToPeerProtocol):
         self.__peerToPeerMessageHandlers.append(self.PingPeerToPeerMessageHandler())
         self.__peerToPeerMessageHandlers.append(self.PongPeerToPeerMessageHandler())
         self.__peerToPeerMessageHandlers.append(self.RoutePeerToPeerMessageHandler())
+        self.__peerToPeerMessageHandlers.append(self.PushPeerToPeerMessageHandler())
         
     @public
     def push(self, peer, peerToPeerMessage):
-        return AbstractPeerToPeerProtocol.push(self, peer, peerToPeerMessage)
+        if peer.countNeighbors() > 0:
+            sem = Semaphore()
+            sem.acquire()
+        
+        
+            neighbor = peer.getNeighbors()[randint(0, len(peer.getNeighbors()) - 1)]
+            
+            id = PeerToPeerMessageIdGenerator.generatePeerToPeerMessageId(peer)
+            sourceId = peer.getId()
+            targetId = neighbor.getId()
+            
+            network = peer.getPeerToPeerNetwork()
+            simulation = network.getSimulation()
+            
+            priority = simulation.getCurrentSimulationTime()
+            
+            peerToPeerMessage.init(id, sourceId, targetId, self.getPushHops(), priority, 512, peerToPeerMessage.getTime())
+            
+            message = self.createPeerToPeerMessage(IPeerToPeerProtocol.PUSH)
+            message.registerParameter("peerToPeerMessage", peerToPeerMessage)
+            
+            message.init(PeerToPeerMessageIdGenerator.generatePeerToPeerMessageId(peer), peer.getId(), neighbor.getId(), self.getPushHops(), priority, message.getSize() + peerToPeerMessage.getSize(), message.getTime())
+            
+            neighbor.dispatchData(message)
+            
+            sem.release()
+            return message
+        
+        return peerToPeerMessage
 
     @public
     def pull(self, peer, peerToPeerMessage):
@@ -68,7 +97,7 @@ class GnutellaSimplePeerProtocol(AbstractPeerToPeerProtocol):
         trace = route.getTrace()
         neighbor = peer.getNeighbor(trace[len(trace) - 1])
         message = self.createPeerToPeerMessage(IPeerToPeerProtocol.ROUTE)
-        message.init(peerToPeerMessage.getId(), peer.getId(), neighbor.getId(), route.getCost(), peerToPeerMessage.getPriority())
+        message.init(peerToPeerMessage.getId(), peer.getId(), neighbor.getId(), route.getCost(), peerToPeerMessage.getPriority(), message.getSize(), message.getTime())
         message.registerParameter("peerToPeerMessage", peerToPeerMessage)
         trace.remove(trace[len(trace) - 1])
         for id in trace:
@@ -204,6 +233,14 @@ class GnutellaSimplePeerProtocol(AbstractPeerToPeerProtocol):
         
         def __init__(self):
             AbstractPeerToPeerMessageHandler.initialize(self, IPeerToPeerProtocol.ROUTE)
+        
+        def execute(self):
+            print "CCUUUUUUUUUUUUUUUUUUUUUUUUUUU"
+    
+    class PushPeerToPeerMessageHandler(AbstractPeerToPeerMessageHandler):
+        
+        def __init__(self):
+            AbstractPeerToPeerMessageHandler.initialize(self, IPeerToPeerProtocol.PUSH)
         
         def execute(self):
             print "CCUUUUUUUUUUUUUUUUUUUUUUUUUUU"

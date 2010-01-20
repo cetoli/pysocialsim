@@ -16,23 +16,8 @@ class IContext(object):
     def __init__(self):
         raise NotImplementedError()
     
-    def getPeer(self):
-        raise NotImplementedError()
-    
     def getType(self):
         raise NotImplementedError()
     
     def getId(self):
         raise NotImplementedError()
-    
-    def registerTag(self, tag):
-        raise NotImplementedError()
-    
-    def unregisterTag(self, tag):
-        raise NotImplementedError()
-    
-    def countTags(self):
-        raise NotImplementedError()
-    
-    def getTags(self):
-        raise NotImplementedError()    

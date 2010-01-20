@@ -47,7 +47,7 @@ class Object(object):
             return name not in without and\
                    name.startswith("__") and name.endswith("__")
                    
-        Proxy = type(cls.__name__,(),{})   
+        Proxy = type(cls.__name__,(),{})
 
         for name in dir(cls):
             if is_own_magic(cls,name, without=dir(Proxy)):

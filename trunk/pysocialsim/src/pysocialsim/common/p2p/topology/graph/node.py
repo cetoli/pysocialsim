@@ -18,6 +18,7 @@ from pysocialsim.common.p2p.peer.i_peer import IPeer
 from pysocialsim.common.p2p.peer.neighbor import Neighbor
 from pysocialsim.common.p2p.topology.graph.network_adapter import NetworkAdapter
 from pysocialsim.common.p2p.network.i_peer_to_peer_network import IPeerToPeerNetwork
+from random import uniform
 
 class Node(Object, INode):
     """
@@ -208,9 +209,9 @@ class Node(Object, INode):
         self.__peer = peer
         network = peer.getPeerToPeerNetwork()
         if peer.getType() == IPeerToPeerNetwork.SUPER_PEER:
-            self.addNodeDevice(NetworkAdapter(network.getLinkAvailability(), network.getSuperPeerLink(), network.getSuperPeerLink()))
+            self.addNodeDevice(NetworkAdapter(uniform(0.01, network.getLinkAvailability()/100.0), network.getSuperPeerLink(), network.getSuperPeerLink()))
         elif peer.getType() == IPeerToPeerNetwork.SIMPLE_PEER:
-            self.addNodeDevice(NetworkAdapter(network.getLinkAvailability(), 1000000, 1000000))
+            self.addNodeDevice(NetworkAdapter(uniform(0.01, network.getLinkAvailability()/100.0), 1000000, 1000000))
         
         return returns(self.__peer, IPeer)
     

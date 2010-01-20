@@ -41,6 +41,7 @@ class AbstractPeerToPeerProtocol(Object, IPeerToPeerProtocol):
         self.__peerToPeerMessageCreator.registerPeerToPeerMessage(self.PingPeerToPeerMessage())
         self.__peerToPeerMessageCreator.registerPeerToPeerMessage(self.PongPeerToPeerMessage())
         self.__peerToPeerMessageCreator.registerPeerToPeerMessage(self.RoutePeerToPeerMessage())
+        self.__peerToPeerMessageCreator.registerPeerToPeerMessage(self.PushPeerToPeerMessage())
     
     @public
     def getPingHops(self):
@@ -150,7 +151,12 @@ class AbstractPeerToPeerProtocol(Object, IPeerToPeerProtocol):
     class RoutePeerToPeerMessage(AbstractPeertoPeerMessage):
         
         def __init__(self):
-            AbstractPeertoPeerMessage.initialize(self, IPeerToPeerMessage.QUERY, IPeerToPeerProtocol.ROUTE, 512)
+            AbstractPeertoPeerMessage.initialize(self, IPeerToPeerMessage.SYSTEM, IPeerToPeerProtocol.ROUTE, 512)
+        
+    class PushPeerToPeerMessage(AbstractPeertoPeerMessage):
+        
+        def __init__(self):
+            AbstractPeertoPeerMessage.initialize(self, IPeerToPeerMessage.ADVERTISEMENT, IPeerToPeerProtocol.PUSH, 512)
     
     pingHops = property(getPingHops, setPingHops, None, None)
 

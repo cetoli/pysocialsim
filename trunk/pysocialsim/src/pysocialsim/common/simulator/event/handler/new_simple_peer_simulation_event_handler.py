@@ -8,6 +8,11 @@ Defines the module with the implementation of NewSimplePeerSimulationEventHandle
 """
 from pysocialsim.common.simulator.event.abstract_simulation_event_handler import AbstractSimulationEventHandler
 from pysocialsim.common.p2p.network.i_peer_to_peer_network import IPeerToPeerNetwork
+from pysocialsim.common.p2p.peer.context.tags_map import TagsMap
+from random import randint
+from pysocialsim.common.p2p.peer.context.context_id_generator import ContextIdGenerator
+from pysocialsim.common.p2p.peer.context.i_context import IContext
+from pysocialsim.common.p2p.peer.profile.interest import Interest
 
 class NewSimplePeerSimulationEventHandler(AbstractSimulationEventHandler):
     """
@@ -26,7 +31,17 @@ class NewSimplePeerSimulationEventHandler(AbstractSimulationEventHandler):
         network = simulation.getPeerToPeerNetwork()
         simplePeer = network.getPeer(IPeerToPeerNetwork.SIMPLE_PEER, self.getSimulationEvent().getPeerId())
         
+        map = TagsMap.getMap()
         
+        concept = map.keys()[randint(0, len(map.keys()) - 1)]
+        tags = map[concept]
+        
+        interest = Interest(concept)
+        for i in range(len(tags)):
+            interest.registerTag(tags[randint(0, len(tags) - 1)]) 
+        
+        socialProfile = simplePeer.getSocialProfile()
+        socialProfile.addInterest(interest)
         simplePeer.join()
         
         return AbstractSimulationEventHandler.execute(self)

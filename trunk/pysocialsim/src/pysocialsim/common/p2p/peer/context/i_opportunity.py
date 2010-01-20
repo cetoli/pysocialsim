@@ -25,3 +25,21 @@ class IOpportunity(IContext):
     
     def isActive(self):
         raise NotImplementedError()
+    
+    def addInterestConstraint(self, interestConstraint):
+        raise NotImplementedError()
+    
+    def removeInterestConstraint(self, interestConstraint):
+        raise NotImplementedError()
+    
+    def getInterestConstraint(self, concept):
+        raise NotImplementedError()
+    
+    def countInterestConstraint(self):
+        raise NotImplementedError()
+    
+    def hasInterestConstraint(self, concept):
+        raise NotImplementedError()
+    
+    def getInterestConstraints(self):
+        raise NotImplementedError()

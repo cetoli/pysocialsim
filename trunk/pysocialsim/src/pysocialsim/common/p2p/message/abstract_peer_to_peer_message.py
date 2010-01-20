@@ -11,6 +11,7 @@ from pysocialsim.common.p2p.message.i_peer_to_peer_message import IPeerToPeerMes
 from pysocialsim.common.base.decorators import public
 from copy import deepcopy, copy
 from pysocialsim.common.util.rotines import returns, requires, pre_condition
+import pickle
 
 class AbstractPeertoPeerMessage(Object, IPeerToPeerMessage):
     """
@@ -174,7 +175,7 @@ class AbstractPeertoPeerMessage(Object, IPeerToPeerMessage):
     
     @public
     def getSize(self):
-        return self.__size
+        return self.__size + len(pickle.dumps(self.__parameters.__str__()))
     
     @public
     def hasParameter(self, name):

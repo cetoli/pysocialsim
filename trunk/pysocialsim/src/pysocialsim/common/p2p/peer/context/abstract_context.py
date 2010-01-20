@@ -16,15 +16,9 @@ class AbstractContext(Object, IContext):
     def __init__(self):
         raise NotImplementedError()
 
-    def initialize(self, type, id, peer):
+    def initialize(self, type, id):
         self.__type = type
         self.__id = id
-        self.__tags = []
-        self.__peer = peer
-    
-    @public
-    def getPeer(self):
-        return self.__peer
         
     @public
     def getType(self):
@@ -34,35 +28,6 @@ class AbstractContext(Object, IContext):
     def getId(self):
         return self.__id
 
-    @public
-    def getTags(self):
-        return self.__tags.__iter__()
-    
-    @public
-    def registerTag(self, tag):
-        if tag in self.__tags:
-            return False
-        self.__tags.append(tag)
-        return tag in self.__tags
-    
-    @public
-    def unregisterTag(self, tag):
-        if not tag in self.__tags:
-            return False
-        self.__tags.remove(tag)
-        return not tag in self.__tags
-    
-    @public
-    def countTags(self):
-        return len(self.__tags)
-    
-
     type = property(getType, None, None, None)
 
-    id = property(getId, None, None, None)
-
-    tags = property(getTags, None, None, None)
-
-    peer = property(getPeer, None, None, None)
-        
-    
+    id = property(getId, None, None, None)    

@@ -5,14 +5,15 @@ from pysocialsim.common.base.decorators import public
 
 class Opportunity(AbstractContext, IOpportunity):
     
-    def __init__(self, id, peer):
-        self.initialize(id, peer)
+    def __init__(self, id):
+        self.initialize(id)
     
-    def initialize(self, id, peer):
-        AbstractContext.initialize(self, IContext.OPPORTUNITY, id, peer)
+    def initialize(self, id):
+        AbstractContext.initialize(self, IContext.OPPORTUNITY, id)
         self.__durationTime = 0
         self.__startTime = 0
         self.__active = False
+        self.__interestContraints = {}
 
     @public
     def getDurationTime(self):
@@ -45,7 +46,39 @@ class Opportunity(AbstractContext, IOpportunity):
     @public
     def isActive(self):
         return self.__active == True
-
+    
+    @public
+    def addInterestConstraint(self, interestConstraint):
+        if self.__interestContraints.has_key(interestConstraint.getConcept()):
+            return False
+        self.__interestContraints[interestConstraint.getConcept()] = interestConstraint
+        return self.__interestContraints.has_key(interestConstraint.getConcept())
+    
+    @public
+    def removeInterestConstraint(self, interestConstraint):
+        if not self.__interestContraints.has_key(interestConstraint.getConcept()):
+            return False
+        del self.__interestContraints[interestConstraint.getConcept()]
+        return not self.__interestContraints.has_key(interestConstraint.getConcept())
+        
+    @public
+    def getInterestConstraint(self, concept):
+        if not self.__interestContraints.has_key(concept):
+            return None
+        return self.__interestContraints[concept]
+    
+    @public
+    def countInterestConstraint(self):
+        return len(self.__interestContraints)
+    
+    @public
+    def hasInterestConstraint(self, concept):
+        return self.__interestContraints.has_key(concept)
+    
+    @public
+    def getInterestConstraints(self):
+        return self.__interestContraints.values()
+    
     durationTime = property(getDurationTime, setDurationTime, None, None)
 
     startTime = property(getStartTime, setStartTime, None, None)

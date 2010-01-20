@@ -28,6 +28,7 @@ class PushOpportunitySimulationEventGenerator(AbstractSimulationEventGenerator):
                 print opportunity.getId(), int(opportunity.getEndTime())/self.__pushFrequency
                 for i in range(1, int(opportunity.getEndTime())/self.__pushFrequency):
                     event = PushOpportunitySimulationEvent(peer.getId(), opportunity.getStartTime() + (i * self.__pushFrequency))
+                    event.registerParameter("opportunityId", opportunity.getId())
                     simulation.registerSimulationEvent(event)
                     generatedEvents += 1
                 

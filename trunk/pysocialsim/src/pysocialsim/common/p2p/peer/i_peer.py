@@ -103,3 +103,9 @@ class IPeer(object):
     
     def getContextManager(self):
         raise NotImplementedError()
+    
+    def getSocialProfile(self):
+        raise NotImplementedError()
+    
+    def push(self, peerToPeerMessage):
+        raise NotImplementedError()

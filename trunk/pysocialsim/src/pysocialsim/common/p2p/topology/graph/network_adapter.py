@@ -10,6 +10,7 @@ from pysocialsim.common.p2p.topology.graph.abstract_node_device import AbstractN
 from pysocialsim.common.base.decorators import public
 from pysocialsim.common.util.rotines import pre_condition
 from pysocialsim.common.p2p.topology.graph.i_node import INode
+from random import uniform
 
 class NetworkAdapter(AbstractNodeDevice):
     """
@@ -27,6 +28,9 @@ class NetworkAdapter(AbstractNodeDevice):
     def input(self, data):
         node = self.getNode()
         peer = node.getPeer()
+        network = peer.getPeerToPeerNetwork()
+        
+        self.setCapacity(uniform(0.01, network.getLinkAvailability()/100.0))
         protocol = peer.getPeerToPeerProtocol()
         protocol.receive(peer, data)
         
@@ -40,6 +44,11 @@ class NetworkAdapter(AbstractNodeDevice):
         pre_condition(data, lambda x: x <> None)
         
         node = self.getNode()
+        peer = node.getPeer()
+        network = peer.getPeerToPeerNetwork()
+        
+        self.setCapacity(uniform(0.01, network.getLinkAvailability()/100.0))
+        
         topology = node.getPeerToPeerTopology()
         edge = topology.getEdge(node.getId(), data.getTargetId())
         targetNode = edge.getTargetNode()

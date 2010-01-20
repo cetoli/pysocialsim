@@ -59,7 +59,7 @@ class StartOpportunitySimulationventGenerator(AbstractSimulationEventGenerator):
                         
                         id = ContextIdGenerator.generateContextId(IContext.OPPORTUNITY, peer)
                         
-                        opportunity = Opportunity(id, peer)
+                        opportunity = Opportunity(id)
                         opportunity.setStartTime(priority)
                         
                         contextManager = peer.getContextManager()

@@ -11,6 +11,7 @@ from pysocialsim.common.p2p.message.i_peer_to_peer_message import IPeerToPeerMes
 from pysocialsim.common.base.decorators import public
 from copy import deepcopy, copy
 from pysocialsim.common.util.rotines import returns, requires, pre_condition
+import zlib
 import pickle
 
 class AbstractPeertoPeerMessage(Object, IPeerToPeerMessage):
@@ -93,7 +94,7 @@ class AbstractPeertoPeerMessage(Object, IPeerToPeerMessage):
     
     @public
     def clone(self):
-        msgClone = copy(self)
+        msgClone = self.__class__()
         msgClone.init(self.__id, self.__sourceId, self.__targetId, self.__ttl, self.__priority, self.__size, self.__time)
         msgClone.setHop(self.__hop)
         for peerId in self.__peerIds:
@@ -175,7 +176,7 @@ class AbstractPeertoPeerMessage(Object, IPeerToPeerMessage):
     
     @public
     def getSize(self):
-        return self.__size + len(pickle.dumps(self.__parameters.__str__()))
+        return self.__size + len(zlib.compress(pickle.dumps(self.__parameters.__str__())))
     
     @public
     def hasParameter(self, name):

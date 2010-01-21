@@ -153,11 +153,46 @@ class AbstractPeerToPeerProtocol(Object, IPeerToPeerProtocol):
         def __init__(self):
             AbstractPeertoPeerMessage.initialize(self, IPeerToPeerMessage.SYSTEM, IPeerToPeerProtocol.ROUTE, 512)
         
+        @public
+        def setTime(self, time):
+            if self.hasParameter("peerToPeerMessage"):
+                message = self.getParameter("peerToPeerMessage")
+                message.setTime(time)
+                
+            AbstractPeertoPeerMessage.setTime(self, time)
+        
     class PushPeerToPeerMessage(AbstractPeertoPeerMessage):
         
         def __init__(self):
             AbstractPeertoPeerMessage.initialize(self, IPeerToPeerMessage.ADVERTISEMENT, IPeerToPeerProtocol.PUSH, 512)
-    
+        
+        @public    
+        def setTime(self, time):
+            if self.hasParameter("peerToPeerMessage"):
+                message = self.getParameter("peerToPeerMessage")
+                message.setTime(time)
+                
+            return AbstractPeertoPeerMessage.setTime(self, time)
+        
+        @public    
+        def setHop(self, hop):
+            if self.hasParameter("peerToPeerMessage"):
+                message = self.getParameter("peerToPeerMessage")
+                message.setHop(hop)
+                
+            return AbstractPeertoPeerMessage.setHop(self, hop)
+        
+        @public    
+        def clone(self):
+            cln = AbstractPeertoPeerMessage.clone(self)
+            if self.hasParameter("peerToPeerMessage"):
+                message = self.getParameter("peerToPeerMessage")
+                cloneMsg = message.clone()
+                cloneMsg.init(message.getId(), message.getSourceId(), cln.getTargetId(), message.getTTL(), message.getPriority(), message.getSize(), message.getTime())
+                cln.unregisterParameter("peerToPeerMessage")
+                cln.registerParameter("peerToPeerMessage", cloneMsg)
+            return cln
+                
     pingHops = property(getPingHops, setPingHops, None, None)
 
     pongHops = property(getPongHops, setPongHops, None, None)

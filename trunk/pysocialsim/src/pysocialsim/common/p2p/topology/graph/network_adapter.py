@@ -34,7 +34,7 @@ class NetworkAdapter(AbstractNodeDevice):
         protocol = peer.getPeerToPeerProtocol()
         protocol.receive(peer, data)
         
-        speed = (self.getInputSpeed() * (self.getCapacity() / 100))
+        speed = (self.getInputSpeed() * self.getCapacity())
         streamSize = data.getSize() * 8
         
         data.setTime(data.getTime() + (streamSize / speed))

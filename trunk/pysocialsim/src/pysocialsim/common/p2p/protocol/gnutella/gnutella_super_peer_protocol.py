@@ -227,10 +227,17 @@ class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
             
             trace = message.getPeerIds()
             route = Route(trace[0], trace, len(trace), 0)
+            
+            socialProfile = peer.getSocialProfile()
+            interests = socialProfile.getInterests()
+            
+            for interest in interests:
+                for tag in interest.getTags():
+                    route.registerTag(tag)
+            
             if not peer.hasNeighbor(trace[0]):
                 neighbor = peer.getNeighbor(message.getSourceId())
                 neighbor.registerRoute(route)
-            
             
             if message.getHop() + 1 == message.getTTL():
                 return
@@ -311,4 +318,37 @@ class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
             dispatcher = peer.getPeerToPeerMessageDispatcher()
             dispatcher.registerPeerToPeerMessage(advertiseMessage)
             
+            trace = message.getPeerIds()
+            if peer.hasNeighbor(message.getSourceId()):
+                neighbor = peer.getNeighbor(message.getSourceId())
+                route = Route(trace[0], trace, len(trace), 0)
+                neighbor.registerRoute(route)
             
+            if message.getHop() + 1 == message.getTTL():
+                return
+            
+            if message.getHop() < message.getTTL():
+                neighbors = [n for n in peer.getNeighbors() if not message.hasPeerId(n.getId())]
+                
+                if len(neighbors) > 0:
+                    neighbor = neighbors[randint(0, len(neighbors) - 1)]
+                    cloneMsg = message.clone()
+                    
+                    cloneMsg.registerPeerId(peer.getId())
+                    cloneMsg.setHop(cloneMsg.getHop() + 1)
+                    cloneMsg.init(message.getId(), peer.getId(), neighbor.getId(), message.getTTL(), message.getPriority(), message.getSize(), message.getTime())
+                    
+                    neighbor.dispatchData(cloneMsg)
+                
+                if len(peer.getChildren()) > 0:
+                    for child in peer.getChildren():
+                        cloneMsg = message.clone()
+                    
+                        cloneMsg.registerPeerId(peer.getId())
+                        cloneMsg.setHop(cloneMsg.getHop() + 1)
+                        cloneMsg.init(message.getId(), peer.getId(), child.getId(), message.getTTL(), message.getPriority(), message.getSize(), message.getTime())
+                        
+                        child.dispatchData(cloneMsg)
+            else:
+                print "RONALDO !!!"
+                

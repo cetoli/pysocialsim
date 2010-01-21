@@ -44,6 +44,10 @@ class EndOpportunitySimulationEventGenerator(AbstractSimulationEventGenerator):
                 event = EndOpportunitySimulationEvent(peer.getId(), int(opportunity.getEndTime()))
                 event.registerParameter("opportunityId", opportunity.getId())
                 
+                prioritiesLogFile = open("priorities.log", "a")
+                prioritiesLogFile.write(str(int(opportunity.getEndTime()))+"\n")
+                prioritiesLogFile.close()
+                
                 print opportunity.getId(), opportunity.getStartTime(), opportunity.getDurationTime(), opportunity.getEndTime()
                 simulation.registerSimulationEvent(event)
                 

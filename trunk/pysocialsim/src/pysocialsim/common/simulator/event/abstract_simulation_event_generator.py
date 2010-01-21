@@ -40,7 +40,7 @@ class AbstractSimulationEventGenerator(Object, ISimulationEventGenerator):
     
     @public
     def generateSimulationEvents(self):
-        return ISimulationEventGenerator.generateSimulationEvents(self)
+        return 0
     
     simulation = property(getSimulation, setSimulation, None, None)
     

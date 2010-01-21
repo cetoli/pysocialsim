@@ -59,6 +59,9 @@ class AbstractNeighbor(Object, INeighbor):
         
         if not route in self.__routes[route.getPeerId()]:
             self.__routes[route.getPeerId()].append(route)
+        else:
+            rt = self.__routes[route.getPeerId()][self.__routes[route.getPeerId()].index(route)]
+            rt.setFreshness(rt.getFreshness() + 1)
                     
         return returns(self.__routes.has_key(route.getPeerId()), bool)
 

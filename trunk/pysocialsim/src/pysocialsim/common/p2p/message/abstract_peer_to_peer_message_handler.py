@@ -9,6 +9,7 @@ Defines the module with the implementation AbstractPeerToPeerMessageHandler clas
 from pysocialsim.common.base.object import Object
 from pysocialsim.common.p2p.message.i_peer_to_peer_message_handler import IPeerToPeerMessageHandler
 from pysocialsim.common.base.decorators import public
+from pysocialsim.common.p2p.network.i_peer_to_peer_network import IPeerToPeerNetwork
 
 class AbstractPeerToPeerMessageHandler(Object, IPeerToPeerMessageHandler):
     """
@@ -45,8 +46,10 @@ class AbstractPeerToPeerMessageHandler(Object, IPeerToPeerMessageHandler):
         self.__peerToPeerMessage = peerToPeerMessage
         self.execute()
         
+        network = self.__peer.getPeerToPeerNetwork()
+        
         messagesLogFile = open(self.getHandle()+".log", "a")
-        line = str(peerToPeerMessage.getPriority()) + " " + peerToPeerMessage.getId() + " " + peerToPeerMessage.getHandle() + " " + peerToPeerMessage.getSourceId() + " " + peerToPeerMessage.getTargetId() + " " + str(peerToPeerMessage.getTime()) + " " + str(peerToPeerMessage.getSize()) + " " + str(int(peerToPeerMessage.getTime() + peerToPeerMessage.getPriority())) + " " + str(peerToPeerMessage.getHop() + 1)
+        line = str(peerToPeerMessage.getPriority()) + " " + peerToPeerMessage.getId() + " " + peerToPeerMessage.getHandle() + " " + peerToPeerMessage.getSourceId() + " " + self.__peer.getId() + " " + str(peerToPeerMessage.getTime()) + " " + str(peerToPeerMessage.getSize()) + " " + str(int(peerToPeerMessage.getTime() + peerToPeerMessage.getPriority())) + " " + str(peerToPeerMessage.getHop() + 1) + " " + str(len(network.getConnectedPeers(IPeerToPeerNetwork.SUPER_PEER))) + " " + str(len(network.getConnectedPeers(IPeerToPeerNetwork.SIMPLE_PEER))) 
         messagesLogFile.write(str(line)+"\n")
         messagesLogFile.close()
         

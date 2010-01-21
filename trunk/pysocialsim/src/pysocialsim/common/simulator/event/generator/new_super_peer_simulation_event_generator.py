@@ -61,6 +61,15 @@ class NewSuperPeerSimulationEventGenerator(AbstractSimulationEventGenerator):
         superPeer = SuperPeer(PeerIdGenerator.generatePeerId(IPeerToPeerNetwork.SUPER_PEER), simulation.getPeerToPeerNetwork())
         aux = 1
         event = NewSuperPeerSimulationEvent(superPeer.getId(), priority)
+        
+        prioritiesLogFile = open("priorities.log", "a")
+        prioritiesLogFile.write(str(priority)+"\n")
+        prioritiesLogFile.close()
+        
+        peersLogFile = open("peers.log", "a")
+        peersLogFile.write(superPeer.getId()+"\n")
+        peersLogFile.close()
+        
         simulation.registerSimulationEvent(event)
         for i in range(1, int(self.__average * 2) + 1):
             distPoisson = (pow(self.__average, i) / factorial(i)) * pow(math.e, -self.__average)
@@ -70,6 +79,15 @@ class NewSuperPeerSimulationEventGenerator(AbstractSimulationEventGenerator):
                 for j in range(i):
                     aux += 1
                     superPeer = SuperPeer(PeerIdGenerator.generatePeerId(IPeerToPeerNetwork.SUPER_PEER), simulation.getPeerToPeerNetwork())
+                    
+                    peersLogFile = open("peers.log", "a")
+                    peersLogFile.write(superPeer.getId()+"\n")
+                    peersLogFile.close()
+                    
+                    prioritiesLogFile = open("priorities.log", "a")
+                    prioritiesLogFile.write(str(priority)+"\n")
+                    prioritiesLogFile.close()
+                    
                     event = NewSuperPeerSimulationEvent(superPeer.getId(), priority)
                     simulation.registerSimulationEvent(event)
                     generatedEvents += 1

@@ -27,6 +27,9 @@ class PushOpportunitySimulationEventGenerator(AbstractSimulationEventGenerator):
             for opportunity in opportunities:
                 print opportunity.getId(), int(opportunity.getEndTime())/self.__pushFrequency
                 for i in range(1, int(opportunity.getEndTime())/self.__pushFrequency):
+                    prioritiesLogFile = open("priorities.log", "a")
+                    prioritiesLogFile.write(str(opportunity.getStartTime() + (i * self.__pushFrequency))+"\n")
+                    prioritiesLogFile.close()
                     event = PushOpportunitySimulationEvent(peer.getId(), opportunity.getStartTime() + (i * self.__pushFrequency))
                     event.registerParameter("opportunityId", opportunity.getId())
                     simulation.registerSimulationEvent(event)

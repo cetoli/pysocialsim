@@ -32,4 +32,4 @@ class InterestConstraint(Object):
     
     @public
     def satisfyInterest(self, socialProfile):
-        return (socialProfile.matchInterest(self.__interest) / 100.0) >= self.__threshold
+        return socialProfile.matchInterest(self.__interest) >= self.__threshold

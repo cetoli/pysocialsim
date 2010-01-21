@@ -70,7 +70,13 @@ class Interest(Object, IInterest):
     
     @public
     def matchInterest(self, interest):
-        return 0
+        points = 0
+        for tag in interest.getTags():
+            if self.__tags.has_key(tag):
+                if self.__tags[tag] >= interest.getTagAccount(tag):
+                    points += 1
+        value = (float(points) / float(interest.countTags())) 
+        return value
 
     
     concept = property(getConcept, None, None, None)

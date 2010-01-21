@@ -92,7 +92,7 @@ class AbstractRoute(Object, IRoute):
 
     def __eq__(self, other):
         requires(other, IRoute)
-        rtrn = self.__peerId == other.getPeerId() and self.__cost == other.getCost() and self.__freshness == other.getFreshness()
+        rtrn = self.__peerId == other.getPeerId() and self.__cost == other.getCost()
         aux = True
         if self.getHops() == other.getHops():
             trace = other.getTrace()

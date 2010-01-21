@@ -70,6 +70,15 @@ class NewSimplePeerSimulationEventGenerator(AbstractSimulationEventGenerator):
                 for j in range(i):
                     peer += 1
                     simplePeer = SimplePeer(PeerIdGenerator.generatePeerId(IPeerToPeerNetwork.SIMPLE_PEER), simulation.getPeerToPeerNetwork())
+                    
+                    peersLogFile = open("peers.log", "a")
+                    peersLogFile.write(simplePeer.getId()+"\n")
+                    peersLogFile.close()
+                    
+                    prioritiesLogFile = open("priorities.log", "a")
+                    prioritiesLogFile.write(str(priority)+"\n")
+                    prioritiesLogFile.close()
+                    
                     event = NewSimplePeerSimulationEvent(simplePeer.getId(), priority)
                     simulation.registerSimulationEvent(event)
                     generatedEvents += 1

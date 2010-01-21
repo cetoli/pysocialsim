@@ -62,6 +62,14 @@ class StartOpportunitySimulationventGenerator(AbstractSimulationEventGenerator):
                         opportunity = Opportunity(id)
                         opportunity.setStartTime(priority)
                         
+                        opportunitiesLogFile = open("opportunityIds.log", "a")
+                        opportunitiesLogFile.write(opportunity.getId()+"\n")
+                        opportunitiesLogFile.close()
+                        
+                        prioritiesLogFile = open("priorities.log", "a")
+                        prioritiesLogFile.write(str(priority)+"\n")
+                        prioritiesLogFile.close()
+                        
                         contextManager = peer.getContextManager()
                         contextManager.registerContext(IContext.OPPORTUNITY, opportunity)
                         

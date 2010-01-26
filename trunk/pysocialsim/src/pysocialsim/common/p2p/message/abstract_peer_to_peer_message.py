@@ -136,7 +136,9 @@ class AbstractPeertoPeerMessage(Object, IPeerToPeerMessage):
 
     @public
     def getPeerIds(self):
-        return self.__peerIds
+        peerIds = []
+        peerIds += self.__peerIds
+        return peerIds
     
     @public
     def getFirst(self):
@@ -190,6 +192,9 @@ class AbstractPeertoPeerMessage(Object, IPeerToPeerMessage):
     def setTime(self, time):
         self.__time = time
         return self.__time
+    
+    def __eq__(self, other):
+        return self.__id == other.getId()
 
 
     handle = property(getHandle, None, None, None)

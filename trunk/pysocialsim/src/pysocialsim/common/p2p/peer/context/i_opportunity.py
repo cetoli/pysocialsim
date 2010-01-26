@@ -46,3 +46,6 @@ class IOpportunity(IContext):
     
     def clone(self):
         raise NotImplementedError()
+    
+    def getSocialNetwork(self):
+        raise NotImplementedError()

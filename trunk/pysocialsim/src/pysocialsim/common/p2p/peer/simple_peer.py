@@ -11,6 +11,7 @@ from pysocialsim.common.p2p.network.i_peer_to_peer_network import IPeerToPeerNet
 from pysocialsim.common.base.decorators import public
 from pysocialsim.common.p2p.peer.message.simplepeer.advertise_opportunity_peer_to_peer_message_handler import AdvertiseOpportunityPeerToPeerMessageHandler
 from pysocialsim.common.p2p.peer.message.simplepeer.compose_social_network_peer_to_peer_message_handler import ComposeSocialNetworkPeerToPeerMessageHandler
+from pysocialsim.common.p2p.peer.message.simplepeer.acknowledge_compose_social_network_peer_to_peer_message_handler import AcknowledgeComposeSocialNetworkPeerToPeerMessageHandler
 
 class SimplePeer(AbstractPeer):
     """
@@ -29,6 +30,7 @@ class SimplePeer(AbstractPeer):
         dispatcher = self.getPeerToPeerMessageDispatcher()
         dispatcher.registerPeerToPeerMessageHandler(AdvertiseOpportunityPeerToPeerMessageHandler())
         dispatcher.registerPeerToPeerMessageHandler(ComposeSocialNetworkPeerToPeerMessageHandler())
+        dispatcher.registerPeerToPeerMessageHandler(AcknowledgeComposeSocialNetworkPeerToPeerMessageHandler())
     
     @public
     def join(self):

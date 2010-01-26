@@ -8,12 +8,12 @@ Defines the module with the PeerToPeerMessageDispatcher class.
 """
 from pysocialsim.common.base.object import Object
 from pysocialsim.common.base.decorators import public
-from pysocialsim.common.util.rotines import requires, pre_condition
+from pysocialsim.common.util.rotines import requires, pre_condition, returns
 from pysocialsim.common.p2p.message.i_peer_to_peer_message_handler import IPeerToPeerMessageHandler
 from pysocialsim.common.p2p.message.i_peer_to_peer_message import IPeerToPeerMessage
-from Queue import Queue
 from threading import Thread, Semaphore
 from pysocialsim.common.p2p.message.abstract_peer_to_peer_message import AbstractPeertoPeerMessage
+from bisect import insort
 
 class PeerToPeerMessageDispatcher(Object):
     """
@@ -35,7 +35,7 @@ class PeerToPeerMessageDispatcher(Object):
         """
         self.__peer = peer
         self.__peerToPeerMessageHandlers = {}
-        self.__queues = {"EXIT": Queue()}
+        self.__queues = {"EXIT": self.PriorityQueue()}
         self.__thread = None
         
     
@@ -54,7 +54,7 @@ class PeerToPeerMessageDispatcher(Object):
             return False
         
         self.__peerToPeerMessageHandlers[peerToPeerMessageHandler.getHandle()] = peerToPeerMessageHandler
-        self.__queues[peerToPeerMessageHandler.getHandle()] = Queue()
+        self.__queues[peerToPeerMessageHandler.getHandle()] = self.PriorityQueue()
         return self.__peerToPeerMessageHandlers.has_key(peerToPeerMessageHandler.getHandle())
     
     @public
@@ -104,19 +104,15 @@ class PeerToPeerMessageDispatcher(Object):
     
     @public
     def registerPeerToPeerMessage(self, peerToPeerMessage):
-        self.__queues[peerToPeerMessage.getHandle()].put(peerToPeerMessage)
+        self.__queues[peerToPeerMessage.getHandle()].enqueue(peerToPeerMessage, peerToPeerMessage.getPriority())
+        self.__thread.__init__(self)
         
     @public    
     def unregisterPeerToPeerMessage(self, handle):
-        sem = Semaphore()
-        sem.acquire()
         queue = self.__queues[handle]
-        if queue.empty():
-            sem.release()
+        if queue.size() == 0:
             return None
-        msg = queue.get()
-        sem.release()
-        queue.task_done()
+        msg = queue.dequeue()
         return msg
     
     @public
@@ -148,18 +144,112 @@ class PeerToPeerMessageDispatcher(Object):
             on = True
             while on:
                 for handle in self.__dispatcher.getPeerToPeerMessageHandles():
-                    msg = self.__dispatcher.unregisterPeerToPeerMessage(handle)
-                    
-                    if not msg:
-                        continue
-                    
-                    if msg.getHandle() == "EXIT":
-                        on = False
-                        break
-                    
-                    self.__dispatcher.handlePeerToPeerMessage(msg)
+                    for i in range(10):
+                        msg = self.__dispatcher.unregisterPeerToPeerMessage(handle)
+                        
+                        if not msg:
+                            continue
+                        
+                        if msg.getHandle() == "EXIT":
+                            on = False
+                            break
+                        
+                        self.__dispatcher.handlePeerToPeerMessage(msg)
                 
     class ExitPeerToPeerMessage(AbstractPeertoPeerMessage):
         
         def __init__(self):
             AbstractPeertoPeerMessage.initialize(self, IPeerToPeerMessage.SYSTEM, "EXIT", 0)
+            
+    
+    class PriorityQueue(Object):
+        
+        def initialize(self):
+            self.__queue = []
+            
+        @public
+        def enqueue(self, item, priority):
+            requires(item, IPeerToPeerMessage)
+            requires(priority, int)
+            
+            pre_condition(item, lambda x: x <> None)
+            pre_condition(priority, lambda x: x >= 0)
+            
+            sem = Semaphore()
+            sem.acquire()
+            for message in self.__queue:
+                if message[1] == item:
+                    return None
+            insort(self.__queue, (priority, item))
+            sem.release()
+            return returns(item, IPeerToPeerMessage)
+        
+        @public
+        def dequeue(self):
+            """
+            Dequeues a simulation event.
+            @return: an ISimulationEvent
+            @rtype: ISimulationEvent
+            """
+            sem = Semaphore()
+            sem.acquire()
+            if len(self.__queue) == 0:
+                sem.release()
+                return None
+            item = self.__queue.pop(0)[1]
+            sem.release()
+            return returns(item, IPeerToPeerMessage)
+        
+        @public
+        def size(self):
+            """
+            Returns the size of queue.
+            @return: an int
+            @rtype: int
+            """
+            sem = Semaphore()
+            sem.acquire()
+            size = len(self.__queue)
+            sem.release()
+            return returns(size, int)
+        
+        @public
+        def getFirst(self):
+            """
+            Gets the first simulation event of queue.
+            @return: an ISimulationEvent
+            @rtype: ISimulationEvent
+            """
+            sem = Semaphore()
+            sem.acquire()
+            if len(self.__queue) == 0:
+                sem.release()
+                return
+            first = self.__queue[0]
+            sem.release()
+            return returns(first[1], IPeerToPeerMessage)
+        
+        @public
+        def getLast(self):
+            """
+            Gets the first simulation event of queue.
+            @return: an ISimulationEvent
+            @rtype: ISimulationEvent
+            """
+            sem = Semaphore()
+            sem.acquire()
+            if len(self.__queue) == 0:
+                sem.release()
+                return
+            last = self.__queue[len(self.__queue) - 1]
+            sem.release()
+            return returns(last[1], IPeerToPeerMessage)
+        
+        @public
+        def clear(self):
+            """
+            Clean the queue of simulation events.
+            @rtype: NoneType
+            """
+            del self.__queue
+            self.__queue = []

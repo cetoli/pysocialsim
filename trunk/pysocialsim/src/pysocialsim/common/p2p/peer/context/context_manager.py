@@ -36,6 +36,13 @@ class ContextManager(Object):
         return aux
     
     @public
+    def hasContext(self, type, contextId):
+        if not self.__contexts.has_key(type):
+            return False
+        
+        return self.__contexts[type].has_key(contextId)
+    
+    @public
     def getContext(self, type, contextId):
         if not self.__contexts.has_key(type):
             return None

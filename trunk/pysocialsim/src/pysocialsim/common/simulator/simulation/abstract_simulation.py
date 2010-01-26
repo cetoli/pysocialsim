@@ -210,14 +210,14 @@ class AbstractSimulation(Object, ISimulation):
             
         def run(self):
             if self.__simulation.getSimulationTime() > 0:
-                number = self.__simulation.getSimulationTime() / 100
+#                number = self.__simulation.getSimulationTime() / 100
                 for i in range(1, self.__simulation.getSimulationTime() + 1):
                     print i
                     self.__simulation.setCurrentSimulationTime(i)
-                    if i % number == 0:
-                        time.sleep(1800)
+#                    if i % number == 0:
+#                        time.sleep(1800)
 
                     if self.__simulation.getSimulationTime() == 0:
                         return 
                     
-                    time.sleep(0.04)
+                    time.sleep(0.06)

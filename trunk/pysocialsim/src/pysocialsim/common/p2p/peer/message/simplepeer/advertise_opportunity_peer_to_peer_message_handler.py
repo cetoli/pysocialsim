@@ -29,6 +29,6 @@ class AdvertiseOpportunityPeerToPeerMessageHandler(AbstractPeerToPeerMessageHand
                 msg = ComposeSocialNetworkPeerToPeerMessage()
                 msg.init(PeerToPeerMessageIdGenerator.generatePeerToPeerMessageId(peer), peer.getId(), message.getSourceId(), message.getTTL(), message.getPriority(), msg.getSize(), 0)
                 msg.registerParameter("opportunityId", opportunity.getId())
-                msg.registerParameter("socialProfile", socialProfile)
+                #msg.registerParameter("socialProfile", socialProfile)
                 peer.send(msg)
                 break

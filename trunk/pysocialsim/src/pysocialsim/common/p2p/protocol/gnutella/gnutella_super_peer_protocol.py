@@ -144,7 +144,10 @@ class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
                 peer.send(message)
                 print "ENTREGUEI PARA", peerId
             else:
-                raise StandardError("OLHA AQUI, DEU ERRO")
+                messagesLogFile = open("fails.log", "a")
+                line = str(message.getPriority()) + " " + message.getId() + " " + message.getHandle() + " " + message.getSourceId() + " " + self.getPeerToPeerMessage().getTargetId() + " " + str(message.getTime()) + " " + str(message.getSize()) + " " + str(int(message.getTime() + message.getPriority())) + " " + str(message.getHop() + 1) + " " + str(len(network.getConnectedPeers(IPeerToPeerNetwork.SUPER_PEER))) + " " + str(len(network.getConnectedPeers(IPeerToPeerNetwork.SIMPLE_PEER))) 
+                messagesLogFile.write(str(line)+"\n")
+                messagesLogFile.close()
         else:
             neighbors = peer.getNeighbors() + peer.getChildren()
             routes = []
@@ -170,14 +173,14 @@ class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
                 message.registerParameter("backTrace", [peer.getId()])
                 try:
                     neighbor.dispatchData(message)
-                    print "roteei para", neighbor.getId()
-                    line = str(message.getPriority()) + " " + message.getId() + " " + message.getHandle() + " " + message.getSourceId() + " " + self.getPeerToPeerMessage().getTargetId() + " " + str(message.getTime()) + " " + str(message.getSize()) + " " + str(int(message.getTime() + message.getPriority())) + " " + str(message.getHop() + 1) + " " + str(len(network.getConnectedPeers(IPeerToPeerNetwork.SUPER_PEER))) + " " + str(len(network.getConnectedPeers(IPeerToPeerNetwork.SIMPLE_PEER)))
                 except InvalidValueError:
                     messagesLogFile = open("fails.log", "a")
                     line = str(message.getPriority()) + " " + message.getId() + " " + message.getHandle() + " " + message.getSourceId() + " " + self.getPeerToPeerMessage().getTargetId() + " " + str(message.getTime()) + " " + str(message.getSize()) + " " + str(int(message.getTime() + message.getPriority())) + " " + str(message.getHop() + 1) + " " + str(len(network.getConnectedPeers(IPeerToPeerNetwork.SUPER_PEER))) + " " + str(len(network.getConnectedPeers(IPeerToPeerNetwork.SIMPLE_PEER))) 
                     messagesLogFile.write(str(line)+"\n")
                     messagesLogFile.close()
-                    neighbor.unregisterRoute(message.getSourceId())
+                    peer.removeNeighbor(neighbor.getId())
+            else:
+                raise StandardError("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
         semaphore.release()
         
         return message
@@ -270,13 +273,12 @@ class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
                     msgClone.registerPeerId(peer.getId())
                     try:
                         neighbor.dispatchData(msgClone)
-                        line = str(msgClone.getPriority()) + " " + msgClone.getId() + " " + msgClone.getHandle() + " " + msgClone.getSourceId() + " " + self.getPeerToPeerMessage().getTargetId() + " " + str(msgClone.getTime()) + " " + str(msgClone.getSize()) + " " + str(int(msgClone.getTime() + msgClone.getPriority())) + " " + str(msgClone.getHop() + 1) + " " + str(len(network.getConnectedPeers(IPeerToPeerNetwork.SUPER_PEER))) + " " + str(len(network.getConnectedPeers(IPeerToPeerNetwork.SIMPLE_PEER)))
                     except InvalidValueError:
                         messagesLogFile = open("fails.log", "a")
                         line = str(msgClone.getPriority()) + " " + msgClone.getId() + " " + msgClone.getHandle() + " " + msgClone.getSourceId() + " " + self.getPeerToPeerMessage().getTargetId() + " " + str(msgClone.getTime()) + " " + str(msgClone.getSize()) + " " + str(int(msgClone.getTime() + msgClone.getPriority())) + " " + str(msgClone.getHop() + 1) + " " + str(len(network.getConnectedPeers(IPeerToPeerNetwork.SUPER_PEER))) + " " + str(len(network.getConnectedPeers(IPeerToPeerNetwork.SIMPLE_PEER))) 
                         messagesLogFile.write(str(line)+"\n")
                         messagesLogFile.close()
-                        neighbor.unregisterRoute(msgClone.getSourceId())
+                        peer.removeNeighbor(neighbor.getId())
                         
     class PongPeerToPeerMessageHandler(AbstractPeerToPeerMessageHandler):
         
@@ -316,13 +318,12 @@ class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
                     neighbor = peer.getNeighbor(peerId)
                     try:
                         neighbor.dispatchData(cloneMsg)
-                        line = str(cloneMsg.getPriority()) + " " + cloneMsg.getId() + " " + cloneMsg.getHandle() + " " + cloneMsg.getSourceId() + " " + self.getPeerToPeerMessage().getTargetId() + " " + str(cloneMsg.getTime()) + " " + str(cloneMsg.getSize()) + " " + str(int(cloneMsg.getTime() + cloneMsg.getPriority())) + " " + str(cloneMsg.getHop() + 1) + " " + str(len(network.getConnectedPeers(IPeerToPeerNetwork.SUPER_PEER))) + " " + str(len(network.getConnectedPeers(IPeerToPeerNetwork.SIMPLE_PEER)))
                     except InvalidValueError:
                         messagesLogFile = open("fails.log", "a")
                         line = str(cloneMsg.getPriority()) + " " + cloneMsg.getId() + " " + cloneMsg.getHandle() + " " + cloneMsg.getSourceId() + " " + self.getPeerToPeerMessage().getTargetId() + " " + str(cloneMsg.getTime()) + " " + str(cloneMsg.getSize()) + " " + str(int(cloneMsg.getTime() + cloneMsg.getPriority())) + " " + str(cloneMsg.getHop() + 1) + " " + str(len(network.getConnectedPeers(IPeerToPeerNetwork.SUPER_PEER))) + " " + str(len(network.getConnectedPeers(IPeerToPeerNetwork.SIMPLE_PEER))) 
                         messagesLogFile.write(str(line)+"\n")
                         messagesLogFile.close()
-                        neighbor.unregisterRoute(cloneMsg.getSourceId())              
+                        peer.removeNeighbor(neighbor.getId())              
     
     class RoutePeerToPeerMessageHandler(AbstractPeerToPeerMessageHandler):
         
@@ -380,13 +381,12 @@ class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
                     
                     try:
                         neighbor.dispatchData(cloneMsg)
-                        line = str(cloneMsg.getPriority()) + " " + cloneMsg.getId() + " " + cloneMsg.getHandle() + " " + cloneMsg.getSourceId() + " " + self.getPeerToPeerMessage().getTargetId() + " " + str(cloneMsg.getTime()) + " " + str(cloneMsg.getSize()) + " " + str(int(cloneMsg.getTime() + cloneMsg.getPriority())) + " " + str(cloneMsg.getHop() + 1) + " " + str(len(network.getConnectedPeers(IPeerToPeerNetwork.SUPER_PEER))) + " " + str(len(network.getConnectedPeers(IPeerToPeerNetwork.SIMPLE_PEER)))
                     except InvalidValueError:
                         messagesLogFile = open("fails.log", "a")
                         line = str(cloneMsg.getPriority()) + " " + cloneMsg.getId() + " " + cloneMsg.getHandle() + " " + cloneMsg.getSourceId() + " " + self.getPeerToPeerMessage().getTargetId() + " " + str(cloneMsg.getTime()) + " " + str(cloneMsg.getSize()) + " " + str(int(cloneMsg.getTime() + cloneMsg.getPriority())) + " " + str(cloneMsg.getHop() + 1) + " " + str(len(network.getConnectedPeers(IPeerToPeerNetwork.SUPER_PEER))) + " " + str(len(network.getConnectedPeers(IPeerToPeerNetwork.SIMPLE_PEER))) 
                         messagesLogFile.write(str(line)+"\n")
                         messagesLogFile.close()
-                        neighbor.unregisterRoute(cloneMsg.getSourceId())
+                        peer.removeNeighbor(neighbor.getId())
                 
                 children = [c for c in peer.getChildren() if not message.hasPeerId(c.getId())]
                 if len(children) > 0:
@@ -398,13 +398,12 @@ class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
                         
                         try:
                             child.dispatchData(cloneMsg)
-                            line = str(cloneMsg.getPriority()) + " " + cloneMsg.getId() + " " + cloneMsg.getHandle() + " " + cloneMsg.getSourceId() + " " + self.getPeerToPeerMessage().getTargetId() + " " + str(cloneMsg.getTime()) + " " + str(cloneMsg.getSize()) + " " + str(int(cloneMsg.getTime() + cloneMsg.getPriority())) + " " + str(cloneMsg.getHop() + 1) + " " + str(len(network.getConnectedPeers(IPeerToPeerNetwork.SUPER_PEER))) + " " + str(len(network.getConnectedPeers(IPeerToPeerNetwork.SIMPLE_PEER)))
                         except InvalidValueError:
                             messagesLogFile = open("fails.log", "a")
                             line = str(cloneMsg.getPriority()) + " " + cloneMsg.getId() + " " + cloneMsg.getHandle() + " " + cloneMsg.getSourceId() + " " + self.getPeerToPeerMessage().getTargetId() + " " + str(cloneMsg.getTime()) + " " + str(cloneMsg.getSize()) + " " + str(int(cloneMsg.getTime() + cloneMsg.getPriority())) + " " + str(cloneMsg.getHop() + 1) + " " + str(len(network.getConnectedPeers(IPeerToPeerNetwork.SUPER_PEER))) + " " + str(len(network.getConnectedPeers(IPeerToPeerNetwork.SIMPLE_PEER))) 
                             messagesLogFile.write(str(line)+"\n")
                             messagesLogFile.close()
-                            child.unregisterRoute(cloneMsg.getSourceId())
+                            peer.removeNeighbor(child.getId())
             else:
                 print "RONALDO !!!"
                 

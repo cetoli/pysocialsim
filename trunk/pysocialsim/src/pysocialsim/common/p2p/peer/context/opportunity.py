@@ -2,6 +2,7 @@ from pysocialsim.common.p2p.peer.context.abstract_context import AbstractContext
 from pysocialsim.common.p2p.peer.context.i_opportunity import IOpportunity
 from pysocialsim.common.p2p.peer.context.i_context import IContext
 from pysocialsim.common.base.decorators import public
+from pysocialsim.common.p2p.peer.context.social_network import SocialNetwork
 
 class Opportunity(AbstractContext, IOpportunity):
     
@@ -14,6 +15,7 @@ class Opportunity(AbstractContext, IOpportunity):
         self.__startTime = 0
         self.__active = False
         self.__interestContraints = {}
+        self.__socialNetwork = SocialNetwork(self)
 
     @public
     def getDurationTime(self):
@@ -90,6 +92,10 @@ class Opportunity(AbstractContext, IOpportunity):
             cln.addInterestConstraint(ic)
         
         return cln
+    
+    @public
+    def getSocialNetwork(self):
+        return self.__socialNetwork
     
     durationTime = property(getDurationTime, setDurationTime, None, None)
 

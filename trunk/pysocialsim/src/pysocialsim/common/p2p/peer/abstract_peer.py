@@ -114,13 +114,13 @@ class AbstractPeer(Object, IPeer):
             simulation = self.__peerToPeerNetwork.getSimulation()
             self.joined()
             self.__peerToPeerMessageDispatcher.on()
-#            if len(self.__neighbors) > 0:
-#                for n in self.__neighbors.values():
-#                    message = self.__peerToPeerProtocol.createPeerToPeerMessage(IPeerToPeerProtocol.PING)
-#                    message.registerPeerId(self.__id)
-#                    messageId = PeerToPeerMessageIdGenerator.generatePeerToPeerMessageId(self)           
-#                    message.init(messageId, self.__id, n.getId(), self.__peerToPeerProtocol.getPingHops(), simulation.getCurrentSimulationTime(), message.getSize(), message.getTime())
-#                    self.send(message)
+            if len(self.__neighbors) > 0:
+                for n in self.__neighbors.values():
+                    message = self.__peerToPeerProtocol.createPeerToPeerMessage(IPeerToPeerProtocol.PING)
+                    message.registerPeerId(self.__id)
+                    messageId = PeerToPeerMessageIdGenerator.generatePeerToPeerMessageId(self)           
+                    message.init(messageId, self.__id, n.getId(), self.__peerToPeerProtocol.getPingHops(), simulation.getCurrentSimulationTime(), message.getSize(), message.getTime())
+                    self.send(message)
         
         return returns(aux, bool)
     

@@ -18,17 +18,17 @@ class AdvertiseOpportunityPeerToPeerMessageHandler(AbstractPeerToPeerMessageHand
     def execute(self):
         message = self.getPeerToPeerMessage()
         peer = self.getPeer()
+        if peer.isJoined():    
+            opportunity = message.getParameter("opportunity")
             
-        opportunity = message.getParameter("opportunity")
-        
-        socialProfile = peer.getSocialProfile()
-        
-        for constraint in opportunity.getInterestConstraints():
-            if constraint.satisfyInterest(socialProfile):
-                print peer.getId(), "BATEEEEEEEEUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU"
-                msg = ComposeSocialNetworkPeerToPeerMessage()
-                msg.init(PeerToPeerMessageIdGenerator.generatePeerToPeerMessageId(peer), peer.getId(), message.getSourceId(), message.getTTL(), message.getPriority(), msg.getSize(), 0)
-                msg.registerParameter("opportunityId", opportunity.getId())
-                #msg.registerParameter("socialProfile", socialProfile)
-                peer.send(msg)
-                break
+            socialProfile = peer.getSocialProfile()
+            
+            for constraint in opportunity.getInterestConstraints():
+                if constraint.satisfyInterest(socialProfile):
+                    print peer.getId(), "BATEEEEEEEEUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU"
+                    msg = ComposeSocialNetworkPeerToPeerMessage()
+                    msg.init(PeerToPeerMessageIdGenerator.generatePeerToPeerMessageId(peer), peer.getId(), message.getSourceId(), message.getTTL(), message.getPriority(), msg.getSize(), 0)
+                    msg.registerParameter("opportunityId", opportunity.getId())
+                    #msg.registerParameter("socialProfile", socialProfile)
+                    peer.send(msg)
+                    break

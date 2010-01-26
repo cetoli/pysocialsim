@@ -24,9 +24,7 @@ from pysocialsim.common.p2p.protocol.gnutella.gnutella_simple_peer_protocol impo
 from pysocialsim.common.simulator.event.handler.start_opportunity_simulation_event_handler import StartOpportunitySimulationEventHandler
 from pysocialsim.common.simulator.event.generator.start_opportunity_simulation_event_generator import StartOpportunitySimulationventGenerator
 from pysocialsim.common.simulator.event.handler.end_opportunity_simulation_event_handler import EndOpportunitySimulationEventHandler
-from pysocialsim.common.simulator.event.generator.end_opportunity_simulation_event_generator import EndOpportunitySimulationEventGenerator
 from pysocialsim.common.simulator.event.handler.push_opportunity_simulation_event_handler import PushOpportunitySimulationEventHandler
-from pysocialsim.common.simulator.event.generator.push_opportunity_simulation_event_generator import PushOpportunitySimulationEventGenerator
 from pysocialsim.common.simulator.event.handler.new_simple_peer_simulation_event_handler import NewSimplePeerSimulationEventHandler
 from pysocialsim.common.simulator.event.handler.simple_peer_leaving_simulation_event_handler import SimplePeerLeavingSimulationEventHandler
 from pysocialsim.common.simulator.event.generator.simple_peer_joining_simulation_event_generator import SimplePeerJoiningSimulationEventGenerator
@@ -81,12 +79,12 @@ simulator.setSimulation(simulation)
 simulation.setSimulationTime(86400)
 
 simulation.addSimulationEventGenerator(BeginSimulationEventGenerator())
-simulation.addSimulationEventGenerator(NewSuperPeerSimulationEventGenerator(5.5, 5000, 3))
-simulation.addSimulationEventGenerator(NewSimplePeerSimulationEventGenerator(5.5, 500, 30))
-simulation.addSimulationEventGenerator(SimplePeerLeavingSimulationEventGenerator(1.5618, 6.0013, 30))
-simulation.addSimulationEventGenerator(StartOpportunitySimulationventGenerator(0.5, 1000, 1))
+simulation.addSimulationEventGenerator(NewSuperPeerSimulationEventGenerator(5.5, 5000, 30))
+simulation.addSimulationEventGenerator(NewSimplePeerSimulationEventGenerator(5.5, 500, 300))
+simulation.addSimulationEventGenerator(SimplePeerLeavingSimulationEventGenerator(1.5618, 6.0013, 300))
+simulation.addSimulationEventGenerator(StartOpportunitySimulationventGenerator(0.5, 600, 300))
 #simulation.addSimulationEventGenerator(EndOpportunitySimulationEventGenerator(1.5618, 6.0013, 1))
-simulation.addSimulationEventGenerator(SimplePeerJoiningSimulationEventGenerator(1.8, 900.0, 30))
+simulation.addSimulationEventGenerator(SimplePeerJoiningSimulationEventGenerator(1.8, 900.0, 300))
 
 simulation.addSimulationEventGenerator(EndSimulationEventGenerator())
 #simulation.configure()

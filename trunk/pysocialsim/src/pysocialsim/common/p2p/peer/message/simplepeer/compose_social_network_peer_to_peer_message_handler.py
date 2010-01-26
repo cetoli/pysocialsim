@@ -20,21 +20,24 @@ class ComposeSocialNetworkPeerToPeerMessageHandler(AbstractPeerToPeerMessageHand
     def execute(self):
         message = self.getPeerToPeerMessage()
         peer = self.getPeer()
-        
-        contextManager = peer.getContextManager()
-        if message.hasParameter("opportunityId"):
-            if contextManager.hasContext(IContext.OPPORTUNITY, message.getParameter("opportunityId")):
-                opportunity = contextManager.getContext(IContext.OPPORTUNITY, message.getParameter("opportunityId"))
-                socialNetwork = opportunity.getSocialNetwork()
-                
-                if socialNetwork.hasSocialNetworkMember(message.getSourceId()):
-                    return
-                
-                member = SocialNetworkMember(message.getSourceId())
-                socialNetwork.addSocialNetworkMember(member)
-                
-                ack_message = AcknowledgeComposeSocialNetworkPeerToPeerMessage()
-                ack_message.init(PeerToPeerMessageIdGenerator.generatePeerToPeerMessageId(peer), peer.getId(), message.getSourceId(), message.getTTL(), message.getPriority(), ack_message.getSize(), ack_message.getTime())
-                
-                peer.send(ack_message)
+        if peer.isJoined():
+            contextManager = peer.getContextManager()
+            if message.hasParameter("opportunityId"):
+                if contextManager.hasContext(IContext.OPPORTUNITY, message.getParameter("opportunityId")):
+                    opportunity = contextManager.getContext(IContext.OPPORTUNITY, message.getParameter("opportunityId"))
+                    cloneOpportunity = opportunity.clone()
+                    socialNetwork = opportunity.getSocialNetwork()
+                    
+                    if socialNetwork.hasSocialNetworkMember(message.getSourceId()):
+                        return
+                    
+                    member = SocialNetworkMember(message.getSourceId())
+                    socialNetwork.addSocialNetworkMember(member)
+                    
+                    ack_message = AcknowledgeComposeSocialNetworkPeerToPeerMessage()
+                    ack_message.init(PeerToPeerMessageIdGenerator.generatePeerToPeerMessageId(peer), peer.getId(), message.getSourceId(), message.getTTL(), message.getPriority(), ack_message.getSize(), ack_message.getTime())
+                    
+                    ack_message.registerParameter("opportunity", cloneOpportunity)
+                    
+                    peer.send(ack_message)
                 

@@ -62,19 +62,19 @@ class StartOpportunitySimulationEventHandler(AbstractSimulationEventHandler):
         
         endOpportunityTime = (1.5618*pow((-math.log(uniform(0,1))), 1/6.0013)) * 3600
         
-        times = int((joinTime + endOpportunityTime) / 120)
+        times = int((joinTime + endOpportunityTime) / 3600)
         
         print 11111111111111111111111111111111, times, initialTime
         
         event = self.getSimulationEvent()
         
-        pushEvent = PushOpportunitySimulationEvent(peer.getId(), event.getPriority() + 120)
+        pushEvent = PushOpportunitySimulationEvent(peer.getId(), event.getPriority() + 3600)
         simulation.registerSimulationEvent(pushEvent)
         
         simulator.startEventHandlingThread(pushEvent.getHandle())
         
         for i in range(2, times + 1):
-            pushEvent = PushOpportunitySimulationEvent(peer.getId(), event.getPriority() + (120 * i))
+            pushEvent = PushOpportunitySimulationEvent(peer.getId(), event.getPriority() + (3600 * i))
             
             pushEvent.registerParameter("opportunityId", opportunity.getId())
             

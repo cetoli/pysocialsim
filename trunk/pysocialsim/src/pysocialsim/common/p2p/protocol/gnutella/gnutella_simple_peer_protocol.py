@@ -105,7 +105,6 @@ class GnutellaSimplePeerProtocol(AbstractPeerToPeerProtocol):
             if len(routes) > 0:
                 route = routes[randint(0, len(routes) - 1)]
                 trace = route.getTrace()
-                print peer.getId(), trace
                 neighbor = peer.getNeighbor(trace[len(trace) - 1])
                 message = self.createPeerToPeerMessage(IPeerToPeerProtocol.ROUTE)
                 message.init(peerToPeerMessage.getId(), peer.getId(), neighbor.getId(), route.getCost(), peerToPeerMessage.getPriority(), message.getSize(), message.getTime())
@@ -272,7 +271,6 @@ class GnutellaSimplePeerProtocol(AbstractPeerToPeerProtocol):
                 
                 trace = message.getPeerIds()
                 
-                print peer.getId(), trace
                 if peer.hasNeighbor(message.getSourceId()):
                     if peer.hasNeighbor(message.getSourceId()):
                         neighbor = peer.getNeighbor(message.getSourceId())

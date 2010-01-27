@@ -64,8 +64,6 @@ class StartOpportunitySimulationEventHandler(AbstractSimulationEventHandler):
         
         times = int((joinTime + endOpportunityTime) / 3600)
         
-        print 11111111111111111111111111111111, times, initialTime
-        
         event = self.getSimulationEvent()
         
         pushEvent = PushOpportunitySimulationEvent(peer.getId(), event.getPriority() + 3600)

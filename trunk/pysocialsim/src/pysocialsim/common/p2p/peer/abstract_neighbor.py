@@ -63,7 +63,6 @@ class AbstractNeighbor(Object, INeighbor):
         
         if not route in self.__routes[route.getPeerId()]:
             self.__routes[route.getPeerId()].append(route)
-            print "QUANTIDADE DE ROTAS", self.getId(), len(self.__routes[route.getPeerId()])
         else:
             rt = self.__routes[route.getPeerId()][self.__routes[route.getPeerId()].index(route)]
             rt.setFreshness(rt.getFreshness() + 1)

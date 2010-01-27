@@ -142,7 +142,6 @@ class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
                 message.setHop(message.getHop() + 1)
                 message.init(message.getId(), peer.getId(), peerId, message.getTTL(), message.getPriority(), message.getSize(), message.getTime())
                 peer.send(message)
-                print "ENTREGUEI PARA", peerId
             else:
                 messagesLogFile = open("fails.log", "a")
                 line = str(message.getPriority()) + " " + message.getId() + " " + message.getHandle() + " " + message.getSourceId() + " " + self.getPeerToPeerMessage().getTargetId() + " " + str(message.getTime()) + " " + str(message.getSize()) + " " + str(int(message.getTime() + message.getPriority())) + " " + str(message.getHop() + 1) + " " + str(len(network.getConnectedPeers(IPeerToPeerNetwork.SUPER_PEER))) + " " + str(len(network.getConnectedPeers(IPeerToPeerNetwork.SIMPLE_PEER))) 

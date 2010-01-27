@@ -29,7 +29,4 @@ class PushOpportunitySimulationEventHandler(AbstractSimulationEventHandler):
             
             peer.push(opportunityMessage)
         
-        else:
-            print 8888888888888888888888888888888888888888888888888888888888888888888888
-        
         return AbstractSimulationEventHandler.execute(self)

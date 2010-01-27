@@ -25,7 +25,7 @@ class AcknowledgeComposeSocialNetworkPeerToPeerMessageHandler(AbstractPeerToPeer
                 
                 member = SocialNetworkMember(message.getSourceId())
                 
-                socialNetwork.addMember(member)
+                socialNetwork.addSocialNetworkMember(member)
                 
                 contextManager = peer.getContextManager()
                 

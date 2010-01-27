@@ -86,10 +86,15 @@ class Opportunity(AbstractContext, IOpportunity):
         cln = Opportunity(self.getId())
         cln.setDurationTime(self.__durationTime)
         cln.setStartTime(self.__durationTime)
+        cln.setVersion(self.getVersion())
         if self.__active:
             cln.activate()
         for ic in self.__interestContraints.values():
             cln.addInterestConstraint(ic)
+        
+        socialNetwork = cln.getSocialNetwork()
+        for member in self.__socialNetwork.getSocialNetworkMembers():
+            socialNetwork.addSocialNetworkMember(member)
         
         return cln
     

@@ -26,3 +26,7 @@ class SocialNetwork(Object):
     def addSocialNetworkMember(self, member):
         pass
     
+    @public
+    def getSocialNetworkMembers(self):
+        return self.__members.values()
+    

@@ -19,6 +19,15 @@ class AbstractContext(Object, IContext):
     def initialize(self, type, id):
         self.__type = type
         self.__id = id
+        self.__version = 0
+        
+    @public
+    def getVersion(self):
+        return self.__version
+
+    @public
+    def setVersion(self, version):
+        self.__version = version
         
     @public
     def getType(self):
@@ -31,3 +40,5 @@ class AbstractContext(Object, IContext):
     type = property(getType, None, None, None)
 
     id = property(getId, None, None, None)    
+    
+    version = property(getVersion, setVersion, None, None)

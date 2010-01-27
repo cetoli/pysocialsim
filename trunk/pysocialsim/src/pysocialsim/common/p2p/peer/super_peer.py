@@ -10,6 +10,8 @@ from pysocialsim.common.p2p.peer.abstract_peer import AbstractPeer
 from pysocialsim.common.p2p.network.i_peer_to_peer_network import IPeerToPeerNetwork
 from pysocialsim.common.base.decorators import public
 from pysocialsim.common.p2p.peer.message.superpeer.advertise_opportunity_peer_to_peer_message_handler import AdvertiseOpportunityPeerToPeerMessageHandler
+from pysocialsim.common.p2p.peer.message.superpeer.create_social_network_peer_to_peer_message_handler import CreateSocialNetworkPeerToPeerMessageHandler
+from pysocialsim.common.p2p.peer.message.superpeer.replicate_social_network_peer_to_peer_message_handler import ReplicateSocialNetworkPeerToPeerMessageHandler
 
 class SuperPeer(AbstractPeer):
 
@@ -20,6 +22,8 @@ class SuperPeer(AbstractPeer):
         AbstractPeer.initialize(self, IPeerToPeerNetwork.SUPER_PEER, id, peerToPeerNetwork)
         dispatcher = self.getPeerToPeerMessageDispatcher()
         dispatcher.registerPeerToPeerMessageHandler(AdvertiseOpportunityPeerToPeerMessageHandler())
+        dispatcher.registerPeerToPeerMessageHandler(CreateSocialNetworkPeerToPeerMessageHandler())
+        dispatcher.registerPeerToPeerMessageHandler(ReplicateSocialNetworkPeerToPeerMessageHandler())
 
     @public
     def countChildren(self):

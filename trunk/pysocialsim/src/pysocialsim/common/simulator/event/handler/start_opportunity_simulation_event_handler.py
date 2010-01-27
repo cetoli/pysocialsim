@@ -9,6 +9,7 @@ from pysocialsim.common.p2p.peer.message.advertise_opportunity_peer_to_peer_mess
 from pysocialsim.common.p2p.peer.context.opportunity import Opportunity
 from pysocialsim.common.p2p.peer.context.context_id_generator import ContextIdGenerator
 from pysocialsim.common.simulator.event.generator.push_opportunity_simulation_event import PushOpportunitySimulationEvent
+from pysocialsim.common.simulator.event.generator.end_opportunity_simulation_event import EndOpportunitySimulationEvent
 import math
 
 class StartOpportunitySimulationEventHandler(AbstractSimulationEventHandler):
@@ -28,6 +29,7 @@ class StartOpportunitySimulationEventHandler(AbstractSimulationEventHandler):
         contextManager = peer.getContextManager()
         
         opportunity = Opportunity(ContextIdGenerator.generateContextId(IContext.OPPORTUNITY, peer))
+        
         contextManager.registerContext(IContext.OPPORTUNITY, opportunity)
         
         opportunity.activate()
@@ -66,6 +68,11 @@ class StartOpportunitySimulationEventHandler(AbstractSimulationEventHandler):
         
         event = self.getSimulationEvent()
         
+        opportunity.setStartTime(event.getPriority())
+        opportunity.setDurationTime(endOpportunityTime)
+        
+        endOpportunityEvent = EndOpportunitySimulationEvent(peer.getId(), int(joinTime + endOpportunityTime))
+        simulation.registerSimulationEvent(endOpportunityEvent)
         pushEvent = PushOpportunitySimulationEvent(peer.getId(), event.getPriority() + 3600)
         simulation.registerSimulationEvent(pushEvent)
         

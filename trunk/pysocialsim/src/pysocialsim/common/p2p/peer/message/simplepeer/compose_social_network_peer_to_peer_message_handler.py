@@ -11,6 +11,7 @@ from pysocialsim.common.p2p.peer.context.i_context import IContext
 from pysocialsim.common.p2p.peer.context.social_network_member import SocialNetworkMember
 from pysocialsim.common.p2p.peer.message.acknowledge_compose_social_network_peer_to_peer_message import AcknowledgeComposeSocialNetworkPeerToPeerMessage
 from pysocialsim.common.p2p.message.peer_to_peer_message_id_generator import PeerToPeerMessageIdGenerator
+from pysocialsim.common.p2p.peer.message.create_social_network_peer_to_peer_message import CreateSocialNetworkPeerToPeerMessage
 
 class ComposeSocialNetworkPeerToPeerMessageHandler(AbstractPeerToPeerMessageHandler):
     
@@ -25,7 +26,6 @@ class ComposeSocialNetworkPeerToPeerMessageHandler(AbstractPeerToPeerMessageHand
             if message.hasParameter("opportunityId"):
                 if contextManager.hasContext(IContext.OPPORTUNITY, message.getParameter("opportunityId")):
                     opportunity = contextManager.getContext(IContext.OPPORTUNITY, message.getParameter("opportunityId"))
-                    cloneOpportunity = opportunity.clone()
                     socialNetwork = opportunity.getSocialNetwork()
                     
                     if socialNetwork.hasSocialNetworkMember(message.getSourceId()):
@@ -33,11 +33,31 @@ class ComposeSocialNetworkPeerToPeerMessageHandler(AbstractPeerToPeerMessageHand
                     
                     member = SocialNetworkMember(message.getSourceId())
                     socialNetwork.addSocialNetworkMember(member)
+                    if not socialNetwork.hasSocialNetworkMember(peer.getId()):
+                        member = SocialNetworkMember(peer.getId())
+                        socialNetwork.addSocialNetworkMember(member)
+                    
+                    opportunity.setVersion(opportunity.getVersion() + 1)
+                    opportunityClone = opportunity.clone()
+                    
+                    if opportunity.getVersion() == 1:
+                        if peer.countNeighbors() > 0:
+                            neighbors = peer.getNeighbors()
+                            for neighbor in neighbors:
+                                createMessage = CreateSocialNetworkPeerToPeerMessage()
+                                createMessage.init(PeerToPeerMessageIdGenerator.generatePeerToPeerMessageId(peer), peer.getId(), neighbor.getId(), message.getTTL(), message.getPriority(), createMessage.getTime(), createMessage.getSize())
+                                createMessage.registerParameter("opportunity", opportunityClone)
+                                peer.send(createMessage)
+                            
+                    elif opportunity.getVersion() > 1:
+                        pass
                     
                     ack_message = AcknowledgeComposeSocialNetworkPeerToPeerMessage()
                     ack_message.init(PeerToPeerMessageIdGenerator.generatePeerToPeerMessageId(peer), peer.getId(), message.getSourceId(), message.getTTL(), message.getPriority(), ack_message.getSize(), ack_message.getTime())
                     
-                    ack_message.registerParameter("opportunity", cloneOpportunity)
+                    
+                    
+                    ack_message.registerParameter("opportunity", opportunityClone)
                     
                     peer.send(ack_message)
                 

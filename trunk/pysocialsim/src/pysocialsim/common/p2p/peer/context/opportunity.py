@@ -83,7 +83,7 @@ class Opportunity(AbstractContext, IOpportunity):
     
     @public
     def clone(self):
-        cln = Opportunity(self.__id)
+        cln = Opportunity(self.getId())
         cln.setDurationTime(self.__durationTime)
         cln.setStartTime(self.__durationTime)
         if self.__active:

@@ -12,7 +12,7 @@ from pysocialsim.common.base.decorators import public
 class SocialNetworkMember(Object):
     
     def __init__(self, id):
-        pass
+        self.initialize(id)
     
     def initialize(self, id):
         self.__id = id

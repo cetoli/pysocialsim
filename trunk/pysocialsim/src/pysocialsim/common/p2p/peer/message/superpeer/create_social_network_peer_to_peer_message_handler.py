@@ -29,7 +29,9 @@ class CreateSocialNetworkPeerToPeerMessageHandler(AbstractPeerToPeerMessageHandl
                 if not contextManager.hasContext(IContext.OPPORTUNITY, opportunity.getId()):
                     contextManager.registerContext(IContext.OPPORTUNITY, opportunity)
                 
-                neighborNumber = peer.countNeighbors()
+                socialNetwork = opportunity.getSocialNetwork()
+                
+                neighborNumber = socialNetwork.countSocialNetworkMembers()
                 if neighborNumber > 0:
                     minPercentage = 0.25
                     copyNumber = (minPercentage * neighborNumber) + math.log(opportunity.getVersion(), (minPercentage * neighborNumber))

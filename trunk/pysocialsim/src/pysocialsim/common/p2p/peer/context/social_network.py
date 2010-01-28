@@ -24,7 +24,14 @@ class SocialNetwork(Object):
     
     @public
     def addSocialNetworkMember(self, member):
-        pass
+        if self.__members.has_key(member.getId()):
+            return False
+        self.__members[member.getId()] = member
+        return self.__members
+    
+    @public
+    def countSocialNetworkMembers(self):
+        return len(self.__members)
     
     @public
     def getSocialNetworkMembers(self):

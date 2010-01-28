@@ -153,11 +153,15 @@ class AbstractPeer(Object, IPeer):
     
     @public
     def addNeighbor(self, neighbor):
+        if self.__neighbors.has_key(neighbor.getId()):
+            return False
         self.__neighbors[neighbor.getId()] = neighbor
         return returns(self.__neighbors.has_key(neighbor.getId()), bool)
     
     @public
     def removeNeighbor(self, peerId):
+        if not self.__neighbors.has_key(peerId):
+            return False
         del self.__neighbors[peerId]
         return returns(not self.__neighbors.has_key(peerId), bool)
     
@@ -171,6 +175,8 @@ class AbstractPeer(Object, IPeer):
     
     @public
     def getNeighbor(self, peerId):
+        if not self.__neighbors.has_key(peerId):
+            return None
         return returns(self.__neighbors[peerId], INeighbor)
     
     @public

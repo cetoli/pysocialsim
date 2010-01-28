@@ -157,7 +157,11 @@ class GnutellaSimplePeerProtocol(AbstractPeerToPeerProtocol):
                             aux = peer.isJoined();
                             del peers[ix]
                             if len(peers) == 0:
-                                break      
+                                break
+                        else:
+                            print "DESCARTEI", superPeer.getId()
+                            del peers[ix]
+                                  
         
         sem.release()
         return aux;

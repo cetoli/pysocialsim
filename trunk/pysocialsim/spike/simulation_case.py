@@ -79,13 +79,13 @@ simulator.setSimulation(simulation)
 simulation.setSimulationTime(2592000)
 
 simulation.addSimulationEventGenerator(BeginSimulationEventGenerator())
-simulation.addSimulationEventGenerator(NewSuperPeerSimulationEventGenerator(5.5, 3000, 30))
-simulation.addSimulationEventGenerator(NewSimplePeerSimulationEventGenerator(5.5, 500, 300))
-simulation.addSimulationEventGenerator(SimplePeerLeavingSimulationEventGenerator(1.5618, 6.0013, 300))
+simulation.addSimulationEventGenerator(NewSuperPeerSimulationEventGenerator(5.5, 3000, 100))
+simulation.addSimulationEventGenerator(NewSimplePeerSimulationEventGenerator(5.5, 500, 1000))
+simulation.addSimulationEventGenerator(SimplePeerLeavingSimulationEventGenerator(1.5618, 6.0013, 1000))
 simulation.addSimulationEventGenerator(StartOpportunitySimulationventGenerator(0.5, 600, 300))
 
-simulation.addSimulationEventGenerator(SimplePeerJoiningSimulationEventGenerator(1.8, 900.0, 300))
-simulation.addSimulationEventGenerator(SimplePeerLeavingSimulationEventGenerator(1.5618, 6.0013, 300))
+simulation.addSimulationEventGenerator(SimplePeerJoiningSimulationEventGenerator(1.8, 900.0, 1000))
+simulation.addSimulationEventGenerator(SimplePeerLeavingSimulationEventGenerator(1.5618, 6.0013, 1000))
 
 simulation.addSimulationEventGenerator(EndSimulationEventGenerator())
 

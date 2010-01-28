@@ -85,6 +85,9 @@ class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
                             del peers[ix]
                             if len(peers) == 0:
                                 break
+                        else:
+                            print "DESCARTEI", neighbor.getId()
+                            del peers[ix]
             
             if not aux:
                 topology.removeNode(peer.getId())

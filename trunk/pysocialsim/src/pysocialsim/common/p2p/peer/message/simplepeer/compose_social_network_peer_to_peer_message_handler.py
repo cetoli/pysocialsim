@@ -12,6 +12,7 @@ from pysocialsim.common.p2p.peer.context.social_network_member import SocialNetw
 from pysocialsim.common.p2p.peer.message.acknowledge_compose_social_network_peer_to_peer_message import AcknowledgeComposeSocialNetworkPeerToPeerMessage
 from pysocialsim.common.p2p.message.peer_to_peer_message_id_generator import PeerToPeerMessageIdGenerator
 from pysocialsim.common.p2p.peer.message.create_social_network_peer_to_peer_message import CreateSocialNetworkPeerToPeerMessage
+from pysocialsim.common.p2p.peer.message.update_social_network_peer_to_peer_message import UpdateSocialNetworkPeerToPeerMessage
 
 class ComposeSocialNetworkPeerToPeerMessageHandler(AbstractPeerToPeerMessageHandler):
     
@@ -50,7 +51,13 @@ class ComposeSocialNetworkPeerToPeerMessageHandler(AbstractPeerToPeerMessageHand
                                 peer.send(createMessage)
                             
                     elif opportunity.getVersion() > 1:
-                        pass
+                        if peer.countNeighbors() > 0:
+                            neighbors = peer.getNeighbors()
+                            for neighbor in neighbors:
+                                updateMessage = UpdateSocialNetworkPeerToPeerMessage()
+                                updateMessage.init(PeerToPeerMessageIdGenerator.generatePeerToPeerMessageId(peer), peer.getId(), neighbor.getId(), message.getTTL(), message.getPriority(), updateMessage.getTime(), updateMessage.getSize())
+                                updateMessage.registerParameter("opportunity", opportunityClone)
+                                peer.send(updateMessage)
                     
                     ack_message = AcknowledgeComposeSocialNetworkPeerToPeerMessage()
                     ack_message.init(PeerToPeerMessageIdGenerator.generatePeerToPeerMessageId(peer), peer.getId(), message.getSourceId(), message.getTTL(), message.getPriority(), ack_message.getSize(), ack_message.getTime())

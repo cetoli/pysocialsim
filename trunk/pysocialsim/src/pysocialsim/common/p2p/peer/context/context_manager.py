@@ -29,6 +29,19 @@ class ContextManager(Object):
         return aux
     
     @public
+    def updateContext(self, type, context):
+        if not self.__contexts.has_key(type):
+            return False
+        
+        contextByType = self.__contexts[type]
+        if not contextByType.has_key(context.getId()):
+            return False
+        
+        contextByType[context.getId()] = context
+        return True
+        
+    
+    @public
     def getContexts(self, type):
         aux = [].__iter__()
         if self.__contexts.has_key(type):

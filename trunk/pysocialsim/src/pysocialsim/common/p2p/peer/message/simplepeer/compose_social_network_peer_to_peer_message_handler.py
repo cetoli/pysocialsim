@@ -41,7 +41,7 @@ class ComposeSocialNetworkPeerToPeerMessageHandler(AbstractPeerToPeerMessageHand
                     opportunity.setVersion(opportunity.getVersion() + 1)
                     opportunityClone = opportunity.clone()
                     
-                    if opportunity.getVersion() == 1:
+                    if opportunity.getVersion() == 1 and socialNetwork.countSocialNetworkMembers() == 2:
                         if peer.countNeighbors() > 0:
                             neighbors = peer.getNeighbors()
                             for neighbor in neighbors:
@@ -50,7 +50,7 @@ class ComposeSocialNetworkPeerToPeerMessageHandler(AbstractPeerToPeerMessageHand
                                 createMessage.registerParameter("opportunity", opportunityClone)
                                 peer.send(createMessage)
                             
-                    elif opportunity.getVersion() > 1:
+                    elif opportunity.getVersion() > 1 and socialNetwork.countSocialNetworkMembers() > 2:
                         if peer.countNeighbors() > 0:
                             neighbors = peer.getNeighbors()
                             for neighbor in neighbors:

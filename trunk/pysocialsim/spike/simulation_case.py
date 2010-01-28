@@ -76,7 +76,7 @@ network.registerPeerToPeerProtocol(IPeerToPeerNetwork.SIMPLE_PEER, protocol)
 
 simulation.setPeerToPeerNetwork(network)
 simulator.setSimulation(simulation)
-simulation.setSimulationTime(86400)
+simulation.setSimulationTime(2592000)
 
 simulation.addSimulationEventGenerator(BeginSimulationEventGenerator())
 simulation.addSimulationEventGenerator(NewSuperPeerSimulationEventGenerator(5.5, 3000, 30))
@@ -84,11 +84,9 @@ simulation.addSimulationEventGenerator(NewSimplePeerSimulationEventGenerator(5.5
 simulation.addSimulationEventGenerator(SimplePeerLeavingSimulationEventGenerator(1.5618, 6.0013, 300))
 simulation.addSimulationEventGenerator(StartOpportunitySimulationventGenerator(0.5, 600, 300))
 
-#simulation.addSimulationEventGenerator(EndOpportunitySimulationEventGenerator(1.5618, 6.0013, 1))
-
 simulation.addSimulationEventGenerator(SimplePeerJoiningSimulationEventGenerator(1.8, 900.0, 300))
 simulation.addSimulationEventGenerator(SimplePeerLeavingSimulationEventGenerator(1.5618, 6.0013, 300))
 
 simulation.addSimulationEventGenerator(EndSimulationEventGenerator())
-#simulation.configure()
+
 simulator.start()

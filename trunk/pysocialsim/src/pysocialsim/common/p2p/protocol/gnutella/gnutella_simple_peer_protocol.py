@@ -19,6 +19,7 @@ from pysocialsim.common.p2p.peer.route import Route
 from pysocialsim.common.p2p.message.peer_to_peer_message_id_generator import PeerToPeerMessageIdGenerator
 from sets import ImmutableSet
 from pysocialsim.common.error.invalid_value_error import InvalidValueError
+import time
 
 class GnutellaSimplePeerProtocol(AbstractPeerToPeerProtocol):
     
@@ -116,13 +117,24 @@ class GnutellaSimplePeerProtocol(AbstractPeerToPeerProtocol):
                 try:
                     neighbor.dispatchData(message)
                 except InvalidValueError:
+                    aux = False
+                    time.sleep(0.5)
+                    for i in range(10):
+                        if self.route(peer, peerToPeerMessage):
+                            aux = True
+                            break
+                    if aux:
+                        return message
                     messagesLogFile = open("fails.log", "a")
                     line = str(peerToPeerMessage.getPriority()) + " " + peerToPeerMessage.getId() + " " + peerToPeerMessage.getHandle() + " " + peerToPeerMessage.getSourceId() + " " + peerToPeerMessage.getTargetId() + " " + str(peerToPeerMessage.getTime()) + " " + str(peerToPeerMessage.getSize()) + " " + str(int(peerToPeerMessage.getTime() + peerToPeerMessage.getPriority())) + " " + str(peerToPeerMessage.getHop() + 1) + " " + str(len(network.getConnectedPeers(IPeerToPeerNetwork.SUPER_PEER))) + " " + str(len(network.getConnectedPeers(IPeerToPeerNetwork.SIMPLE_PEER))) 
                     messagesLogFile.write(str(line)+"\n")
                     messagesLogFile.close()
                     peer.removeNeighbor(neighbor.getId())
             else:
-                raise StandardError()
+                time.sleep(0.5)
+                for i in range(10):
+                    if self.route(peer, peerToPeerMessage):
+                        break
 #                messagesLogFile = open("fails.log", "a")
 #                line = str(peerToPeerMessage.getPriority()) + " " + peerToPeerMessage.getId() + " " + peerToPeerMessage.getHandle() + " " + peerToPeerMessage.getSourceId() + " " + peerToPeerMessage.getTargetId() + " " + str(peerToPeerMessage.getTime()) + " " + str(peerToPeerMessage.getSize()) + " " + str(int(peerToPeerMessage.getTime() + peerToPeerMessage.getPriority())) + " " + str(peerToPeerMessage.getHop() + 1) + " " + str(len(network.getConnectedPeers(IPeerToPeerNetwork.SUPER_PEER))) + " " + str(len(network.getConnectedPeers(IPeerToPeerNetwork.SIMPLE_PEER))) 
 #                messagesLogFile.write(str(line)+"\n")

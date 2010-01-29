@@ -51,7 +51,7 @@ network = PeerToPeerNetwork(simulation)
 
 network.setConnectionsBetweenSuperPeers(6)
 network.setConnectionsBetweenSuperPeerAndSimplePeers(30)
-network.setConnectionsBetweenSimplePeerAndSuperPeers(3)
+network.setConnectionsBetweenSimplePeerAndSuperPeers(1)
 
 network.setLinkAvailability(50.0)
 
@@ -79,13 +79,13 @@ simulator.setSimulation(simulation)
 simulation.setSimulationTime(2592000)
 
 simulation.addSimulationEventGenerator(BeginSimulationEventGenerator())
-simulation.addSimulationEventGenerator(NewSuperPeerSimulationEventGenerator(5.5, 3000, 100))
-simulation.addSimulationEventGenerator(NewSimplePeerSimulationEventGenerator(5.5, 500, 1000))
-simulation.addSimulationEventGenerator(SimplePeerLeavingSimulationEventGenerator(1.5618, 6.0013, 1000))
+simulation.addSimulationEventGenerator(NewSuperPeerSimulationEventGenerator(5.5, 3000, 10))
+simulation.addSimulationEventGenerator(NewSimplePeerSimulationEventGenerator(5.5, 500, 100))
+simulation.addSimulationEventGenerator(SimplePeerLeavingSimulationEventGenerator(1.5618, 6.0013, 100))
 simulation.addSimulationEventGenerator(StartOpportunitySimulationventGenerator(0.5, 600, 300))
 
-simulation.addSimulationEventGenerator(SimplePeerJoiningSimulationEventGenerator(1.8, 900.0, 1000))
-simulation.addSimulationEventGenerator(SimplePeerLeavingSimulationEventGenerator(1.5618, 6.0013, 1000))
+simulation.addSimulationEventGenerator(SimplePeerJoiningSimulationEventGenerator(1.8, 900.0, 100))
+simulation.addSimulationEventGenerator(SimplePeerLeavingSimulationEventGenerator(1.5618, 6.0013, 100))
 
 simulation.addSimulationEventGenerator(EndSimulationEventGenerator())
 

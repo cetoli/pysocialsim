@@ -34,18 +34,4 @@ class ReplicateSocialNetworkPeerToPeerMessageHandler(AbstractPeerToPeerMessageHa
         else:
             contextManager.registerContext(IContext.OPPORTUNITY, opportunity)
             
-        socialNetwork = opportunity.getSocialNetwork()
-        
-        if peer.countChildren() > 0:
-            children = peer.getChildren()
-            for child in children:
-                if not socialNetwork.hasSocialNetworkMember(child.getId()) and child.getId() <> message.getSourceId():
-                    messageClone = message.clone()
-                    messageClone.init(message.getId(), peer.getId(), child.getId(), message.getTTL(), message.getPriority(), 512, message.getTime())
-                    if messageClone.hasParameter("opportunity"):
-                        messageClone.unregisterParameter("opportunity")
-                        messageClone.registerParameter("opportunity", opportunity.clone())
-                    messageClone.setHop(messageClone.getHop() + 1)
-                    peer.send(messageClone)
-            
         print "OOOHH, YEEESSS", peer.getId()

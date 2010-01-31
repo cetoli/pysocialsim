@@ -137,20 +137,54 @@ class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
         network = peer.getPeerToPeerNetwork()
         
         if peerToPeerMessage.getHandle() == IPeerToPeerProtocol.ROUTE:
-            peerToPeerMessage.unregisterPeerId(peer.getId())
-            peerId = peerToPeerMessage.getLast()
-            if peer.hasNeighbor(peerId):
+            if peerToPeerMessage.getHop() < peerToPeerMessage.getTTL():
+                peerToPeerMessage.unregisterPeerId(peer.getId())
+                peerId = peerToPeerMessage.getLast()
                 message = peerToPeerMessage.clone()
-                message.getParameter("backTrace").append(peer.getId())
-                
                 message.setHop(message.getHop() + 1)
                 message.init(message.getId(), peer.getId(), peerId, message.getTTL(), message.getPriority(), message.getSize(), message.getTime())
-                peer.send(message)
+                
+                if message.hasParameter("backTrace"):
+                    newBackTrace = [] + message.getParameter("backTrace")
+                    newBackTrace.append(peer.getId())
+                    message.unregisterParameter("backTrace")
+                    message.registerParameter("backTrace", newBackTrace)
+                    
+                if peer.hasNeighbor(peerId):
+                    peer.send(message)
+                else:
+                    neighbors = peer.getNeighbors() + peer.getChildren()
+                    routes = []
+                    for neighbor in neighbors:
+                        if neighbor.hasRoutes(peerToPeerMessage.getTargetId()):
+                            rts = neighbor.getRoutes(peerToPeerMessage.getTargetId())
+                            rt = rts[0]
+                            for route in rts:
+                                if route.getCost() < rt.getCost():
+                                    rt = route
+                            routes.append(rt)
+                    if len(routes) > 0:
+                        route = routes[randint(0, len(routes) - 1)]
+                        trace = route.getTrace()
+                        neighbor = peer.getNeighbor(trace[len(trace) - 1])
+                        trace.remove(trace[len(trace) - 1])
+                        for id in trace:
+                            message.registerPeerId(id)
+                        try:
+                            neighbor.dispatchData(message)
+                        except InvalidValueError:
+                            messagesLogFile = open("fails.log", "a")
+                            line = str(peerToPeerMessage.getPriority()) + " " + peerToPeerMessage.getId() + " " + peerToPeerMessage.getHandle() + " " + peerToPeerMessage.getSourceId() + " " + peerToPeerMessage.getTargetId() + " " + str(peerToPeerMessage.getTime()) + " " + str(peerToPeerMessage.getSize()) + " " + str(int(peerToPeerMessage.getTime() + peerToPeerMessage.getPriority())) + " " + str(peerToPeerMessage.getHop() + 1) + " " + str(len(network.getConnectedPeers(IPeerToPeerNetwork.SUPER_PEER))) + " " + str(len(network.getConnectedPeers(IPeerToPeerNetwork.SIMPLE_PEER))) 
+                            messagesLogFile.write(str(line)+"\n")
+                            messagesLogFile.close()
+                            peer.removeNeighbor(neighbor.getId())
+                    else:
+                        messagesLogFile = open("fails.log", "a")
+                        line = str(peerToPeerMessage.getPriority()) + " " + peerToPeerMessage.getId() + " " + peerToPeerMessage.getHandle() + " " + peerToPeerMessage.getSourceId() + " " + peerToPeerMessage.getTargetId() + " " + str(peerToPeerMessage.getTime()) + " " + str(peerToPeerMessage.getSize()) + " " + str(int(peerToPeerMessage.getTime() + peerToPeerMessage.getPriority())) + " " + str(peerToPeerMessage.getHop() + 1) + " " + str(len(network.getConnectedPeers(IPeerToPeerNetwork.SUPER_PEER))) + " " + str(len(network.getConnectedPeers(IPeerToPeerNetwork.SIMPLE_PEER))) 
+                        messagesLogFile.write(str(line)+"\n")
+                        messagesLogFile.close()
             else:
-                messagesLogFile = open("fails.log", "a")
-                line = str(peerToPeerMessage.getPriority()) + " " + peerToPeerMessage.getId() + " " + peerToPeerMessage.getHandle() + " " + peerToPeerMessage.getSourceId() + " " + peerToPeerMessage.getTargetId() + " " + str(peerToPeerMessage.getTime()) + " " + str(peerToPeerMessage.getSize()) + " " + str(int(peerToPeerMessage.getTime() + peerToPeerMessage.getPriority())) + " " + str(peerToPeerMessage.getHop() + 1) + " " + str(len(network.getConnectedPeers(IPeerToPeerNetwork.SUPER_PEER))) + " " + str(len(network.getConnectedPeers(IPeerToPeerNetwork.SIMPLE_PEER))) 
-                messagesLogFile.write(str(line)+"\n")
-                messagesLogFile.close()
+                return peerToPeerMessage
         else:
             neighbors = peer.getNeighbors() + peer.getChildren()
             routes = []
@@ -177,30 +211,16 @@ class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
                 try:
                     neighbor.dispatchData(message)
                 except InvalidValueError:
-                    aux = False
-                    time.sleep(0.5)
-                    for i in range(10):
-                        if self.route(peer, peerToPeerMessage):
-                            aux = True
-                            break
-                    if aux:
-                        return message
                     messagesLogFile = open("fails.log", "a")
                     line = str(peerToPeerMessage.getPriority()) + " " + peerToPeerMessage.getId() + " " + peerToPeerMessage.getHandle() + " " + peerToPeerMessage.getSourceId() + " " + peerToPeerMessage.getTargetId() + " " + str(peerToPeerMessage.getTime()) + " " + str(peerToPeerMessage.getSize()) + " " + str(int(peerToPeerMessage.getTime() + peerToPeerMessage.getPriority())) + " " + str(peerToPeerMessage.getHop() + 1) + " " + str(len(network.getConnectedPeers(IPeerToPeerNetwork.SUPER_PEER))) + " " + str(len(network.getConnectedPeers(IPeerToPeerNetwork.SIMPLE_PEER))) 
                     messagesLogFile.write(str(line)+"\n")
                     messagesLogFile.close()
                     peer.removeNeighbor(neighbor.getId())
             else:
-                time.sleep(0.5)
-                for i in range(10):
-                    if self.route(peer, peerToPeerMessage):
-                        break
-                    
-#                messagesLogFile = open("fails.log", "a")
-#                line = str(peerToPeerMessage.getPriority()) + " " + peerToPeerMessage.getId() + " " + peerToPeerMessage.getHandle() + " " + peerToPeerMessage.getSourceId() + " " + peerToPeerMessage.getTargetId() + " " + str(peerToPeerMessage.getTime()) + " " + str(peerToPeerMessage.getSize()) + " " + str(int(peerToPeerMessage.getTime() + peerToPeerMessage.getPriority())) + " " + str(peerToPeerMessage.getHop() + 1) + " " + str(len(network.getConnectedPeers(IPeerToPeerNetwork.SUPER_PEER))) + " " + str(len(network.getConnectedPeers(IPeerToPeerNetwork.SIMPLE_PEER))) 
-#                messagesLogFile.write(str(line)+"\n")
-#                messagesLogFile.close()
-#                peer.removeNeighbor(neighbor.getId())
+                messagesLogFile = open("fails.log", "a")
+                line = str(peerToPeerMessage.getPriority()) + " " + peerToPeerMessage.getId() + " " + peerToPeerMessage.getHandle() + " " + peerToPeerMessage.getSourceId() + " " + peerToPeerMessage.getTargetId() + " " + str(peerToPeerMessage.getTime()) + " " + str(peerToPeerMessage.getSize()) + " " + str(int(peerToPeerMessage.getTime() + peerToPeerMessage.getPriority())) + " " + str(peerToPeerMessage.getHop() + 1) + " " + str(len(network.getConnectedPeers(IPeerToPeerNetwork.SUPER_PEER))) + " " + str(len(network.getConnectedPeers(IPeerToPeerNetwork.SIMPLE_PEER))) 
+                messagesLogFile.write(str(line)+"\n")
+                messagesLogFile.close()
                 
         semaphore.release()
         
@@ -323,6 +343,16 @@ class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
                     neighbor = peer.getNeighbor(lastPeerId)
                     neighbor.registerRoute(route)
             else:
+                backTrace = message.getParameter("backTrace")
+                peerId = backTrace[0]
+                route = Route(peerId, backTrace, len(backTrace), 0)
+                lastPeerId = backTrace[len(backTrace) - 1]
+                if not peer.hasNeighbor(lastPeerId) or peerId == lastPeerId:
+                    return
+                if peer.hasNeighbor(lastPeerId):
+                    neighbor = peer.getNeighbor(lastPeerId)
+                    neighbor.registerRoute(route)
+                
                 message.unregisterPeerId(peer.getId())
                 peerId = message.getLast()
                 
@@ -360,6 +390,20 @@ class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
                 dispatcher = peer.getPeerToPeerMessageDispatcher()
                 dispatcher.registerPeerToPeerMessage(peerToPeerMessage)
             else:
+                trace = message.getPeerIds()
+                if peer.hasNeighbor(message.getSourceId()):
+                    if peer.hasNeighbor(message.getSourceId()):
+                        neighbor = peer.getNeighbor(message.getSourceId())
+                        route = Route(trace[0], trace, len(trace), 0)
+                        neighbor.registerRoute(route)
+                        
+                backTrace = message.getParameter("backTrace")
+                peerId = backTrace[0]
+                route = Route(peerId, backTrace, len(backTrace), 0)
+                lastPeerId = backTrace[len(backTrace) - 1]
+                if peer.hasNeighbor(lastPeerId):
+                    neighbor = peer.getNeighbor(lastPeerId)
+                    neighbor.registerRoute(route)
                 peer.route(message)
                 
     class PushPeerToPeerMessageHandler(AbstractPeerToPeerMessageHandler):

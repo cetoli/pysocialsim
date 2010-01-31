@@ -20,6 +20,11 @@ from pysocialsim.common.p2p.message.i_peer_to_peer_message import IPeerToPeerMes
 from pysocialsim.common.p2p.peer.i_neighbor import INeighbor
 from pysocialsim.common.p2p.peer.context.context_manager import ContextManager
 from pysocialsim.common.p2p.peer.profile.social_profile import SocialProfile
+from pysocialsim.common.p2p.peer.context.i_context import IContext
+from pysocialsim.common.p2p.peer.sharing.disk_sharing import DiskSharing
+from pysocialsim.common.p2p.peer.sharing.HardwareSharingIdGenerator import HardwareSharingIdGenerator
+from pysocialsim.common.p2p.peer.sharing.memory_sharing import MemorySharing
+from pysocialsim.common.p2p.peer.sharing.processor_sharing import ProcessorSharing
 
 class AbstractPeer(Object, IPeer):
     """
@@ -60,6 +65,7 @@ class AbstractPeer(Object, IPeer):
         self.__contextManager = ContextManager(self)
         self.__socialProfile = SocialProfile(self)
         self.__joinTime = 0
+        self.__hardwareSharings = {INode.DISK: {}, INode.MEMORY: {}, INode.PROCESSOR: {}}
     
     @public    
     def getId(self):
@@ -106,12 +112,9 @@ class AbstractPeer(Object, IPeer):
         return returns(self.__node, INode)
     
     @public
-    def join(self):
+    def join(self, priority):
         aux = self.__peerToPeerProtocol.join(self)
         if aux:
-            topology = self.__peerToPeerProtocol.getPeerToPeerTopology()
-            self.setNode(topology.getNode(self.__id))
-            simulation = self.__peerToPeerNetwork.getSimulation()
             self.joined()
             self.__peerToPeerMessageDispatcher.on()
             if len(self.__neighbors) > 0:
@@ -119,13 +122,13 @@ class AbstractPeer(Object, IPeer):
                     message = self.__peerToPeerProtocol.createPeerToPeerMessage(IPeerToPeerProtocol.PING)
                     message.registerPeerId(self.__id)
                     messageId = PeerToPeerMessageIdGenerator.generatePeerToPeerMessageId(self)           
-                    message.init(messageId, self.__id, n.getId(), self.__peerToPeerProtocol.getPingHops(), simulation.getCurrentSimulationTime(), message.getSize(), message.getTime())
+                    message.init(messageId, self.__id, n.getId(), self.__peerToPeerProtocol.getPingHops(), priority, message.getSize(), message.getTime())
                     self.send(message)
         
         return returns(aux, bool)
     
     @public
-    def leave(self):
+    def leave(self, priority):
         self.__peerToPeerMessageDispatcher.off()
         aux = self.__peerToPeerProtocol.leave(self)
         
@@ -226,6 +229,81 @@ class AbstractPeer(Object, IPeer):
     @public
     def getJoinTime(self):
         return self.__joinTime
+    
+    @public
+    def shareHardware(self, priority, deviceType, sharedPercentage, opportunityId):
+        if not self.isJoined():
+            return None
+        
+        contextManager = self.getContextManager()
+        if not contextManager.hasContext(IContext.OPPORTUNITY, opportunityId):
+            return None
+        
+        opportunity = contextManager.getContext(IContext.OPPORTUNITY, opportunityId)
+        
+        node = self.getNode()
+        nodeDevice = node.getNodeDevice(deviceType)
+        capacity = nodeDevice.getFreeCapacity() * sharedPercentage
+        
+        hardwareSharing = None
+        if deviceType == INode.DISK:
+            hardwareSharing = DiskSharing(HardwareSharingIdGenerator.generateId(self, opportunity, deviceType), self, capacity)
+        elif deviceType == INode.MEMORY:
+            hardwareSharing = MemorySharing(HardwareSharingIdGenerator.generateId(self, opportunity, deviceType), self, capacity)
+        elif deviceType == INode.PROCESSOR:
+            hardwareSharing = ProcessorSharing(HardwareSharingIdGenerator.generateId(self, opportunity, deviceType), self, capacity)
+        
+        sharings = self.__hardwareSharings[deviceType]
+        sharings[hardwareSharing.getId()] = hardwareSharing
+        
+        print "PERCENTAGE", hardwareSharing.getCapacity() / nodeDevice.getCapacity(), sharedPercentage
+        
+        return hardwareSharing
+    
+    @public
+    def getHardwareSharing(self, nodeDeviceType, sharingId):
+        if not self.__hardwareSharings.has_key(nodeDeviceType):
+            return None
+        sharing = self.__hardwareSharings[nodeDeviceType]
+        if not sharing.has_key(sharingId):
+            return None
+        return sharing[sharingId]
+    
+    @public
+    def getSharedCapacity(self, nodeDeviceType):
+        capacity = 0
+        
+        if self.__hardwareSharings.has_key(nodeDeviceType):
+            sharings = self.__hardwareSharings[nodeDeviceType]
+            for sharing in sharings.values():
+                capacity += sharing.getCapacity()
+                
+        return capacity
+    
+    @public
+    def getFreeSharedCapacity(self, nodeDeviceType):
+        capacity = 0
+        
+        if self.__hardwareSharings.has_key(nodeDeviceType):
+            sharings = self.__hardwareSharings[nodeDeviceType]
+            if len(sharings) > 0:
+                for sharing in sharings.values():
+                    capacity += sharing.getFreeCapacity()
+            else:
+                nodeDevice = self.__node.getNodeDevice(nodeDeviceType)
+                capacity = nodeDevice.getCapacity()
+                    
+        return capacity
+    
+    @public
+    def getNodeDeviceCapacity(self, nodeDeviceType):
+        nodeDevice = self.__node.getNodeDevice(nodeDeviceType)
+        return nodeDevice.getCapacity()
+    
+    @public
+    def getNodedeviceFreeCapacity(self, nodeDeviceType):
+        nodeDevice = self.__node.getNodeDevice(nodeDeviceType)
+        return nodeDevice.getFreeCapacity()
     
     id = property(getId, None, None, None)
 

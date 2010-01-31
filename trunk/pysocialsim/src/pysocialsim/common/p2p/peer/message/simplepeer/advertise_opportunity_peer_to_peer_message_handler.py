@@ -10,6 +10,7 @@ from pysocialsim.common.p2p.message.abstract_peer_to_peer_message_handler import
 from pysocialsim.common.p2p.peer.message.compose_social_network_peer_to_peer_message import ComposeSocialNetworkPeerToPeerMessage
 from pysocialsim.common.p2p.message.peer_to_peer_message_id_generator import PeerToPeerMessageIdGenerator
 from pysocialsim.common.p2p.peer.context.i_context import IContext
+from pysocialsim.common.p2p.topology.graph.i_node import INode
 
 class AdvertiseOpportunityPeerToPeerMessageHandler(AbstractPeerToPeerMessageHandler):
     
@@ -19,8 +20,19 @@ class AdvertiseOpportunityPeerToPeerMessageHandler(AbstractPeerToPeerMessageHand
     def execute(self):
         message = self.getPeerToPeerMessage()
         peer = self.getPeer()
+        
+        
         if peer.isJoined():  
             if not message.hasParameter("opportunity"):
+                return
+            
+            node = peer.getNode()
+        
+            disk = node.getNodeDevice(INode.DISK)
+            processor = node.getNodeDevice(INode.PROCESSOR)
+            memory = node.getNodeDevice(INode.MEMORY)
+            
+            if (disk.getFreeCapacity() / disk.getCapacity() <= 0.1) and (processor.getFreeCapacity() / processor.getCapacity() <= 0.1) and (memory.getFreeCapacity() / memory.getCapacity() <= 0.1):
                 return
             
             opportunity = message.getParameter("opportunity")

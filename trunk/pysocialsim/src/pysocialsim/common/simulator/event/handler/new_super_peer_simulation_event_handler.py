@@ -28,7 +28,7 @@ class NewSuperPeerSimulationEventHandler(AbstractSimulationEventHandler):
         
         event = self.getSimulationEvent()
         
-        if superPeer.join():
+        if superPeer.join(event.getPriority()):
             superPeer.setJoinTime(event.getPriority())
         
         return AbstractSimulationEventHandler.execute(self)

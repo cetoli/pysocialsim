@@ -44,7 +44,7 @@ class NewSimplePeerSimulationEventHandler(AbstractSimulationEventHandler):
         
         socialProfile = simplePeer.getSocialProfile()
         socialProfile.addInterest(interest)
-        if simplePeer.join():
+        if simplePeer.join(event.getPriority()):
             simplePeer.setJoinTime(event.getPriority())
         
         return AbstractSimulationEventHandler.execute(self)

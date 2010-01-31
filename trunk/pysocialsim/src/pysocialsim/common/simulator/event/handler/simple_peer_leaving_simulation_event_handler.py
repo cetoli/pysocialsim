@@ -20,7 +20,8 @@ class SimplePeerLeavingSimulationEventHandler(AbstractSimulationEventHandler):
     def execute(self):
         simulation = self.getSimulation()
         network = simulation.getPeerToPeerNetwork()
+        event = self.getSimulationEvent()
         simplePeer = network.getPeer(IPeerToPeerNetwork.SIMPLE_PEER, self.getSimulationEvent().getPeerId())
-        simplePeer.leave()
+        simplePeer.leave(event.getPriority())
         
         return AbstractSimulationEventHandler.execute(self)

@@ -6,10 +6,10 @@ from random import randint, uniform
 from pysocialsim.common.p2p.peer.profile.interest import Interest
 from pysocialsim.common.p2p.peer.context.interest_constraint import InterestConstraint
 from pysocialsim.common.p2p.peer.message.advertise_opportunity_peer_to_peer_message import AdvertiseOpportunityPeerToPeerMessage
-from pysocialsim.common.p2p.peer.context.opportunity import Opportunity
 from pysocialsim.common.p2p.peer.context.context_id_generator import ContextIdGenerator
 from pysocialsim.common.simulator.event.generator.push_opportunity_simulation_event import PushOpportunitySimulationEvent
 from pysocialsim.common.simulator.event.generator.end_opportunity_simulation_event import EndOpportunitySimulationEvent
+from pysocialsim.common.p2p.peer.context.opportunity.opportunity import Opportunity
 import math
 
 class StartOpportunitySimulationEventHandler(AbstractSimulationEventHandler):
@@ -67,6 +67,7 @@ class StartOpportunitySimulationEventHandler(AbstractSimulationEventHandler):
         times = int((joinTime + endOpportunityTime) / 3600)
         
         event = self.getSimulationEvent()
+        event.setPeerId(peer.getId())
         
         opportunity.setStartTime(event.getPriority())
         opportunity.setDurationTime(endOpportunityTime)

@@ -17,7 +17,8 @@ class SimplePeerJoiningSimulationEventHandler(AbstractSimulationEventHandler):
     def execute(self):
         simulation = self.getSimulation()
         network = simulation.getPeerToPeerNetwork()
+        event = self.getSimulationEvent()
         simplePeer = network.getPeer(IPeerToPeerNetwork.SIMPLE_PEER, self.getSimulationEvent().getPeerId())
-        simplePeer.join()
+        simplePeer.join(event.getPriority())
         
         return AbstractSimulationEventHandler.execute(self)

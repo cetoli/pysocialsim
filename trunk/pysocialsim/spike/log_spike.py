@@ -6,13 +6,6 @@ Defines the module with objective.
 @contact: fbarros@gmail.com 
 @since: 20/09/2009
 """
-import cmath
+import math
 
-dic = {}
-
-dic["superpeer:id:1"] = 1
-dic["superpeer:id:2"] = 10
-dic["superpeer:id:111"] = 1
-dic["superpeer:id:20"] = 10
-
-print dic
+math.log(5, 1)

@@ -56,7 +56,7 @@ class IPeer(object):
     def leaved(self):
         raise NotImplementedError()
     
-    def join(self):
+    def join(self, priority):
         raise NotImplementedError()
     
     def receive(self, peerToPeerMessage):
@@ -98,7 +98,7 @@ class IPeer(object):
     def route(self, peerToPeerMessage):
         raise NotImplementedError()
     
-    def leave(self):
+    def leave(self, priority):
         raise NotImplementedError()
     
     def getContextManager(self):
@@ -115,3 +115,27 @@ class IPeer(object):
     
     def getJoinTime(self):
         raise NotImplementedError()
+    
+    def shareHardware(self, priority, deviceType, sharedPercentage, opportunityId):
+        raise NotImplementedError()
+    
+    def getHarwareSharing(self, nodeDeviceType, sharingId):
+        raise NotImplementedError()
+    
+    def getSharedCapacity(self, nodeDeviceType):
+        raise NotImplementedError()
+    
+    def getFreeSharedCapacity(self, nodeDeviceType):
+        raise NotImplementedError()
+    
+    def getNodeDeviceCapacity(self, nodeDeviceType):
+        raise NotImplementedError()
+    
+    def getNodedeviceFreeCapacity(self, nodeDeviceType):
+        raise NotImplementedError()
+    
+    def shareContent(self, priority, content, opportunityId):
+        raise NotImplementedError()
+    
+    def shareApplication(self, priority, application, opportunityId):
+        raise NotImplementedError()    

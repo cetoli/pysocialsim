@@ -33,7 +33,11 @@ class CreateSocialNetworkPeerToPeerMessageHandler(AbstractPeerToPeerMessageHandl
                 neighborNumber = socialNetwork.countSocialNetworkMembers()
                 if neighborNumber > 0:
                     minPercentage = 0.25
-                    copyNumber = (minPercentage * neighborNumber) + math.log(opportunity.getVersion(), (minPercentage * neighborNumber))
+                    
+                    if (minPercentage * float(neighborNumber))  == 1:
+                        return 
+                    
+                    copyNumber = (minPercentage * float(neighborNumber)) + math.log(float(opportunity.getVersion()), (minPercentage * float(neighborNumber)))
                     
                     if round(copyNumber) >= 1:
                         neighbors = peer.getNeighbors()

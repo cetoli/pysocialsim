@@ -29,6 +29,7 @@ from pysocialsim.common.simulator.event.handler.new_simple_peer_simulation_event
 from pysocialsim.common.simulator.event.handler.simple_peer_leaving_simulation_event_handler import SimplePeerLeavingSimulationEventHandler
 from pysocialsim.common.simulator.event.generator.simple_peer_joining_simulation_event_generator import SimplePeerJoiningSimulationEventGenerator
 from pysocialsim.common.simulator.event.handler.simple_peer_joining_simulation_event_handler import SimplePeerJoiningSimulationEventHandler
+from pysocialsim.common.p2p.peer.event.share_hardware_simulation_event_handler import ShareHardwareSimulationEventHandler
 
 class SimulationSpike(AbstractSimulation):
     
@@ -45,6 +46,7 @@ simulator.registerSimulationEventHandler(EndOpportunitySimulationEventHandler())
 simulator.registerSimulationEventHandler(PushOpportunitySimulationEventHandler())
 simulator.registerSimulationEventHandler(SimplePeerLeavingSimulationEventHandler())
 simulator.registerSimulationEventHandler(SimplePeerJoiningSimulationEventHandler())
+simulator.registerSimulationEventHandler(ShareHardwareSimulationEventHandler())
 simulator.registerSimulationEventHandler(EndSimulationEventHandler())
 simulation = SimulationSpike()
 network = PeerToPeerNetwork(simulation)
@@ -56,10 +58,34 @@ network.setConnectionsBetweenSimplePeerAndSuperPeers(1)
 network.setLinkAvailability(50.0)
 
 network.setSuperPeerLink(1000000000)
+network.setSimplePeerLink(1000000)
+
+network.registerSizeOfMemory(4294967296)
+network.registerSizeOfMemory(3221225472)
+network.registerSizeOfMemory(2147483648)
+network.registerSizeOfMemory(1073741824)
+
+network.setMemoryAvailability(70.0)
+
+network.registerSizeOfDisk(343597383680)
+network.registerSizeOfDisk(268435456000)
+network.registerSizeOfDisk(171798691840)
+network.registerSizeOfDisk(128849018880)
+
+network.setDiskAvailability(70.0)
+
+network.registerProcessorClock(5000000000)
+network.registerProcessorClock(4000000000)
+network.registerProcessorClock(3000000000)
+network.registerProcessorClock(2000000000)
+
+network.setDiskAvailability(90.0)
+
 
 protocol = GnutellaSuperPeerProtocol()
 protocol.setPingHops(6)
 protocol.setPongHops(6)
+protocol.setPushHops(6)
 
 topology = PeerToPeerTopology()
 topology.setPeerToPeerNetwork(network)
@@ -74,18 +100,18 @@ protocol.setPushHops(6)
 protocol.setPeerToPeerTopology(topology)
 network.registerPeerToPeerProtocol(IPeerToPeerNetwork.SIMPLE_PEER, protocol)
 
+
 simulation.setPeerToPeerNetwork(network)
 simulator.setSimulation(simulation)
 simulation.setSimulationTime(2592000)
 
 simulation.addSimulationEventGenerator(BeginSimulationEventGenerator())
-simulation.addSimulationEventGenerator(NewSuperPeerSimulationEventGenerator(5.5, 3000, 10))
-simulation.addSimulationEventGenerator(NewSimplePeerSimulationEventGenerator(5.5, 500, 100))
-simulation.addSimulationEventGenerator(SimplePeerLeavingSimulationEventGenerator(1.5618, 6.0013, 100))
+simulation.addSimulationEventGenerator(NewSuperPeerSimulationEventGenerator(5.5, 5000, 34))
+simulation.addSimulationEventGenerator(NewSimplePeerSimulationEventGenerator(5.5, 500, 1000))
+#simulation.addSimulationEventGenerator(SimplePeerLeavingSimulationEventGenerator(1.5618, 6.0013, 100))
 simulation.addSimulationEventGenerator(StartOpportunitySimulationventGenerator(0.5, 600, 300))
-
-simulation.addSimulationEventGenerator(SimplePeerJoiningSimulationEventGenerator(1.8, 900.0, 100))
-simulation.addSimulationEventGenerator(SimplePeerLeavingSimulationEventGenerator(1.5618, 6.0013, 100))
+#simulation.addSimulationEventGenerator(SimplePeerJoiningSimulationEventGenerator(1.8, 900.0, 100))
+#simulation.addSimulationEventGenerator(SimplePeerLeavingSimulationEventGenerator(1.5618, 6.0013, 100))
 
 simulation.addSimulationEventGenerator(EndSimulationEventGenerator())
 

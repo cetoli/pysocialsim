@@ -39,6 +39,13 @@ class AbstractPeerToPeerNetwork(Object, IPeerToPeerNetwork):
         self.__connectionsBetweenSimplePeerAndSuperPeers = 0
         self.__linkAvailability = 0
         self.__superPeerLink = 0
+        self.__simplePeerLink = 0
+        self.__sizesOfDisk = []
+        self.__sizesOfMemory = []
+        self.__diskAvailability = 0
+        self.__memoryAvailability = 0
+        self.__processorAvailability = 0
+        self.__processorClocks = []
     
     @public
     def getSimulation(self):
@@ -212,6 +219,111 @@ class AbstractPeerToPeerNetwork(Object, IPeerToPeerNetwork):
         self.__superPeerLink = superPeerLink
         return self.__superPeerLink
     
+    @public
+    def setSimplePeerLink(self, simplePeerLink):
+        self.__simplePeerLink = simplePeerLink
+        return self.__simplePeerLink
+
+    
+    @public
+    def getSimplePeerLink(self):
+        return self.__simplePeerLink
+
+    
+    @public
+    def registerSizeOfDisk(self, sizeOfDisk):
+        if sizeOfDisk in self.__sizesOfDisk:
+            return False
+        self.__sizesOfDisk.append(sizeOfDisk)
+        return sizeOfDisk in self.__sizesOfDisk
+
+    
+    @public
+    def unregisterSizeDisk(self, sizeOfDisk):
+        if not sizeOfDisk in self.__sizesOfDisk:
+            return False
+        self.__sizesOfDisk.remove(sizeOfDisk)
+        return not sizeOfDisk in self.__sizesOfDisk
+
+    @public
+    def getSizesOfDisk(self):
+        return [] + self.__sizesOfDisk
+
+    @public
+    def countSizesOfDisk(self):
+        return len(self.__sizesOfDisk)
+
+    @public
+    def setDiskAvailability(self, availability):
+        self.__diskAvailability = availability
+        return self.__diskAvailability
+
+    @public
+    def getDiskAvailability(self):
+        return self.__diskAvailability
+
+    @public
+    def setMemoryAvailability(self, availability):
+        self.__memoryAvailability = availability
+        return self.__memoryAvailability
+
+    @public
+    def getMemoryAvailability(self):
+        return self.__memoryAvailability
+
+    @public
+    def registerSizeOfMemory(self, sizeOfMemory):
+        if sizeOfMemory in self.__sizesOfMemory:
+            return False
+        self.__sizesOfMemory.append(sizeOfMemory)
+        return sizeOfMemory in self.__sizesOfMemory
+
+    @public
+    def unregisterSizeMemory(self, sizeOfMemory):
+        if not sizeOfMemory in self.__sizesOfMemory:
+            return False
+        self.__sizesOfMemory.remove(sizeOfMemory)
+        return not sizeOfMemory in self.__sizesOfMemory
+    
+    @public
+    def getSizesOfMemory(self):
+        return [] + self.__sizesOfMemory
+
+    @public
+    def countSizesOfMemory(self):
+        return len(self.__sizesOfMemory)
+    
+    @public
+    def registerProcessorClock(self, clock):
+        if clock in self.__processorClocks:
+            return False
+        self.__processorClocks.append(clock)
+        return clock in self.__processorClocks
+
+    @public
+    def unregisterProcessorClock(self, clock):
+        if not clock in self.__processorClocks:
+            return False
+        self.__processorClocks.remove(clock)
+        return not clock in self.__processorClocks
+
+    @public
+    def getProcessorClocks(self):
+        return [] + self.__processorClocks
+
+    @public
+    def countProcessorClocks(self):
+        return len(self.__processorClocks)
+    
+    @public
+    def setProcessorAvailability(self, availability):
+        self.__processorAvailability = availability
+        return self.__processorAvailability
+
+    @public
+    def getProcessorAvailability(self):
+        return self.__processorAvailability
+    
     
     simulation = property(getSimulation, setSimulation, None, None)
 
@@ -224,4 +336,3 @@ class AbstractPeerToPeerNetwork(Object, IPeerToPeerNetwork):
     linkAvailability = property(getLinkAvailability, setLinkAvailability, None, None)
 
     superPeerLink = property(getSuperPeerLink, setSuperPeerLink, None, None)
-

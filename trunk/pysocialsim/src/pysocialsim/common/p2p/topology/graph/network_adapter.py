@@ -56,11 +56,11 @@ class NetworkAdapter(AbstractNodeDevice):
 
     @public
     def getUsedCapacity(self):
-        pass
+        return self.getCapacity()
 
     @public
     def getFreeCapacity(self):
-        pass
+        return (1 - self.getCapacity())
 
     
     

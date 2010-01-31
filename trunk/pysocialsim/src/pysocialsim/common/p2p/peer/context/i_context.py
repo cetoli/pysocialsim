@@ -9,8 +9,10 @@ Defines the module with the specification of IContext interface.
 
 class IContext(object):
     
-    INTEREST = "INTEREST"
     OPPORTUNITY = "OPPORTUNITY"
+    HARDWARE_SHARING = "HARDWARE_SHARING"
+    CONTENT_SHARING = "CONTENT_SHARING"
+    
     
 
     def __init__(self):

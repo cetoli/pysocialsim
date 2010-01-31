@@ -12,6 +12,7 @@ class INode(object):
     PROCESSOR = 0
     DISK = 1
     NETWORK_ADAPTER = 2
+    MEMORY = 3
     
     def __init__(self):
         raise NotImplementedError()

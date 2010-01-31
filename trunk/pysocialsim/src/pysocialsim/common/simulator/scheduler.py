@@ -45,7 +45,7 @@ class Scheduler(Object):
         
         self.__simulator = simulator
         self.__peerTimes = {IPeerToPeerNetwork.SUPER_PEER: {}, IPeerToPeerNetwork.SIMPLE_PEER: {}}
-        self.__contextTimes = {IContext.INTEREST: {}}
+        self.__contextTimes = {}
     
     @public
     def registerTimeForPeer(self, peerType, peerId, time):

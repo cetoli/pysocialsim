@@ -18,7 +18,10 @@ from pysocialsim.common.p2p.peer.i_peer import IPeer
 from pysocialsim.common.p2p.peer.neighbor import Neighbor
 from pysocialsim.common.p2p.topology.graph.network_adapter import NetworkAdapter
 from pysocialsim.common.p2p.network.i_peer_to_peer_network import IPeerToPeerNetwork
-from random import uniform
+from random import uniform, randint
+from pysocialsim.common.p2p.topology.graph.hard_disk import HardDisk
+from pysocialsim.common.p2p.topology.graph.processor import Processor
+from pysocialsim.common.p2p.topology.graph.memory import Memory
 
 class Node(Object, INode):
     """
@@ -211,7 +214,24 @@ class Node(Object, INode):
         if peer.getType() == IPeerToPeerNetwork.SUPER_PEER:
             self.addNodeDevice(NetworkAdapter(uniform(0.01, network.getLinkAvailability()/100.0), network.getSuperPeerLink(), network.getSuperPeerLink()))
         elif peer.getType() == IPeerToPeerNetwork.SIMPLE_PEER:
-            self.addNodeDevice(NetworkAdapter(uniform(0.01, network.getLinkAvailability()/100.0), 1000000, 1000000))
+            self.addNodeDevice(NetworkAdapter(uniform(0.01, network.getLinkAvailability()/100.0), network.getSimplePeerLink(), network.getSimplePeerLink()))
+            
+            diskSizes = network.getSizesOfDisk()
+            diskSize = diskSizes[randint(0, len(diskSizes) - 1)]
+            hardDisk = HardDisk(int(diskSize * uniform(0.1, network.getDiskAvailability() / 100.0)))
+            self.addNodeDevice(hardDisk)
+            
+            clockProcessors = network.getProcessorClocks()
+            clockProcessor = clockProcessors[randint(0, len(clockProcessors) - 1)]
+            processor = Processor(clockProcessor)
+            self.addNodeDevice(processor)
+            
+            memories = network.getSizesOfMemory()
+            memorySize = memories[randint(0, len(memories) - 1)]
+            memory = Memory(memorySize)
+            self.addNodeDevice(memory)
+            
+            print "PEER", clockProcessor, memorySize, diskSize
         
         return returns(self.__peer, IPeer)
     

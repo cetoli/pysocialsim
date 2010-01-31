@@ -201,3 +201,65 @@ class IPeerToPeerNetwork(object):
     
     def getSuperPeerLink(self):
         raise NotImplementedError()
+    
+    def setSimplePeerLink(self, simplePeerLink):
+        raise NotImplementedError()
+    
+    def getSimplePeerLink(self):
+        raise NotImplementedError()
+    
+    def registerSizeOfDisk(self, sizeOfDisk):
+        raise NotImplementedError()
+    
+    def unregisterSizeDisk(self, sizeOfDisk):
+        raise NotImplementedError()
+    
+    def getSizesOfDisk(self):
+        raise NotImplementedError()
+    
+    def countSizesOfDisk(self):
+        raise NotImplementedError()
+    
+    def setDiskAvailability(self, availability):
+        raise NotImplementedError()
+    
+    def getDiskAvailability(self):
+        raise NotImplementedError()
+    
+    def setMemoryAvailability(self, availability):
+        raise NotImplementedError()
+    
+    def getMemoryAvailability(self):
+        raise NotImplementedError()
+    
+    def registerSizeOfMemory(self, sizeOfMemory):
+        raise NotImplementedError()
+    
+    def unregisterSizeMemory(self, sizeOfMemory):
+        raise NotImplementedError()
+    
+    def getSizesOfMemory(self):
+        raise NotImplementedError()
+    
+    def countSizesOfMemory(self):
+        raise NotImplementedError()
+    
+    def registerProcessorClock(self, clock):
+        raise NotImplementedError()
+    
+    def unregisterProcessorClock(self, clock):
+        raise NotImplementedError()
+    
+    def getProcessorClocks(self):
+        raise NotImplementedError()
+    
+    def countProcessorClocks(self):
+        raise NotImplementedError()
+    
+    def setProcessorAvailability(self, availability):
+        raise NotImplementedError()
+    
+    def getProcessorAvailability(self):
+        raise NotImplementedError()
+    
+    

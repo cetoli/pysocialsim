@@ -40,6 +40,8 @@ class UpdateSocialNetworkPeerToPeerMessageHandler(AbstractPeerToPeerMessageHandl
                 neighborNumber = socialNetwork.countSocialNetworkMembers()
                 if neighborNumber > 0:
                     minPercentage = 0.25
+                    if (minPercentage * float(neighborNumber))  == 1:
+                        return 
                     copyNumber = (minPercentage * neighborNumber) + math.log(opportunity.getVersion(), (minPercentage * neighborNumber))
                     
                     if round(copyNumber) >= 1:

@@ -8,7 +8,6 @@ Defines the module with the implementation of SimplePeer class.
 """
 from pysocialsim.common.p2p.peer.abstract_peer import AbstractPeer
 from pysocialsim.common.p2p.network.i_peer_to_peer_network import IPeerToPeerNetwork
-from pysocialsim.common.base.decorators import public
 from pysocialsim.common.p2p.peer.message.simplepeer.advertise_opportunity_peer_to_peer_message_handler import AdvertiseOpportunityPeerToPeerMessageHandler
 from pysocialsim.common.p2p.peer.message.simplepeer.compose_social_network_peer_to_peer_message_handler import ComposeSocialNetworkPeerToPeerMessageHandler
 from pysocialsim.common.p2p.peer.message.simplepeer.acknowledge_compose_social_network_peer_to_peer_message_handler import AcknowledgeComposeSocialNetworkPeerToPeerMessageHandler
@@ -33,9 +32,3 @@ class SimplePeer(AbstractPeer):
         dispatcher.registerPeerToPeerMessageHandler(ComposeSocialNetworkPeerToPeerMessageHandler())
         dispatcher.registerPeerToPeerMessageHandler(AcknowledgeComposeSocialNetworkPeerToPeerMessageHandler())
         dispatcher.registerPeerToPeerMessageHandler(ReplicateSocialNetworkPeerToPeerMessageHandler())
-    
-    @public
-    def join(self):
-        return AbstractPeer.join(self)
-
-        

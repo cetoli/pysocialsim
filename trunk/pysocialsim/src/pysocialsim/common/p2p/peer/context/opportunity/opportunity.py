@@ -1,8 +1,8 @@
 from pysocialsim.common.p2p.peer.context.abstract_context import AbstractContext
-from pysocialsim.common.p2p.peer.context.i_opportunity import IOpportunity
 from pysocialsim.common.p2p.peer.context.i_context import IContext
 from pysocialsim.common.base.decorators import public
-from pysocialsim.common.p2p.peer.context.social_network import SocialNetwork
+from pysocialsim.common.p2p.peer.context.opportunity.social_network import SocialNetwork
+from pysocialsim.common.p2p.peer.context.opportunity.i_opportunity import IOpportunity
 
 class Opportunity(AbstractContext, IOpportunity):
     

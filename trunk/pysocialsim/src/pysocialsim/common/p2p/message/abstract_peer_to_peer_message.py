@@ -178,7 +178,7 @@ class AbstractPeertoPeerMessage(Object, IPeerToPeerMessage):
     
     @public
     def getSize(self):
-        return self.__size + len(zlib.compress(pickle.dumps(self.__parameters.__str__())))
+        return self.__size
     
     @public
     def hasParameter(self, name):

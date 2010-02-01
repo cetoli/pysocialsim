@@ -25,6 +25,7 @@ from pysocialsim.common.p2p.peer.sharing.disk_sharing import DiskSharing
 from pysocialsim.common.p2p.peer.sharing.HardwareSharingIdGenerator import HardwareSharingIdGenerator
 from pysocialsim.common.p2p.peer.sharing.memory_sharing import MemorySharing
 from pysocialsim.common.p2p.peer.sharing.processor_sharing import ProcessorSharing
+from pysocialsim.common.p2p.peer.message.share_hardware_peer_to_peer_message import ShareHardwarePeerToPeerMessage
 
 class AbstractPeer(Object, IPeer):
     """
@@ -256,6 +257,15 @@ class AbstractPeer(Object, IPeer):
         
         sharings = self.__hardwareSharings[deviceType]
         sharings[hardwareSharing.getId()] = hardwareSharing
+        
+        if self.countNeighbors() > 0:
+            for neighbor in self.__neighbors.values():
+                shareMessage = ShareHardwarePeerToPeerMessage()
+                shareMessage.init(PeerToPeerMessageIdGenerator.generatePeerToPeerMessageId(self), self.__id, neighbor.getId(), self.__peerToPeerProtocol.getPushHops(), priority, 512, 0)
+                context = hardwareSharing.getContext()
+                shareMessage.registerParameter("hardwareSharingContext", context)
+                shareMessage.registerParameter("opportunityId", opportunityId)
+                self.send(shareMessage)
         
         sem.release()
         

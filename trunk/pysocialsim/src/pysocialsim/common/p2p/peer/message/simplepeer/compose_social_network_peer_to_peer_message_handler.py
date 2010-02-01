@@ -69,7 +69,7 @@ class ComposeSocialNetworkPeerToPeerMessageHandler(AbstractPeerToPeerMessageHand
                                 simulation.registerSimulationEvent(shareDiskEvent)
                             else:
                                 print "ACABOU DISK", peer.getId()
-            #                
+            
                             if float(peer.getSharedCapacity(INode.PROCESSOR)) / float(peer.getNodeDeviceCapacity(INode.PROCESSOR)) < 1.0:
                                 shareProcessorEvent = ShareHardwareSimulationEvent(peer.getId(), message.getPriority() + 10)
                                 shareProcessorEvent.registerParameter("deviceType", INode.PROCESSOR)
@@ -85,9 +85,7 @@ class ComposeSocialNetworkPeerToPeerMessageHandler(AbstractPeerToPeerMessageHand
                                 simulation.registerSimulationEvent(shareMemoryEvent)
                             else:
                                 print "ACABOU MEMORY", peer.getId()
-#                            
-#                           
-                            
+
                     elif opportunity.getVersion() > 2 and socialNetwork.countSocialNetworkMembers() > 2:
                         if peer.countNeighbors() > 0:
                             neighbors = peer.getNeighbors()

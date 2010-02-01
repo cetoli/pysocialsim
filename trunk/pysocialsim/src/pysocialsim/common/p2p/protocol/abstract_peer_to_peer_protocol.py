@@ -153,6 +153,21 @@ class AbstractPeerToPeerProtocol(Object, IPeerToPeerProtocol):
         
         def __init__(self):
             AbstractPeertoPeerMessage.initialize(self, IPeerToPeerMessage.SYSTEM, IPeerToPeerProtocol.ROUTE, 512)
+            
+        @public
+        def registerPeerId(self, peerId):
+            if self.hasParameter("peerToPeerMessage"):
+                message = self.getParameter("peerToPeerMessage")
+                message.registerPeerId(peerId)
+            return AbstractPeertoPeerMessage.registerPeerId(self, peerId)
+
+        @public
+        def unregisterPeerId(self, peerId):
+            if self.hasParameter("peerToPeerMessage"):
+                message = self.getParameter("peerToPeerMessage")
+                message.unregisterPeerId(peerId)
+            return AbstractPeertoPeerMessage.unregisterPeerId(self, peerId)
+
         
         @public
         def init(self, id, sourceId, targetId, ttl, priority, size, time):
@@ -232,6 +247,21 @@ class AbstractPeerToPeerProtocol(Object, IPeerToPeerProtocol):
                 cln.unregisterParameter("peerToPeerMessage")
                 cln.registerParameter("peerToPeerMessage", cloneMsg)
             return cln
+        
+        @public
+        def registerPeerId(self, peerId):
+            if self.hasParameter("peerToPeerMessage"):
+                message = self.getParameter("peerToPeerMessage")
+                message.registerPeerId(peerId)
+            return AbstractPeertoPeerMessage.registerPeerId(self, peerId)
+
+        @public
+        def unregisterPeerId(self, peerId):
+            if self.hasParameter("peerToPeerMessage"):
+                message = self.getParameter("peerToPeerMessage")
+                message.unregisterPeerId(peerId)
+            return AbstractPeertoPeerMessage.unregisterPeerId(self, peerId)
+        
                 
     pingHops = property(getPingHops, setPingHops, None, None)
 

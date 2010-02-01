@@ -137,11 +137,11 @@ class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
         network = peer.getPeerToPeerNetwork()
         
         if peerToPeerMessage.getHandle() == IPeerToPeerProtocol.ROUTE:
-            if peerToPeerMessage.getHop() < peerToPeerMessage.getTTL():
+            if peerToPeerMessage.countPeerIds() < peerToPeerMessage.getTTL():
                 peerToPeerMessage.unregisterPeerId(peer.getId())
                 peerId = peerToPeerMessage.getLast()
                 message = peerToPeerMessage.clone()
-                message.setHop(message.getHop() + 1)
+                message.setHop(peerToPeerMessage.getHop())
                 message.init(message.getId(), peer.getId(), peerId, message.getTTL(), message.getPriority(), message.getSize(), message.getTime())
                 
                 if message.hasParameter("backTrace"):
@@ -262,6 +262,7 @@ class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
         
         def execute(self):
             message = self.getPeerToPeerMessage()
+            message.setHop(message.getHop() + 1)
             
             peer = self.getPeer()
             
@@ -310,7 +311,7 @@ class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
                         continue
                     msgClone = message.clone()
                     msgClone.init(message.getId(), peer.getId(), neighbor.getId(), message.getTTL(), message.getPriority(), message.getSize(), message.getTime())
-                    msgClone.setHop(message.getHop() + 1)
+                    msgClone.setHop(message.getHop())
                     msgClone.registerPeerId(peer.getId())
                     try:
                         neighbor.dispatchData(msgClone)
@@ -383,6 +384,7 @@ class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
             
         def execute(self):
             message = self.getPeerToPeerMessage()
+            message.setHop(message.getHop() + 1)
             peer = self.getPeer()
             
             if peer.getId() == message.getFirst():
@@ -413,8 +415,11 @@ class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
         
         def execute(self):
             message = self.getPeerToPeerMessage()
+            message.setHop(message.getHop() + 1)
             
             peer = self.getPeer()
+            print peer.getId(), message.getId(), message.getHop()
+            
             
             message.registerPeerId(peer.getId())
             
@@ -431,19 +436,19 @@ class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
                     route = Route(trace[0], trace, len(trace), 0)
                     neighbor.registerRoute(route)
             
-            if message.getHop() + 1 == message.getTTL():
+            if message.countPeerIds() + 1 == message.getTTL():
                 return
             
-            if message.getHop() < message.getTTL():
+            if message.countPeerIds() < message.getTTL():
                 neighbors = [n for n in peer.getNeighbors() if not message.hasPeerId(n.getId())]
                 
                 if len(neighbors) > 0:
                     neighbor = neighbors[randint(0, len(neighbors) - 1)]
                     cloneMsg = message.clone()
                     
-                    cloneMsg.setHop(cloneMsg.getHop() + 1)
                     cloneMsg.init(message.getId(), peer.getId(), neighbor.getId(), message.getTTL(), message.getPriority(), message.getSize(), message.getTime())
-                    
+                    cloneMsg.setHop(message.getHop())
+                    cloneMsg.registerPeerId(peer.getId())
                     try:
                         neighbor.dispatchData(cloneMsg)
                     except InvalidValueError:
@@ -458,9 +463,9 @@ class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
                     for child in children:
                         cloneMsg = message.clone()
                     
-                        cloneMsg.setHop(cloneMsg.getHop() + 1)
                         cloneMsg.init(message.getId(), peer.getId(), child.getId(), message.getTTL(), message.getPriority(), message.getSize(), message.getTime())
-                        
+                        cloneMsg.registerPeerId(peer.getId())
+                        cloneMsg.setHop(message.getHop())
                         try:
                             child.dispatchData(cloneMsg)
                         except InvalidValueError:

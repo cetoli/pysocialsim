@@ -19,6 +19,7 @@ class ShareHardwarePeerToPeerMessageHandler(AbstractPeerToPeerMessageHandler):
         if not peer.isJoined():
             message = self.getPeerToPeerMessage()
             contextManager = peer.getContextManager()
+            message.registerPeerId(peer.getId())
             if not contextManager.hasContext(IContext.OPPORTUNITY, message.getParameter("opportunityId")):
                 return 
             opportunity = contextManager.getParameter("opportunityId")

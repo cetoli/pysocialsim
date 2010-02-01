@@ -14,4 +14,7 @@ class AdvertiseOpportunityPeerToPeerMessageHandler(AbstractPeerToPeerMessageHand
         AbstractPeerToPeerMessageHandler.initialize(self, "ADVERTISE_OPPORTUNITY")
     
     def execute(self):
-        print "CUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU"
+        message = self.getPeerToPeerMessage()
+        peer = self.getPeer()
+        message.registerPeerId(peer.getId())
+        print self.getPeer().getId(), "CUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU"

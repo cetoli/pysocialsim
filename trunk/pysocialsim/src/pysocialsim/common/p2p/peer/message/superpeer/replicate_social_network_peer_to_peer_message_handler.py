@@ -20,6 +20,7 @@ class ReplicateSocialNetworkPeerToPeerMessageHandler(AbstractPeerToPeerMessageHa
             return
         
         message = self.getPeerToPeerMessage()
+        message.registerPeerId(peer.getId())
         if not message.hasParameter("opportunity"):
             return
         

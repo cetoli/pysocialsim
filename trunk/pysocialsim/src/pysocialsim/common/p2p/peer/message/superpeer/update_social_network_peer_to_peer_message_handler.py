@@ -22,6 +22,7 @@ class UpdateSocialNetworkPeerToPeerMessageHandler(AbstractPeerToPeerMessageHandl
         peer = self.getPeer()
         if not peer.isJoined():
             message = self.getPeerToPeerMessage()
+            message.registerPeerId(peer.getId())
             if message.hasParameter("opportunity"):
                 opportunity = message.getParameter("opportunity")
                 

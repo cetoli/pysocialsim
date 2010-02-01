@@ -24,6 +24,7 @@ class ComposeSocialNetworkPeerToPeerMessageHandler(AbstractPeerToPeerMessageHand
     def execute(self):
         message = self.getPeerToPeerMessage()
         peer = self.getPeer()
+        message.registerPeerId(peer.getId())
         network = peer.getPeerToPeerNetwork()
         simulation = network.getSimulation()
         if peer.isJoined():

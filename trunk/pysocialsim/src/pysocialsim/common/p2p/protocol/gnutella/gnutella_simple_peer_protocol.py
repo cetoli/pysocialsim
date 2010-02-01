@@ -19,7 +19,6 @@ from pysocialsim.common.p2p.peer.route import Route
 from pysocialsim.common.p2p.message.peer_to_peer_message_id_generator import PeerToPeerMessageIdGenerator
 from sets import ImmutableSet
 from pysocialsim.common.error.invalid_value_error import InvalidValueError
-import time
 
 class GnutellaSimplePeerProtocol(AbstractPeerToPeerProtocol):
     
@@ -37,6 +36,8 @@ class GnutellaSimplePeerProtocol(AbstractPeerToPeerProtocol):
         
     @public
     def push(self, peer, peerToPeerMessage):
+        if not peer.isJoined():
+            return peerToPeerMessage
         if peer.countNeighbors() > 0:
             sem = Semaphore()
             sem.acquire()
@@ -272,6 +273,7 @@ class GnutellaSimplePeerProtocol(AbstractPeerToPeerProtocol):
             if peer.isJoined():
                 message = self.getPeerToPeerMessage()
                 message.setHop(message.getHop() + 1)
+                message.registerPeerId(peer.getId())
                 
                 trace = message.getPeerIds()
                 

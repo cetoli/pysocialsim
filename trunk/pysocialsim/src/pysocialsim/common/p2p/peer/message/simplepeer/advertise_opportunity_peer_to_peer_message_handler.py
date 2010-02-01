@@ -20,6 +20,7 @@ class AdvertiseOpportunityPeerToPeerMessageHandler(AbstractPeerToPeerMessageHand
     def execute(self):
         message = self.getPeerToPeerMessage()
         peer = self.getPeer()
+        message.registerPeerId(peer.getId())
         
         
         if peer.isJoined():  

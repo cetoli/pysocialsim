@@ -9,7 +9,6 @@ Defines the module with the implementation of AbstractPeerToPeerMessage class.
 from pysocialsim.common.base.object import Object
 from pysocialsim.common.p2p.message.i_peer_to_peer_message import IPeerToPeerMessage
 from pysocialsim.common.base.decorators import public
-from copy import deepcopy, copy
 from pysocialsim.common.util.rotines import returns, requires, pre_condition
 import zlib
 import pickle

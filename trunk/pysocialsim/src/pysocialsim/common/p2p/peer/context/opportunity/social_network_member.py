@@ -62,3 +62,11 @@ class SocialNetworkMember(Object):
         del sharings[sharingId]
         return not sharings.has_key(sharingId)
     
+    @public
+    def getHardwareSharing(self, nodeDeviceType, sharingId):
+        if not self.__hardwareSharings[nodeDeviceType]:
+            return None
+        sharings = self.__hardwareSharings[nodeDeviceType]
+        if not sharings.has_key(sharingId):
+            return None
+        return sharings[sharingId]

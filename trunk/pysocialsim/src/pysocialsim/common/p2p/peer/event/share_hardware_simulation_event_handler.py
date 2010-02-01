@@ -25,10 +25,12 @@ class ShareHardwareSimulationEventHandler(AbstractSimulationEventHandler):
         sharedPercentage = 0
         
         if deviceType == INode.DISK:
-            sharedPercentage = uniform(0.01, 1.0)
+            sharedPercentage = uniform(0.01, 0.9)
         elif deviceType == INode.PROCESSOR:
-            sharedPercentage = uniform(0.01, 1.0)
+            sharedPercentage = uniform(0.01, 0.9)
         elif deviceType == INode.MEMORY:
-            sharedPercentage = uniform(0.01, 1.0)
+            sharedPercentage = uniform(0.01, 0.9)
         
         simplePeer.shareHardware(event.getPriority(), deviceType, sharedPercentage, event.getParameter("opportunityId"))
+        
+        return AbstractSimulationEventHandler.execute(self)

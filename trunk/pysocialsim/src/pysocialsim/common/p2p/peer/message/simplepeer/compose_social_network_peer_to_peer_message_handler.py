@@ -27,6 +27,11 @@ class ComposeSocialNetworkPeerToPeerMessageHandler(AbstractPeerToPeerMessageHand
         network = peer.getPeerToPeerNetwork()
         simulation = network.getSimulation()
         if peer.isJoined():
+            
+            if (float(peer.getSharedCapacity(INode.DISK)) / float(peer.getNodeDeviceCapacity(INode.DISK)) >= 1.0) and (float(peer.getSharedCapacity(INode.MEMORY)) / float(peer.getNodeDeviceCapacity(INode.MEMORY)) >= 1.0) and (float(peer.getSharedCapacity(INode.MEMORY)) / float(peer.getNodeDeviceCapacity(INode.MEMORY)) >= 1.0):
+                print "PAREI DE COMPARTILHAR", self.getHandle()
+                return
+            
             contextManager = peer.getContextManager()
             if message.hasParameter("opportunityId"):
                 if contextManager.hasContext(IContext.OPPORTUNITY, message.getParameter("opportunityId")):
@@ -45,7 +50,7 @@ class ComposeSocialNetworkPeerToPeerMessageHandler(AbstractPeerToPeerMessageHand
                     opportunity.setVersion(opportunity.getVersion() + 1)
                     opportunityClone = opportunity.clone()
                     
-                    if opportunity.getVersion() == 1 and socialNetwork.countSocialNetworkMembers() == 2:
+                    if opportunity.getVersion() == 2 and socialNetwork.countSocialNetworkMembers() == 2:
                         if peer.countNeighbors() > 0:
                             
                             neighbors = peer.getNeighbors()
@@ -55,7 +60,7 @@ class ComposeSocialNetworkPeerToPeerMessageHandler(AbstractPeerToPeerMessageHand
                                 createMessage.registerParameter("opportunity", opportunityClone)
                                 peer.send(createMessage)
 
-                            if float(peer.getSharedCapacity(INode.DISK)) / float(peer.getNodeDeviceCapacity(INode.DISK)) < 0.9:
+                            if float(peer.getSharedCapacity(INode.DISK)) / float(peer.getNodeDeviceCapacity(INode.DISK)) < 1.0:
                                 print "PERCENTAGE", float(peer.getSharedCapacity(INode.DISK)) / float(peer.getNodeDeviceCapacity(INode.DISK))
                                 shareDiskEvent = ShareHardwareSimulationEvent(peer.getId(), message.getPriority() + 5)
                                 shareDiskEvent.registerParameter("deviceType", INode.DISK)
@@ -64,7 +69,7 @@ class ComposeSocialNetworkPeerToPeerMessageHandler(AbstractPeerToPeerMessageHand
                             else:
                                 print "ACABOU DISK", peer.getId()
             #                
-                            if float(peer.getSharedCapacity(INode.PROCESSOR)) / float(peer.getNodeDeviceCapacity(INode.PROCESSOR)) < 0.9:
+                            if float(peer.getSharedCapacity(INode.PROCESSOR)) / float(peer.getNodeDeviceCapacity(INode.PROCESSOR)) < 1.0:
                                 shareProcessorEvent = ShareHardwareSimulationEvent(peer.getId(), message.getPriority() + 10)
                                 shareProcessorEvent.registerParameter("deviceType", INode.PROCESSOR)
                                 shareProcessorEvent.registerParameter("opportunityId", opportunity.getId())
@@ -72,7 +77,7 @@ class ComposeSocialNetworkPeerToPeerMessageHandler(AbstractPeerToPeerMessageHand
                             else:
                                 print "ACABOU PROCESSOR", peer.getId()
                             
-                            if float(peer.getSharedCapacity(INode.MEMORY)) / float(peer.getNodeDeviceCapacity(INode.MEMORY)) < 0.9:
+                            if float(peer.getSharedCapacity(INode.MEMORY)) / float(peer.getNodeDeviceCapacity(INode.MEMORY)) < 1.0:
                                 shareMemoryEvent = ShareHardwareSimulationEvent(peer.getId(), message.getPriority() + 15)
                                 shareMemoryEvent.registerParameter("deviceType", INode.MEMORY)
                                 shareMemoryEvent.registerParameter("opportunityId", opportunity.getId())
@@ -82,7 +87,7 @@ class ComposeSocialNetworkPeerToPeerMessageHandler(AbstractPeerToPeerMessageHand
 #                            
 #                           
                             
-                    elif opportunity.getVersion() > 1 and socialNetwork.countSocialNetworkMembers() > 2:
+                    elif opportunity.getVersion() > 2 and socialNetwork.countSocialNetworkMembers() > 2:
                         if peer.countNeighbors() > 0:
                             neighbors = peer.getNeighbors()
                             for neighbor in neighbors:

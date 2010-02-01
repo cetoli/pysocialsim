@@ -24,6 +24,11 @@ class AcknowledgeComposeSocialNetworkPeerToPeerMessageHandler(AbstractPeerToPeer
         network = peer.getPeerToPeerNetwork()
         simulation = network.getSimulation()
         if peer.isJoined():
+            
+            if (float(peer.getSharedCapacity(INode.DISK)) / float(peer.getNodeDeviceCapacity(INode.DISK)) >= 1.0) and (float(peer.getSharedCapacity(INode.MEMORY)) / float(peer.getNodeDeviceCapacity(INode.MEMORY)) >= 1.0) and (float(peer.getSharedCapacity(INode.MEMORY)) / float(peer.getNodeDeviceCapacity(INode.MEMORY)) >= 1.0):
+                print "PAREI DE COMPARTILHAR", self.getHandle()
+                return
+            
             message = self.getPeerToPeerMessage()
             if message.hasParameter("opportunity"):
                 opportunity = message.getParameter("opportunity")

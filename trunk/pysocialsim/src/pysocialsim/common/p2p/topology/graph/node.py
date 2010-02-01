@@ -223,15 +223,14 @@ class Node(Object, INode):
             
             clockProcessors = network.getProcessorClocks()
             clockProcessor = clockProcessors[randint(0, len(clockProcessors) - 1)]
-            processor = Processor(clockProcessor)
+            processor = Processor(int(clockProcessor * uniform(0.1, network.getProcessorAvailability() / 100.0)))
             self.addNodeDevice(processor)
             
             memories = network.getSizesOfMemory()
             memorySize = memories[randint(0, len(memories) - 1)]
-            memory = Memory(memorySize)
+            memory = Memory(int(memorySize * uniform(0.1, network.getMemoryAvailability() / 100.0)))
             self.addNodeDevice(memory)
             
-            print "PEER", clockProcessor, memorySize, diskSize
         
         return returns(self.__peer, IPeer)
     

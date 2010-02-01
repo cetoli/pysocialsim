@@ -8,6 +8,7 @@ Defines the module with objective.
 """
 from pysocialsim.common.base.object import Object
 from pysocialsim.common.base.decorators import public
+from pysocialsim.common.p2p.topology.graph.i_node import INode
 
 class SocialNetworkMember(Object):
     
@@ -17,6 +18,7 @@ class SocialNetworkMember(Object):
     def initialize(self, id):
         self.__id = id
         self.__socialNetwork = None
+        self.__hardwareSharings = {INode.DISK: {}, INode.MEMORY: {}, INode.PROCESSOR: {}}
     
     @public    
     def getId(self):
@@ -30,3 +32,33 @@ class SocialNetworkMember(Object):
     def setSocialNetwork(self, socialNetwork):
         self.__socialNetwork = socialNetwork
         return self.__socialNetwork
+    
+    @public
+    def registerHardwareSharing(self, nodeDeviceType, hardwareSharingContext):
+        if not self.__hardwareSharings[nodeDeviceType]:
+            return False
+        sharings = self.__hardwareSharings[nodeDeviceType]
+        if not sharings.has_key(hardwareSharingContext.getId()):
+            return False
+        sharings[hardwareSharingContext.getId()] = hardwareSharingContext
+        return sharings.has_key(hardwareSharingContext.getId())
+    
+    @public
+    def hasHardwareSharing(self, nodeDeviceType, sharingId):
+        if not self.__hardwareSharings[nodeDeviceType]:
+            return False
+        sharings = self.__hardwareSharings[nodeDeviceType]
+        if not sharings.has_key(sharingId):
+            return False
+        return self.__hardwareSharings.has_key(sharingId)
+    
+    @public
+    def unregisterHardwareSharing(self, nodeDeviceType, sharingId):
+        if not self.__hardwareSharings[nodeDeviceType]:
+            return False
+        sharings = self.__hardwareSharings[nodeDeviceType]
+        if not sharings.has_key(sharingId):
+            return False
+        del sharings[sharingId]
+        return not sharings.has_key(sharingId)
+    

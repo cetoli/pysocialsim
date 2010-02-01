@@ -234,7 +234,8 @@ class AbstractPeer(Object, IPeer):
     def shareHardware(self, priority, deviceType, sharedPercentage, opportunityId):
         if not self.isJoined():
             return None
-        
+        sem = Semaphore()
+        sem.acquire()
         contextManager = self.getContextManager()
         if not contextManager.hasContext(IContext.OPPORTUNITY, opportunityId):
             return None
@@ -256,7 +257,7 @@ class AbstractPeer(Object, IPeer):
         sharings = self.__hardwareSharings[deviceType]
         sharings[hardwareSharing.getId()] = hardwareSharing
         
-        print "PERCENTAGE", hardwareSharing.getCapacity() / nodeDevice.getCapacity(), sharedPercentage
+        sem.release()
         
         return hardwareSharing
     
@@ -283,7 +284,8 @@ class AbstractPeer(Object, IPeer):
     @public
     def getFreeSharedCapacity(self, nodeDeviceType):
         capacity = 0
-        
+        sem = Semaphore()
+        sem.acquire()
         if self.__hardwareSharings.has_key(nodeDeviceType):
             sharings = self.__hardwareSharings[nodeDeviceType]
             if len(sharings) > 0:
@@ -292,17 +294,23 @@ class AbstractPeer(Object, IPeer):
             else:
                 nodeDevice = self.__node.getNodeDevice(nodeDeviceType)
                 capacity = nodeDevice.getCapacity()
-                    
+        sem.release()           
         return capacity
     
     @public
     def getNodeDeviceCapacity(self, nodeDeviceType):
+        sem = Semaphore()
+        sem.acquire()
         nodeDevice = self.__node.getNodeDevice(nodeDeviceType)
+        sem.release()
         return nodeDevice.getCapacity()
     
     @public
     def getNodedeviceFreeCapacity(self, nodeDeviceType):
+        sem = Semaphore()
+        sem.acquire()
         nodeDevice = self.__node.getNodeDevice(nodeDeviceType)
+        sem.release()
         return nodeDevice.getFreeCapacity()
     
     id = property(getId, None, None, None)

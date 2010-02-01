@@ -12,14 +12,13 @@ class AbstractHardwareSharingContextInformation(AbstractContext, IHardwareSharin
     def __init__(self):
         raise NotImplementedError()
         
-    def initialize(self, id, nodeDeviceType, capacity, usedCapacity, freeCapacity, peerId, sharingId):
+    def initialize(self, id, nodeDeviceType, capacity, usedCapacity, freeCapacity, peerId):
         AbstractContext.initialize(self, IContext.HARDWARE_SHARING, id)
         self.__capacity = capacity
         self.__usedCapacity = usedCapacity
         self.__freeCapacity = freeCapacity
         self.__peerId = peerId
         self.__nodeDeviceType = nodeDeviceType
-        self.__sharingId = sharingId
         
     def getCapacity(self):
         return self.__capacity
@@ -36,5 +35,3 @@ class AbstractHardwareSharingContextInformation(AbstractContext, IHardwareSharin
     def getNodeDeviceType(self):
         return self.__nodeDeviceType
     
-    def getSharingId(self):
-        return self.__sharingId

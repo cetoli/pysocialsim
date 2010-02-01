@@ -70,3 +70,20 @@ class SocialNetworkMember(Object):
         if not sharings.has_key(sharingId):
             return None
         return sharings[sharingId]
+    
+    @public
+    def clone(self):
+        cln = SocialNetworkMember(self.__id)
+        disks = self.__hardwareSharings[INode.DISK]
+        for disk in disks.values():
+            cln.registerHardwareSharing(INode.DISK, disk)
+        
+        memories = self.__hardwareSharings[INode.MEMORY]
+        for memory in memories.values():
+            cln.registerHardwareSharing(INode.MEMORY, memory)
+            
+        processors = self.__hardwareSharings[INode.PROCESSOR]
+        for processor in processors.values():
+            cln.registerHardwareSharing(INode.PROCESSOR, processor)
+            
+        return cln

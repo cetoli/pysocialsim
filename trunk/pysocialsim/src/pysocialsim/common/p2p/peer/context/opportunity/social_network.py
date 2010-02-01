@@ -37,3 +37,16 @@ class SocialNetwork(Object):
     def getSocialNetworkMembers(self):
         return self.__members.values()
     
+    @public
+    def getSocialNetworkMember(self, peerId):
+        if not self.__members.has_key(peerId):
+            return None
+        return self.__members[peerId]
+    
+    @public
+    def clone(self):
+        cln = SocialNetwork(self.__opportunity)
+        for member in self.__members.values():
+            self.__members[member.getId()] = member.clone()
+        return cln
+    

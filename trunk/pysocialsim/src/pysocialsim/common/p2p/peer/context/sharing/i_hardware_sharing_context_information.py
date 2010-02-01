@@ -23,6 +23,3 @@ class IHardwareSharingContextInformation(object):
     
     def getNodeDeviceType(self):
         raise NotImplementedError()
-    
-    def getSharingId(self):
-        raise NotImplementedError()

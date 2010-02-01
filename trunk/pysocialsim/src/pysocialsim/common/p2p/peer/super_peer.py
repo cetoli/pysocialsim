@@ -13,6 +13,7 @@ from pysocialsim.common.p2p.peer.message.superpeer.advertise_opportunity_peer_to
 from pysocialsim.common.p2p.peer.message.superpeer.create_social_network_peer_to_peer_message_handler import CreateSocialNetworkPeerToPeerMessageHandler
 from pysocialsim.common.p2p.peer.message.superpeer.replicate_social_network_peer_to_peer_message_handler import ReplicateSocialNetworkPeerToPeerMessageHandler
 from pysocialsim.common.p2p.peer.message.superpeer.update_social_network_peer_to_peer_message_handler import UpdateSocialNetworkPeerToPeerMessageHandler
+from pysocialsim.common.p2p.peer.message.superpeer.share_hardware_peer_to_peer_message_handler import ShareHardwarePeerToPeerMessageHandler
 
 class SuperPeer(AbstractPeer):
 
@@ -26,6 +27,7 @@ class SuperPeer(AbstractPeer):
         dispatcher.registerPeerToPeerMessageHandler(CreateSocialNetworkPeerToPeerMessageHandler())
         dispatcher.registerPeerToPeerMessageHandler(ReplicateSocialNetworkPeerToPeerMessageHandler())
         dispatcher.registerPeerToPeerMessageHandler(UpdateSocialNetworkPeerToPeerMessageHandler())
+        dispatcher.registerPeerToPeerMessageHandler(ShareHardwarePeerToPeerMessageHandler())
         
 
     @public

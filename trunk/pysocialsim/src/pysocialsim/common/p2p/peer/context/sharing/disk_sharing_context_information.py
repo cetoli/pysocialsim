@@ -9,4 +9,4 @@ from pysocialsim.common.p2p.peer.context.sharing.abstract_hardware_sharing_conte
 class DiskSharingContextInformation(AbstractHardwareSharingContextInformation):
     
     def __init__(self, id, capacity, usedCapacity, freeCapacity, peerId):
-        self.initialize(id, INode.DISK, capacity, usedCapacity, freeCapacity, peerId)
+        AbstractHardwareSharingContextInformation.initialize(self, id, INode.DISK, capacity, usedCapacity, freeCapacity, peerId)

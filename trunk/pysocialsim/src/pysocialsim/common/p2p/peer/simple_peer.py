@@ -12,6 +12,7 @@ from pysocialsim.common.p2p.peer.message.simplepeer.advertise_opportunity_peer_t
 from pysocialsim.common.p2p.peer.message.simplepeer.compose_social_network_peer_to_peer_message_handler import ComposeSocialNetworkPeerToPeerMessageHandler
 from pysocialsim.common.p2p.peer.message.simplepeer.acknowledge_compose_social_network_peer_to_peer_message_handler import AcknowledgeComposeSocialNetworkPeerToPeerMessageHandler
 from pysocialsim.common.p2p.peer.message.simplepeer.replicate_social_network_peer_to_peer_message_handler import ReplicateSocialNetworkPeerToPeerMessageHandler
+from pysocialsim.common.p2p.peer.message.simplepeer.request_storage_agreement_peer_to_peer_message_handler import RequestStorageAgreementPeerToPeerMessageHandler
 
 class SimplePeer(AbstractPeer):
     """
@@ -32,3 +33,4 @@ class SimplePeer(AbstractPeer):
         dispatcher.registerPeerToPeerMessageHandler(ComposeSocialNetworkPeerToPeerMessageHandler())
         dispatcher.registerPeerToPeerMessageHandler(AcknowledgeComposeSocialNetworkPeerToPeerMessageHandler())
         dispatcher.registerPeerToPeerMessageHandler(ReplicateSocialNetworkPeerToPeerMessageHandler())
+        dispatcher.registerPeerToPeerMessageHandler(RequestStorageAgreementPeerToPeerMessageHandler())

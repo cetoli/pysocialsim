@@ -28,6 +28,7 @@ from pysocialsim.common.simulator.event.handler.new_simple_peer_simulation_event
 from pysocialsim.common.simulator.event.handler.simple_peer_leaving_simulation_event_handler import SimplePeerLeavingSimulationEventHandler
 from pysocialsim.common.simulator.event.handler.simple_peer_joining_simulation_event_handler import SimplePeerJoiningSimulationEventHandler
 from pysocialsim.common.p2p.peer.event.share_hardware_simulation_event_handler import ShareHardwareSimulationEventHandler
+from pysocialsim.common.p2p.peer.event.share_content_simulation_event_handler import ShareContentSimulationEventHandler
 
 class SimulationSpike(AbstractSimulation):
     
@@ -45,6 +46,7 @@ simulator.registerSimulationEventHandler(PushOpportunitySimulationEventHandler()
 simulator.registerSimulationEventHandler(SimplePeerLeavingSimulationEventHandler())
 simulator.registerSimulationEventHandler(SimplePeerJoiningSimulationEventHandler())
 simulator.registerSimulationEventHandler(ShareHardwareSimulationEventHandler())
+simulator.registerSimulationEventHandler(ShareContentSimulationEventHandler())
 simulator.registerSimulationEventHandler(EndSimulationEventHandler())
 simulation = SimulationSpike()
 network = PeerToPeerNetwork(simulation)

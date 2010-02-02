@@ -19,6 +19,7 @@ class SocialNetworkMember(Object):
         self.__id = id
         self.__socialNetwork = None
         self.__hardwareSharings = {INode.DISK: {}, INode.MEMORY: {}, INode.PROCESSOR: {}}
+        self.__active = True
     
     @public    
     def getId(self):
@@ -72,6 +73,13 @@ class SocialNetworkMember(Object):
         return sharings[sharingId]
     
     @public
+    def getHardwareSharings(self, nodeDeviceType):
+        if not self.__hardwareSharings[nodeDeviceType]:
+            return None
+        sharings = self.__hardwareSharings[nodeDeviceType]
+        return sharings.values()
+    
+    @public
     def clone(self):
         cln = SocialNetworkMember(self.__id)
         disks = self.__hardwareSharings[INode.DISK]
@@ -87,3 +95,15 @@ class SocialNetworkMember(Object):
             cln.registerHardwareSharing(INode.PROCESSOR, processor)
             
         return cln
+    
+    @public
+    def activate(self):
+        self.__active = True
+        
+    @public
+    def deactive(self):
+        self.__active = False
+        
+    @public
+    def isActive(self):
+        return self.__active == True

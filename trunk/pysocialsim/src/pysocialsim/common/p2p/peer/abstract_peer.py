@@ -22,10 +22,12 @@ from pysocialsim.common.p2p.peer.context.context_manager import ContextManager
 from pysocialsim.common.p2p.peer.profile.social_profile import SocialProfile
 from pysocialsim.common.p2p.peer.context.i_context import IContext
 from pysocialsim.common.p2p.peer.sharing.disk_sharing import DiskSharing
-from pysocialsim.common.p2p.peer.sharing.HardwareSharingIdGenerator import HardwareSharingIdGenerator
 from pysocialsim.common.p2p.peer.sharing.memory_sharing import MemorySharing
 from pysocialsim.common.p2p.peer.sharing.processor_sharing import ProcessorSharing
 from pysocialsim.common.p2p.peer.message.share_hardware_peer_to_peer_message import ShareHardwarePeerToPeerMessage
+from pysocialsim.common.p2p.peer.sharing.hardware_sharing_id_generator import HardwareSharingIdGenerator
+from pysocialsim.common.p2p.peer.event.share_content_simulation_event import ShareContentSimulationEvent
+from pysocialsim.common.p2p.peer.message.request_storage_agreement_peer_to_peer_message import RequestStorageAgreementPeerToPeerMessage
 
 class AbstractPeer(Object, IPeer):
     """
@@ -67,6 +69,7 @@ class AbstractPeer(Object, IPeer):
         self.__socialProfile = SocialProfile(self)
         self.__joinTime = 0
         self.__hardwareSharings = {INode.DISK: {}, INode.MEMORY: {}, INode.PROCESSOR: {}}
+        self.__contents = {}
     
     @public    
     def getId(self):
@@ -267,9 +270,36 @@ class AbstractPeer(Object, IPeer):
                 shareMessage.registerParameter("opportunityId", opportunityId)
                 self.send(shareMessage)
         
+        contentSharingEvent = ShareContentSimulationEvent(self.__id, priority + 60)
+        contentSharingEvent.registerParameter("opportunityId", opportunityId)
+        
+        simulation = self.__peerToPeerNetwork.getSimulation()
+        simulation.registerSimulationEvent(contentSharingEvent)
+        
         sem.release()
         
         return hardwareSharing
+    
+    @public
+    def shareContent(self, priority, content, opportunityId):
+        if self.__contents.has_key(content.getId()):
+            return None
+        
+        self.__contents[content.getId()] = content
+        
+        if not self.__contextManager.hasContext(IContext.OPPORTUNITY, opportunityId):
+            return None
+        
+        opportunity = self.__contextManager.getContext(IContext.OPPORTUNITY, opportunityId)
+        socialNetwork = opportunity.getSocialNetwork()
+        
+        for member in socialNetwork.getSocialNetworkMembers():
+            requestStorageAgreementMessage = RequestStorageAgreementPeerToPeerMessage()
+            requestStorageAgreementMessage.registerParameter("contentId", content.getId())
+            requestStorageAgreementMessage.registerParameter("contentSize", content.getSize())
+            requestStorageAgreementMessage.init(PeerToPeerMessageIdGenerator.generatePeerToPeerMessageId(self), self.__id, member.getId(), self.__peerToPeerProtocol.getPushHops(), priority, 512, 0)
+            
+            self.send(requestStorageAgreementMessage)
     
     @public
     def getHardwareSharing(self, nodeDeviceType, sharingId):
@@ -322,6 +352,34 @@ class AbstractPeer(Object, IPeer):
         nodeDevice = self.__node.getNodeDevice(nodeDeviceType)
         sem.release()
         return nodeDevice.getFreeCapacity()
+    
+    @public
+    def addContent(self, content):
+        if self.__contents.has_key(content.getId()):
+            return False
+        self.__contents[content.getId()] = content
+        return self.__contents.has_key(content.getId())
+    
+    @public
+    def removeContent(self, contentId):
+        if not self.__contents.has_key(contentId):
+            return False
+        del self.__contents[contentId]
+        return not self.__contents.has_key(contentId)
+    
+    @public
+    def getContent(self, contentId):
+        if not self.__contents.has_key(contentId):
+            return None
+        return self.__contents[contentId]
+    
+    @public
+    def countContents(self):
+        return len(self.__contents)
+    
+    @public
+    def getContents(self):
+        return self.__contents.values()
     
     id = property(getId, None, None, None)
 

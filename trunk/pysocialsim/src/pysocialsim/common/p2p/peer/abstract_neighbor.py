@@ -58,6 +58,9 @@ class AbstractNeighbor(Object, INeighbor):
         sem = Semaphore()
         sem.acquire()
         
+        if route.getCost() <= 1:
+            return False
+        
         if not self.__routes.has_key(route.getPeerId()):
             self.__routes[route.getPeerId()] = []
         

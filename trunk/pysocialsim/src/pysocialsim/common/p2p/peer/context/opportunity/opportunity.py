@@ -94,7 +94,10 @@ class Opportunity(AbstractContext, IOpportunity):
         
         socialNetwork = cln.getSocialNetwork()
         for member in self.__socialNetwork.getSocialNetworkMembers():
-            socialNetwork.addSocialNetworkMember(member.clone())
+            memberClone = member.clone()
+            if not member.isActive():
+                member.deactive()
+            socialNetwork.addSocialNetworkMember(memberClone)
         
         return cln
     

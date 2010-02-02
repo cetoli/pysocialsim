@@ -149,6 +149,10 @@ class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
                     message.unregisterParameter("backTrace")
                     message.registerParameter("backTrace", newBackTrace)
                     
+                if message.hasParameter("peerToPeerMessage"):
+                    msg = message.getParameter("peerToPeerMessage")
+                    msg.registerPeerId(peerId)
+                    
                 if peer.hasNeighbor(peerId):
                     peer.send(message)
                 else:
@@ -203,6 +207,7 @@ class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
                 message = self.createPeerToPeerMessage(IPeerToPeerProtocol.ROUTE)
                 message.init(peerToPeerMessage.getId(), peer.getId(), neighbor.getId(), route.getCost(), peerToPeerMessage.getPriority(), peerToPeerMessage.getSize(), peerToPeerMessage.getTime())
                 message.registerParameter("peerToPeerMessage", peerToPeerMessage)
+                peerToPeerMessage.registerPeerId(peer.getId())
                 trace.remove(trace[len(trace) - 1])
                 for id in trace:
                     message.registerPeerId(id)
@@ -388,6 +393,7 @@ class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
             
             if peer.getId() == message.getFirst():
                 peerToPeerMessage = message.getParameter("peerToPeerMessage")
+                peerToPeerMessage.registerPeerId(peer.getId())
                 dispatcher = peer.getPeerToPeerMessageDispatcher()
                 dispatcher.registerPeerToPeerMessage(peerToPeerMessage)
             else:

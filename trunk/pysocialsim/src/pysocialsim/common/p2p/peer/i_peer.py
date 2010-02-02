@@ -139,3 +139,18 @@ class IPeer(object):
     
     def shareApplication(self, priority, application, opportunityId):
         raise NotImplementedError()    
+    
+    def addContent(self, content):
+        raise NotImplementedError()
+    
+    def removeContent(self, contentId):
+        raise NotImplementedError()
+    
+    def getContent(self, contentId):
+        raise NotImplementedError()
+    
+    def countContents(self):
+        raise NotImplementedError()
+    
+    def getContents(self):
+        raise NotImplementedError()

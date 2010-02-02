@@ -58,21 +58,17 @@ class StartOpportunitySimulationEventHandler(AbstractSimulationEventHandler):
         
         peer.push(opportunityMessage)
         
-        initialTime = scheduler.getTimeForPeer(IPeerToPeerNetwork.SIMPLE_PEER, peer.getId())
-        
-        joinTime = peer.getJoinTime()
-        
         endOpportunityTime = (1.5618*pow((-math.log(uniform(0,1))), 1/6.0013)) * 3600
-        
-        times = int((joinTime + endOpportunityTime) / 3600)
         
         event = self.getSimulationEvent()
         event.setPeerId(peer.getId())
         
-        opportunity.setStartTime(event.getPriority())
-        opportunity.setDurationTime(endOpportunityTime)
+        times = int(endOpportunityTime / 3600)
         
-        endOpportunityEvent = EndOpportunitySimulationEvent(peer.getId(), int(joinTime + endOpportunityTime))
+        opportunity.setStartTime(event.getPriority())
+        opportunity.setDurationTime(int(endOpportunityTime))
+        
+        endOpportunityEvent = EndOpportunitySimulationEvent(peer.getId(), int(event.getPriority() + endOpportunityTime))
         simulation.registerSimulationEvent(endOpportunityEvent)
         pushEvent = PushOpportunitySimulationEvent(peer.getId(), event.getPriority() + 3600)
         simulation.registerSimulationEvent(pushEvent)
@@ -81,7 +77,6 @@ class StartOpportunitySimulationEventHandler(AbstractSimulationEventHandler):
         
         for i in range(2, times + 1):
             pushEvent = PushOpportunitySimulationEvent(peer.getId(), event.getPriority() + (3600 * i))
-            
             pushEvent.registerParameter("opportunityId", opportunity.getId())
             
             simulation.registerSimulationEvent(pushEvent)

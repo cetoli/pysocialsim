@@ -32,10 +32,7 @@ class AbstractRoute(Object, IRoute):
 
     @public
     def getTrace(self):
-        trace = []
-        for trc in self.__trace:
-            trace.append(trc)
-        return trace
+        return [] + self.__trace
 
     @public
     def getFreshness(self):

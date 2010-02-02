@@ -44,6 +44,29 @@ class SocialNetwork(Object):
         return self.__members[peerId]
     
     @public
+    def getCapacity(self, nodeDeviceType):
+        capacity = 0
+        for member in self.__members.values():
+            for sharing in member.getHardwareSharings(nodeDeviceType):
+                capacity += sharing.getCapacity()
+                
+        return capacity
+    
+    @public
+    def getFreeCapacity(self, nodeDeviceType):
+        capacity = 0
+        for member in self.__members.values():
+            for sharing in member.getHardwareSharings(nodeDeviceType):
+                capacity += sharing.getFreeCapacity()
+        if capacity == 0:
+            capacity = self.getCapacity(nodeDeviceType)
+        return capacity
+    
+    @public
+    def getUsedCapacity(self, nodeDeviceType):
+        return self.getCapacity(nodeDeviceType) - self.getFreeCapacity(nodeDeviceType)
+    
+    @public
     def clone(self):
         cln = SocialNetwork(self.__opportunity)
         for member in self.__members.values():

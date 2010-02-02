@@ -45,9 +45,10 @@ class DefaultSimulator(Object, ISimulator):
     
     @public    
     def handleSimulationEvent(self, simulationEvent):
-        print simulationEvent.getHandle(), simulationEvent.getPeerId()
         requires(simulationEvent, ISimulationEvent)
-        return returns(self.__eventDispatcher.handleSimulationEvent(simulationEvent), ISimulationEvent)
+        event = returns(self.__eventDispatcher.handleSimulationEvent(simulationEvent), ISimulationEvent)
+        print simulationEvent.getHandle(), simulationEvent.getPeerId()
+        return event
 
     @public
     def registerSimulationEventHandler(self, simulationEventHandler):

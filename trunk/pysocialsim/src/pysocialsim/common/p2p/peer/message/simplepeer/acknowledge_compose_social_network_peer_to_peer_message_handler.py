@@ -43,13 +43,6 @@ class AcknowledgeComposeSocialNetworkPeerToPeerMessageHandler(AbstractPeerToPeer
                 
                 contextManager.registerContext(IContext.OPPORTUNITY, opportunity)
                 
-                neighbors = peer.getNeighbors()
-                for neighbor in neighbors:
-                    createMessage = CreateSocialNetworkPeerToPeerMessage()
-                    createMessage.init(PeerToPeerMessageIdGenerator.generatePeerToPeerMessageId(peer), peer.getId(), neighbor.getId(), message.getTTL(), message.getPriority(), createMessage.getSize(), createMessage.getTime())
-                    createMessage.registerParameter("opportunity", opportunity)
-                    peer.send(createMessage)
-                    
                 if float(peer.getSharedCapacity(INode.DISK)) / float(peer.getNodeDeviceCapacity(INode.DISK)) < 0.9:
                     print "PERCENTAGE", float(peer.getSharedCapacity(INode.DISK)) / float(peer.getNodeDeviceCapacity(INode.DISK))
                     shareDiskEvent = ShareHardwareSimulationEvent(peer.getId(), message.getPriority() + 5)

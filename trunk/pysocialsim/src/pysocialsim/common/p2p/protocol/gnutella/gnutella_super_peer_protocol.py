@@ -20,7 +20,6 @@ from pysocialsim.common.p2p.protocol.i_peer_to_peer_protocol import IPeerToPeerP
 from pysocialsim.common.p2p.message.peer_to_peer_message_id_generator import PeerToPeerMessageIdGenerator
 from pysocialsim.common.p2p.peer.route import Route
 from pysocialsim.common.error.invalid_value_error import InvalidValueError
-import time
 
 class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
     """

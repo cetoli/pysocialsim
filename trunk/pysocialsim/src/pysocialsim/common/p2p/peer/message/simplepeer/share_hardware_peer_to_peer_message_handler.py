@@ -40,11 +40,12 @@ class ShareHardwarePeerToPeerMessageHandler(AbstractPeerToPeerMessageHandler):
             if member.hasHardwareSharing(hardwareSharing.getNodeDeviceType(), hardwareSharing.getId()):
                 return
             
-            member.registerHardwareSharing(hardwareSharing.getNodeDeviceType(), hardwareSharing)
+            if member.registerHardwareSharing(hardwareSharing.getNodeDeviceType(), hardwareSharing):
+                print "OH POOOOOOOOOOOOOOOOOOOOOORRAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
             
             opportunity.setVersion(opportunity.getVersion() + 1)
             
-            print "MAIS QUE POOOOOOOOOOOOOOOOOOOOOORRAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+            
              
 #            opportunityClone = opportunity.clone()
 #            

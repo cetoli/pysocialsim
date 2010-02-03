@@ -24,3 +24,6 @@ class IHardwareSharing(ISharing):
     
     def getNode(self):
         raise NotImplementedError()
+    
+    def clone(self):
+        raise NotImplementedError()

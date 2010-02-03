@@ -43,6 +43,9 @@ class ComposeSocialNetworkPeerToPeerMessageHandler(AbstractPeerToPeerMessageHand
                         return
                     
                     member = SocialNetworkMember(message.getSourceId())
+                    
+                    print 'ADD', member.getId()
+                    
                     socialNetwork.addSocialNetworkMember(member)
                     if not socialNetwork.hasSocialNetworkMember(peer.getId()):
                         member = SocialNetworkMember(peer.getId())
@@ -50,10 +53,12 @@ class ComposeSocialNetworkPeerToPeerMessageHandler(AbstractPeerToPeerMessageHand
                     
                     opportunity.setVersion(opportunity.getVersion() + 1)
                     opportunityClone = opportunity.clone()
+
                     
-                    if opportunity.getVersion() == 2 and socialNetwork.countSocialNetworkMembers() == 2:
+                    
+                    if opportunity.getVersion() == 1 and socialNetwork.countSocialNetworkMembers() == 2:
                         if peer.countNeighbors() > 0:
-                            
+                            print "1A - SOCIAL NETWORK MEMBERS:", opportunityClone.getId(), opportunityClone.getSocialNetwork().countSocialNetworkMembers()
                             neighbors = peer.getNeighbors()
                             for neighbor in neighbors:
                                 createMessage = CreateSocialNetworkPeerToPeerMessage()
@@ -86,8 +91,9 @@ class ComposeSocialNetworkPeerToPeerMessageHandler(AbstractPeerToPeerMessageHand
                             else:
                                 print "ACABOU MEMORY", peer.getId()
 
-                    elif opportunity.getVersion() > 2 and socialNetwork.countSocialNetworkMembers() > 2:
+                    elif opportunity.getVersion() > 1 and socialNetwork.countSocialNetworkMembers() > 2:
                         if peer.countNeighbors() > 0:
+                            print "1B - SOCIAL NETWORK MEMBERS:", opportunityClone.getId(), opportunityClone.getSocialNetwork().countSocialNetworkMembers()
                             neighbors = peer.getNeighbors()
                             for neighbor in neighbors:
                                 updateMessage = UpdateSocialNetworkPeerToPeerMessage()

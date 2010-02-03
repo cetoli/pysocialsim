@@ -49,3 +49,6 @@ class IOpportunity(IContext):
     
     def getSocialNetwork(self):
         raise NotImplementedError()
+    
+    def setSocialNetwork(self, socialNetwork):
+        raise NotImplementedError()

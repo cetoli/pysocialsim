@@ -92,17 +92,17 @@ class Opportunity(AbstractContext, IOpportunity):
         for ic in self.__interestContraints.values():
             cln.addInterestConstraint(ic)
         
-        socialNetwork = cln.getSocialNetwork()
-        for member in self.__socialNetwork.getSocialNetworkMembers():
-            memberClone = member.clone()
-            if not member.isActive():
-                member.deactive()
-            socialNetwork.addSocialNetworkMember(memberClone)
+        cln.setSocialNetwork(self.__socialNetwork.clone())
         
         return cln
     
     @public
     def getSocialNetwork(self):
+        return self.__socialNetwork
+    
+    @public
+    def setSocialNetwork(self, socialNetwork):
+        self.__socialNetwork = socialNetwork
         return self.__socialNetwork
     
     durationTime = property(getDurationTime, setDurationTime, None, None)

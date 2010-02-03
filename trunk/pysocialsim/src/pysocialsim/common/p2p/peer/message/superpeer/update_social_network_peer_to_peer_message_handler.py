@@ -9,8 +9,8 @@ Defines the module with objective.
 from pysocialsim.common.p2p.message.abstract_peer_to_peer_message_handler import AbstractPeerToPeerMessageHandler
 from pysocialsim.common.p2p.peer.context.i_context import IContext
 from pysocialsim.common.p2p.peer.message.replicate_social_network_peer_to_peer_message import ReplicateSocialNetworkPeerToPeerMessage
-from random import randint
 from pysocialsim.common.p2p.message.peer_to_peer_message_id_generator import PeerToPeerMessageIdGenerator
+from pysocialsim.common.p2p.topology.graph.i_node import INode
 import math
 
 class UpdateSocialNetworkPeerToPeerMessageHandler(AbstractPeerToPeerMessageHandler):
@@ -26,6 +26,8 @@ class UpdateSocialNetworkPeerToPeerMessageHandler(AbstractPeerToPeerMessageHandl
             if message.hasParameter("opportunity"):
                 opportunity = message.getParameter("opportunity")
                 
+                socialNetwork = opportunity.getSocialNetwork()
+                
                 contextManager = peer.getContextManager()
                 if not contextManager.hasContext(IContext.OPPORTUNITY, opportunity.getId()):
                     return
@@ -35,12 +37,14 @@ class UpdateSocialNetworkPeerToPeerMessageHandler(AbstractPeerToPeerMessageHandl
                     print "VERSAO ANTIGA"
                     return
                 
+                print "2B - SOCIAL NETWORK MEMBERS:", opportunity.getId(), opportunity.getSocialNetwork().countSocialNetworkMembers()
+                
                 contextManager.updateContext(IContext.OPPORTUNITY, opportunity)
                 socialNetwork = opportunity.getSocialNetwork()
                 
                 neighborNumber = socialNetwork.countSocialNetworkMembers()
                 if neighborNumber > 0:
-                    minPercentage = 0.25
+                    minPercentage = 1.0
                     if (minPercentage * float(neighborNumber))  == 1:
                         return 
                     copyNumber = (minPercentage * neighborNumber) + math.log(opportunity.getVersion(), (minPercentage * neighborNumber))

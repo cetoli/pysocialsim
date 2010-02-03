@@ -270,7 +270,18 @@ class AbstractPeer(Object, IPeer):
                 shareMessage.registerParameter("opportunityId", opportunityId)
                 self.send(shareMessage)
         
-        contentSharingEvent = ShareContentSimulationEvent(self.__id, priority + 60)
+        socialNetwork = opportunity.getSocialNetwork()
+        if socialNetwork.countSocialNetworkMembers() > 0:
+            members = socialNetwork.getSocialNetworkMembers()
+            for member in members:
+                shareMessage = ShareHardwarePeerToPeerMessage()
+                shareMessage.init(PeerToPeerMessageIdGenerator.generatePeerToPeerMessageId(self), self.__id, member.getId(), self.__peerToPeerProtocol.getPushHops(), priority, 512, 0)
+                context = hardwareSharing.getContext()
+                shareMessage.registerParameter("hardwareSharingContext", context)
+                shareMessage.registerParameter("opportunityId", opportunityId)
+                self.send(shareMessage)
+        
+        contentSharingEvent = ShareContentSimulationEvent(self.__id, priority + 200)
         contentSharingEvent.registerParameter("opportunityId", opportunityId)
         
         simulation = self.__peerToPeerNetwork.getSimulation()
@@ -294,9 +305,13 @@ class AbstractPeer(Object, IPeer):
         socialNetwork = opportunity.getSocialNetwork()
         
         for member in socialNetwork.getSocialNetworkMembers():
+            if member.getId() == self.__id:
+                continue
+            
             requestStorageAgreementMessage = RequestStorageAgreementPeerToPeerMessage()
             requestStorageAgreementMessage.registerParameter("contentId", content.getId())
             requestStorageAgreementMessage.registerParameter("contentSize", content.getSize())
+            requestStorageAgreementMessage.registerParameter("opportunityId", opportunityId)
             requestStorageAgreementMessage.init(PeerToPeerMessageIdGenerator.generatePeerToPeerMessageId(self), self.__id, member.getId(), self.__peerToPeerProtocol.getPushHops(), priority, 512, 0)
             
             self.send(requestStorageAgreementMessage)

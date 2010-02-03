@@ -86,7 +86,6 @@ class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
                             if len(peers) == 0:
                                 break
                         else:
-                            print "DESCARTEI", neighbor.getId()
                             del peers[ix]
             
             if not aux:
@@ -423,8 +422,6 @@ class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
             message.setHop(message.getHop() + 1)
             
             peer = self.getPeer()
-            print peer.getId(), message.getId(), message.getHop()
-            
             
             message.registerPeerId(peer.getId())
             
@@ -479,6 +476,4 @@ class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
                             messagesLogFile.write(str(line)+"\n")
                             messagesLogFile.close()
                             peer.removeNeighbor(child.getId())
-            else:
-                print "RONALDO !!!"
                 

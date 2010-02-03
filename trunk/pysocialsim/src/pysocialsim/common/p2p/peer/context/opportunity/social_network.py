@@ -70,6 +70,7 @@ class SocialNetwork(Object):
     def clone(self):
         cln = SocialNetwork(self.__opportunity)
         for member in self.__members.values():
-            self.__members[member.getId()] = member.clone()
+            clone = member.clone()
+            cln.addSocialNetworkMember(clone)
         return cln
     

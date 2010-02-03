@@ -22,13 +22,11 @@ class AdvertiseOpportunityPeerToPeerMessageHandler(AbstractPeerToPeerMessageHand
         peer = self.getPeer()
         message.registerPeerId(peer.getId())
         
-        
         if peer.isJoined():  
             if not message.hasParameter("opportunity"):
                 return
             
             if (float(peer.getSharedCapacity(INode.DISK)) / float(peer.getNodeDeviceCapacity(INode.DISK)) >= 1.0) and (float(peer.getSharedCapacity(INode.MEMORY)) / float(peer.getNodeDeviceCapacity(INode.MEMORY)) >= 1.0) and (float(peer.getSharedCapacity(INode.MEMORY)) / float(peer.getNodeDeviceCapacity(INode.MEMORY)) >= 1.0):
-                print "PAREI DE COMPARTILHAR", self.getHandle()
                 return
             
             opportunity = message.getParameter("opportunity")

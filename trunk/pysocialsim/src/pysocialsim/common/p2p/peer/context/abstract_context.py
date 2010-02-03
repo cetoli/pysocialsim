@@ -19,7 +19,7 @@ class AbstractContext(Object, IContext):
     def initialize(self, type, id):
         self.__type = type
         self.__id = id
-        self.__version = 1
+        self.__version = 0
         
     @public
     def getVersion(self):

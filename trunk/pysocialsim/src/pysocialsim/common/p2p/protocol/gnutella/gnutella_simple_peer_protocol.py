@@ -108,8 +108,6 @@ class GnutellaSimplePeerProtocol(AbstractPeerToPeerProtocol):
                 route = routes[randint(0, len(routes) - 1)]
                 trace = route.getTrace()
                 
-                print "TRACE", peer.getId(), trace
-                
                 neighbor = peer.getNeighbor(trace[len(trace) - 1])
                 message = self.createPeerToPeerMessage(IPeerToPeerProtocol.ROUTE)
                 peerToPeerMessage.getId()
@@ -120,6 +118,8 @@ class GnutellaSimplePeerProtocol(AbstractPeerToPeerProtocol):
                 trace.remove(trace[len(trace) - 1])
                 for id in trace:
                     message.registerPeerId(id)
+                    peerToPeerMessage.registerPeerId(id)
+                
                 message.registerParameter("backTrace", [peer.getId()])
                 try:
                     neighbor.dispatchData(message)
@@ -167,7 +167,6 @@ class GnutellaSimplePeerProtocol(AbstractPeerToPeerProtocol):
                             if len(peers) == 0:
                                 break
                         else:
-                            print "DESCARTEI", superPeer.getId()
                             del peers[ix]
                                   
         
@@ -266,8 +265,6 @@ class GnutellaSimplePeerProtocol(AbstractPeerToPeerProtocol):
                         return
                     neighbor = peer.getNeighbor(lastPeerId)
                     neighbor.registerRoute(route)
-                else:
-                    print "Deu merda"
         
     class RoutePeerToPeerMessageHandler(AbstractPeerToPeerMessageHandler):
         

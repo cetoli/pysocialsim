@@ -123,7 +123,6 @@ class AbstractPeerToPeerProtocol(Object, IPeerToPeerProtocol):
     def send(self, peer, peerToPeerMessage):
         if not peer.hasNeighbor(peerToPeerMessage.getTargetId()):
             self.route(peer, peerToPeerMessage)
-            print "passei por: ", peer.getId()
             return peerToPeerMessage
         
         neighbor = peer.getNeighbor(peerToPeerMessage.getTargetId())

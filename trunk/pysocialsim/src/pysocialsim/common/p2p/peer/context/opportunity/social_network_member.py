@@ -36,26 +36,29 @@ class SocialNetworkMember(Object):
     
     @public
     def registerHardwareSharing(self, nodeDeviceType, hardwareSharingContext):
-        if not self.__hardwareSharings[nodeDeviceType]:
+        if not self.__hardwareSharings.has_key(nodeDeviceType):
             return False
         sharings = self.__hardwareSharings[nodeDeviceType]
-        if not sharings.has_key(hardwareSharingContext.getId()):
+        if sharings.has_key(hardwareSharingContext.getId()):
             return False
+        print "INSERIU AQUI ESSA PORRA"
+        
         sharings[hardwareSharingContext.getId()] = hardwareSharingContext
         return sharings.has_key(hardwareSharingContext.getId())
     
     @public
     def hasHardwareSharing(self, nodeDeviceType, sharingId):
-        if not self.__hardwareSharings[nodeDeviceType]:
+        if not self.__hardwareSharings.has_key(nodeDeviceType):
             return False
         sharings = self.__hardwareSharings[nodeDeviceType]
         if not sharings.has_key(sharingId):
             return False
+        
         return self.__hardwareSharings.has_key(sharingId)
     
     @public
     def unregisterHardwareSharing(self, nodeDeviceType, sharingId):
-        if not self.__hardwareSharings[nodeDeviceType]:
+        if not self.__hardwareSharings.has_key(nodeDeviceType):
             return False
         sharings = self.__hardwareSharings[nodeDeviceType]
         if not sharings.has_key(sharingId):
@@ -65,7 +68,7 @@ class SocialNetworkMember(Object):
     
     @public
     def getHardwareSharing(self, nodeDeviceType, sharingId):
-        if not self.__hardwareSharings[nodeDeviceType]:
+        if not self.__hardwareSharings.has_key(nodeDeviceType):
             return None
         sharings = self.__hardwareSharings[nodeDeviceType]
         if not sharings.has_key(sharingId):
@@ -74,8 +77,9 @@ class SocialNetworkMember(Object):
     
     @public
     def getHardwareSharings(self, nodeDeviceType):
-        if not self.__hardwareSharings[nodeDeviceType]:
+        if not self.__hardwareSharings.has_key(nodeDeviceType):
             return None
+        
         sharings = self.__hardwareSharings[nodeDeviceType]
         return sharings.values()
     
@@ -84,15 +88,15 @@ class SocialNetworkMember(Object):
         cln = SocialNetworkMember(self.__id)
         disks = self.__hardwareSharings[INode.DISK]
         for disk in disks.values():
-            cln.registerHardwareSharing(INode.DISK, disk)
+            cln.registerHardwareSharing(INode.DISK, disk.clone())
         
         memories = self.__hardwareSharings[INode.MEMORY]
         for memory in memories.values():
-            cln.registerHardwareSharing(INode.MEMORY, memory)
+            cln.registerHardwareSharing(INode.MEMORY, memory.clone())
             
         processors = self.__hardwareSharings[INode.PROCESSOR]
         for processor in processors.values():
-            cln.registerHardwareSharing(INode.PROCESSOR, processor)
+            cln.registerHardwareSharing(INode.PROCESSOR, processor.clone())
             
         return cln
     

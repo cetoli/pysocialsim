@@ -38,5 +38,4 @@ class AbstractHardwareSharing(AbstractSharing, IHardwareSharing):
     def getUsedCapacity(self):
         return 0
     
-        
     

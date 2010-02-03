@@ -23,3 +23,6 @@ class IHardwareSharingContextInformation(object):
     
     def getNodeDeviceType(self):
         raise NotImplementedError()
+
+    def clone(self):
+        raise NotImplementedError()

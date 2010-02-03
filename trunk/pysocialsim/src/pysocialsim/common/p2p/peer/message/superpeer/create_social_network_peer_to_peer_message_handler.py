@@ -31,9 +31,11 @@ class CreateSocialNetworkPeerToPeerMessageHandler(AbstractPeerToPeerMessageHandl
                 
                 socialNetwork = opportunity.getSocialNetwork()
                 
+                print "2A - SOCIAL NETWORK MEMBERS:", opportunity.getId(), opportunity.getSocialNetwork().countSocialNetworkMembers()
+                
                 neighborNumber = socialNetwork.countSocialNetworkMembers()
                 if neighborNumber > 0:
-                    minPercentage = 0.25
+                    minPercentage = 1.0
                     
                     if (minPercentage * float(neighborNumber))  == 1:
                         return 

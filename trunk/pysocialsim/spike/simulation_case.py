@@ -51,9 +51,9 @@ simulator.registerSimulationEventHandler(EndSimulationEventHandler())
 simulation = SimulationSpike()
 network = PeerToPeerNetwork(simulation)
 
-network.setConnectionsBetweenSuperPeers(6)
-network.setConnectionsBetweenSuperPeerAndSimplePeers(32)
-network.setConnectionsBetweenSimplePeerAndSuperPeers(1)
+network.setConnectionsBetweenSuperPeers(32)
+network.setConnectionsBetweenSuperPeerAndSimplePeers(30)
+network.setConnectionsBetweenSimplePeerAndSuperPeers(3)
 
 network.setLinkAvailability(50.0)
 
@@ -103,16 +103,16 @@ network.registerPeerToPeerProtocol(IPeerToPeerNetwork.SIMPLE_PEER, protocol)
 
 simulation.setPeerToPeerNetwork(network)
 simulator.setSimulation(simulation)
-simulation.setSimulationTime(86400)
+simulation.setSimulationTime(432000)
 
 simulation.addSimulationEventGenerator(BeginSimulationEventGenerator())
-simulation.addSimulationEventGenerator(NewSuperPeerSimulationEventGenerator(5.5, 1000, 34))
-simulation.addSimulationEventGenerator(NewSimplePeerSimulationEventGenerator(5.5, 60, 1000))
-simulation.addSimulationEventGenerator(SimplePeerLeavingSimulationEventGenerator(0.6568, 4.0821, 1000))
+simulation.addSimulationEventGenerator(NewSuperPeerSimulationEventGenerator(5.5, 900, 100))
+simulation.addSimulationEventGenerator(NewSimplePeerSimulationEventGenerator(5.5, 600, 1000))
+simulation.addSimulationEventGenerator(SimplePeerLeavingSimulationEventGenerator(0.6566, 4.0763, 1000))
 simulation.addSimulationEventGenerator(StartOpportunitySimulationventGenerator(0.5, 600, 1))
-for i in range(86400/10000):
-    simulation.addSimulationEventGenerator(SimplePeerJoiningSimulationEventGenerator(0.2, 900.0, 1000))
-    simulation.addSimulationEventGenerator(SimplePeerLeavingSimulationEventGenerator(0.6568, 4.0821, 1000))
+for i in range(simulation.getSimulationTime()/10000):
+    simulation.addSimulationEventGenerator(SimplePeerJoiningSimulationEventGenerator(0.2, 1.0, 1000))
+    simulation.addSimulationEventGenerator(SimplePeerLeavingSimulationEventGenerator(0.6566, 4.0763, 1000))
 
 simulation.addSimulationEventGenerator(EndSimulationEventGenerator())
 

@@ -40,7 +40,7 @@ class NetworkAdapter(AbstractNodeDevice):
         data.setTime(data.getTime() + (streamSize / speed))
         
         messagesLogFile = open("bandwidth.log", "a")
-        line = str(data.getPriority()) + " " + str(self.getInputSpeed()) + " " + str(self.getCapacity()) + " " + str(streamSize) + " " + str(data.getTime()) 
+        line = peer.getId() + " " + str(data.getPriority()) + " " + str(self.getInputSpeed()) + " " + str(self.getCapacity()) + " " + str(streamSize) + " " + str(data.getTime()) 
         messagesLogFile.write(str(line)+"\n")
         messagesLogFile.close()
         

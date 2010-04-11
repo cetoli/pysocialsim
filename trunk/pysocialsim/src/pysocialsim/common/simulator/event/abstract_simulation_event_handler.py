@@ -95,8 +95,8 @@ class AbstractSimulationEventHandler(Object, ISimulationEventHandler):
         """
         self.__simulationEvent.handled()
         network = self.__simulation.getPeerToPeerNetwork()
-        superPeers = len(network.getConnectedPeers(IPeerToPeerNetwork.SUPER_PEER))
-        simplePeers = len(network.getConnectedPeers(IPeerToPeerNetwork.SIMPLE_PEER))
+        superPeers = network.countConnectedPeers(IPeerToPeerNetwork.SUPER_PEER)
+        simplePeers = network.countConnectedPeers(IPeerToPeerNetwork.SIMPLE_PEER)
         eventsLogFile = open("simulation.log", "a")
         line = str(self.__simulationEvent.getPriority()) + " " + self.__simulationEvent.getHandle() + " " + self.__simulationEvent.getPeerId() + " " + str(superPeers) + " " + str(simplePeers)
         eventsLogFile.write(str(line)+"\n")

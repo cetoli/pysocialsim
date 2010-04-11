@@ -232,9 +232,6 @@ class AbstractSimulation(Object, ISimulation):
                     
                     self.__simulation.setCurrentSimulationTime(i)
                     print i
-                    network = self.__simulation.getPeerToPeerNetwork()
-                    self.__simulation.registerSimplePeersByTime(i, network.countConnectedPeers(IPeerToPeerNetwork.SIMPLE_PEER))
-                    self.__simulation.registerSuperPeersByTime(i, network.countConnectedPeers(IPeerToPeerNetwork.SUPER_PEER))
 
                     if self.__simulation.getSimulationTime() == 0:
                         return 

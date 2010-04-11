@@ -236,4 +236,4 @@ class AbstractSimulation(Object, ISimulation):
                     if self.__simulation.getSimulationTime() == 0:
                         return 
 
-                    time.sleep(0.06)
+                    time.sleep(0.03)

@@ -8,6 +8,7 @@ Defines the module with the implementation of SimplePeerLeavingSimulationEventHa
 """
 from pysocialsim.common.simulator.event.abstract_simulation_event_handler import AbstractSimulationEventHandler
 from pysocialsim.common.p2p.network.i_peer_to_peer_network import IPeerToPeerNetwork
+from pysocialsim.common.p2p.peer.context.i_context import IContext
 
 class SimplePeerLeavingSimulationEventHandler(AbstractSimulationEventHandler):
     """
@@ -22,6 +23,9 @@ class SimplePeerLeavingSimulationEventHandler(AbstractSimulationEventHandler):
         network = simulation.getPeerToPeerNetwork()
         event = self.getSimulationEvent()
         simplePeer = network.getPeer(IPeerToPeerNetwork.SIMPLE_PEER, self.getSimulationEvent().getPeerId())
-        simplePeer.leave(event.getPriority())
+        contextManager = simplePeer.getContextManager()
+        if not contextManager.getContexts(IContext.OPPORTUNITY):
+            simplePeer.leave(event.getPriority())
+        
         
         return AbstractSimulationEventHandler.execute(self)

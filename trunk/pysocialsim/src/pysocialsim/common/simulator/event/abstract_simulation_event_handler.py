@@ -24,8 +24,6 @@ class AbstractSimulationEventHandler(Object, ISimulationEventHandler):
     @since: 25/08/2009
     """
 
-    eventsLogFile = open("simulation.log", "a")
-
     def __init__(self):
         raise NotImplementedError()
 
@@ -99,9 +97,10 @@ class AbstractSimulationEventHandler(Object, ISimulationEventHandler):
         network = self.__simulation.getPeerToPeerNetwork()
         superPeers = network.countConnectedPeers(IPeerToPeerNetwork.SUPER_PEER)
         simplePeers = network.countConnectedPeers(IPeerToPeerNetwork.SIMPLE_PEER)
+        eventsLogFile = open("simulation.log", "a")
         line = str(self.__simulationEvent.getPriority()) + " " + self.__simulationEvent.getHandle() + " " + self.__simulationEvent.getPeerId() + " " + str(superPeers) + " " + str(simplePeers)
-        AbstractSimulationEventHandler.eventsLogFile.write(str(line)+"\n")
-        #eventsLogFile.close()
+        eventsLogFile.write(str(line)+"\n")
+        eventsLogFile.close()
         
         return self.__simulationEvent
 

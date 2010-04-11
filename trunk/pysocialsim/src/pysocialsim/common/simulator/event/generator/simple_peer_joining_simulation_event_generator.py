@@ -48,6 +48,7 @@ class SimplePeerJoiningSimulationEventGenerator(AbstractSimulationEventGenerator
         scheduler = simulator.getScheduler()
         generatedEvents = 0
         print "Generating SIMPLE_PEER_JOIN .."
+        messagesLogFile = open("distPareto.log", "a")
         network = simulation.getPeerToPeerNetwork()
         for peer in network.getPeers(IPeerToPeerNetwork.SIMPLE_PEER):
             lastTime = scheduler.getTimeForPeer(IPeerToPeerNetwork.SIMPLE_PEER, peer.getId())
@@ -57,10 +58,11 @@ class SimplePeerJoiningSimulationEventGenerator(AbstractSimulationEventGenerator
             
             scheduler.registerTimeForPeer(IPeerToPeerNetwork.SIMPLE_PEER, peer.getId(), int(time + lastTime))
             generatedEvents += 1
-            messagesLogFile = open("distPareto.log", "a")
+            
             line = str(time) 
             messagesLogFile.write(str(line)+"\n")
-            messagesLogFile.close()
+        messagesLogFile.close()
+        
         print "Generating SIMPLE_PEER_JOIN ..."
         print "Done. (" + str(generatedEvents) +" events were generated)"
         return generatedEvents      

@@ -244,7 +244,7 @@ class GnutellaSimplePeerProtocol(AbstractPeerToPeerProtocol):
                             neighbor.registerRoute(route)
                 except:
                     messagesLogFile = open("fails.log", "a")
-                    line = str(message.getPriority()) + " " + message.getId() + " " + message.getHandle() + " " + message.getSourceId() + " " + message.getTargetId() + " " + str(message.getTime()) + " " + str(message.getSize()) + " " + str(int(message.getTime() + message.getPriority())) + " " + str(message.getHop() + 1) + " " + str(len(network.countConnectedPeers(IPeerToPeerNetwork.SUPER_PEER))) + " " + str(network.countConnectedPeers(IPeerToPeerNetwork.SIMPLE_PEER)) 
+                    line = str(message.getPriority()) + " " + message.getId() + " " + message.getHandle() + " " + message.getSourceId() + " " + message.getTargetId() + " " + str(message.getTime()) + " " + str(message.getSize()) + " " + str(int(message.getTime() + message.getPriority())) + " " + str(message.getHop() + 1) + " " + str(network.countConnectedPeers(IPeerToPeerNetwork.SUPER_PEER)) + " " + str(network.countConnectedPeers(IPeerToPeerNetwork.SIMPLE_PEER)) 
                     messagesLogFile.write(str(line)+"\n")
                     messagesLogFile.close()
                     

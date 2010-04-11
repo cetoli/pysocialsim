@@ -50,6 +50,7 @@ class SimplePeerLeavingSimulationEventGenerator(AbstractSimulationEventGenerator
         generatedEvents = 0
         network = simulation.getPeerToPeerNetwork()
         print "Generating SIMPLE_PEER_LEAVE .."
+        messagesLogFile = open("distWeibull.log", "a")
         for peer in network.getPeers(IPeerToPeerNetwork.SIMPLE_PEER):
             lastTime = scheduler.getTimeForPeer(IPeerToPeerNetwork.SIMPLE_PEER, peer.getId())
             time = (self.__scale*pow((-math.log(uniform(0,1))), 1/self.__shape)) * 3600
@@ -58,10 +59,10 @@ class SimplePeerLeavingSimulationEventGenerator(AbstractSimulationEventGenerator
             event = SimplePeerLeavingSimulationEvent(peer.getId(), scheduler.getTimeForPeer(IPeerToPeerNetwork.SIMPLE_PEER, peer.getId()))
             simulation.registerSimulationEvent(event)
             generatedEvents += 1
-            messagesLogFile = open("distWeibull.log", "a")
+            
             line = str(time) 
             messagesLogFile.write(str(line)+"\n")
-            messagesLogFile.close()
+        messagesLogFile.close()
             
         print "Generating SIMPLE_PEER_LEAVE ..."
         print "Done. (" + str(generatedEvents) +" events were generated)"

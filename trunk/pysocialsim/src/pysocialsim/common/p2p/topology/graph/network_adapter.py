@@ -20,7 +20,9 @@ class NetworkAdapter(AbstractNodeDevice):
     @contact: fbarros@gmail.com 
     @since: 13/10/2009
     """
-
+    
+    messagesLogFile = open("bandwidth.log", "a")
+    
     def __init__(self, capacity, inputSpeed, outputSpeed):
         AbstractNodeDevice.initialize(self, INode.NETWORK_ADAPTER, capacity, inputSpeed, outputSpeed)
 
@@ -39,10 +41,8 @@ class NetworkAdapter(AbstractNodeDevice):
         
         data.setTime(data.getTime() + (streamSize / speed))
         
-        messagesLogFile = open("bandwidth.log", "a")
-        line = peer.getId() + " " + str(data.getPriority()) + " " + str(self.getInputSpeed()) + " " + str(self.getCapacity()) + " " + str(streamSize) + " " + str(data.getTime()) 
-        messagesLogFile.write(str(line)+"\n")
-        messagesLogFile.close()
+        line = str(data.getPriority()) + " " +  peer.getId() + " " + str(self.getInputSpeed()) + " " + str(self.getCapacity()) + " " + str(streamSize) + " " + str(data.getTime()) 
+        NetworkAdapter.messagesLogFile.write(str(line)+"\n")
         
     @public
     def output(self, data):

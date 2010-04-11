@@ -84,9 +84,9 @@ network.setDiskAvailability(90.0)
 
 
 protocol = GnutellaSuperPeerProtocol()
-protocol.setPingHops(6)
-protocol.setPongHops(6)
-protocol.setPushHops(6)
+protocol.setPingHops(4)
+protocol.setPongHops(4)
+protocol.setPushHops(4)
 
 topology = PeerToPeerTopology()
 topology.setPeerToPeerNetwork(network)
@@ -95,9 +95,9 @@ protocol.setPeerToPeerTopology(topology)
 network.registerPeerToPeerProtocol(IPeerToPeerNetwork.SUPER_PEER, protocol)
 
 protocol = GnutellaSimplePeerProtocol()
-protocol.setPingHops(6)
-protocol.setPongHops(6)
-protocol.setPushHops(6)
+protocol.setPingHops(4)
+protocol.setPongHops(4)
+protocol.setPushHops(4)
 protocol.setPeerToPeerTopology(topology)
 network.registerPeerToPeerProtocol(IPeerToPeerNetwork.SIMPLE_PEER, protocol)
 
@@ -111,9 +111,9 @@ simulation.addSimulationEventGenerator(NewSuperPeerSimulationEventGenerator(5.5,
 simulation.addSimulationEventGenerator(NewSimplePeerSimulationEventGenerator(5.5, 600, 1000))
 simulation.addSimulationEventGenerator(SimplePeerLeavingSimulationEventGenerator(0.6566, 4.0763, 1000))
 simulation.addSimulationEventGenerator(StartOpportunitySimulationventGenerator(0.5, 900, 1))
-#for i in range(simulation.getSimulationTime()/10000):
-#    simulation.addSimulationEventGenerator(SimplePeerJoiningSimulationEventGenerator(0.2, 1.0, 1000))
-#    simulation.addSimulationEventGenerator(SimplePeerLeavingSimulationEventGenerator(0.6566, 4.0763, 1000))
+for i in range(simulation.getSimulationTime()/10000):
+    simulation.addSimulationEventGenerator(SimplePeerJoiningSimulationEventGenerator(0.2, 1.0, 1000))
+    simulation.addSimulationEventGenerator(SimplePeerLeavingSimulationEventGenerator(0.6566, 4.0763, 1000))
 
 simulation.addSimulationEventGenerator(EndSimulationEventGenerator())
 

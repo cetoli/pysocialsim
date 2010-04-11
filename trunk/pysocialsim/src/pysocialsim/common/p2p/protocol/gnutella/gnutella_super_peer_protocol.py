@@ -328,7 +328,7 @@ class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
                         neighbor.dispatchData(msgClone)
                     except InvalidValueError:
                         messagesLogFile = open("fails.log", "a")
-                        line = str(msgClone.getPriority()) + " " + msgClone.getId() + " " + msgClone.getHandle() + " " + msgClone.getSourceId() + " " + self.getPeerToPeerMessage().getTargetId() + " " + str(msgClone.getTime()) + " " + str(msgClone.getSize()) + " " + str(int(msgClone.getTime() + msgClone.getPriority())) + " " + str(msgClone.getHop() + 1) + " " + str(len(network.countConnectedPeers(IPeerToPeerNetwork.SUPER_PEER))) + " " + str(network.countConnectedPeers(IPeerToPeerNetwork.SIMPLE_PEER)) 
+                        line = str(msgClone.getPriority()) + " " + msgClone.getId() + " " + msgClone.getHandle() + " " + msgClone.getSourceId() + " " + self.getPeerToPeerMessage().getTargetId() + " " + str(msgClone.getTime()) + " " + str(msgClone.getSize()) + " " + str(int(msgClone.getTime() + msgClone.getPriority())) + " " + str(msgClone.getHop() + 1) + " " + str(network.countConnectedPeers(IPeerToPeerNetwork.SUPER_PEER)) + " " + str(network.countConnectedPeers(IPeerToPeerNetwork.SIMPLE_PEER)) 
                         messagesLogFile.write(str(line)+"\n")
                         messagesLogFile.close()
                         peer.removeNeighbor(neighbor.getId())

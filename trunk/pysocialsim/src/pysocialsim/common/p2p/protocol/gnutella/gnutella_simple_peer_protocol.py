@@ -65,7 +65,7 @@ class GnutellaSimplePeerProtocol(AbstractPeerToPeerProtocol):
                 neighbor.dispatchData(message)
             except InvalidValueError:
                 messagesLogFile = open("fails.log", "a")
-                line = str(peerToPeerMessage.getPriority()) + " " + peerToPeerMessage.getId() + " " + peerToPeerMessage.getHandle() + " " + peerToPeerMessage.getSourceId() + " " + peerToPeerMessage.getTargetId() + " " + str(peerToPeerMessage.getTime()) + " " + str(peerToPeerMessage.getSize()) + " " + str(int(peerToPeerMessage.getTime() + peerToPeerMessage.getPriority())) + " " + str(peerToPeerMessage.getHop() + 1) + " " + str(len(network.countConnectedPeers(IPeerToPeerNetwork.SUPER_PEER))) + " " + str(network.countConnectedPeers(IPeerToPeerNetwork.SIMPLE_PEER)) 
+                line = str(peerToPeerMessage.getPriority()) + " " + peerToPeerMessage.getId() + " " + peerToPeerMessage.getHandle() + " " + peerToPeerMessage.getSourceId() + " " + peerToPeerMessage.getTargetId() + " " + str(peerToPeerMessage.getTime()) + " " + str(peerToPeerMessage.getSize()) + " " + str(int(peerToPeerMessage.getTime() + peerToPeerMessage.getPriority())) + " " + str(peerToPeerMessage.getHop() + 1) + " " + str(network.countConnectedPeers(IPeerToPeerNetwork.SUPER_PEER)) + " " + str(network.countConnectedPeers(IPeerToPeerNetwork.SIMPLE_PEER)) 
                 messagesLogFile.write(str(line)+"\n")
                 messagesLogFile.close()
                 peer.removeNeighbor(neighbor.getId())
@@ -120,14 +120,14 @@ class GnutellaSimplePeerProtocol(AbstractPeerToPeerProtocol):
                     neighbor.dispatchData(message)
                 except InvalidValueError:
                     messagesLogFile = open("fails.log", "a")
-                    line = str(peerToPeerMessage.getPriority()) + " " + peerToPeerMessage.getId() + " " + peerToPeerMessage.getHandle() + " " + peerToPeerMessage.getSourceId() + " " + peerToPeerMessage.getTargetId() + " " + str(peerToPeerMessage.getTime()) + " " + str(peerToPeerMessage.getSize()) + " " + str(int(peerToPeerMessage.getTime() + peerToPeerMessage.getPriority())) + " " + str(peerToPeerMessage.getHop() + 1) + " " + str(len(network.countConnectedPeers(IPeerToPeerNetwork.SUPER_PEER))) + " " + str(network.countConnectedPeers(IPeerToPeerNetwork.SIMPLE_PEER)) 
+                    line = str(peerToPeerMessage.getPriority()) + " " + peerToPeerMessage.getId() + " " + peerToPeerMessage.getHandle() + " " + peerToPeerMessage.getSourceId() + " " + peerToPeerMessage.getTargetId() + " " + str(peerToPeerMessage.getTime()) + " " + str(peerToPeerMessage.getSize()) + " " + str(int(peerToPeerMessage.getTime() + peerToPeerMessage.getPriority())) + " " + str(peerToPeerMessage.getHop() + 1) + " " + str(network.countConnectedPeers(IPeerToPeerNetwork.SUPER_PEER)) + " " + str(network.countConnectedPeers(IPeerToPeerNetwork.SIMPLE_PEER)) 
                     messagesLogFile.write(str(line)+"\n")
                     messagesLogFile.close()
                     peer.removeNeighbor(neighbor.getId())
 #                    peer.join(peerToPeerMessage.getPriority())
             else:
                 messagesLogFile = open("fails.log", "a")
-                line = str(peerToPeerMessage.getPriority()) + " " + peerToPeerMessage.getId() + " " + peerToPeerMessage.getHandle() + " " + peerToPeerMessage.getSourceId() + " " + peerToPeerMessage.getTargetId() + " " + str(peerToPeerMessage.getTime()) + " " + str(peerToPeerMessage.getSize()) + " " + str(int(peerToPeerMessage.getTime() + peerToPeerMessage.getPriority())) + " " + str(peerToPeerMessage.getHop() + 1) + " " + str(len(network.countConnectedPeers(IPeerToPeerNetwork.SUPER_PEER))) + " " + str(network.countConnectedPeers(IPeerToPeerNetwork.SIMPLE_PEER)) 
+                line = str(peerToPeerMessage.getPriority()) + " " + peerToPeerMessage.getId() + " " + peerToPeerMessage.getHandle() + " " + peerToPeerMessage.getSourceId() + " " + peerToPeerMessage.getTargetId() + " " + str(peerToPeerMessage.getTime()) + " " + str(peerToPeerMessage.getSize()) + " " + str(int(peerToPeerMessage.getTime() + peerToPeerMessage.getPriority())) + " " + str(peerToPeerMessage.getHop() + 1) + " " + str(network.countConnectedPeers(IPeerToPeerNetwork.SUPER_PEER)) + " " + str(network.countConnectedPeers(IPeerToPeerNetwork.SIMPLE_PEER)) 
                 messagesLogFile.write(str(line)+"\n")
                 messagesLogFile.close()
         

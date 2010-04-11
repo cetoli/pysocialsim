@@ -119,6 +119,7 @@ class AbstractPeer(Object, IPeer):
         if aux:
             self.joined()
             self.__peerToPeerMessageDispatcher.on()
+            self.__peerToPeerNetwork.increaseConnectedPeers(self.__type)
             if len(self.__neighbors) > 0:
                 for n in self.__neighbors.values():
                     message = self.__peerToPeerProtocol.createPeerToPeerMessage(IPeerToPeerProtocol.PING)
@@ -133,6 +134,7 @@ class AbstractPeer(Object, IPeer):
     def leave(self, priority):
         self.__peerToPeerMessageDispatcher.off()
         aux = self.__peerToPeerProtocol.leave(self)
+        self.__peerToPeerNetwork.decreaseConnectedPeers(self.__type)
         
         return returns(aux, bool)
     @public

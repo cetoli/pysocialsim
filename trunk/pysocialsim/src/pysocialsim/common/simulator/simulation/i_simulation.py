@@ -193,3 +193,14 @@ class ISimulation(object):
         """
         raise NotImplementedError()
     
+    def registerSimplePeersByTime(self, time, simplePeers):
+        raise NotImplementedError()
+    
+    def getSimplePeersByTime(self, time):
+        raise NotImplementedError()
+    
+    def registerSuperPeersByTime(self, time, superPeers):
+        raise NotImplementedError()
+        
+    def getSuperPeersByTime(self, time):
+        raise NotImplementedError()

@@ -6,10 +6,6 @@ Defines the module with objective.
 @contact: fbarros@gmail.com 
 @since: 20/09/2009
 """
-from Crypto.PublicKey import RSA, DSA
-
-from Crypto.PublicKey import RSA
-from Crypto.Util.randpool import RandomPool
 import sha
 #rpool = RandomPool()
 #

@@ -12,4 +12,4 @@ from pysocialsim.common.p2p.message.i_peer_to_peer_message import IPeerToPeerMes
 class UpdateSocialNetworkPeerToPeerMessage(AbstractPeertoPeerMessage):
     
     def __init__(self):
-        AbstractPeertoPeerMessage.initialize(self, IPeerToPeerMessage.ADVERTISEMENT, "UPDATE_SOCIAL_NETWORK", 512)
+        AbstractPeertoPeerMessage.initialize(self, IPeerToPeerMessage.ADVERTISEMENT, "UPDATE_SOCIAL_NETWORK", 512*8)

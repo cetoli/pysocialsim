@@ -46,10 +46,33 @@ class AbstractPeerToPeerNetwork(Object, IPeerToPeerNetwork):
         self.__memoryAvailability = 0
         self.__processorAvailability = 0
         self.__processorClocks = []
+        self.__connectedPeers = {IPeerToPeerNetwork.SUPER_PEER: 0, IPeerToPeerNetwork.SIMPLE_PEER : 0}
     
     @public
     def getSimulation(self):
         return returns(self.__simulation, ISimulation)
+    
+    @public
+    def increaseConnectedPeers(self, type):
+        sem = Semaphore()
+        sem.acquire()
+        self.__connectedPeers[type] += 1
+        sem.release()
+        
+    @public
+    def decreaseConnectedPeers(self, type):
+        sem = Semaphore()
+        sem.acquire()
+        self.__connectedPeers[type] -= 1
+        sem.release()
+        
+    @public
+    def countConnectedPeers(self, type):
+        sem = Semaphore()
+        sem.acquire()
+        aux = self.__connectedPeers[type]
+        sem.release()
+        return aux
     
     @public
     def setSimulation(self, simulation):

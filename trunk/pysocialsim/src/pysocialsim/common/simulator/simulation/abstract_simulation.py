@@ -43,6 +43,8 @@ class AbstractSimulation(Object, ISimulation):
         self.__queues = {}
         self.__peerToPeerNetwork = None
         self.__simulationEventGenerators = []
+        self.__simplePeersByTime = {}
+        self.__superPeersByTime = {}
    
     @public
     def addSimulationEventGenerator(self, simulationEventGenerator):
@@ -53,7 +55,23 @@ class AbstractSimulation(Object, ISimulation):
         self.__simulationEventGenerators.append(simulationEventGenerator)
         simulationEventGenerator.setSimulation(self)
         return returns(self.__simulationEventGenerators[self.__simulationEventGenerators.index(simulationEventGenerator)], ISimulationEventGenerator)
-
+    
+    @public
+    def registerSimplePeersByTime(self, time, simplePeers):
+        self.__simplePeersByTime[time] = simplePeers
+        
+    @public
+    def getSimplePeersByTime(self, time):
+        return self.__simplePeersByTime[time]
+    
+    @public
+    def registerSuperPeersByTime(self, time, superPeers):
+        self.__superPeersByTime[time] = superPeers
+        
+    @public
+    def getSuperPeersByTime(self, time):
+        return self.__superPeersByTime[time]
+    
     @public
     def removeSimulationEventGenerator(self, simulationEventGenerator):
         requires(simulationEventGenerator, ISimulationEventGenerator)
@@ -214,6 +232,9 @@ class AbstractSimulation(Object, ISimulation):
                     
                     self.__simulation.setCurrentSimulationTime(i)
                     print i
+                    network = self.__simulation.getPeerToPeerNetwork()
+                    self.__simulation.registerSimplePeersByTime(i, network.countConnectedPeers(IPeerToPeerNetwork.SIMPLE_PEER))
+                    self.__simulation.registerSuperPeersByTime(i, network.countConnectedPeers(IPeerToPeerNetwork.SUPER_PEER))
 
                     if self.__simulation.getSimulationTime() == 0:
                         return 

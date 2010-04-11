@@ -65,7 +65,8 @@ class NewSimplePeerSimulationEventGenerator(AbstractSimulationEventGenerator):
         print "Generating NEW_SIMPLE_PEER .."
         for i in range(1, int(self.__average * 2) + 1):
             distPoisson = (pow(self.__average, i) / factorial(i)) * pow(math.e, -self.__average)
-            times = round((simulation.getSimulationTime() / self.__time) * distPoisson)
+            times = round(((simulation.getSimulationTime()/4) / self.__time) * distPoisson)
+            print times, i, peer + 1
             for x in range(1, int(times)):
                 priority += self.__time
                 for j in range(i):

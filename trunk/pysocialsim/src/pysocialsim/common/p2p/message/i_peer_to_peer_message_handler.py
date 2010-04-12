@@ -59,7 +59,7 @@ class IPeerToPeerMessageHandler(object):
         """
         raise NotImplementedError()
     
-    def init(self, peer):
+    def init(self, peer, counter, logVersion):
         """
         Initializes the copy of object.
         """

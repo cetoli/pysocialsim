@@ -21,7 +21,10 @@ class NetworkAdapter(AbstractNodeDevice):
     @since: 13/10/2009
     """
     
-    messagesLogFile = open("bandwidth.log", "a")
+    counter = 0
+    logVersion = 1
+    
+    messagesLogFile = open("bandwidth"+str(logVersion)+".log", "a")
     
     def __init__(self, capacity, inputSpeed, outputSpeed):
         AbstractNodeDevice.initialize(self, INode.NETWORK_ADAPTER, capacity, inputSpeed, outputSpeed)
@@ -40,6 +43,12 @@ class NetworkAdapter(AbstractNodeDevice):
         streamSize = data.getSize() * 8
         
         data.setTime(data.getTime() + (streamSize / speed))
+        
+        NetworkAdapter.counter += 1
+        if NetworkAdapter.counter == 10000:
+            NetworkAdapter.logVersion += 1
+            NetworkAdapter.counter = 0
+            NetworkAdapter.messagesLogFile = open("bandwidth"+str(NetworkAdapter.logVersion)+".log", "a")
         
         line = str(data.getPriority()) + " " +  peer.getId() + " " + str(self.getInputSpeed()) + " " + str(self.getCapacity()) + " " + str(streamSize) + " " + str(data.getTime()) 
         NetworkAdapter.messagesLogFile.write(str(line)+"\n")

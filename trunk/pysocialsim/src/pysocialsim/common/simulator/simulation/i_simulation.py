@@ -204,3 +204,9 @@ class ISimulation(object):
         
     def getSuperPeersByTime(self, time):
         raise NotImplementedError()
+    
+    def increaseVersion(self):
+        raise NotImplementedError()
+    
+    def getVersion(self):
+        raise NotImplementedError()

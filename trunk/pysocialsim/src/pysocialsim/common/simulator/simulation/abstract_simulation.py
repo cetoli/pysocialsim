@@ -45,6 +45,7 @@ class AbstractSimulation(Object, ISimulation):
         self.__simulationEventGenerators = []
         self.__simplePeersByTime = {}
         self.__superPeersByTime = {}
+        self.__version = 0
    
     @public
     def addSimulationEventGenerator(self, simulationEventGenerator):
@@ -202,6 +203,14 @@ class AbstractSimulation(Object, ISimulation):
             raise UnregisterSimulationEventError(handle + "was not registered by simulator.")
         return returns(self.__queues[handle].dequeue(), ISimulationEvent)
     
+    @public
+    def increaseVersion(self):
+        self.__version += 1
+    
+    @public
+    def getVersion(self):
+        return self.__version
+    
     simulator = property(getSimulator, setSimulator, None, None)
     """
     @type: ISimulator 
@@ -231,9 +240,10 @@ class AbstractSimulation(Object, ISimulation):
                 for i in range(1, self.__simulation.getSimulationTime() + 1):
                     
                     self.__simulation.setCurrentSimulationTime(i)
-                    print i
+                    if i % 10000 == 0:
+                        self.__simulation.increaseVersion()
 
                     if self.__simulation.getSimulationTime() == 0:
                         return 
-
-                    time.sleep(0.03)
+                    print i
+                    time.sleep(0.02)

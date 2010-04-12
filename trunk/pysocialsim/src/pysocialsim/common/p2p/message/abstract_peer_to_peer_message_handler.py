@@ -48,7 +48,9 @@ class AbstractPeerToPeerMessageHandler(Object, IPeerToPeerMessageHandler):
         
         network = self.__peer.getPeerToPeerNetwork()
         
-        messagesLogFile = open(self.getHandle()+".log", "a")
+        simulation = network.getSimulation()
+        
+        messagesLogFile = open(self.getHandle()+str(simulation.getVersion())+".log", "a")
         line = str(peerToPeerMessage.getPriority()) + " " + peerToPeerMessage.getId() + " " + peerToPeerMessage.getHandle() + " " + peerToPeerMessage.getSourceId() + " " + self.__peerToPeerMessage.getTargetId() + " " + str(peerToPeerMessage.getTime()) + " " + str(peerToPeerMessage.getSize()) + " " + str(int(peerToPeerMessage.getTime() + peerToPeerMessage.getPriority())) + " " + str(peerToPeerMessage.countPeerIds()) + " " + str(network.countConnectedPeers(IPeerToPeerNetwork.SUPER_PEER)) + " " + str(network.countConnectedPeers(IPeerToPeerNetwork.SIMPLE_PEER)) 
         messagesLogFile.write(str(line)+"\n")
         messagesLogFile.close()
@@ -61,11 +63,12 @@ class AbstractPeerToPeerMessageHandler(Object, IPeerToPeerMessageHandler):
     @public
     def init(self, peer):
         self.__peer = peer
-
+    
     @public
     def clone(self):
         cloneHandler = Object.clone(self)
         cloneHandler.init(self.__peer)
+        
         return cloneHandler
 
     handle = property(getHandle, None, None, None)

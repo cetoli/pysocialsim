@@ -1,8 +1,5 @@
 from pysocialsim.common.simulator.event.abstract_simulation_event_generator import AbstractSimulationEventGenerator
 from pysocialsim.common.base.decorators import public
-from pysocialsim.common.p2p.network.i_peer_to_peer_network import IPeerToPeerNetwork
-from pysocialsim.common.p2p.peer.context.i_context import IContext
-from pysocialsim.common.simulator.event.generator.push_opportunity_simulation_event import PushOpportunitySimulationEvent
 
 class PushOpportunitySimulationEventGenerator(AbstractSimulationEventGenerator):
     

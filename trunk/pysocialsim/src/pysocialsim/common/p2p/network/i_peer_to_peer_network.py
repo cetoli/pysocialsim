@@ -262,4 +262,15 @@ class IPeerToPeerNetwork(object):
     def getProcessorAvailability(self):
         raise NotImplementedError()
     
+    def setPeerAvailability(self, type, availability):
+        raise NotImplementedError()
+    
+    def getPeerAvailability(self, type):
+        raise NotImplementedError()
+    
+    def registerConnectedPeer(self, type, peerId):
+        raise NotImplementedError()
+    
+    def unregisterConnectedPeer(self, type, peerId):
+        raise NotImplementedError()
     

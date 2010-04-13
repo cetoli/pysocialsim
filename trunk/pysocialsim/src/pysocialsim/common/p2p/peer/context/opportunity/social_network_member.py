@@ -8,7 +8,6 @@ Defines the module with objective.
 """
 from pysocialsim.common.base.object import Object
 from pysocialsim.common.base.decorators import public
-from pysocialsim.common.p2p.topology.graph.i_node import INode
 
 class SocialNetworkMember(Object):
     

@@ -139,3 +139,15 @@ class IPeer(object):
     
     def shareApplication(self, priority, application, opportunityId):
         raise NotImplementedError()    
+    
+    def registerMessageId(self, messageId):
+        raise NotImplementedError()
+    
+    def hasMessageId(self, messageId):
+        raise NotImplementedError()
+    
+    def countMessageIds(self):
+        raise NotImplementedError()
+    
+    def clearMessageIds(self):
+        raise NotImplementedError()

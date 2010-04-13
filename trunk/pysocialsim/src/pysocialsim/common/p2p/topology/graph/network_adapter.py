@@ -45,12 +45,12 @@ class NetworkAdapter(AbstractNodeDevice):
         data.setTime(data.getTime() + (streamSize / speed))
         
         NetworkAdapter.counter += 1
-        if NetworkAdapter.counter == 10000:
+        if NetworkAdapter.counter == 1000:
             NetworkAdapter.logVersion += 1
             NetworkAdapter.counter = 0
             NetworkAdapter.messagesLogFile = open("bandwidth"+str(NetworkAdapter.logVersion)+".log", "a")
         
-        line = str(data.getPriority()) + " " +  peer.getId() + " " + str(self.getInputSpeed()) + " " + str(self.getCapacity()) + " " + str(streamSize) + " " + str(data.getTime()) 
+        line = str(data.getPriority()) + " " +  peer.getId() + " " + data.getHandle()+ " "+ str(self.getInputSpeed()) + " " + str(self.getCapacity()) + " " + str(streamSize) + " " + str(data.getTime()) 
         NetworkAdapter.messagesLogFile.write(str(line)+"\n")
         
     @public

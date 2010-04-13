@@ -12,7 +12,6 @@ from pysocialsim.common.util.rotines import requires, pre_condition, returns
 from pysocialsim.common.simulator.i_simulator import ISimulator
 from pysocialsim.common.base.decorators import public
 from pysocialsim.common.error.invalid_value_error import InvalidValueError
-from pysocialsim.common.p2p.peer.context.i_context import IContext
 
 class Scheduler(Object):
     """

@@ -17,7 +17,6 @@ from sets import ImmutableSet
 from pysocialsim.common.p2p.message.i_peer_to_peer_message import IPeerToPeerMessage
 from pysocialsim.common.p2p.message.abstract_peer_to_peer_message_handler import AbstractPeerToPeerMessageHandler
 from pysocialsim.common.p2p.protocol.i_peer_to_peer_protocol import IPeerToPeerProtocol
-from pysocialsim.common.p2p.message.peer_to_peer_message_id_generator import PeerToPeerMessageIdGenerator
 from pysocialsim.common.p2p.peer.route import Route
 from pysocialsim.common.error.invalid_value_error import InvalidValueError
 
@@ -271,9 +270,13 @@ class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
             peer = self.getPeer()
             message = self.getPeerToPeerMessage()
             if peer.hasMessageId(message.getId):
+                print "Ja passou aqui"
                 return 
             
             peer.registerMessageId(message.getId())
+            if peer.countMessageIds() == 1024:
+                peer.clearMessageIds()
+            
             message.setHop(message.getHop() + 1)
             
             
@@ -411,9 +414,6 @@ class GnutellaSuperPeerProtocol(AbstractPeerToPeerProtocol):
                 
                 dispatcher = peer.getPeerToPeerMessageDispatcher()
                 dispatcher.registerPeerToPeerMessage(peerToPeerMessage)
-                
-                
-                
             else:
                 trace = message.getPeerIds()
                 if peer.hasNeighbor(message.getSourceId()):

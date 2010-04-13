@@ -116,15 +116,16 @@ class AbstractPeer(Object, IPeer):
     @public
     def join(self, priority):
         aux = self.__peerToPeerProtocol.join(self)
+        self.__peerToPeerNetwork.registerConnectedPeer(self.__type, self.__id)
         if aux:
             self.joined()
             self.__peerToPeerMessageDispatcher.on()
             self.__peerToPeerNetwork.increaseConnectedPeers(self.__type)
             if len(self.__neighbors) > 0:
+                messageId = PeerToPeerMessageIdGenerator.generatePeerToPeerMessageId(self)
                 for n in self.__neighbors.values():
                     message = self.__peerToPeerProtocol.createPeerToPeerMessage(IPeerToPeerProtocol.PING)
                     message.registerPeerId(self.__id)
-                    messageId = PeerToPeerMessageIdGenerator.generatePeerToPeerMessageId(self)           
                     message.init(messageId, self.__id, n.getId(), self.__peerToPeerProtocol.getPingHops(), priority, message.getSize(), message.getTime())
                     self.send(message)
         
@@ -134,6 +135,7 @@ class AbstractPeer(Object, IPeer):
     def leave(self, priority):
         self.__peerToPeerMessageDispatcher.off()
         aux = self.__peerToPeerProtocol.leave(self)
+        self.__peerToPeerNetwork.unregisterConnectedPeer(self.__type, self.__id)
         self.__peerToPeerNetwork.decreaseConnectedPeers(self.__type)
         
         return returns(aux, bool)
@@ -338,6 +340,14 @@ class AbstractPeer(Object, IPeer):
     @public
     def hasMessageId(self, messageId):
         return messageId in self.__messages
+    
+    @public
+    def countMessageIds(self):
+        return len(self.__messages)
+    
+    @public
+    def clearMessageIds(self):
+        self.__messages = []
     
     id = property(getId, None, None, None)
 

@@ -6,9 +6,7 @@ Created on 01/02/2010
 from pysocialsim.common.p2p.message.abstract_peer_to_peer_message_handler import AbstractPeerToPeerMessageHandler
 from pysocialsim.common.p2p.peer.context.i_context import IContext
 from pysocialsim.common.p2p.peer.message.replicate_social_network_peer_to_peer_message import ReplicateSocialNetworkPeerToPeerMessage
-from pysocialsim.common.p2p.message.peer_to_peer_message_id_generator import PeerToPeerMessageIdGenerator
 from pysocialsim.common.p2p.topology.graph.i_node import INode
-import math
 
 class ShareHardwarePeerToPeerMessageHandler(AbstractPeerToPeerMessageHandler):
     

@@ -11,8 +11,6 @@ from pysocialsim.common.p2p.peer.context.i_context import IContext
 from pysocialsim.common.p2p.peer.event.share_hardware_simulation_event import ShareHardwareSimulationEvent
 from pysocialsim.common.p2p.topology.graph.i_node import INode
 from pysocialsim.common.p2p.peer.context.opportunity.social_network_member import SocialNetworkMember
-from pysocialsim.common.p2p.peer.message.create_social_network_peer_to_peer_message import CreateSocialNetworkPeerToPeerMessage
-from pysocialsim.common.p2p.message.peer_to_peer_message_id_generator import PeerToPeerMessageIdGenerator
 
 class AcknowledgeComposeSocialNetworkPeerToPeerMessageHandler(AbstractPeerToPeerMessageHandler):
     

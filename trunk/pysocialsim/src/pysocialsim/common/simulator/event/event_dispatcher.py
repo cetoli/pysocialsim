@@ -14,7 +14,6 @@ from types import NoneType
 from pysocialsim.common.simulator.event.i_simulation_event_handler import ISimulationEventHandler
 from threading import Thread, Semaphore
 from pysocialsim.common.simulator.i_simulator import ISimulator
-import logging
 
 class EventDispatcher(Object):
     """

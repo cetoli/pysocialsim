@@ -54,7 +54,7 @@ class GnutellaSimplePeerProtocol(AbstractPeerToPeerProtocol):
             
             priority = simulation.getCurrentSimulationTime()
             
-            peerToPeerMessage.init(id, sourceId, targetId, self.getPushHops(), priority, 512, peerToPeerMessage.getTime())
+            peerToPeerMessage.init(id, sourceId, targetId, self.getPushHops(), priority, peerToPeerMessage.getSize(), peerToPeerMessage.getTime())
             
             message = self.createPeerToPeerMessage(IPeerToPeerProtocol.PUSH)
             message.registerParameter("peerToPeerMessage", peerToPeerMessage)

@@ -47,6 +47,8 @@ class AbstractPeerToPeerNetwork(Object, IPeerToPeerNetwork):
         self.__processorAvailability = 0
         self.__processorClocks = []
         self.__connectedPeers = {IPeerToPeerNetwork.SUPER_PEER: 0, IPeerToPeerNetwork.SIMPLE_PEER : 0}
+        self.__peerAvailabilities = {IPeerToPeerNetwork.SUPER_PEER: 0, IPeerToPeerNetwork.SIMPLE_PEER : 0}
+        self.__connectedIds = {IPeerToPeerNetwork.SUPER_PEER: {}, IPeerToPeerNetwork.SIMPLE_PEER : {}}
     
     @public
     def getSimulation(self):
@@ -145,11 +147,13 @@ class AbstractPeerToPeerNetwork(Object, IPeerToPeerNetwork):
         
         sem = Semaphore()
         sem.acquire()
-        peers = []
-        
-        for peer in self.__peers[peerType].values():
-            if peer.isJoined():
-                peers.append(peer)
+#        peers = []
+#        
+#        for peer in self.__peers[peerType].values():
+#            if peer.isJoined():
+#                peers.append(peer)
+
+        peers = self.__connectedIds[peerType].values()
                 
         sem.release()
         return peers
@@ -346,6 +350,32 @@ class AbstractPeerToPeerNetwork(Object, IPeerToPeerNetwork):
     @public
     def getProcessorAvailability(self):
         return self.__processorAvailability
+    
+    @public
+    def setPeerAvailability(self, type, availability):
+        self.__peerAvailabilities[type] = availability
+        
+    
+    @public
+    def getPeerAvailability(self, type):
+        return self.__peerAvailabilities[type]
+    @public
+    def registerConnectedPeer(self, type, peerId):
+        sem = Semaphore()
+        sem.acquire()
+        
+        peer = self.__peers[type][peerId]
+        self.__connectedIds[type][peer.getId()] = peer
+        
+        sem.release()
+    @public
+    def unregisterConnectedPeer(self, type, peerId):
+        sem = Semaphore()
+        sem.acquire()
+        
+        del self.__connectedIds[type][peerId]
+        
+        sem.release()
     
     
     simulation = property(getSimulation, setSimulation, None, None)

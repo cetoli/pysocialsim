@@ -240,10 +240,10 @@ class AbstractSimulation(Object, ISimulation):
                 for i in range(1, self.__simulation.getSimulationTime() + 1):
                     
                     self.__simulation.setCurrentSimulationTime(i)
-                    if i % 10000 == 0:
+                    if i % 1000 == 0:
                         self.__simulation.increaseVersion()
 
                     if self.__simulation.getSimulationTime() == 0:
                         return 
                     print i
-                    time.sleep(0.02)
+                    time.sleep(0.03)

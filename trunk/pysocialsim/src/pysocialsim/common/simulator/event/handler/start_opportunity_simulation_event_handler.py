@@ -10,7 +10,6 @@ from pysocialsim.common.p2p.peer.context.context_id_generator import ContextIdGe
 from pysocialsim.common.simulator.event.generator.push_opportunity_simulation_event import PushOpportunitySimulationEvent
 from pysocialsim.common.simulator.event.generator.end_opportunity_simulation_event import EndOpportunitySimulationEvent
 from pysocialsim.common.p2p.peer.context.opportunity.opportunity import Opportunity
-import math
 
 class StartOpportunitySimulationEventHandler(AbstractSimulationEventHandler):
     

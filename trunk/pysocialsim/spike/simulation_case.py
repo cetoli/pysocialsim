@@ -52,9 +52,9 @@ simulation = SimulationSpike()
 
 network = PeerToPeerNetwork(simulation)
 
-network.setConnectionsBetweenSuperPeers(32)
+network.setConnectionsBetweenSuperPeers(6)
 network.setConnectionsBetweenSuperPeerAndSimplePeers(30)
-network.setConnectionsBetweenSimplePeerAndSuperPeers(3)
+network.setConnectionsBetweenSimplePeerAndSuperPeers(1)
 
 network.setLinkAvailability(50.0)
 
@@ -84,9 +84,9 @@ network.setDiskAvailability(90.0)
 
 
 protocol = GnutellaSuperPeerProtocol()
-protocol.setPingHops(4)
-protocol.setPongHops(4)
-protocol.setPushHops(4)
+protocol.setPingHops(7)
+protocol.setPongHops(7)
+protocol.setPushHops(7)
 
 topology = PeerToPeerTopology()
 topology.setPeerToPeerNetwork(network)
@@ -95,9 +95,9 @@ protocol.setPeerToPeerTopology(topology)
 network.registerPeerToPeerProtocol(IPeerToPeerNetwork.SUPER_PEER, protocol)
 
 protocol = GnutellaSimplePeerProtocol()
-protocol.setPingHops(4)
-protocol.setPongHops(4)
-protocol.setPushHops(4)
+protocol.setPingHops(7)
+protocol.setPongHops(7)
+protocol.setPushHops(7)
 protocol.setPeerToPeerTopology(topology)
 network.registerPeerToPeerProtocol(IPeerToPeerNetwork.SIMPLE_PEER, protocol)
 
@@ -107,15 +107,15 @@ simulator.setSimulation(simulation)
 simulation.setSimulationTime(432000)
 
 simulation.addSimulationEventGenerator(BeginSimulationEventGenerator())
-simulation.addSimulationEventGenerator(NewSuperPeerSimulationEventGenerator(5.5, 3600, 100))
-simulation.addSimulationEventGenerator(NewSimplePeerSimulationEventGenerator(5.5, 600, 1000))
+simulation.addSimulationEventGenerator(NewSuperPeerSimulationEventGenerator(2.5, 1000, 34))
+simulation.addSimulationEventGenerator(NewSimplePeerSimulationEventGenerator(5.5, 400, 1000))
 
 simulation.addSimulationEventGenerator(StartOpportunitySimulationventGenerator(0.5, 3600, 1))
-for i in range(simulation.getSimulationTime()/10000):
-    simulation.addSimulationEventGenerator(SimplePeerLeavingSimulationEventGenerator(0.6876, 4.3386, 500))
-    simulation.addSimulationEventGenerator(SimplePeerJoiningSimulationEventGenerator(0.1, 1.0, 500))
+for i in range(simulation.getSimulationTime()/65000):
+    simulation.addSimulationEventGenerator(SimplePeerLeavingSimulationEventGenerator(0.59, 40.0, 500))
+    simulation.addSimulationEventGenerator(SimplePeerJoiningSimulationEventGenerator(0.1, 60.0, 500))
 
-simulation.addSimulationEventGenerator(SimplePeerLeavingSimulationEventGenerator(0.6876, 4.3386, 1000))
+simulation.addSimulationEventGenerator(SimplePeerLeavingSimulationEventGenerator(0.59, 40.0, 1000))
 
 simulation.addSimulationEventGenerator(EndSimulationEventGenerator())
 

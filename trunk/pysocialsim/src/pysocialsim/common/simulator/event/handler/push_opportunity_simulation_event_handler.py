@@ -31,6 +31,8 @@ class PushOpportunitySimulationEventHandler(AbstractSimulationEventHandler):
                 peer.push(opportunityMessage)
                 print "FOI PUBLICADA"
         else:
+            percentage = 0.25
+            counter = 0
             for member in socialNetwork.getSocialNetworkMembers():
                 peer = network.getPeer(IPeerToPeerNetwork.SIMPLE_PEER, member.getId())
                 if peer.isJoined():
@@ -38,6 +40,10 @@ class PushOpportunitySimulationEventHandler(AbstractSimulationEventHandler):
                     opportunityMessage.registerParameter("opportunity", opportunity)
                     
                     peer.push(opportunityMessage)
+                    counter += 1
+                    if counter >= (socialNetwork.countSocialNetworkMembers() * percentage):
+                        counter = 0
+                        break
                     print "TEM MAIS GENTE PUBLICANDO"
         
         return AbstractSimulationEventHandler.execute(self)

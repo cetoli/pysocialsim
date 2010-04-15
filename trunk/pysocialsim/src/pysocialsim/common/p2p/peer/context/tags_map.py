@@ -24,6 +24,8 @@ class TagsMap(Object):
         mapping["tools"] = ["web2.0", "software", "web", "webdesign", "twitter", "windows", "tool", "utilities", "resources", "reference", "online"]
         mapping["music"] = ["mp3", "blog", "download", "audio", "video", "guitar", "software", "free", "web2.0", "youtube", "radio"]
         mapping["programming"] = ["development", "tutorial", "software", "python", "reference", "java", "php", "web", "opensource", "javascript", "webdev"]
+        mapping["soa"] = ["pattern", "xml", "soc", "architecture", "webservice", "soap", "uddi"]
+        mapping["grid computing"] = ["grid", "distributed", "boinc", "science", "computing", "software", "programming", "opensource", "research", "computer", "collaboration", "community"]
         mapping["webdesign"] = ["design", "web", "inspiration", "css", "webdev", "resources", "tutorials", "tutorial", "tools", "web2.0", "photoshop"]
         mapping["reference"] = ["resources", "tools", "programming", "webdesign", "tutorial", "research", "design", "tips", "web", "tutorials", "howto"]
         mapping["tutorial"] = ["photoshop", "webdesign", "tutorials", "programming", "howto", "tips", "reference", "web", "design", "photography", "css"]

@@ -30,5 +30,7 @@ class TagsMap(Object):
         mapping["art"] = ["design", "inspiration", "illustration", "photography", "blog", "portfolio", "artist", "gallery", "graphics", "painting", "culture"]
         mapping["web"] = ["webdesign", "tools", "web2.0", "design", "webdev", "software", "tutorial", "css", "tutorials", "tool", "resources"]
         mapping["howto"] = ["tutorial", "tips", "linux", "reference", "tutorials", "diy", "photography", "ubuntu", "photoshop", "programming", "software"]
+        mapping["bioinformatics"] = ["eScience", "workflow", "bioinformatics", "blast", "fasta", "gene", "ontology", "biology", "DNA", "RNA", "phylogeny", "system"]
+        mapping["oil"] = ["oil", "stratigraphy", "sequence", "workflow", "riser", "sediment", "gas"]
         
         return mapping

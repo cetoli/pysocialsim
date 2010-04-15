@@ -242,8 +242,9 @@ class AbstractSimulation(Object, ISimulation):
                     self.__simulation.setCurrentSimulationTime(i)
                     if i % 1000 == 0:
                         self.__simulation.increaseVersion()
+                        time.sleep(60)
 
                     if self.__simulation.getSimulationTime() == 0:
                         return 
                     print i
-                    time.sleep(0.03)
+                    time.sleep(0.06)

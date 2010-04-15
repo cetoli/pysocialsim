@@ -10,7 +10,7 @@ from pysocialsim.common.base.object import Object
 from pysocialsim.common.simulator.i_simulator import ISimulator
 from pysocialsim.common.base.decorators import public
 from pysocialsim.common.simulator.event.event_dispatcher import EventDispatcher
-from threading import Thread
+from threading import Thread, Semaphore
 from pysocialsim.common.util.rotines import requires, returns
 from pysocialsim.common.simulator.simulation.i_simulation import ISimulation
 from pysocialsim.common.simulator.event.i_simulation_event import ISimulationEvent
@@ -95,7 +95,7 @@ class DefaultSimulator(Object, ISimulator):
     @public    
     def getScheduler(self):
         return self.__scheduler
-
+    
     class EventHandlingThread(Thread):
         """
         Thread for headling events.
@@ -117,21 +117,40 @@ class DefaultSimulator(Object, ISimulator):
             Thread.__init__(self)
             requires(simulator, ISimulator)
             requires(handle, str)
-            self.__simulator = simulator
+            self.simulator = simulator
             self.__handle = handle
             self.__currentSimulationTime = 0
+            self.pool = []
+            for i in range(5):
+                self.pool.append(self.ThreadForProcessing(self))
             
         def setCurrentSimulationTime(self, currentSimulationTime):
             self.__currentSimulationTime = currentSimulationTime
         
         def run(self):
-            simulation = self.__simulator.getSimulation()
+            simulation = self.simulator.getSimulation()
             while True:
                 event = simulation.getSimulationEvent(self.__handle)
-                if event:
+                if event and len(self.pool) > 0:
                     if self.__currentSimulationTime >= event.getPriority():
-                        self.__simulator.handleSimulationEvent(simulation.unregisterSimulationEvent(self.__handle))
+                        #self.simulator.handleSimulationEvent(simulation.unregisterSimulationEvent(self.__handle))
+                        
+                        thread = self.pool.pop(0)
+                        thread.__init__(self)
+                        thread.event = simulation.unregisterSimulationEvent(self.__handle)
+                        thread.start()
             
         
-        
+        class ThreadForProcessing(Thread):
+            
+            def __init__(self, threadHandling):
+                Thread.__init__(self)
+                self.event = None
+                self.__threadHandling = threadHandling
+                
+            def run(self):
+                self.__threadHandling.simulator.handleSimulationEvent(self.event)
+                self.__threadHandling.pool.append(self)
+            
+            
     simulation = property(getSimulation, setSimulation, None, None)

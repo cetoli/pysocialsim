@@ -44,10 +44,11 @@ class PriorityQueue(Object):
         
         sem = Semaphore()
         sem.acquire()
-        for event in self.__queue:
-            if event[1] == item:
-                return None
-        insort(self.__queue, (priority, item))
+#        for event in self.__queue:
+#            if event[1] == item:
+#                return None
+        self.__queue.append(item)
+        #insort(self.__queue, (priority, item))
         sem.release()
         return returns(item, ISimulationEvent)
         
@@ -63,7 +64,7 @@ class PriorityQueue(Object):
         if len(self.__queue) == 0:
             sem.release()
             return None
-        item = self.__queue.pop(0)[1]
+        item = self.__queue.pop(0)
         sem.release()
         return returns(item, ISimulationEvent)
     
@@ -94,7 +95,7 @@ class PriorityQueue(Object):
             return
         first = self.__queue[0]
         sem.release()
-        return returns(first[1], ISimulationEvent)
+        return returns(first, ISimulationEvent)
     
     @public
     def getLast(self):
@@ -110,7 +111,7 @@ class PriorityQueue(Object):
             return
         last = self.__queue[len(self.__queue) - 1]
         sem.release()
-        return returns(last[1], ISimulationEvent)
+        return returns(last, ISimulationEvent)
     
     @public
     def clear(self):

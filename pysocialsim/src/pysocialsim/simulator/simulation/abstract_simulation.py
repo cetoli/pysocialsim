@@ -100,7 +100,6 @@ class AbstractSimulation(ISimulation):
     
     def setPeerToPeerNetwork(self, peerToPeerNetwork):
         self.__peerToPeerNetwork = peerToPeerNetwork
-        self.__peerToPeerNetwork.setSimulation(self)
         return self.__peerToPeerNetwork
     
         

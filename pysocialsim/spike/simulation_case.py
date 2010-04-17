@@ -17,6 +17,7 @@ from pysocialsim.simulator.simulation.concrete_simulation import ConcreteSimulat
 from pysocialsim.simulator.event.generator.begin_simulation_event_generator import BeginSimulationEventGenerator
 from pysocialsim.simulator.event.generator.new_super_peer_simulation_event_generator import NewSuperPeerSimulationEventGenerator
 from pysocialsim.simulator.event.generator.new_simple_peer_simulation_event_generator import NewSimplePeerSimulationEventGenerator
+from Pyro.core import getProxyForURI
 
 if __name__ == '__main__':
     simulator = DefaultSimulator()
@@ -39,6 +40,8 @@ if __name__ == '__main__':
 simulation.addSimulationEventGenerator(NewSuperPeerSimulationEventGenerator(0.5, 250, 24))
 simulation.addSimulationEventGenerator(NewSimplePeerSimulationEventGenerator(0.5, 10, 700))
 
-simulator.start()
+#simulator.start()
+
+masterNode = getProxyForURI("PYRONAME://network")
     
     

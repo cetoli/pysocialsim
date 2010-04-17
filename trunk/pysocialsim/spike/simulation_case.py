@@ -17,7 +17,7 @@ from pysocialsim.simulator.simulation.concrete_simulation import ConcreteSimulat
 from pysocialsim.simulator.event.generator.begin_simulation_event_generator import BeginSimulationEventGenerator
 from pysocialsim.simulator.event.generator.new_super_peer_simulation_event_generator import NewSuperPeerSimulationEventGenerator
 from pysocialsim.simulator.event.generator.new_simple_peer_simulation_event_generator import NewSimplePeerSimulationEventGenerator
-from Pyro.core import getProxyForURI
+from pysocialsim.p2p.network.peer_to_peer_network import PeerToPeerNetwork
 
 if __name__ == '__main__':
     simulator = DefaultSimulator()
@@ -33,15 +33,47 @@ if __name__ == '__main__':
     simulator.registerSimulationEventHandler(EndSimulationEventHandler())
     
     simulation = ConcreteSimulation()
+    network = PeerToPeerNetwork()
+    network.setSimulation(simulation)
+    network.setConnectionsBetweenSuperPeers(6)
+    network.setConnectionsBetweenSuperPeerAndSimplePeers(30)
+    network.setConnectionsBetweenSimplePeerAndSuperPeers(1)
+    
+    network.setLinkAvailability(50.0)
+    
+    network.setSuperPeerLink(1000000000)
+    network.setSimplePeerLink(1000000)
+    
+    network.registerSizeOfMemory(4294967296)
+    network.registerSizeOfMemory(3221225472)
+    network.registerSizeOfMemory(2147483648)
+    network.registerSizeOfMemory(1073741824)
+    
+    network.setMemoryAvailability(70.0)
+    
+    network.registerSizeOfDisk(343597383680)
+    network.registerSizeOfDisk(268435456000)
+    network.registerSizeOfDisk(171798691840)
+    network.registerSizeOfDisk(128849018880)
+    
+    network.setDiskAvailability(70.0)
+    
+    network.registerProcessorClock(5000000000)
+    network.registerProcessorClock(4000000000)
+    network.registerProcessorClock(3000000000)
+    network.registerProcessorClock(2000000000)
+    
+    network.setDiskAvailability(90.0)
+    
     simulator.setSimulation(simulation)
     simulation.setSimulationTime(432000)
     
     simulation.addSimulationEventGenerator(BeginSimulationEventGenerator())
-simulation.addSimulationEventGenerator(NewSuperPeerSimulationEventGenerator(0.5, 250, 24))
-simulation.addSimulationEventGenerator(NewSimplePeerSimulationEventGenerator(0.5, 10, 700))
+    simulation.addSimulationEventGenerator(NewSuperPeerSimulationEventGenerator(0.5, 250, 24))
+    simulation.addSimulationEventGenerator(NewSimplePeerSimulationEventGenerator(0.5, 10, 700))
+    
+    simulator.start()
 
-#simulator.start()
-
-masterNode = getProxyForURI("PYRONAME://network")
+#masterNode = getProxyForURI("PYRONAME://network")
     
     

@@ -8,6 +8,7 @@ Defines the module with the implementation of AbstractSimulationEventHandler cla
 """
 from pysocialsim.simulator.event.i_simulation_event_handler import ISimulationEventHandler
 from pysocialsim.p2p.network.i_peer_to_peer_network import IPeerToPeerNetwork
+from Pyro.core import getProxyForURI
 
 class AbstractSimulationEventHandler(ISimulationEventHandler):
     """

@@ -49,7 +49,7 @@ class IPeerToPeerNetwork(object):
         """
         raise NotImplementedError()
     
-    def addPeer(self, peerType, peer):
+    def addPeer(self, peerType, peerId):
         """
         Adds a peer in peer-to-peer network.
         @param peerType: type of peer
